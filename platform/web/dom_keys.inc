@@ -31,10 +31,10 @@
 #include "core/os/keyboard.h"
 
 // See https://w3c.github.io/uievents-code/#code-value-tables
-Key dom_code2godot_scancode(EM_UTF8 const p_code[32], EM_UTF8 const p_key[32], bool p_physical) {
-#define DOM2SCARDOT(p_str, p_godot_code)                                                                \
+Key dom_code2scardot_scancode(EM_UTF8 const p_code[32], EM_UTF8 const p_key[32], bool p_physical) {
+#define DOM2SCARDOT(p_str, p_scardot_code)                                                                \
 	if (memcmp((const void *)p_str, (void *)(p_physical ? p_code : p_key), strlen(p_str) + 1) == 0) { \
-		return Key::p_godot_code;                                                                     \
+		return Key::p_scardot_code;                                                                     \
 	}
 
 	// Numpad section.
@@ -224,10 +224,10 @@ Key dom_code2godot_scancode(EM_UTF8 const p_code[32], EM_UTF8 const p_key[32], b
 #undef DOM2SCARDOT
 }
 
-KeyLocation dom_code2godot_key_location(EM_UTF8 const p_code[32]) {
-#define DOM2SCARDOT(m_str, m_godot_code)                                         \
+KeyLocation dom_code2scardot_key_location(EM_UTF8 const p_code[32]) {
+#define DOM2SCARDOT(m_str, m_scardot_code)                                         \
 	if (memcmp((const void *)m_str, (void *)p_code, strlen(m_str) + 1) == 0) { \
-		return KeyLocation::m_godot_code;                                      \
+		return KeyLocation::m_scardot_code;                                      \
 	}
 
 	DOM2SCARDOT("AltLeft", LEFT);

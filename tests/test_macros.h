@@ -123,7 +123,7 @@ DOCTEST_STRINGIFY_VARIANT(PackedVector4Array);
 
 // Register test commands to be launched from the command-line.
 // For instance: REGISTER_TEST_COMMAND("gdscript-parser" &test_parser_func).
-// Example usage: `godot --test gdscript-parser`.
+// Example usage: `scardot --test gdscript-parser`.
 
 typedef void (*TestFunc)();
 extern HashMap<String, TestFunc> *test_commands;

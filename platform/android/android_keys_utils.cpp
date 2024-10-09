@@ -30,19 +30,19 @@
 
 #include "android_keys_utils.h"
 
-Key godot_code_from_android_code(unsigned int p_code) {
-	for (int i = 0; android_godot_code_pairs[i].android_code != AKEYCODE_MAX; i++) {
-		if (android_godot_code_pairs[i].android_code == p_code) {
-			return android_godot_code_pairs[i].godot_code;
+Key scardot_code_from_android_code(unsigned int p_code) {
+	for (int i = 0; android_scardot_code_pairs[i].android_code != AKEYCODE_MAX; i++) {
+		if (android_scardot_code_pairs[i].android_code == p_code) {
+			return android_scardot_code_pairs[i].scardot_code;
 		}
 	}
 	return Key::UNKNOWN;
 }
 
-KeyLocation godot_location_from_android_code(unsigned int p_code) {
-	for (int i = 0; android_godot_location_pairs[i].android_code != AKEYCODE_MAX; i++) {
-		if (android_godot_location_pairs[i].android_code == p_code) {
-			return android_godot_location_pairs[i].godot_code;
+KeyLocation scardot_location_from_android_code(unsigned int p_code) {
+	for (int i = 0; android_scardot_location_pairs[i].android_code != AKEYCODE_MAX; i++) {
+		if (android_scardot_location_pairs[i].android_code == p_code) {
+			return android_scardot_location_pairs[i].scardot_code;
 		}
 	}
 	return KeyLocation::UNSPECIFIED;

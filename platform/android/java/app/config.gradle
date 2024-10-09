@@ -21,7 +21,7 @@ ext.getExportPackageName = { ->
     String appId = project.hasProperty("export_package_name") ? project.property("export_package_name") : ""
     // Check if the app id is valid, otherwise use the default.
     if (appId == null || appId.isEmpty()) {
-        appId = "com.godot.game"
+        appId = "com.scardot.game"
     }
     return appId
 }
@@ -71,7 +71,7 @@ ext.getExportTargetSdkVersion = { ->
 }
 
 ext.getscardotEditorVersion = { ->
-    String editorVersion = project.hasProperty("godot_editor_version") ? project.property("godot_editor_version") : ""
+    String editorVersion = project.hasProperty("scardot_editor_version") ? project.property("scardot_editor_version") : ""
     if (editorVersion == null || editorVersion.isEmpty()) {
         // Try the library version first
         editorVersion = getscardotLibraryVersionName()
@@ -219,7 +219,7 @@ ext.getExportPath = {
 ext.getExportFilename = {
     String exportFilename = project.hasProperty("export_filename") ? project.property("export_filename") : ""
     if (exportFilename == null || exportFilename.isEmpty()) {
-        exportFilename = "godot_android"
+        exportFilename = "scardot_android"
     }
     return exportFilename
 }

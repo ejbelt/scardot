@@ -37,7 +37,7 @@
 
 namespace GDScriptTests {
 
-// TODO: Handle some cases failing on release builds. See: https://github.com/godotengine/godot/pull/88452
+// TODO: Handle some cases failing on release builds. See: https://github.com/scardotengine/scardot/pull/88452
 #ifdef TOOLS_ENABLED
 TEST_SUITE("[Modules][GDScript]") {
 	TEST_CASE("Script compilation and runtime") {

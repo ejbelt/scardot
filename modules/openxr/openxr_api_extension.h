@@ -60,7 +60,7 @@ public:
 
 	static bool openxr_is_enabled(bool p_check_run_in_editor = true);
 
-	//TODO workaround as GDExtensionPtr<void> return type results in build error in godot-cpp
+	//TODO workaround as GDExtensionPtr<void> return type results in build error in scardot-cpp
 	uint64_t get_instance_proc_addr(String p_name);
 	String get_error_string(uint64_t result);
 	String get_swapchain_format_name(int64_t p_swapchain_format);

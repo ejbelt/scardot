@@ -40,8 +40,8 @@ if env["use_pix"]:
 
 # Mesa (SPIR-V to DXIL functionality).
 
-mesa_dir = (env["mesa_libs"] + "/godot-mesa").replace("\\", "/")
-mesa_gen_dir = (env["mesa_libs"] + "/godot-mesa/generated").replace("\\", "/")
+mesa_dir = (env["mesa_libs"] + "/scardot-mesa").replace("\\", "/")
+mesa_gen_dir = (env["mesa_libs"] + "/scardot-mesa/generated").replace("\\", "/")
 mesa_absdir = Dir(mesa_dir).abspath
 mesa_gen_absdir = Dir(mesa_dir + "/generated").abspath
 

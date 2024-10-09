@@ -215,6 +215,7 @@ def make_license_header(target, source, env):
     data_list: list = []
     for project in iter(projects.values()):
         for part in project:
+            print(part)
             part["file_index"] = len(data_list)
             data_list += part["Files"]
             part["copyright_index"] = len(data_list)

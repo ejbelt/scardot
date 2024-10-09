@@ -194,7 +194,7 @@ def run_msbuild(tools: ToolsLocation, sln: str, chdir_to: str, msbuild_args: Opt
     return subprocess.call(args, env=msbuild_env, cwd=chdir_to)
 
 
-def build_godot_api(msbuild_tool, module_dir, output_dir, push_nupkgs_local, precision):
+def build_scardot_api(msbuild_tool, module_dir, output_dir, push_nupkgs_local, precision):
     target_filenames = [
         "scardotSharp.dll",
         "scardotSharp.pdb",
@@ -336,19 +336,19 @@ def generate_sdk_package_versions():
         f.write(constants)
 
 
-def build_all(msbuild_tool, module_dir, output_dir, godot_platform, dev_debug, push_nupkgs_local, precision):
+def build_all(msbuild_tool, module_dir, output_dir, scardot_platform, dev_debug, push_nupkgs_local, precision):
     # Generate SdkPackageVersions.props and VersionDocsUrl constant
     generate_sdk_package_versions()
 
     # scardot API
-    exit_code = build_godot_api(msbuild_tool, module_dir, output_dir, push_nupkgs_local, precision)
+    exit_code = build_scardot_api(msbuild_tool, module_dir, output_dir, push_nupkgs_local, precision)
     if exit_code != 0:
         return exit_code
 
     # scardotTools
     sln = os.path.join(module_dir, "editor/scardotTools/scardotTools.sln")
     args = ["/restore", "/t:Build", "/p:Configuration=" + ("Debug" if dev_debug else "Release")] + (
-        ["/p:scardotPlatform=" + godot_platform] if godot_platform else []
+        ["/p:scardotPlatform=" + scardot_platform] if scardot_platform else []
     )
     if push_nupkgs_local:
         args += ["/p:ClearNuGetLocalCache=true", "/p:PushNuGetToLocalSource=" + push_nupkgs_local]
@@ -377,14 +377,14 @@ def main():
     import sys
 
     parser = argparse.ArgumentParser(description="Builds all scardot .NET solutions")
-    parser.add_argument("--godot-output-dir", type=str, required=True)
+    parser.add_argument("--scardot-output-dir", type=str, required=True)
     parser.add_argument(
         "--dev-debug",
         action="store_true",
         default=False,
         help="Build scardotTools and scardot.NET.Sdk with 'Configuration=Debug'",
     )
-    parser.add_argument("--godot-platform", type=str, default="")
+    parser.add_argument("--scardot-platform", type=str, default="")
     parser.add_argument("--mono-prefix", type=str, default="")
     parser.add_argument("--push-nupkgs-local", type=str, default="")
     parser.add_argument(
@@ -396,7 +396,7 @@ def main():
     this_script_dir = os.path.dirname(os.path.realpath(__file__))
     module_dir = os.path.abspath(os.path.join(this_script_dir, os.pardir))
 
-    output_dir = os.path.abspath(args.godot_output_dir)
+    output_dir = os.path.abspath(args.scardot_output_dir)
 
     push_nupkgs_local = os.path.abspath(args.push_nupkgs_local) if args.push_nupkgs_local else None
 
@@ -410,7 +410,7 @@ def main():
         msbuild_tool,
         module_dir,
         output_dir,
-        args.godot_platform,
+        args.scardot_platform,
         args.dev_debug,
         push_nupkgs_local,
         args.precision,

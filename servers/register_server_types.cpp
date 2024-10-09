@@ -81,7 +81,7 @@
 
 // 2D physics and navigation.
 #include "navigation_server_2d.h"
-#include "physics_2d/godot_physics_server_2d.h"
+#include "physics_2d/scardot_physics_server_2d.h"
 #include "physics_server_2d.h"
 #include "physics_server_2d_wrap_mt.h"
 #include "servers/extensions/physics_server_2d_extension.h"
@@ -89,7 +89,7 @@
 // 3D physics and navigation (3D navigation is needed for 2D).
 #include "navigation_server_3d.h"
 #ifndef _3D_DISABLED
-#include "physics_3d/godot_physics_server_3d.h"
+#include "physics_3d/scardot_physics_server_3d.h"
 #include "physics_server_3d.h"
 #include "physics_server_3d_wrap_mt.h"
 #include "servers/extensions/physics_server_3d_extension.h"

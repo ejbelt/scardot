@@ -3,11 +3,11 @@
 1. Build scardot with the module enabled: `module_mono_enabled=yes`.
 2. After building scardot, use it to generate the C# glue code:
    ```sh
-   <godot_binary> --generate-mono-glue ./modules/mono/glue
+   <scardot_binary> --generate-mono-glue ./modules/mono/glue
    ```
 3. Build the C# solutions:
    ```sh
-   ./modules/mono/build_scripts/build_assemblies.py --godot-output-dir ./bin
+   ./modules/mono/build_scripts/build_assemblies.py --scardot-output-dir ./bin
    ```
 
 The paths specified in these examples assume the command is being run from
@@ -35,7 +35,7 @@ In order to simplify this process, the `build_assemblies.py` script provides
 the following `--push-nupkgs-local` option:
 
 ```sh
-./modules/mono/build_scripts/build_assemblies.py --godot-output-dir ./bin \
+./modules/mono/build_scripts/build_assemblies.py --scardot-output-dir ./bin \
     --push-nupkgs-local ~/MyLocalNugetSource
 ```
 
@@ -50,6 +50,6 @@ Follow the above instructions but build scardot with the precision=double argume
 
 When building the NuGet packages, specify `--precision=double` - for example:
 ```sh
-./modules/mono/build_scripts/build_assemblies.py --godot-output-dir ./bin \
+./modules/mono/build_scripts/build_assemblies.py --scardot-output-dir ./bin \
     --push-nupkgs-local ~/MyLocalNugetSource --precision=double
 ```

@@ -210,4 +210,4 @@ class scardotProcessor extends AudioWorkletProcessor {
 	}
 }
 
-registerProcessor('godot-processor', scardotProcessor);
+registerProcessor('scardot-processor', scardotProcessor);

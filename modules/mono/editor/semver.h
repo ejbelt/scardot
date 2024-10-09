@@ -42,7 +42,7 @@
 #undef minor
 #endif
 
-namespace godotsharp {
+namespace scardotsharp {
 
 struct SemVer {
 private:
@@ -101,6 +101,6 @@ public:
 	bool parse(const String &p_ver_text, SemVer &r_semver);
 };
 
-} //namespace godotsharp
+} //namespace scardotsharp
 
 #endif // SEMVER_H

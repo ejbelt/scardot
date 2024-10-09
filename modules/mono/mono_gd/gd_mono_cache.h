@@ -56,18 +56,18 @@ namespace GDMonoCache {
 #endif
 #endif
 
-struct godotsharp_property_info {
-	godot_string_name name; // Not owned
-	godot_string hint_string;
+struct scardotsharp_property_info {
+	scardot_string_name name; // Not owned
+	scardot_string hint_string;
 	Variant::Type type;
 	PropertyHint hint;
 	PropertyUsageFlags usage;
 	bool exported;
 };
 
-struct godotsharp_property_def_val_pair {
-	godot_string_name name; // Not owned
-	godot_variant value;
+struct scardotsharp_property_def_val_pair {
+	scardot_string_name name; // Not owned
+	scardot_variant value;
 };
 
 struct ManagedCallbacks {
@@ -152,9 +152,9 @@ struct ManagedCallbacks {
 };
 
 extern ManagedCallbacks managed_callbacks;
-extern bool godot_api_cache_updated;
+extern bool scardot_api_cache_updated;
 
-void update_godot_api_cache(const ManagedCallbacks &p_managed_callbacks);
+void update_scardot_api_cache(const ManagedCallbacks &p_managed_callbacks);
 
 } // namespace GDMonoCache
 

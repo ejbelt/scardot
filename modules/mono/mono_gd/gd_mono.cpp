@@ -32,7 +32,7 @@
 
 #include "../csharp_script.h"
 #include "../glue/runtime_interop.h"
-#include "../godotsharp_dirs.h"
+#include "../scardotsharp_dirs.h"
 #include "../thirdparty/coreclr_delegates.h"
 #include "../thirdparty/hostfxr.h"
 #include "../utils/path_utils.h"
@@ -87,7 +87,7 @@ String find_hostfxr() {
 #ifdef TOOLS_ENABLED
 	String dotnet_root;
 	String fxr_path;
-	if (godotsharp::hostfxr_resolver::try_get_path(dotnet_root, fxr_path)) {
+	if (scardotsharp::hostfxr_resolver::try_get_path(dotnet_root, fxr_path)) {
 		return fxr_path;
 	}
 
@@ -108,7 +108,7 @@ String find_hostfxr() {
 		// allow us to fail gracefully and show some helpful information in the editor.
 
 		dotnet_root = dotnet_exe.get_base_dir();
-		if (godotsharp::hostfxr_resolver::try_get_path_from_dotnet_root(dotnet_root, fxr_path)) {
+		if (scardotsharp::hostfxr_resolver::try_get_path_from_dotnet_root(dotnet_root, fxr_path)) {
 			return fxr_path;
 		}
 	}
@@ -244,16 +244,16 @@ load_assembly_and_get_function_pointer_fn initialize_hostfxr_self_contained(
 #endif
 
 #ifdef TOOLS_ENABLED
-using godot_plugins_initialize_fn = bool (*)(void *, bool, gdmono::PluginCallbacks *, GDMonoCache::ManagedCallbacks *, const void **, int32_t);
+using scardot_plugins_initialize_fn = bool (*)(void *, bool, gdmono::PluginCallbacks *, GDMonoCache::ManagedCallbacks *, const void **, int32_t);
 #else
-using godot_plugins_initialize_fn = bool (*)(void *, GDMonoCache::ManagedCallbacks *, const void **, int32_t);
+using scardot_plugins_initialize_fn = bool (*)(void *, GDMonoCache::ManagedCallbacks *, const void **, int32_t);
 #endif
 
 #ifdef TOOLS_ENABLED
-godot_plugins_initialize_fn initialize_hostfxr_and_godot_plugins(bool &r_runtime_initialized) {
-	godot_plugins_initialize_fn godot_plugins_initialize = nullptr;
+scardot_plugins_initialize_fn initialize_hostfxr_and_scardot_plugins(bool &r_runtime_initialized) {
+	scardot_plugins_initialize_fn scardot_plugins_initialize = nullptr;
 
-	HostFxrCharString godot_plugins_path = str_to_hostfxr(
+	HostFxrCharString scardot_plugins_path = str_to_hostfxr(
 			scardotSharpDirs::get_api_assemblies_dir().path_join("scardotPlugins.dll"));
 
 	HostFxrCharString config_path = str_to_hostfxr(
@@ -272,19 +272,19 @@ godot_plugins_initialize_fn initialize_hostfxr_and_godot_plugins(bool &r_runtime
 
 	print_verbose(".NET: hostfxr initialized");
 
-	int rc = load_assembly_and_get_function_pointer(get_data(godot_plugins_path),
+	int rc = load_assembly_and_get_function_pointer(get_data(scardot_plugins_path),
 			HOSTFXR_STR("scardotPlugins.Main, scardotPlugins"),
 			HOSTFXR_STR("InitializeFromEngine"),
 			UNMANAGEDCALLERSONLY_METHOD,
 			nullptr,
-			(void **)&godot_plugins_initialize);
+			(void **)&scardot_plugins_initialize);
 	ERR_FAIL_COND_V_MSG(rc != 0, nullptr, ".NET: Failed to get scardotPlugins initialization function pointer");
 
-	return godot_plugins_initialize;
+	return scardot_plugins_initialize;
 }
 #else
-godot_plugins_initialize_fn initialize_hostfxr_and_godot_plugins(bool &r_runtime_initialized) {
-	godot_plugins_initialize_fn godot_plugins_initialize = nullptr;
+scardot_plugins_initialize_fn initialize_hostfxr_and_scardot_plugins(bool &r_runtime_initialized) {
+	scardot_plugins_initialize_fn scardot_plugins_initialize = nullptr;
 
 	String assembly_name = path::get_csharp_project_name();
 
@@ -304,13 +304,13 @@ godot_plugins_initialize_fn initialize_hostfxr_and_godot_plugins(bool &r_runtime
 			HOSTFXR_STR("InitializeFromGameProject"),
 			UNMANAGEDCALLERSONLY_METHOD,
 			nullptr,
-			(void **)&godot_plugins_initialize);
+			(void **)&scardot_plugins_initialize);
 	ERR_FAIL_COND_V_MSG(rc != 0, nullptr, ".NET: Failed to get scardotPlugins initialization function pointer");
 
-	return godot_plugins_initialize;
+	return scardot_plugins_initialize;
 }
 
-godot_plugins_initialize_fn try_load_native_aot_library(void *&r_aot_dll_handle) {
+scardot_plugins_initialize_fn try_load_native_aot_library(void *&r_aot_dll_handle) {
 	String assembly_name = path::get_csharp_project_name();
 
 #if defined(WINDOWS_ENABLED)
@@ -333,9 +333,9 @@ godot_plugins_initialize_fn try_load_native_aot_library(void *&r_aot_dll_handle)
 
 	void *symbol = nullptr;
 
-	err = OS::get_singleton()->get_dynamic_library_symbol_handle(lib, "godotsharp_game_main_init", symbol);
+	err = OS::get_singleton()->get_dynamic_library_symbol_handle(lib, "scardotsharp_game_main_init", symbol);
 	ERR_FAIL_COND_V(err != OK, nullptr);
-	return (godot_plugins_initialize_fn)symbol;
+	return (scardot_plugins_initialize_fn)symbol;
 }
 #endif
 
@@ -351,7 +351,7 @@ bool GDMono::should_initialize() {
 }
 
 static bool _on_core_api_assembly_loaded() {
-	if (!GDMonoCache::godot_api_cache_updated) {
+	if (!GDMonoCache::scardot_api_cache_updated) {
 		return false;
 	}
 
@@ -370,9 +370,9 @@ static bool _on_core_api_assembly_loaded() {
 void GDMono::initialize() {
 	print_verbose(".NET: Initializing module...");
 
-	_init_godot_api_hashes();
+	_init_scardot_api_hashes();
 
-	godot_plugins_initialize_fn godot_plugins_initialize = nullptr;
+	scardot_plugins_initialize_fn scardot_plugins_initialize = nullptr;
 
 #if !defined(IOS_ENABLED)
 	// Check that the .NET assemblies directory exists before trying to use it.
@@ -384,9 +384,9 @@ void GDMono::initialize() {
 
 	if (!load_hostfxr(hostfxr_dll_handle)) {
 #if !defined(TOOLS_ENABLED)
-		godot_plugins_initialize = try_load_native_aot_library(hostfxr_dll_handle);
+		scardot_plugins_initialize = try_load_native_aot_library(hostfxr_dll_handle);
 
-		if (godot_plugins_initialize != nullptr) {
+		if (scardot_plugins_initialize != nullptr) {
 			is_native_aot = true;
 			runtime_initialized = true;
 		} else {
@@ -401,25 +401,25 @@ void GDMono::initialize() {
 	}
 
 	if (!is_native_aot) {
-		godot_plugins_initialize = initialize_hostfxr_and_godot_plugins(runtime_initialized);
-		ERR_FAIL_NULL(godot_plugins_initialize);
+		scardot_plugins_initialize = initialize_hostfxr_and_scardot_plugins(runtime_initialized);
+		ERR_FAIL_NULL(scardot_plugins_initialize);
 	}
 
 	int32_t interop_funcs_size = 0;
-	const void **interop_funcs = godotsharp::get_runtime_interop_funcs(interop_funcs_size);
+	const void **interop_funcs = scardotsharp::get_runtime_interop_funcs(interop_funcs_size);
 
 	GDMonoCache::ManagedCallbacks managed_callbacks{};
 
-	void *godot_dll_handle = nullptr;
+	void *scardot_dll_handle = nullptr;
 
 #if defined(UNIX_ENABLED) && !defined(MACOS_ENABLED) && !defined(IOS_ENABLED)
 	// Managed code can access it on its own on other platforms
-	godot_dll_handle = dlopen(nullptr, RTLD_NOW);
+	scardot_dll_handle = dlopen(nullptr, RTLD_NOW);
 #endif
 
 #ifdef TOOLS_ENABLED
 	gdmono::PluginCallbacks plugin_callbacks_res;
-	bool init_ok = godot_plugins_initialize(godot_dll_handle,
+	bool init_ok = scardot_plugins_initialize(scardot_dll_handle,
 			Engine::get_singleton()->is_editor_hint(),
 			&plugin_callbacks_res, &managed_callbacks,
 			interop_funcs, interop_funcs_size);
@@ -427,12 +427,12 @@ void GDMono::initialize() {
 
 	plugin_callbacks = plugin_callbacks_res;
 #else
-	bool init_ok = godot_plugins_initialize(godot_dll_handle, &managed_callbacks,
+	bool init_ok = scardot_plugins_initialize(scardot_dll_handle, &managed_callbacks,
 			interop_funcs, interop_funcs_size);
 	ERR_FAIL_COND_MSG(!init_ok, ".NET: scardotPlugins initialization failed");
 #endif
 
-	GDMonoCache::update_godot_api_cache(managed_callbacks);
+	GDMonoCache::update_scardot_api_cache(managed_callbacks);
 
 	print_verbose(".NET: scardotPlugins initialized");
 
@@ -462,7 +462,7 @@ void GDMono::_try_load_project_assembly() {
 }
 #endif
 
-void GDMono::_init_godot_api_hashes() {
+void GDMono::_init_scardot_api_hashes() {
 #ifdef DEBUG_METHODS_ENABLED
 	get_api_core_hash();
 
@@ -519,7 +519,7 @@ Error GDMono::reload_project_assemblies() {
 	finalizing_scripts_domain = true;
 
 	if (!get_plugin_callbacks().UnloadProjectPluginCallback()) {
-		ERR_PRINT_ED(".NET: Failed to unload assemblies. Please check https://github.com/godotengine/godot/issues/78513 for more information.");
+		ERR_PRINT_ED(".NET: Failed to unload assemblies. Please check https://github.com/scardotengine/scardot/issues/78513 for more information.");
 		reload_failure();
 		return FAILED;
 	}

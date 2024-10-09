@@ -30,7 +30,7 @@
 
 #include "csharp_script.h"
 
-#include "godotsharp_dirs.h"
+#include "scardotsharp_dirs.h"
 #include "managed_callable.h"
 #include "mono_gd/gd_mono_cache.h"
 #include "signal_awaiter_utils.h"
@@ -74,8 +74,8 @@ const Vector<String> ignored_types = {};
 
 #ifdef TOOLS_ENABLED
 static bool _create_project_solution_if_needed() {
-	CRASH_COND(CSharpLanguage::get_singleton()->get_godotsharp_editor() == nullptr);
-	return CSharpLanguage::get_singleton()->get_godotsharp_editor()->call("CreateProjectSolutionIfNeeded");
+	CRASH_COND(CSharpLanguage::get_singleton()->get_scardotsharp_editor() == nullptr);
+	return CSharpLanguage::get_singleton()->get_scardotsharp_editor()->call("CreateProjectSolutionIfNeeded");
 }
 #endif
 
@@ -142,7 +142,7 @@ void CSharpLanguage::finalize() {
 		return;
 	}
 
-	if (gdmono && gdmono->is_runtime_initialized() && GDMonoCache::godot_api_cache_updated) {
+	if (gdmono && gdmono->is_runtime_initialized() && GDMonoCache::scardot_api_cache_updated) {
 		GDMonoCache::managed_callbacks.DisposablesTracker_OnscardotShuttingDown();
 	}
 
@@ -509,7 +509,7 @@ Vector<ScriptLanguage::StackInfo> CSharpLanguage::debug_get_current_stack_info()
 
 	Vector<StackInfo> si;
 
-	if (GDMonoCache::godot_api_cache_updated) {
+	if (GDMonoCache::scardot_api_cache_updated) {
 		GDMonoCache::managed_callbacks.DebuggingUtils_GetCurrentStackInfo(&si);
 	}
 
@@ -540,7 +540,7 @@ void CSharpLanguage::pre_unsafe_unreference(Object *p_obj) {
 }
 
 void CSharpLanguage::frame() {
-	if (gdmono && gdmono->is_runtime_initialized() && GDMonoCache::godot_api_cache_updated) {
+	if (gdmono && gdmono->is_runtime_initialized() && GDMonoCache::scardot_api_cache_updated) {
 		GDMonoCache::managed_callbacks.ScriptManagerBridge_FrameCallback();
 	}
 }
@@ -587,7 +587,7 @@ void CSharpLanguage::reload_tool_script(const Ref<Script> &p_script, bool p_soft
 	CRASH_COND(!Engine::get_singleton()->is_editor_hint());
 
 #ifdef TOOLS_ENABLED
-	get_godotsharp_editor()->get_node(NodePath("HotReloadAssemblyWatcher"))->call("RestartTimer");
+	get_scardotsharp_editor()->get_node(NodePath("HotReloadAssemblyWatcher"))->call("RestartTimer");
 #endif
 
 #ifdef GD_MONO_HOT_RELOAD
@@ -896,7 +896,7 @@ void CSharpLanguage::reload_assemblies(bool p_soft_reload) {
 #ifdef TOOLS_ENABLED
 				if (si) {
 					// If the script instance is not null, then it must be a placeholder.
-					// Non-placeholder script instances are removed in godot_icall_Object_Disposed.
+					// Non-placeholder script instances are removed in scardot_icall_Object_Disposed.
 					CRASH_COND(!si->is_placeholder());
 
 					if (replace_placeholder || scr->is_tool() || ScriptServer::is_scripting_enabled()) {
@@ -1018,11 +1018,11 @@ void CSharpLanguage::get_recognized_extensions(List<String> *p_extensions) const
 
 #ifdef TOOLS_ENABLED
 Error CSharpLanguage::open_in_external_editor(const Ref<Script> &p_script, int p_line, int p_col) {
-	return (Error)(int)get_godotsharp_editor()->call("OpenInExternalEditor", p_script, p_line, p_col);
+	return (Error)(int)get_scardotsharp_editor()->call("OpenInExternalEditor", p_script, p_line, p_col);
 }
 
 bool CSharpLanguage::overrides_external_editor() {
-	return get_godotsharp_editor()->call("OverridesExternalEditor");
+	return get_scardotsharp_editor()->call("OverridesExternalEditor");
 }
 #endif
 
@@ -1056,21 +1056,21 @@ void CSharpLanguage::_editor_init_callback() {
 	// Load scardotTools and initialize scardotSharpEditor
 
 	int32_t interop_funcs_size = 0;
-	const void **interop_funcs = godotsharp::get_editor_interop_funcs(interop_funcs_size);
+	const void **interop_funcs = scardotsharp::get_editor_interop_funcs(interop_funcs_size);
 
 	Object *editor_plugin_obj = GDMono::get_singleton()->get_plugin_callbacks().LoadToolsAssemblyCallback(
 			scardotSharpDirs::get_data_editor_tools_dir().path_join("scardotTools.dll").utf16(),
 			interop_funcs, interop_funcs_size);
 	CRASH_COND(editor_plugin_obj == nullptr);
 
-	EditorPlugin *godotsharp_editor = Object::cast_to<EditorPlugin>(editor_plugin_obj);
-	CRASH_COND(godotsharp_editor == nullptr);
+	EditorPlugin *scardotsharp_editor = Object::cast_to<EditorPlugin>(editor_plugin_obj);
+	CRASH_COND(scardotsharp_editor == nullptr);
 
 	// Add plugin to EditorNode and enable it
-	EditorNode::add_editor_plugin(godotsharp_editor);
-	godotsharp_editor->enable_plugin();
+	EditorNode::add_editor_plugin(scardotsharp_editor);
+	scardotsharp_editor->enable_plugin();
 
-	get_singleton()->godotsharp_editor = godotsharp_editor;
+	get_singleton()->scardotsharp_editor = scardotsharp_editor;
 }
 #endif
 
@@ -1166,7 +1166,7 @@ bool CSharpLanguage::setup_csharp_script_binding(CSharpScriptBinding &r_script_b
 		// Unsafe refcount increment. The managed instance also counts as a reference.
 		// This way if the unmanaged world has no references to our owner
 		// but the managed instance is alive, the refcount will be 1 instead of 0.
-		// See: godot_icall_RefCounted_Dtor(MonoObject *p_obj, Object *p_ptr)
+		// See: scardot_icall_RefCounted_Dtor(MonoObject *p_obj, Object *p_ptr)
 
 		rc->reference();
 		CSharpLanguage::get_singleton()->post_unsafe_reference(rc);
@@ -1363,13 +1363,13 @@ void CSharpLanguage::tie_native_managed_to_unmanaged(GCHandleIntPtr p_gchandle_i
 	// script binding instead. One of the advantages of this is that if a script is attached
 	// later and it's not a C# script, then the managed object won't have to be disposed.
 	// Another reason for doing this is that this instance could outlive CSharpLanguage, which would
-	// be problematic when using a script. See: https://github.com/godotengine/godot/issues/25621
+	// be problematic when using a script. See: https://github.com/scardotengine/scardot/issues/25621
 
 	if (p_ref_counted) {
 		// Unsafe refcount increment. The managed instance also counts as a reference.
 		// This way if the unmanaged world has no references to our owner
 		// but the managed instance is alive, the refcount will be 1 instead of 0.
-		// See: godot_icall_RefCounted_Dtor(MonoObject *p_obj, Object *p_ptr)
+		// See: scardot_icall_RefCounted_Dtor(MonoObject *p_obj, Object *p_ptr)
 
 		// May not me referenced yet, so we must use init_ref() instead of reference()
 		if (rc->init_ref()) {
@@ -1613,7 +1613,7 @@ bool CSharpInstance::has_method(const StringName &p_method) const {
 		return false;
 	}
 
-	if (!GDMonoCache::godot_api_cache_updated) {
+	if (!GDMonoCache::scardot_api_cache_updated) {
 		return false;
 	}
 
@@ -1878,7 +1878,7 @@ void CSharpInstance::notification(int p_notification, bool p_reversed) {
 			// The RefCounted wouldn't have reached 0 otherwise, since the managed side
 			// references it and Dispose() needs to be called to release it.
 			// However, this means C# RefCounted scripts can't receive NOTIFICATION_PREDELETE, but
-			// this is likely the case with GDScript as well: https://github.com/godotengine/godot/issues/6784
+			// this is likely the case with GDScript as well: https://github.com/scardotengine/scardot/issues/6784
 			return;
 		}
 	} else if (p_notification == Object::NOTIFICATION_PREDELETE_CLEANUP) {
@@ -2029,7 +2029,7 @@ void CSharpScript::_update_exports_values(HashMap<StringName, Variant> &values, 
 #endif
 
 void GD_CLR_STDCALL CSharpScript::_add_property_info_list_callback(CSharpScript *p_script, const String *p_current_class_name, void *p_props, int32_t p_count) {
-	GDMonoCache::godotsharp_property_info *props = (GDMonoCache::godotsharp_property_info *)p_props;
+	GDMonoCache::scardotsharp_property_info *props = (GDMonoCache::scardotsharp_property_info *)p_props;
 
 #ifdef TOOLS_ENABLED
 	p_script->exported_members_cache.push_back(PropertyInfo(
@@ -2038,7 +2038,7 @@ void GD_CLR_STDCALL CSharpScript::_add_property_info_list_callback(CSharpScript 
 #endif
 
 	for (int i = 0; i < p_count; i++) {
-		const GDMonoCache::godotsharp_property_info &prop = props[i];
+		const GDMonoCache::scardotsharp_property_info &prop = props[i];
 
 		StringName name = *reinterpret_cast<const StringName *>(&prop.name);
 		String hint_string = *reinterpret_cast<const String *>(&prop.hint_string);
@@ -2061,10 +2061,10 @@ void GD_CLR_STDCALL CSharpScript::_add_property_info_list_callback(CSharpScript 
 
 #ifdef TOOLS_ENABLED
 void GD_CLR_STDCALL CSharpScript::_add_property_default_values_callback(CSharpScript *p_script, void *p_def_vals, int32_t p_count) {
-	GDMonoCache::godotsharp_property_def_val_pair *def_vals = (GDMonoCache::godotsharp_property_def_val_pair *)p_def_vals;
+	GDMonoCache::scardotsharp_property_def_val_pair *def_vals = (GDMonoCache::scardotsharp_property_def_val_pair *)p_def_vals;
 
 	for (int i = 0; i < p_count; i++) {
-		const GDMonoCache::godotsharp_property_def_val_pair &def_val_pair = def_vals[i];
+		const GDMonoCache::scardotsharp_property_def_val_pair &def_val_pair = def_vals[i];
 
 		StringName name = *reinterpret_cast<const StringName *>(&def_val_pair.name);
 		Variant value = *reinterpret_cast<const Variant *>(&def_val_pair.value);
@@ -2104,7 +2104,7 @@ bool CSharpScript::_update_exports(PlaceHolderScriptInstance *p_instance_to_upda
 		exported_members_defval_cache.clear();
 #endif
 
-		if (GDMonoCache::godot_api_cache_updated) {
+		if (GDMonoCache::scardot_api_cache_updated) {
 			GDMonoCache::managed_callbacks.ScriptManagerBridge_GetPropertyInfoList(this, &_add_property_info_list_callback);
 
 #ifdef TOOLS_ENABLED
@@ -2208,7 +2208,7 @@ void CSharpScript::reload_registered_script(Ref<CSharpScript> p_script) {
 void CSharpScript::update_script_class_info(Ref<CSharpScript> p_script) {
 	TypeInfo type_info;
 
-	// TODO: Use GDExtension godot_dictionary
+	// TODO: Use GDExtension scardot_dictionary
 	Array methods_array;
 	methods_array.~Array();
 	Dictionary rpc_functions_dict;
@@ -2619,7 +2619,7 @@ bool CSharpScript::has_script_signal(const StringName &p_signal) const {
 		return false;
 	}
 
-	if (!GDMonoCache::godot_api_cache_updated) {
+	if (!GDMonoCache::scardot_api_cache_updated) {
 		return false;
 	}
 
@@ -2668,7 +2668,7 @@ bool CSharpScript::inherits_script(const Ref<Script> &p_script) const {
 		return false;
 	}
 
-	if (!GDMonoCache::godot_api_cache_updated) {
+	if (!GDMonoCache::scardot_api_cache_updated) {
 		return false;
 	}
 
@@ -2761,7 +2761,7 @@ CSharpScript::~CSharpScript() {
 	}
 #endif
 
-	if (GDMonoCache::godot_api_cache_updated) {
+	if (GDMonoCache::scardot_api_cache_updated) {
 		GDMonoCache::managed_callbacks.ScriptManagerBridge_RemoveScriptBridge(this);
 	}
 }
@@ -2794,7 +2794,7 @@ Ref<Resource> ResourceFormatLoaderCSharpScript::load(const String &p_path, const
 
 	Ref<CSharpScript> scr;
 
-	if (GDMonoCache::godot_api_cache_updated) {
+	if (GDMonoCache::scardot_api_cache_updated) {
 		GDMonoCache::managed_callbacks.ScriptManagerBridge_GetOrCreateScriptBridgeForPath(&p_path, &scr);
 		ERR_FAIL_NULL_V_MSG(scr, Ref<Resource>(), "Could not create C# script '" + real_path + "'.");
 	} else {

@@ -55,7 +55,7 @@
 # Günther Bohn <ciscouser@gmx.de>, 2020, 2021.
 # Tom Wor <mail@tomwor.com>, 2020.
 # Bjarne Hiller <bjarne.hiller@gmail.com>, 2020.
-# Dirk Federmann <weblategodot@dirkfedermann.de>, 2020.
+# Dirk Federmann <weblatescardot@dirkfedermann.de>, 2020.
 # Helmut Hirtes <helmut.h@gmx.de>, 2020.
 # Michal695 <michalek.jedrzejak@gmail.com>, 2020.
 # Leon Marz <leon.marz@kabelmail.de>, 2020.
@@ -107,11 +107,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: scardot Engine properties\n"
-"Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
+"Report-Msgid-Bugs-To: https://github.com/scardotengine/scardot\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2024-07-30 16:40+0000\n"
 "Last-Translator: tct123 <tct1234@protonmail.com>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/godot-engine/godot-"
+"Language-Team: German <https://hosted.weblate.org/projects/scardot-engine/scardot-"
 "properties/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"

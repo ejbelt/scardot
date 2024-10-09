@@ -32,7 +32,7 @@
 #define ANDROID_EXPORT_PLUGIN_H
 
 #ifndef DISABLE_DEPRECATED
-#include "godot_plugin_config.h"
+#include "scardot_plugin_config.h"
 #endif // DISABLE_DEPRECATED
 
 #include "core/io/zip_io.h"

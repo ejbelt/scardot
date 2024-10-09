@@ -195,7 +195,7 @@ def configure(env: "SConsEnvironment"):
     # Link flags
 
     env.Append(LINKFLAGS="-Wl,--gc-sections -Wl,--no-undefined -Wl,-z,now".split())
-    env.Append(LINKFLAGS="-Wl,-soname,libgodot_android.so")
+    env.Append(LINKFLAGS="-Wl,-soname,libscardot_android.so")
 
     env.Prepend(CPPPATH=["#platform/android"])
     env.Append(CPPDEFINES=["ANDROID_ENABLED", "UNIX_ENABLED"])

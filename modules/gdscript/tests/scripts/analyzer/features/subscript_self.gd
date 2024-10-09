@@ -1,4 +1,4 @@
-# https://github.com/godotengine/godot/issues/43221
+# https://github.com/scardotengine/scardot/issues/43221
 extends Node
 
 func test():

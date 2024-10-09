@@ -52,12 +52,12 @@ private:
 	Vector<GLTFNodeIndex> roots;
 
 	// The created Skeleton3D for the scene
-	Skeleton3D *godot_skeleton = nullptr;
+	Skeleton3D *scardot_skeleton = nullptr;
 
 	// Set of unique bone names for the skeleton
 	HashSet<String> unique_names;
 
-	HashMap<int32_t, GLTFNodeIndex> godot_bone_node;
+	HashMap<int32_t, GLTFNodeIndex> scardot_bone_node;
 
 	Vector<BoneAttachment3D *> bone_attachments;
 
@@ -71,32 +71,32 @@ public:
 	Vector<GLTFNodeIndex> get_roots();
 	void set_roots(Vector<GLTFNodeIndex> p_roots);
 
-	Skeleton3D *get_godot_skeleton();
+	Skeleton3D *get_scardot_skeleton();
 
-	// Skeleton *get_godot_skeleton() {
-	// 	return godot_skeleton;
+	// Skeleton *get_scardot_skeleton() {
+	// 	return scardot_skeleton;
 	// }
-	// void set_godot_skeleton(Skeleton p_*godot_skeleton) {
-	// 	godot_skeleton = p_godot_skeleton;
+	// void set_scardot_skeleton(Skeleton p_*scardot_skeleton) {
+	// 	scardot_skeleton = p_scardot_skeleton;
 	// }
 
 	TypedArray<String> get_unique_names();
 	void set_unique_names(TypedArray<String> p_unique_names);
 
-	//RBMap<int32_t, GLTFNodeIndex> get_godot_bone_node() {
-	//	return godot_bone_node;
+	//RBMap<int32_t, GLTFNodeIndex> get_scardot_bone_node() {
+	//	return scardot_bone_node;
 	//}
-	//void set_godot_bone_node(const RBMap<int32_t, GLTFNodeIndex> &p_godot_bone_node) {
-	//	godot_bone_node = p_godot_bone_node;
+	//void set_scardot_bone_node(const RBMap<int32_t, GLTFNodeIndex> &p_scardot_bone_node) {
+	//	scardot_bone_node = p_scardot_bone_node;
 	//}
-	Dictionary get_godot_bone_node();
-	void set_godot_bone_node(Dictionary p_indict);
+	Dictionary get_scardot_bone_node();
+	void set_scardot_bone_node(Dictionary p_indict);
 
-	//Dictionary get_godot_bone_node() {
-	//	return VariantConversion::to_dict(godot_bone_node);
+	//Dictionary get_scardot_bone_node() {
+	//	return VariantConversion::to_dict(scardot_bone_node);
 	//}
-	//void set_godot_bone_node(Dictionary p_indict) {
-	//	VariantConversion::set_from_dict(godot_bone_node, p_indict);
+	//void set_scardot_bone_node(Dictionary p_indict) {
+	//	VariantConversion::set_from_dict(scardot_bone_node, p_indict);
 	//}
 
 	BoneAttachment3D *get_bone_attachment(int idx);

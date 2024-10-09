@@ -276,7 +276,7 @@ class BindingsGenerator {
 
 		/**
 		 * Determines whether the native return value of this type must be disposed
-		 * by the generated internal call (think of `godot_string`, whose destructor
+		 * by the generated internal call (think of `scardot_string`, whose destructor
 		 * must be called). Some structs that are disposable may still disable this
 		 * flag if the ownership is transferred.
 		 */
@@ -433,7 +433,7 @@ class BindingsGenerator {
 
 		/**
 		 * Formatting elements:
-		 * %0: input expression of type `in godot_variant`
+		 * %0: input expression of type `in scardot_variant`
 		 * %1: [cs_type] of this type
 		 * %2: [name] of this type
 		 */

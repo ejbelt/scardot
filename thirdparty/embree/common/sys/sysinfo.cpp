@@ -649,7 +649,7 @@ namespace embree
 
 // -- SCARDOT start --
 extern "C" {
-extern int godot_js_os_hw_concurrency_get();
+extern int scardot_js_os_hw_concurrency_get();
 }
 // -- SCARDOT end --
 #endif
@@ -666,7 +666,7 @@ namespace embree
     assert(nThreads);
 #elif defined(__EMSCRIPTEN__)
     // -- SCARDOT start --
-    nThreads = godot_js_os_hw_concurrency_get();
+    nThreads = scardot_js_os_hw_concurrency_get();
     // -- SCARDOT end --
 #else
     cpu_set_t set;

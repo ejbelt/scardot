@@ -290,7 +290,7 @@ Error SkinTool::_determine_skeletons(
 	if (!p_single_skeleton_roots.is_empty()) {
 		Ref<GLTFSkin> skin;
 		skin.instantiate();
-		skin->set_name("godot_single_skeleton_root");
+		skin->set_name("scardot_single_skeleton_root");
 		for (GLTFNodeIndex i = 0; i < p_single_skeleton_roots.size(); i++) {
 			skin->joints.push_back(p_single_skeleton_roots[i]);
 		}
@@ -548,7 +548,7 @@ Error SkinTool::_create_skeletons(
 		Ref<GLTFSkeleton> gltf_skeleton = skeletons.write[skel_i];
 
 		Skeleton3D *skeleton = memnew(Skeleton3D);
-		gltf_skeleton->godot_skeleton = skeleton;
+		gltf_skeleton->scardot_skeleton = skeleton;
 		skeleton3d_to_gltf_skeleton[skeleton->get_instance_id()] = skel_i;
 
 		// Make a unique name, no gltf node represents this skeleton
@@ -631,7 +631,7 @@ Error SkinTool::_map_skin_joints_indices_to_skeleton_bone_indices(
 			const SkinNodeIndex node_i = skin->joints_original[joint_index];
 			const Ref<GLTFNode> node = nodes[node_i];
 
-			const int bone_index = skeleton->godot_skeleton->find_bone(node->get_name());
+			const int bone_index = skeleton->scardot_skeleton->find_bone(node->get_name());
 			ERR_FAIL_COND_V(bone_index < 0, FAILED);
 
 			skin->joint_i_to_bone_i.insert(joint_index, bone_index);
@@ -669,7 +669,7 @@ Error SkinTool::_create_skins(Vector<Ref<GLTFSkin>> &skins, Vector<Ref<GLTFNode>
 			}
 		}
 
-		gltf_skin->godot_skin = skin;
+		gltf_skin->scardot_skin = skin;
 	}
 
 	// Purge the duplicates!
@@ -678,7 +678,7 @@ Error SkinTool::_create_skins(Vector<Ref<GLTFSkin>> &skins, Vector<Ref<GLTFNode>
 	// Create unique names now, after removing duplicates
 	for (GLTFSkinIndex skin_i = 0; skin_i < skins.size(); ++skin_i) {
 		ERR_CONTINUE(skins.get(skin_i).is_null());
-		Ref<Skin> skin = skins.write[skin_i]->godot_skin;
+		Ref<Skin> skin = skins.write[skin_i]->scardot_skin;
 		ERR_CONTINUE(skin.is_null());
 		if (skin->get_name().is_empty()) {
 			// Make a unique name, no node represents this skin
@@ -740,12 +740,12 @@ bool SkinTool::_skins_are_same(const Ref<Skin> p_skin_a, const Ref<Skin> p_skin_
 void SkinTool::_remove_duplicate_skins(Vector<Ref<GLTFSkin>> &r_skins) {
 	for (int i = 0; i < r_skins.size(); ++i) {
 		for (int j = i + 1; j < r_skins.size(); ++j) {
-			const Ref<Skin> skin_i = r_skins[i]->godot_skin;
-			const Ref<Skin> skin_j = r_skins[j]->godot_skin;
+			const Ref<Skin> skin_i = r_skins[i]->scardot_skin;
+			const Ref<Skin> skin_j = r_skins[j]->scardot_skin;
 
 			if (_skins_are_same(skin_i, skin_j)) {
 				// replace it and delete the old
-				r_skins.write[j]->godot_skin = skin_i;
+				r_skins.write[j]->scardot_skin = skin_i;
 			}
 		}
 	}

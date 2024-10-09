@@ -36,11 +36,11 @@ dependencies {
 
     if (rootProject.findProject(":lib")) {
         implementation project(":lib")
-    } else if (rootProject.findProject(":godot:lib")) {
-        implementation project(":godot:lib")
+    } else if (rootProject.findProject(":scardot:lib")) {
+        implementation project(":scardot:lib")
     } else {
         // scardot gradle build mode. In this scenario this project is the only one around and the scardot
-        // library is available through the pre-generated godot-lib.*.aar android archive files.
+        // library is available through the pre-generated scardot-lib.*.aar android archive files.
         debugImplementation fileTree(dir: 'libs/debug', include: ['*.jar', '*.aar'])
         devImplementation fileTree(dir: 'libs/dev', include: ['*.jar', '*.aar'])
         releaseImplementation fileTree(dir: 'libs/release', include: ['*.jar', '*.aar'])
@@ -77,7 +77,7 @@ android {
 
     assetPacks = [":assetPacks:installTime"]
 
-    namespace = 'com.godot.game'
+    namespace = 'com.scardot.game'
 
     defaultConfig {
         // The default ignore pattern for the 'assets' directory includes hidden files and directories which are used by scardot projects.
@@ -90,7 +90,7 @@ android {
             abiFilters export_abi_list
         }
 
-        manifestPlaceholders = [godotEditorVersion: getscardotEditorVersion()]
+        manifestPlaceholders = [scardotEditorVersion: getscardotEditorVersion()]
 
         // Feel free to modify the application id to your own.
         applicationId getExportPackageName()

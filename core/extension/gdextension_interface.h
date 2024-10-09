@@ -760,16 +760,16 @@ typedef GDExtensionInterfaceFunctionPtr (*GDExtensionInterfaceGetProcAddress)(co
  *
  * For example:
  *
- *   GDExtensionInterfaceGetscardotVersion get_godot_version = (GDExtensionInterfaceGetscardotVersion)p_get_proc_address("get_godot_version");
+ *   GDExtensionInterfaceGetscardotVersion get_scardot_version = (GDExtensionInterfaceGetscardotVersion)p_get_proc_address("get_scardot_version");
  *
  * (Note that snippet may cause "cast between incompatible function types" on some compilers, you can
  * silence this by adding an intermediary `void*` cast.)
  *
  * You can then call it like a normal function:
  *
- *   GDExtensionscardotVersion godot_version;
- *   get_godot_version(&godot_version);
- *   printf("scardot v%d.%d.%d\n", godot_version.major, godot_version.minor, godot_version.patch);
+ *   GDExtensionscardotVersion scardot_version;
+ *   get_scardot_version(&scardot_version);
+ *   printf("scardot v%d.%d.%d\n", scardot_version.major, scardot_version.minor, scardot_version.patch);
  *
  * All of these interface functions are described below, together with the name that's used to load it,
  * and the function pointer typedef that shows its signature.
@@ -786,14 +786,14 @@ typedef struct {
 } GDExtensionscardotVersion;
 
 /**
- * @name get_godot_version
+ * @name get_scardot_version
  * @since 4.1
  *
  * Gets the scardot version that the GDExtension was loaded into.
  *
- * @param r_godot_version A pointer to the structure to write the version information into.
+ * @param r_scardot_version A pointer to the structure to write the version information into.
  */
-typedef void (*GDExtensionInterfaceGetscardotVersion)(GDExtensionscardotVersion *r_godot_version);
+typedef void (*GDExtensionInterfaceGetscardotVersion)(GDExtensionscardotVersion *r_scardot_version);
 
 /* INTERFACE: Memory */
 
@@ -2719,7 +2719,7 @@ typedef void *(*GDExtensionInterfaceCallableCustomGetUserData)(GDExtensionConstT
  *
  * Constructs an Object of the requested class.
  *
- * The passed class must be a built-in godot class, or an already-registered extension class. In both cases, object_set_instance() should be called to fully initialize the object.
+ * The passed class must be a built-in scardot class, or an already-registered extension class. In both cases, object_set_instance() should be called to fully initialize the object.
  *
  * @param p_classname A pointer to a StringName with the class name.
  *
@@ -2733,7 +2733,7 @@ typedef GDExtensionObjectPtr (*GDExtensionInterfaceClassdbConstructObject)(GDExt
  *
  * Constructs an Object of the requested class.
  *
- * The passed class must be a built-in godot class, or an already-registered extension class. In both cases, object_set_instance() should be called to fully initialize the object.
+ * The passed class must be a built-in scardot class, or an already-registered extension class. In both cases, object_set_instance() should be called to fully initialize the object.
  *
  * "NOTIFICATION_POSTINITIALIZE" must be sent after construction.
  *

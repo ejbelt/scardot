@@ -33,7 +33,7 @@
 
 #include "core/typedefs.h"
 
-namespace godotsharp {
+namespace scardotsharp {
 const void **get_runtime_interop_funcs(int32_t &r_size);
 }
 

@@ -238,13 +238,13 @@ void JoypadMacOS::joypad_vibration_stop(Joypad *p_joypad, uint64_t p_timestamp) 
 	self = [super init];
 
 	if (self) {
-		[self godot_commonInit];
+		[self scardot_commonInit];
 	}
 
 	return self;
 }
 
-- (void)godot_commonInit {
+- (void)scardot_commonInit {
 	self.isObserving = NO;
 	self.isProcessing = NO;
 }

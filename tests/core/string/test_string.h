@@ -300,7 +300,7 @@ TEST_CASE("[String] Contains") {
 TEST_CASE("[String] Contains case insensitive") {
 	String s = "C:\\scardot\\project\\string_test.tscn";
 	CHECK(s.containsn("scardot"));
-	CHECK(s.containsn("godot"));
+	CHECK(s.containsn("scardot"));
 	CHECK(s.containsn(String("Project\\string_test")));
 	CHECK(s.containsn(String("\\string_Test.tscn")));
 

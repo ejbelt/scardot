@@ -32,8 +32,8 @@
 #define IOS_API_H
 
 #if defined(IOS_ENABLED)
-extern void godot_ios_plugins_initialize();
-extern void godot_ios_plugins_deinitialize();
+extern void scardot_ios_plugins_initialize();
+extern void scardot_ios_plugins_deinitialize();
 #endif
 
 void register_ios_api();

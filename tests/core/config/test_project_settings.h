@@ -45,7 +45,7 @@ public:
 
 namespace TestProjectSettings {
 
-// TODO: Handle some cases failing on release builds. See: https://github.com/godotengine/godot/pull/88452
+// TODO: Handle some cases failing on release builds. See: https://github.com/scardotengine/scardot/pull/88452
 #ifdef TOOLS_ENABLED
 TEST_CASE("[ProjectSettings] Get existing setting") {
 	CHECK(ProjectSettings::get_singleton()->has_setting("application/config/name"));

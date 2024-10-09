@@ -30,7 +30,7 @@
 
 #import "joypad_ios.h"
 
-#import "godot_view.h"
+#import "scardot_view.h"
 #import "os_ios.h"
 
 #include "core/config/project_settings.h"
@@ -70,13 +70,13 @@ void JoypadIOS::start_processing() {
 	self = [super init];
 
 	if (self) {
-		[self godot_commonInit];
+		[self scardot_commonInit];
 	}
 
 	return self;
 }
 
-- (void)godot_commonInit {
+- (void)scardot_commonInit {
 	self.isObserving = NO;
 	self.isProcessing = NO;
 }

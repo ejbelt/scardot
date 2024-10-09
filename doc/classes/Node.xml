@@ -19,7 +19,7 @@
 	</description>
 	<tutorials>
 		<link title="Nodes and scenes">$DOCS_URL/getting_started/step_by_step/nodes_and_scenes.html</link>
-		<link title="All Demos">https://github.com/godotengine/godot-demo-projects/</link>
+		<link title="All Demos">https://github.com/scardotengine/scardot-demo-projects/</link>
 	</tutorials>
 	<methods>
 		<method name="_enter_tree" qualifiers="virtual">

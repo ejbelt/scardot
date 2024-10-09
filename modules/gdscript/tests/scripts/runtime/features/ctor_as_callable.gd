@@ -1,4 +1,4 @@
-# https://github.com/godotengine/godot/issues/70319
+# https://github.com/scardotengine/scardot/issues/70319
 
 class InnerClass:
     pass

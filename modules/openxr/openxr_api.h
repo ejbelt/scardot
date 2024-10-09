@@ -274,7 +274,7 @@ private:
 	RID get_tracker_rid(XrPath p_path);
 
 	struct ActionSet { // Action sets define a set of actions that can be enabled together
-		String name; // Name for this action set (i.e. "godot_action_set")
+		String name; // Name for this action set (i.e. "scardot_action_set")
 		bool is_attached; // If true our action set has been attached to the session and can no longer be modified
 		XrActionSet handle; // OpenXR handle for this action set
 	};

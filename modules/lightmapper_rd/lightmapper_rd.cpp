@@ -711,7 +711,7 @@ void LightmapperRD::_raster_geometry(RenderingDevice *rd, Size2i atlas_size, int
 
 		// Half pixel offset is required so the rasterizer doesn't output face edges directly aligned into pixels.
 		// This fixes artifacts where the pixel would be traced from the edge of a face, causing half the rays to
-		// be outside of the boundaries of the geometry. See <https://github.com/godotengine/godot/issues/69126>.
+		// be outside of the boundaries of the geometry. See <https://github.com/scardotengine/scardot/issues/69126>.
 		raster_push_constant.uv_offset[0] = -0.5f / float(atlas_size.x);
 		raster_push_constant.uv_offset[1] = -0.5f / float(atlas_size.y);
 

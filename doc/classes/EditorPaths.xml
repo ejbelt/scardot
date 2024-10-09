@@ -20,7 +20,7 @@
 				[codeblock lang=text]
 				- Windows: %LOCALAPPDATA%\scardot\
 				- macOS: ~/Library/Caches/scardot/
-				- Linux: ~/.cache/godot/
+				- Linux: ~/.cache/scardot/
 				[/codeblock]
 			</description>
 		</method>
@@ -32,7 +32,7 @@
 				[codeblock lang=text]
 				- Windows: %APPDATA%\scardot\                    (same as `get_data_dir()`)
 				- macOS: ~/Library/Application Support/scardot/  (same as `get_data_dir()`)
-				- Linux: ~/.config/godot/
+				- Linux: ~/.config/scardot/
 				[/codeblock]
 			</description>
 		</method>
@@ -44,7 +44,7 @@
 				[codeblock lang=text]
 				- Windows: %APPDATA%\scardot\                    (same as `get_config_dir()`)
 				- macOS: ~/Library/Application Support/scardot/  (same as `get_config_dir()`)
-				- Linux: ~/.local/share/godot/
+				- Linux: ~/.local/share/scardot/
 				[/codeblock]
 			</description>
 		</method>

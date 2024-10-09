@@ -33,7 +33,7 @@
 
 #include "servers/display_server.h"
 
-#include "godot_js.h"
+#include "scardot_js.h"
 
 #include <emscripten.h>
 #include <emscripten/html5.h>
@@ -107,8 +107,8 @@ private:
 	NativeMenu *native_menu = nullptr;
 
 	// utilities
-	static void dom2godot_mod(Ref<InputEventWithModifiers> ev, int p_mod, Key p_keycode);
-	static const char *godot2dom_cursor(DisplayServer::CursorShape p_shape);
+	static void dom2scardot_mod(Ref<InputEventWithModifiers> ev, int p_mod, Key p_keycode);
+	static const char *scardot2dom_cursor(DisplayServer::CursorShape p_shape);
 
 	// events
 	WASM_EXPORT static void fullscreen_change_callback(int p_fullscreen);

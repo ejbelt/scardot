@@ -122,7 +122,7 @@ Error ResourceFormatImporter::_get_path_and_type(const String &p_path, PathAndTy
 		return ERR_FILE_CORRUPT;
 	}
 	if (r_path_and_type.path.is_empty()) {
-		// Some importers may not write files to the .godot folder, so the path can be empty.
+		// Some importers may not write files to the .scardot folder, so the path can be empty.
 		if (r_path_and_type.importer.is_empty()) {
 			return ERR_FILE_CORRUPT;
 		}

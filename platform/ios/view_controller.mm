@@ -31,8 +31,8 @@
 #import "view_controller.h"
 
 #import "display_server_ios.h"
-#import "godot_view.h"
-#import "godot_view_renderer.h"
+#import "scardot_view.h"
+#import "scardot_view_renderer.h"
 #import "key_mapping_ios.h"
 #import "keyboard_input_view.h"
 #import "os_ios.h"
@@ -47,13 +47,13 @@
 @property(strong, nonatomic) scardotViewRenderer *renderer;
 @property(strong, nonatomic) scardotKeyboardInputView *keyboardView;
 
-@property(strong, nonatomic) UIView *godotLoadingOverlay;
+@property(strong, nonatomic) UIView *scardotLoadingOverlay;
 
 @end
 
 @implementation ViewController
 
-- (scardotView *)godotView {
+- (scardotView *)scardotView {
 	return (scardotView *)self.view;
 }
 
@@ -134,7 +134,7 @@
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 
 	if (self) {
-		[self godot_commonInit];
+		[self scardot_commonInit];
 	}
 
 	return self;
@@ -144,13 +144,13 @@
 	self = [super initWithCoder:coder];
 
 	if (self) {
-		[self godot_commonInit];
+		[self scardot_commonInit];
 	}
 
 	return self;
 }
 
-- (void)godot_commonInit {
+- (void)scardot_commonInit {
 	// Initialize view controller values.
 }
 
@@ -197,16 +197,16 @@
 	UIStoryboard *launchStoryboard = [UIStoryboard storyboardWithName:storyboardName bundle:bundle];
 
 	UIViewController *controller = [launchStoryboard instantiateInitialViewController];
-	self.godotLoadingOverlay = controller.view;
-	self.godotLoadingOverlay.frame = self.view.bounds;
-	self.godotLoadingOverlay.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+	self.scardotLoadingOverlay = controller.view;
+	self.scardotLoadingOverlay.frame = self.view.bounds;
+	self.scardotLoadingOverlay.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 
-	[self.view addSubview:self.godotLoadingOverlay];
+	[self.view addSubview:self.scardotLoadingOverlay];
 }
 
-- (BOOL)godotViewFinishedSetup:(scardotView *)view {
-	[self.godotLoadingOverlay removeFromSuperview];
-	self.godotLoadingOverlay = nil;
+- (BOOL)scardotViewFinishedSetup:(scardotView *)view {
+	[self.scardotLoadingOverlay removeFromSuperview];
+	self.scardotLoadingOverlay = nil;
 
 	return YES;
 }
@@ -216,9 +216,9 @@
 
 	self.renderer = nil;
 
-	if (self.godotLoadingOverlay) {
-		[self.godotLoadingOverlay removeFromSuperview];
-		self.godotLoadingOverlay = nil;
+	if (self.scardotLoadingOverlay) {
+		[self.scardotLoadingOverlay removeFromSuperview];
+		self.scardotLoadingOverlay = nil;
 	}
 
 	[[NSNotificationCenter defaultCenter] removeObserver:self];

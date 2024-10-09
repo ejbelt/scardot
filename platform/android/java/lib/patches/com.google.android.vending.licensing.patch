@@ -21,7 +21,7 @@ index a0d2779af..a8bf65f9c 100644
   */
  
 +// -- SCARDOT start --
-import org.godotengine.godot.BuildConfig;
+import org.scardotengine.scardot.BuildConfig;
 +// -- SCARDOT end --
 +
  /**

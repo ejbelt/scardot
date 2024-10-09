@@ -16,7 +16,7 @@
         android:required="true" />
 
     <application
-        android:label="@string/godot_project_name_string"
+        android:label="@string/scardot_project_name_string"
         android:allowBackup="false"
         android:icon="@mipmap/icon"
         android:appCategory="game"
@@ -31,12 +31,12 @@
 
         <!-- Records the version of the scardot editor used for building -->
         <meta-data
-            android:name="org.godotengine.editor.version"
-            android:value="${godotEditorVersion}" />
+            android:name="org.scardotengine.editor.version"
+            android:value="${scardotEditorVersion}" />
 
         <activity
             android:name=".scardotApp"
-            android:label="@string/godot_project_name_string"
+            android:label="@string/scardot_project_name_string"
             android:theme="@style/scardotAppSplashTheme"
             android:launchMode="singleInstancePerTask"
             android:excludeFromRecents="false"

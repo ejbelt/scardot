@@ -604,7 +604,7 @@ void EditorSettings::_load_defaults(Ref<ConfigFile> p_extra_config) {
 	EDITOR_SETTING(Variant::STRING, PROPERTY_HINT_ENUM, "text_editor/theme/color_theme", "Default", "Default,scardot 2,Custom")
 
 	// Theme: Highlighting
-	_load_godot2_text_editor_theme();
+	_load_scardot2_text_editor_theme();
 
 	// Appearance
 	// Appearance: Caret
@@ -823,7 +823,7 @@ void EditorSettings::_load_defaults(Ref<ConfigFile> p_extra_config) {
 	_initial_set("run/window_placement/rect_custom_position", Vector2());
 	EDITOR_SETTING(Variant::INT, PROPERTY_HINT_ENUM, "run/window_placement/screen", -5, screen_hints)
 #endif
-	// Should match the ANDROID_WINDOW_* constants in 'platform/android/java/editor/src/main/java/org/godotengine/editor/scardotEditor.kt'
+	// Should match the ANDROID_WINDOW_* constants in 'platform/android/java/editor/src/main/java/org/scardotengine/editor/scardotEditor.kt'
 	String android_window_hints = "Auto (based on screen size):0,Same as Editor:1,Side-by-side with Editor:2";
 	EDITOR_SETTING(Variant::INT, PROPERTY_HINT_ENUM, "run/window_placement/android_window", 0, android_window_hints)
 
@@ -915,7 +915,7 @@ void EditorSettings::_load_defaults(Ref<ConfigFile> p_extra_config) {
 	}
 }
 
-void EditorSettings::_load_godot2_text_editor_theme() {
+void EditorSettings::_load_scardot2_text_editor_theme() {
 	// scardot 2 is only a dark theme; it doesn't have a light theme counterpart.
 	_initial_set("text_editor/theme/highlighting/symbol_color", Color(0.73, 0.87, 1.0));
 	_initial_set("text_editor/theme/highlighting/keyword_color", Color(1.0, 1.0, 0.7));
@@ -1005,7 +1005,7 @@ bool EditorSettings::_save_text_editor_theme(const String &p_file) {
 }
 
 bool EditorSettings::_is_default_text_editor_theme(const String &p_theme_name) {
-	return p_theme_name == "default" || p_theme_name == "godot 2" || p_theme_name == "custom";
+	return p_theme_name == "default" || p_theme_name == "scardot 2" || p_theme_name == "custom";
 }
 
 const String EditorSettings::_get_project_metadata_path() const {
@@ -1459,7 +1459,7 @@ void EditorSettings::load_text_editor_theme() {
 
 	if (_is_default_text_editor_theme(p_file.get_file().to_lower())) {
 		if (p_file == "scardot 2") {
-			_load_godot2_text_editor_theme();
+			_load_scardot2_text_editor_theme();
 		}
 		return; // sorry for "Settings changed" console spam
 	}

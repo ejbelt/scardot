@@ -1,4 +1,4 @@
-# https://github.com/godotengine/godot/pull/69620
+# https://github.com/scardotengine/scardot/pull/69620
 
 var a: int = 1
 

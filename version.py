@@ -1,9 +1,9 @@
-short_name = "godot"
-name = "scardot Engine"
+short_name = "Scardot"
+name = "Scardot Engine"
 major = 4
 minor = 4
 patch = 0
 status = "dev"
 module_config = ""
-website = "https://godotengine.org"
+website = "nil"
 docs = "latest"

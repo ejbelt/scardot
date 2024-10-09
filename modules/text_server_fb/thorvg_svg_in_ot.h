@@ -34,11 +34,11 @@
 #ifdef GDEXTENSION
 // Headers for building as GDExtension plug-in.
 
-#include <godot_cpp/core/mutex_lock.hpp>
-#include <godot_cpp/godot.hpp>
-#include <godot_cpp/templates/hash_map.hpp>
+#include <scardot_cpp/core/mutex_lock.hpp>
+#include <scardot_cpp/scardot.hpp>
+#include <scardot_cpp/templates/hash_map.hpp>
 
-using namespace godot;
+using namespace scardot;
 
 #elif defined(SCARDOT_MODULE)
 // Headers for building as built-in module.

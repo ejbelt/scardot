@@ -34,11 +34,11 @@
 #ifdef GDEXTENSION
 
 // Headers for building as GDExtension plug-in.
-#include <godot_cpp/godot.hpp>
-#include <godot_cpp/templates/vector.hpp>
-#include <godot_cpp/variant/string.hpp>
+#include <scardot_cpp/scardot.hpp>
+#include <scardot_cpp/templates/vector.hpp>
+#include <scardot_cpp/variant/string.hpp>
 
-using namespace godot;
+using namespace scardot;
 
 #elif defined(SCARDOT_MODULE)
 

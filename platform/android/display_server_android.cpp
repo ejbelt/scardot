@@ -30,8 +30,8 @@
 
 #include "display_server_android.h"
 
-#include "java_godot_io_wrapper.h"
-#include "java_godot_wrapper.h"
+#include "java_scardot_io_wrapper.h"
+#include "java_scardot_wrapper.h"
 #include "os_android.h"
 #include "tts_android.h"
 
@@ -120,17 +120,17 @@ void DisplayServerAndroid::tts_stop() {
 }
 
 bool DisplayServerAndroid::is_dark_mode_supported() const {
-	scardotJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
-	ERR_FAIL_NULL_V(godot_java, false);
+	scardotJavaWrapper *scardot_java = OS_Android::get_singleton()->get_scardot_java();
+	ERR_FAIL_NULL_V(scardot_java, false);
 
-	return godot_java->is_dark_mode_supported();
+	return scardot_java->is_dark_mode_supported();
 }
 
 bool DisplayServerAndroid::is_dark_mode() const {
-	scardotJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
-	ERR_FAIL_NULL_V(godot_java, false);
+	scardotJavaWrapper *scardot_java = OS_Android::get_singleton()->get_scardot_java();
+	ERR_FAIL_NULL_V(scardot_java, false);
 
-	return godot_java->is_dark_mode();
+	return scardot_java->is_dark_mode();
 }
 
 void DisplayServerAndroid::set_system_theme_change_callback(const Callable &p_callable) {
@@ -144,55 +144,55 @@ void DisplayServerAndroid::emit_system_theme_changed() {
 }
 
 void DisplayServerAndroid::clipboard_set(const String &p_text) {
-	scardotJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
-	ERR_FAIL_NULL(godot_java);
+	scardotJavaWrapper *scardot_java = OS_Android::get_singleton()->get_scardot_java();
+	ERR_FAIL_NULL(scardot_java);
 
-	if (godot_java->has_set_clipboard()) {
-		godot_java->set_clipboard(p_text);
+	if (scardot_java->has_set_clipboard()) {
+		scardot_java->set_clipboard(p_text);
 	} else {
 		DisplayServer::clipboard_set(p_text);
 	}
 }
 
 String DisplayServerAndroid::clipboard_get() const {
-	scardotJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
-	ERR_FAIL_NULL_V(godot_java, String());
+	scardotJavaWrapper *scardot_java = OS_Android::get_singleton()->get_scardot_java();
+	ERR_FAIL_NULL_V(scardot_java, String());
 
-	if (godot_java->has_get_clipboard()) {
-		return godot_java->get_clipboard();
+	if (scardot_java->has_get_clipboard()) {
+		return scardot_java->get_clipboard();
 	} else {
 		return DisplayServer::clipboard_get();
 	}
 }
 
 bool DisplayServerAndroid::clipboard_has() const {
-	scardotJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
-	ERR_FAIL_NULL_V(godot_java, false);
+	scardotJavaWrapper *scardot_java = OS_Android::get_singleton()->get_scardot_java();
+	ERR_FAIL_NULL_V(scardot_java, false);
 
-	if (godot_java->has_has_clipboard()) {
-		return godot_java->has_clipboard();
+	if (scardot_java->has_has_clipboard()) {
+		return scardot_java->has_clipboard();
 	} else {
 		return DisplayServer::clipboard_has();
 	}
 }
 
 TypedArray<Rect2> DisplayServerAndroid::get_display_cutouts() const {
-	scardotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
-	ERR_FAIL_NULL_V(godot_io_java, Array());
-	return godot_io_java->get_display_cutouts();
+	scardotIOJavaWrapper *scardot_io_java = OS_Android::get_singleton()->get_scardot_io_java();
+	ERR_FAIL_NULL_V(scardot_io_java, Array());
+	return scardot_io_java->get_display_cutouts();
 }
 
 Rect2i DisplayServerAndroid::get_display_safe_area() const {
-	scardotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
-	ERR_FAIL_NULL_V(godot_io_java, Rect2i());
-	return godot_io_java->get_display_safe_area();
+	scardotIOJavaWrapper *scardot_io_java = OS_Android::get_singleton()->get_scardot_io_java();
+	ERR_FAIL_NULL_V(scardot_io_java, Rect2i());
+	return scardot_io_java->get_display_safe_area();
 }
 
 void DisplayServerAndroid::screen_set_keep_on(bool p_enable) {
-	scardotJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
-	ERR_FAIL_NULL(godot_java);
+	scardotJavaWrapper *scardot_java = OS_Android::get_singleton()->get_scardot_java();
+	ERR_FAIL_NULL(scardot_java);
 
-	godot_java->set_keep_screen_on(p_enable);
+	scardot_java->set_keep_screen_on(p_enable);
 	keep_screen_on = p_enable;
 }
 
@@ -201,17 +201,17 @@ bool DisplayServerAndroid::screen_is_kept_on() const {
 }
 
 void DisplayServerAndroid::screen_set_orientation(DisplayServer::ScreenOrientation p_orientation, int p_screen) {
-	scardotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
-	ERR_FAIL_NULL(godot_io_java);
+	scardotIOJavaWrapper *scardot_io_java = OS_Android::get_singleton()->get_scardot_io_java();
+	ERR_FAIL_NULL(scardot_io_java);
 
-	godot_io_java->set_screen_orientation(p_orientation);
+	scardot_io_java->set_screen_orientation(p_orientation);
 }
 
 DisplayServer::ScreenOrientation DisplayServerAndroid::screen_get_orientation(int p_screen) const {
-	scardotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
-	ERR_FAIL_NULL_V(godot_io_java, SCREEN_LANDSCAPE);
+	scardotIOJavaWrapper *scardot_io_java = OS_Android::get_singleton()->get_scardot_io_java();
+	ERR_FAIL_NULL_V(scardot_io_java, SCREEN_LANDSCAPE);
 
-	const int orientation = godot_io_java->get_screen_orientation();
+	const int orientation = scardot_io_java->get_screen_orientation();
 	ERR_FAIL_INDEX_V_MSG(orientation, 7, SCREEN_LANDSCAPE, "Unrecognized screen orientation");
 	return (ScreenOrientation)orientation;
 }
@@ -238,17 +238,17 @@ Rect2i DisplayServerAndroid::screen_get_usable_rect(int p_screen) const {
 }
 
 int DisplayServerAndroid::screen_get_dpi(int p_screen) const {
-	scardotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
-	ERR_FAIL_NULL_V(godot_io_java, 0);
+	scardotIOJavaWrapper *scardot_io_java = OS_Android::get_singleton()->get_scardot_io_java();
+	ERR_FAIL_NULL_V(scardot_io_java, 0);
 
-	return godot_io_java->get_screen_dpi();
+	return scardot_io_java->get_screen_dpi();
 }
 
 float DisplayServerAndroid::screen_get_scale(int p_screen) const {
-	scardotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
-	ERR_FAIL_NULL_V(godot_io_java, 1.0f);
+	scardotIOJavaWrapper *scardot_io_java = OS_Android::get_singleton()->get_scardot_io_java();
+	ERR_FAIL_NULL_V(scardot_io_java, 1.0f);
 
-	float screen_scale = godot_io_java->get_scaled_density();
+	float screen_scale = scardot_io_java->get_scaled_density();
 
 	// Update the scale to avoid cropping.
 	Size2i screen_size = screen_get_size(p_screen);
@@ -263,13 +263,13 @@ float DisplayServerAndroid::screen_get_scale(int p_screen) const {
 }
 
 float DisplayServerAndroid::screen_get_refresh_rate(int p_screen) const {
-	scardotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
-	if (!godot_io_java) {
+	scardotIOJavaWrapper *scardot_io_java = OS_Android::get_singleton()->get_scardot_io_java();
+	if (!scardot_io_java) {
 		ERR_PRINT("An error occurred while trying to get the screen refresh rate.");
 		return SCREEN_REFRESH_RATE_FALLBACK;
 	}
 
-	return godot_io_java->get_screen_refresh_rate(SCREEN_REFRESH_RATE_FALLBACK);
+	return scardot_io_java->get_screen_refresh_rate(SCREEN_REFRESH_RATE_FALLBACK);
 }
 
 bool DisplayServerAndroid::is_touchscreen_available() const {
@@ -277,32 +277,32 @@ bool DisplayServerAndroid::is_touchscreen_available() const {
 }
 
 void DisplayServerAndroid::virtual_keyboard_show(const String &p_existing_text, const Rect2 &p_screen_rect, VirtualKeyboardType p_type, int p_max_length, int p_cursor_start, int p_cursor_end) {
-	scardotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
-	ERR_FAIL_NULL(godot_io_java);
+	scardotIOJavaWrapper *scardot_io_java = OS_Android::get_singleton()->get_scardot_io_java();
+	ERR_FAIL_NULL(scardot_io_java);
 
-	if (godot_io_java->has_vk()) {
-		godot_io_java->show_vk(p_existing_text, (int)p_type, p_max_length, p_cursor_start, p_cursor_end);
+	if (scardot_io_java->has_vk()) {
+		scardot_io_java->show_vk(p_existing_text, (int)p_type, p_max_length, p_cursor_start, p_cursor_end);
 	} else {
 		ERR_PRINT("Virtual keyboard not available");
 	}
 }
 
 void DisplayServerAndroid::virtual_keyboard_hide() {
-	scardotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
-	ERR_FAIL_NULL(godot_io_java);
+	scardotIOJavaWrapper *scardot_io_java = OS_Android::get_singleton()->get_scardot_io_java();
+	ERR_FAIL_NULL(scardot_io_java);
 
-	if (godot_io_java->has_vk()) {
-		godot_io_java->hide_vk();
+	if (scardot_io_java->has_vk()) {
+		scardot_io_java->hide_vk();
 	} else {
 		ERR_PRINT("Virtual keyboard not available");
 	}
 }
 
 int DisplayServerAndroid::virtual_keyboard_get_height() const {
-	scardotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
-	ERR_FAIL_NULL_V(godot_io_java, 0);
+	scardotIOJavaWrapper *scardot_io_java = OS_Android::get_singleton()->get_scardot_io_java();
+	ERR_FAIL_NULL_V(scardot_io_java, 0);
 
-	return godot_io_java->get_vk_height();
+	return scardot_io_java->get_vk_height();
 }
 
 void DisplayServerAndroid::window_set_window_event_callback(const Callable &p_callable, DisplayServer::WindowID p_window) {
@@ -365,7 +365,7 @@ int64_t DisplayServerAndroid::window_get_native_handle(HandleType p_handle_type,
 	ERR_FAIL_COND_V(p_window != MAIN_WINDOW_ID, 0);
 	switch (p_handle_type) {
 		case WINDOW_HANDLE: {
-			return reinterpret_cast<int64_t>(static_cast<OS_Android *>(OS::get_singleton())->get_godot_java()->get_activity());
+			return reinterpret_cast<int64_t>(static_cast<OS_Android *>(OS::get_singleton())->get_scardot_java()->get_activity());
 		}
 		case WINDOW_VIEW: {
 			return 0; // Not supported.
@@ -455,11 +455,11 @@ Size2i DisplayServerAndroid::window_get_size_with_decorations(DisplayServer::Win
 }
 
 void DisplayServerAndroid::window_set_mode(DisplayServer::WindowMode p_mode, DisplayServer::WindowID p_window) {
-	OS_Android::get_singleton()->get_godot_java()->enable_immersive_mode(p_mode == WINDOW_MODE_FULLSCREEN || p_mode == WINDOW_MODE_EXCLUSIVE_FULLSCREEN);
+	OS_Android::get_singleton()->get_scardot_java()->enable_immersive_mode(p_mode == WINDOW_MODE_FULLSCREEN || p_mode == WINDOW_MODE_EXCLUSIVE_FULLSCREEN);
 }
 
 DisplayServer::WindowMode DisplayServerAndroid::window_get_mode(DisplayServer::WindowID p_window) const {
-	if (OS_Android::get_singleton()->get_godot_java()->is_in_immersive_mode()) {
+	if (OS_Android::get_singleton()->get_scardot_java()->is_in_immersive_mode()) {
 		return WINDOW_MODE_FULLSCREEN;
 	} else {
 		return WINDOW_MODE_MAXIMIZED;
@@ -692,7 +692,7 @@ void DisplayServerAndroid::process_gyroscope(const Vector3 &p_gyroscope) {
 }
 
 void DisplayServerAndroid::mouse_set_mode(MouseMode p_mode) {
-	if (!OS_Android::get_singleton()->get_godot_java()->get_godot_view()->can_update_pointer_icon() || !OS_Android::get_singleton()->get_godot_java()->get_godot_view()->can_capture_pointer()) {
+	if (!OS_Android::get_singleton()->get_scardot_java()->get_scardot_view()->can_update_pointer_icon() || !OS_Android::get_singleton()->get_scardot_java()->get_scardot_view()->can_capture_pointer()) {
 		return;
 	}
 	if (mouse_mode == p_mode) {
@@ -700,15 +700,15 @@ void DisplayServerAndroid::mouse_set_mode(MouseMode p_mode) {
 	}
 
 	if (p_mode == MouseMode::MOUSE_MODE_HIDDEN) {
-		OS_Android::get_singleton()->get_godot_java()->get_godot_view()->set_pointer_icon(CURSOR_TYPE_NULL);
+		OS_Android::get_singleton()->get_scardot_java()->get_scardot_view()->set_pointer_icon(CURSOR_TYPE_NULL);
 	} else {
 		cursor_set_shape(cursor_shape);
 	}
 
 	if (p_mode == MouseMode::MOUSE_MODE_CAPTURED) {
-		OS_Android::get_singleton()->get_godot_java()->get_godot_view()->request_pointer_capture();
+		OS_Android::get_singleton()->get_scardot_java()->get_scardot_view()->request_pointer_capture();
 	} else {
-		OS_Android::get_singleton()->get_godot_java()->get_godot_view()->release_pointer_capture();
+		OS_Android::get_singleton()->get_scardot_java()->get_scardot_view()->release_pointer_capture();
 	}
 
 	mouse_mode = p_mode;
@@ -727,7 +727,7 @@ BitField<MouseButtonMask> DisplayServerAndroid::mouse_get_button_state() const {
 }
 
 void DisplayServerAndroid::_cursor_set_shape_helper(CursorShape p_shape, bool force) {
-	if (!OS_Android::get_singleton()->get_godot_java()->get_godot_view()->can_update_pointer_icon()) {
+	if (!OS_Android::get_singleton()->get_scardot_java()->get_scardot_view()->can_update_pointer_icon()) {
 		return;
 	}
 	if (cursor_shape == p_shape && !force) {
@@ -737,7 +737,7 @@ void DisplayServerAndroid::_cursor_set_shape_helper(CursorShape p_shape, bool fo
 	cursor_shape = p_shape;
 
 	if (mouse_mode == MouseMode::MOUSE_MODE_VISIBLE || mouse_mode == MouseMode::MOUSE_MODE_CONFINED) {
-		OS_Android::get_singleton()->get_godot_java()->get_godot_view()->set_pointer_icon(android_cursors[cursor_shape]);
+		OS_Android::get_singleton()->get_scardot_java()->get_scardot_view()->set_pointer_icon(android_cursors[cursor_shape]);
 	}
 }
 
@@ -756,7 +756,7 @@ void DisplayServerAndroid::cursor_set_custom_image(const Ref<Resource> &p_cursor
 	if (!cursor_path.is_empty()) {
 		cursor_path = ProjectSettings::get_singleton()->globalize_path(cursor_path);
 	}
-	OS_Android::get_singleton()->get_godot_java()->get_godot_view()->configure_pointer_icon(android_cursors[cursor_shape], cursor_path, p_hotspot);
+	OS_Android::get_singleton()->get_scardot_java()->get_scardot_view()->configure_pointer_icon(android_cursors[cursor_shape], cursor_path, p_hotspot);
 	_cursor_set_shape_helper(p_shape, true);
 }
 

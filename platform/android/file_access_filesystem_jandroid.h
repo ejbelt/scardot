@@ -31,7 +31,7 @@
 #ifndef FILE_ACCESS_FILESYSTEM_JANDROID_H
 #define FILE_ACCESS_FILESYSTEM_JANDROID_H
 
-#include "java_godot_lib_jni.h"
+#include "java_scardot_lib_jni.h"
 
 #include "core/io/file_access.h"
 

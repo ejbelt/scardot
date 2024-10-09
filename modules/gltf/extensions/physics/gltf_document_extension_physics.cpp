@@ -384,8 +384,8 @@ GLTFMeshIndex _get_or_insert_mesh_in_state(Ref<GLTFState> p_state, Ref<ImporterM
 
 void GLTFDocumentExtensionPhysics::convert_scene_node(Ref<GLTFState> p_state, Ref<GLTFNode> p_gltf_node, Node *p_scene_node) {
 	if (cast_to<CollisionShape3D>(p_scene_node)) {
-		CollisionShape3D *godot_shape = Object::cast_to<CollisionShape3D>(p_scene_node);
-		Ref<GLTFPhysicsShape> gltf_shape = GLTFPhysicsShape::from_node(godot_shape);
+		CollisionShape3D *scardot_shape = Object::cast_to<CollisionShape3D>(p_scene_node);
+		Ref<GLTFPhysicsShape> gltf_shape = GLTFPhysicsShape::from_node(scardot_shape);
 		ERR_FAIL_COND_MSG(gltf_shape.is_null(), "glTF Physics: Could not convert CollisionShape3D to GLTFPhysicsShape. Does it have a valid Shape3D?");
 		{
 			Ref<ImporterMesh> importer_mesh = gltf_shape->get_importer_mesh();
@@ -405,8 +405,8 @@ void GLTFDocumentExtensionPhysics::convert_scene_node(Ref<GLTFState> p_state, Re
 			p_gltf_node->set_additional_data(StringName("GLTFPhysicsColliderShape"), gltf_shape);
 		}
 	} else if (cast_to<CollisionObject3D>(p_scene_node)) {
-		CollisionObject3D *godot_body = Object::cast_to<CollisionObject3D>(p_scene_node);
-		p_gltf_node->set_additional_data(StringName("GLTFPhysicsBody"), GLTFPhysicsBody::from_node(godot_body));
+		CollisionObject3D *scardot_body = Object::cast_to<CollisionObject3D>(p_scene_node);
+		p_gltf_node->set_additional_data(StringName("GLTFPhysicsBody"), GLTFPhysicsBody::from_node(scardot_body));
 	}
 }
 

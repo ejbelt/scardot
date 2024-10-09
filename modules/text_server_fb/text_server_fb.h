@@ -39,43 +39,43 @@
 #ifdef GDEXTENSION
 // Headers for building as GDExtension plug-in.
 
-#include <godot_cpp/godot.hpp>
+#include <scardot_cpp/scardot.hpp>
 
-#include <godot_cpp/core/class_db.hpp>
-#include <godot_cpp/core/ext_wrappers.gen.inc>
-#include <godot_cpp/core/mutex_lock.hpp>
+#include <scardot_cpp/core/class_db.hpp>
+#include <scardot_cpp/core/ext_wrappers.gen.inc>
+#include <scardot_cpp/core/mutex_lock.hpp>
 
-#include <godot_cpp/variant/array.hpp>
-#include <godot_cpp/variant/dictionary.hpp>
-#include <godot_cpp/variant/packed_int32_array.hpp>
-#include <godot_cpp/variant/packed_string_array.hpp>
-#include <godot_cpp/variant/packed_vector2_array.hpp>
-#include <godot_cpp/variant/rect2.hpp>
-#include <godot_cpp/variant/rid.hpp>
-#include <godot_cpp/variant/string.hpp>
-#include <godot_cpp/variant/typed_array.hpp>
-#include <godot_cpp/variant/vector2.hpp>
-#include <godot_cpp/variant/vector2i.hpp>
+#include <scardot_cpp/variant/array.hpp>
+#include <scardot_cpp/variant/dictionary.hpp>
+#include <scardot_cpp/variant/packed_int32_array.hpp>
+#include <scardot_cpp/variant/packed_string_array.hpp>
+#include <scardot_cpp/variant/packed_vector2_array.hpp>
+#include <scardot_cpp/variant/rect2.hpp>
+#include <scardot_cpp/variant/rid.hpp>
+#include <scardot_cpp/variant/string.hpp>
+#include <scardot_cpp/variant/typed_array.hpp>
+#include <scardot_cpp/variant/vector2.hpp>
+#include <scardot_cpp/variant/vector2i.hpp>
 
-#include <godot_cpp/classes/text_server.hpp>
-#include <godot_cpp/classes/text_server_extension.hpp>
-#include <godot_cpp/classes/text_server_manager.hpp>
+#include <scardot_cpp/classes/text_server.hpp>
+#include <scardot_cpp/classes/text_server_extension.hpp>
+#include <scardot_cpp/classes/text_server_manager.hpp>
 
-#include <godot_cpp/classes/caret_info.hpp>
-#include <godot_cpp/classes/global_constants_binds.hpp>
-#include <godot_cpp/classes/glyph.hpp>
-#include <godot_cpp/classes/image.hpp>
-#include <godot_cpp/classes/image_texture.hpp>
-#include <godot_cpp/classes/ref.hpp>
-#include <godot_cpp/classes/worker_thread_pool.hpp>
+#include <scardot_cpp/classes/caret_info.hpp>
+#include <scardot_cpp/classes/global_constants_binds.hpp>
+#include <scardot_cpp/classes/glyph.hpp>
+#include <scardot_cpp/classes/image.hpp>
+#include <scardot_cpp/classes/image_texture.hpp>
+#include <scardot_cpp/classes/ref.hpp>
+#include <scardot_cpp/classes/worker_thread_pool.hpp>
 
-#include <godot_cpp/templates/hash_map.hpp>
-#include <godot_cpp/templates/hash_set.hpp>
-#include <godot_cpp/templates/rid_owner.hpp>
-#include <godot_cpp/templates/safe_refcount.hpp>
-#include <godot_cpp/templates/vector.hpp>
+#include <scardot_cpp/templates/hash_map.hpp>
+#include <scardot_cpp/templates/hash_set.hpp>
+#include <scardot_cpp/templates/rid_owner.hpp>
+#include <scardot_cpp/templates/safe_refcount.hpp>
+#include <scardot_cpp/templates/vector.hpp>
 
-using namespace godot;
+using namespace scardot;
 
 #elif defined(SCARDOT_MODULE)
 // Headers for building as built-in module.

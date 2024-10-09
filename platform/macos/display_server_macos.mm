@@ -30,14 +30,14 @@
 
 #include "display_server_macos.h"
 
-#include "godot_button_view.h"
-#include "godot_content_view.h"
-#include "godot_menu_delegate.h"
-#include "godot_menu_item.h"
-#include "godot_open_save_delegate.h"
-#include "godot_status_item.h"
-#include "godot_window.h"
-#include "godot_window_delegate.h"
+#include "scardot_button_view.h"
+#include "scardot_content_view.h"
+#include "scardot_menu_delegate.h"
+#include "scardot_menu_item.h"
+#include "scardot_open_save_delegate.h"
+#include "scardot_status_item.h"
+#include "scardot_window.h"
+#include "scardot_window_delegate.h"
 #include "key_mapping_macos.h"
 #include "os_macos.h"
 #include "tts_macos.h"
@@ -1706,7 +1706,7 @@ void DisplayServerMacOS::screen_set_keep_on(bool p_enable) {
 
 	if (p_enable) {
 		String app_name_string = GLOBAL_GET("application/config/name");
-		NSString *name = [NSString stringWithUTF8String:(app_name_string.is_empty() ? "scardot Engine" : app_name_string.utf8().get_data())];
+		NSString *name = [NSString stringWithUTF8String:(app_name_string.is_empty() ? "Scardot Engine" : app_name_string.utf8().get_data())];
 		NSString *reason = @"scardot Engine running with display/window/energy_saving/keep_screen_on = true";
 		IOPMAssertionCreateWithDescription(kIOPMAssertPreventUserIdleDisplaySleep, (__bridge CFStringRef)name, (__bridge CFStringRef)reason, (__bridge CFStringRef)reason, nullptr, 0, nullptr, &screen_keep_on_assertion);
 	}
@@ -3390,7 +3390,7 @@ void DisplayServerMacOS::popup_open(WindowID p_window) {
 
 		if (was_empty && popup_list.is_empty()) {
 			// Inform OS that popup was opened, to close other native popups.
-			[[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"com.apple.HIToolbox.beginMenuTrackingNotification" object:@"org.godotengine.godot.popup_window"];
+			[[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"com.apple.HIToolbox.beginMenuTrackingNotification" object:@"org.scardotengine.scardot.popup_window"];
 		}
 		time_since_popup = OS::get_singleton()->get_ticks_msec();
 		popup_list.push_back(p_window);
@@ -3415,7 +3415,7 @@ void DisplayServerMacOS::popup_close(WindowID p_window) {
 	}
 	if (!was_empty && popup_list.is_empty()) {
 		// Inform OS that all popups are closed.
-		[[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"com.apple.HIToolbox.endMenuTrackingNotification" object:@"org.godotengine.godot.popup_window"];
+		[[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"com.apple.HIToolbox.endMenuTrackingNotification" object:@"org.scardotengine.scardot.popup_window"];
 	}
 }
 
@@ -3433,7 +3433,7 @@ bool DisplayServerMacOS::mouse_process_popups(bool p_close) {
 		}
 		if (!was_empty) {
 			// Inform OS that all popups are closed.
-			[[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"com.apple.HIToolbox.endMenuTrackingNotification" object:@"org.godotengine.godot.popup_window"];
+			[[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"com.apple.HIToolbox.endMenuTrackingNotification" object:@"org.scardotengine.scardot.popup_window"];
 		}
 	} else {
 		uint64_t delta = OS::get_singleton()->get_ticks_msec() - time_since_popup;
@@ -3465,7 +3465,7 @@ bool DisplayServerMacOS::mouse_process_popups(bool p_close) {
 		}
 		if (!was_empty && popup_list.is_empty()) {
 			// Inform OS that all popups are closed.
-			[[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"com.apple.HIToolbox.endMenuTrackingNotification" object:@"org.godotengine.godot.popup_window"];
+			[[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"com.apple.HIToolbox.endMenuTrackingNotification" object:@"org.scardotengine.scardot.popup_window"];
 		}
 	}
 	return closed;

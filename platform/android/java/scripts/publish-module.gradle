@@ -24,7 +24,7 @@ afterEvaluate {
                     licenses {
                         license {
                             name = 'MIT License'
-                            url = 'https://github.com/godotengine/godot/blob/master/LICENSE.txt'
+                            url = 'https://github.com/scardotengine/scardot/blob/master/LICENSE.txt'
                         }
                     }
                     developers {
@@ -49,9 +49,9 @@ afterEvaluate {
                     // Version control info - if you're using GitHub, follow the
                     // format as seen here
                     scm {
-                        connection = 'scm:git:github.com/godotengine/godot.git'
-                        developerConnection = 'scm:git:ssh://github.com/godotengine/godot.git'
-                        url = 'https://github.com/godotengine/godot/tree/master'
+                        connection = 'scm:git:github.com/scardotengine/scardot.git'
+                        developerConnection = 'scm:git:ssh://github.com/scardotengine/scardot.git'
+                        url = 'https://github.com/scardotengine/scardot/tree/master'
                     }
                 }
             }

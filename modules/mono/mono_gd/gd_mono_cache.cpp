@@ -35,9 +35,9 @@
 namespace GDMonoCache {
 
 ManagedCallbacks managed_callbacks;
-bool godot_api_cache_updated = false;
+bool scardot_api_cache_updated = false;
 
-void update_godot_api_cache(const ManagedCallbacks &p_managed_callbacks) {
+void update_scardot_api_cache(const ManagedCallbacks &p_managed_callbacks) {
 	int checked_count = 0;
 
 #define CHECK_CALLBACK_NOT_NULL_IMPL(m_var, m_class, m_method)                             \
@@ -95,6 +95,6 @@ void update_godot_api_cache(const ManagedCallbacks &p_managed_callbacks) {
 		WARN_PRINT("The presence of " + itos(missing_count) + " callback(s) was not validated");
 	}
 
-	godot_api_cache_updated = true;
+	scardot_api_cache_updated = true;
 }
 } // namespace GDMonoCache

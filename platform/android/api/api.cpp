@@ -43,7 +43,7 @@ void register_android_api() {
 #if !defined(ANDROID_ENABLED)
 	// On Android platforms, the `java_class_wrapper` instantiation and the
 	// `JNISingleton` registration occurs in
-	// `platform/android/java_godot_lib_jni.cpp#Java_org_godotengine_godot_scardotLib_setup`
+	// `platform/android/java_scardot_lib_jni.cpp#Java_org_scardotengine_scardot_scardotLib_setup`
 	java_class_wrapper = memnew(JavaClassWrapper); // Dummy
 	GDREGISTER_CLASS(JNISingleton);
 #endif

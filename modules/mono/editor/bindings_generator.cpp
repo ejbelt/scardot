@@ -32,7 +32,7 @@
 
 #if defined(DEBUG_METHODS_ENABLED) && defined(TOOLS_ENABLED)
 
-#include "../godotsharp_defs.h"
+#include "../scardotsharp_defs.h"
 #include "../utils/naming_utils.h"
 #include "../utils/path_utils.h"
 #include "../utils/string_utils.h"
@@ -93,7 +93,7 @@ StringBuilder &operator<<(StringBuilder &r_sb, const char *p_cstring) {
 #define CS_STATIC_FIELD_METHOD_PROXY_NAME_PREFIX "MethodProxyName_"
 #define CS_STATIC_FIELD_SIGNAL_PROXY_NAME_PREFIX "SignalProxyName_"
 
-#define ICALL_PREFIX "godot_icall_"
+#define ICALL_PREFIX "scardot_icall_"
 #define ICALL_CLASSDB_GET_METHOD "ClassDB_get_method"
 #define ICALL_CLASSDB_GET_METHOD_WITH_COMPATIBILITY "ClassDB_get_method_with_compatibility"
 #define ICALL_CLASSDB_GET_CONSTRUCTOR "ClassDB_get_constructor"
@@ -1364,7 +1364,7 @@ void BindingsGenerator::_append_xml_param(StringBuilder &p_xml_output, const Str
 	} else {
 		// Documentation in C# is added to an event, not the delegate itself;
 		// as such, we treat these parameters as codeblocks instead.
-		// See: https://github.com/godotengine/godot/pull/65529
+		// See: https://github.com/scardotengine/scardot/pull/65529
 		_append_xml_undeclared(p_xml_output, link_target);
 	}
 }
@@ -1469,7 +1469,7 @@ Error BindingsGenerator::_populate_method_icalls_table(const TypeInterface &p_it
 			im_unique_sig += get_arg_unique_sig(*arg_type);
 		}
 
-		// godot_icall_{argc}_{icallcount}
+		// scardot_icall_{argc}_{icallcount}
 		String icall_method = ICALL_PREFIX;
 		icall_method += itos(imethod.arguments.size());
 		icall_method += "_";
@@ -1686,7 +1686,7 @@ Error BindingsGenerator::generate_cs_core_project(const String &p_proj_dir) {
 	da->make_dir("Generated/scardotObjects");
 
 	String base_gen_dir = path::join(p_proj_dir, "Generated");
-	String godot_objects_gen_dir = path::join(base_gen_dir, "scardotObjects");
+	String scardot_objects_gen_dir = path::join(base_gen_dir, "scardotObjects");
 
 	Vector<String> compile_items;
 
@@ -1723,7 +1723,7 @@ Error BindingsGenerator::generate_cs_core_project(const String &p_proj_dir) {
 			continue;
 		}
 
-		String output_file = path::join(godot_objects_gen_dir, itype.proxy_name + ".cs");
+		String output_file = path::join(scardot_objects_gen_dir, itype.proxy_name + ".cs");
 		Error err = _generate_cs_type(itype, output_file);
 
 		if (err == ERR_SKIP) {
@@ -1753,7 +1753,7 @@ Error BindingsGenerator::generate_cs_core_project(const String &p_proj_dir) {
 	cs_icalls_content.append("[System.Runtime.CompilerServices.SkipLocalsInit]\n");
 	cs_icalls_content.append("internal static class " BINDINGS_CLASS_NATIVECALLS "\n{");
 
-	cs_icalls_content.append(MEMBER_BEGIN "internal static ulong godot_api_hash = ");
+	cs_icalls_content.append(MEMBER_BEGIN "internal static ulong scardot_api_hash = ");
 	cs_icalls_content.append(String::num_uint64(ClassDB::get_api_hash(ClassDB::API_CORE)) + ";\n");
 
 	cs_icalls_content.append(MEMBER_BEGIN "private const int VarArgsSpanThreshold = 10;\n");
@@ -1819,7 +1819,7 @@ Error BindingsGenerator::generate_cs_editor_project(const String &p_proj_dir) {
 	da->make_dir("Generated/scardotObjects");
 
 	String base_gen_dir = path::join(p_proj_dir, "Generated");
-	String godot_objects_gen_dir = path::join(base_gen_dir, "scardotObjects");
+	String scardot_objects_gen_dir = path::join(base_gen_dir, "scardotObjects");
 
 	Vector<String> compile_items;
 
@@ -1830,7 +1830,7 @@ Error BindingsGenerator::generate_cs_editor_project(const String &p_proj_dir) {
 			continue;
 		}
 
-		String output_file = path::join(godot_objects_gen_dir, itype.proxy_name + ".cs");
+		String output_file = path::join(scardot_objects_gen_dir, itype.proxy_name + ".cs");
 		Error err = _generate_cs_type(itype, output_file);
 
 		if (err == ERR_SKIP) {
@@ -1860,7 +1860,7 @@ Error BindingsGenerator::generate_cs_editor_project(const String &p_proj_dir) {
 	cs_icalls_content.append("[System.Runtime.CompilerServices.SkipLocalsInit]\n");
 	cs_icalls_content.append("internal static class " BINDINGS_CLASS_NATIVECALLS_EDITOR "\n" OPEN_BLOCK);
 
-	cs_icalls_content.append(INDENT1 "internal static ulong godot_api_hash = ");
+	cs_icalls_content.append(INDENT1 "internal static ulong scardot_api_hash = ");
 	cs_icalls_content.append(String::num_uint64(ClassDB::get_api_hash(ClassDB::API_EDITOR)) + ";\n");
 
 	cs_icalls_content.append(MEMBER_BEGIN "private const int VarArgsSpanThreshold = 10;\n");
@@ -2184,7 +2184,7 @@ Error BindingsGenerator::_generate_cs_type(const TypeInterface &itype, const Str
 			// Add native constructor static field
 
 			output << MEMBER_BEGIN << "[DebuggerBrowsable(DebuggerBrowsableState.Never)]\n"
-				   << INDENT1 "private static readonly unsafe delegate* unmanaged<godot_bool, IntPtr> "
+				   << INDENT1 "private static readonly unsafe delegate* unmanaged<scardot_bool, IntPtr> "
 				   << CS_STATIC_FIELD_NATIVE_CTOR " = " ICALL_CLASSDB_GET_CONSTRUCTOR
 				   << "(" BINDINGS_NATIVE_NAME_FIELD ");\n";
 		}
@@ -2278,8 +2278,8 @@ Error BindingsGenerator::_generate_cs_type(const TypeInterface &itype, const Str
 		output << "#pragma warning disable CS0618 // Member is obsolete\n";
 
 		output << INDENT1 "protected internal " << (is_derived_type ? "override" : "virtual")
-			   << " bool " CS_METHOD_INVOKE_SCARDOT_CLASS_METHOD "(in godot_string_name method, "
-			   << "NativeVariantPtrArgs args, out godot_variant ret)\n"
+			   << " bool " CS_METHOD_INVOKE_SCARDOT_CLASS_METHOD "(in scardot_string_name method, "
+			   << "NativeVariantPtrArgs args, out scardot_variant ret)\n"
 			   << INDENT1 "{\n";
 
 		for (const MethodInterface &imethod : itype.methods) {
@@ -2296,7 +2296,7 @@ Error BindingsGenerator::_generate_cs_type(const TypeInterface &itype, const Str
 			output << INDENT2 "if ((method == " << CS_STATIC_FIELD_METHOD_PROXY_NAME_PREFIX << imethod.name
 				   << " || method == MethodName." << imethod.proxy_name
 				   << ") && args.Count == " << itos(imethod.arguments.size())
-				   << " && " << CS_METHOD_HAS_SCARDOT_CLASS_METHOD << "((godot_string_name)"
+				   << " && " << CS_METHOD_HAS_SCARDOT_CLASS_METHOD << "((scardot_string_name)"
 				   << CS_STATIC_FIELD_METHOD_PROXY_NAME_PREFIX << imethod.name << ".NativeValue))\n"
 				   << INDENT2 "{\n";
 
@@ -2368,7 +2368,7 @@ Error BindingsGenerator::_generate_cs_type(const TypeInterface &itype, const Str
 			   << INDENT1 "/// <param name=\"method\">Name of the method to check for.</param>\n";
 
 		output << MEMBER_BEGIN "protected internal " << (is_derived_type ? "override" : "virtual")
-			   << " bool " CS_METHOD_HAS_SCARDOT_CLASS_METHOD "(in godot_string_name method)\n"
+			   << " bool " CS_METHOD_HAS_SCARDOT_CLASS_METHOD "(in scardot_string_name method)\n"
 			   << INDENT1 "{\n";
 
 		for (const MethodInterface &imethod : itype.methods) {
@@ -2407,7 +2407,7 @@ Error BindingsGenerator::_generate_cs_type(const TypeInterface &itype, const Str
 			   << INDENT1 "/// <param name=\"signal\">Name of the signal to check for.</param>\n";
 
 		output << MEMBER_BEGIN "protected internal " << (is_derived_type ? "override" : "virtual")
-			   << " bool " CS_METHOD_HAS_SCARDOT_CLASS_SIGNAL "(in godot_string_name signal)\n"
+			   << " bool " CS_METHOD_HAS_SCARDOT_CLASS_SIGNAL "(in scardot_string_name signal)\n"
 			   << INDENT1 "{\n";
 
 		for (const SignalInterface &isignal : itype.signals_) {
@@ -2802,7 +2802,7 @@ Error BindingsGenerator::_generate_cs_method(const BindingsGenerator::TypeInterf
 
 	// Collect caller name for MethodBind
 	if (p_imethod.is_vararg) {
-		icall_params += ", (godot_string_name)MethodName." + p_imethod.proxy_name + ".NativeValue";
+		icall_params += ", (scardot_string_name)MethodName." + p_imethod.proxy_name + ".NativeValue";
 	}
 
 	// Generate method
@@ -3005,7 +3005,7 @@ Error BindingsGenerator::_generate_cs_signal(const BindingsGenerator::TypeInterf
 
 			// Generate Callable trampoline for the delegate
 			p_output << MEMBER_BEGIN "private static void " << p_isignal.proxy_name << "Trampoline"
-					 << "(object delegateObj, NativeVariantPtrArgs args, out godot_variant ret)\n"
+					 << "(object delegateObj, NativeVariantPtrArgs args, out scardot_variant ret)\n"
 					 << INDENT1 "{\n"
 					 << INDENT2 "Callable.ThrowIfArgCountMismatch(args, " << itos(p_isignal.arguments.size()) << ");\n"
 					 << INDENT2 "((" << delegate_name << ")delegateObj)(";
@@ -3138,7 +3138,7 @@ Error BindingsGenerator::_generate_cs_native_calls(const InternalCall &p_icall, 
 				String c_in_vararg = arg_type->c_in_vararg;
 
 				if (arg_type->is_object_type) {
-					c_in_vararg = "%5using godot_variant %1_in = VariantUtils.CreateFromscardotObjectPtr(%1);\n";
+					c_in_vararg = "%5using scardot_variant %1_in = VariantUtils.CreateFromscardotObjectPtr(%1);\n";
 				}
 
 				ERR_FAIL_COND_V_MSG(c_in_vararg.is_empty(), ERR_BUG,
@@ -3168,7 +3168,7 @@ Error BindingsGenerator::_generate_cs_native_calls(const InternalCall &p_icall, 
 
 	// Collect caller name for MethodBind
 	if (p_icall.is_vararg) {
-		c_func_sig << ", godot_string_name caller";
+		c_func_sig << ", scardot_string_name caller";
 	}
 
 	String icall_method = p_icall.name;
@@ -3187,7 +3187,7 @@ Error BindingsGenerator::_generate_cs_native_calls(const InternalCall &p_icall, 
 		String initialization;
 
 		if (return_type->is_object_type) {
-			ptrcall_return_type = return_type->is_ref_counted ? "godot_ref" : return_type->c_type;
+			ptrcall_return_type = return_type->is_ref_counted ? "scardot_ref" : return_type->c_type;
 			initialization = " = default";
 		} else {
 			ptrcall_return_type = return_type->c_type;
@@ -3225,21 +3225,21 @@ Error BindingsGenerator::_generate_cs_native_calls(const InternalCall &p_icall, 
 				if (return_type->cname != name_cache.type_Variant) {
 					// Usually the return value takes ownership, but in this case the variant is only used
 					// for conversion to another return type. As such, the local variable takes ownership.
-					r_output << "using godot_variant " << C_LOCAL_VARARG_RET " = ";
+					r_output << "using scardot_variant " << C_LOCAL_VARARG_RET " = ";
 				} else {
 					// Variant's [c_out] takes ownership of the variant value
-					r_output << "godot_variant " << C_LOCAL_RET " = ";
+					r_output << "scardot_variant " << C_LOCAL_RET " = ";
 				}
 			}
 
-			r_output << C_CLASS_NATIVE_FUNCS ".godotsharp_method_bind_call("
+			r_output << C_CLASS_NATIVE_FUNCS ".scardotsharp_method_bind_call("
 					 << CS_PARAM_METHODBIND ", " << (p_icall.is_static ? "IntPtr.Zero" : CS_PARAM_INSTANCE)
-					 << ", " << (p_icall.get_arguments_count() ? "(godot_variant**)" C_LOCAL_PTRCALL_ARGS : "null")
-					 << ", total_length, out godot_variant_call_error vcall_error);\n";
+					 << ", " << (p_icall.get_arguments_count() ? "(scardot_variant**)" C_LOCAL_PTRCALL_ARGS : "null")
+					 << ", total_length, out scardot_variant_call_error vcall_error);\n";
 
 			r_output << base_indent << "ExceptionUtils.DebugCheckCallError(caller"
 					 << ", " << (p_icall.is_static ? "IntPtr.Zero" : CS_PARAM_INSTANCE)
-					 << ", " << (p_icall.get_arguments_count() ? "(godot_variant**)" C_LOCAL_PTRCALL_ARGS : "null")
+					 << ", " << (p_icall.get_arguments_count() ? "(scardot_variant**)" C_LOCAL_PTRCALL_ARGS : "null")
 					 << ", total_length, vcall_error);\n";
 
 			if (!ret_void) {
@@ -3255,7 +3255,7 @@ Error BindingsGenerator::_generate_cs_native_calls(const InternalCall &p_icall, 
 			}
 		} else {
 			// MethodBind PtrCall
-			r_output << base_indent << C_CLASS_NATIVE_FUNCS ".godotsharp_method_bind_ptrcall("
+			r_output << base_indent << C_CLASS_NATIVE_FUNCS ".scardotsharp_method_bind_ptrcall("
 					 << CS_PARAM_METHODBIND ", " << (p_icall.is_static ? "IntPtr.Zero" : CS_PARAM_INSTANCE)
 					 << ", " << (p_icall.get_arguments_count() ? C_LOCAL_PTRCALL_ARGS : "null")
 					 << ", " << (!ret_void ? "&" C_LOCAL_RET ");\n" : "null);\n");
@@ -3283,15 +3283,15 @@ Error BindingsGenerator::_generate_cs_native_calls(const InternalCall &p_icall, 
 			r_output << INDENT2 "int vararg_length = " << vararg_arg << ".Length;\n"
 					 << INDENT2 "int total_length = " << real_argc_str << " + vararg_length;\n";
 
-			r_output << INDENT2 "Span<godot_variant.movable> varargs_span = vararg_length <= VarArgsSpanThreshold ?\n"
-					 << INDENT3 "stackalloc godot_variant.movable[VarArgsSpanThreshold] :\n"
-					 << INDENT3 "new godot_variant.movable[vararg_length];\n";
+			r_output << INDENT2 "Span<scardot_variant.movable> varargs_span = vararg_length <= VarArgsSpanThreshold ?\n"
+					 << INDENT3 "stackalloc scardot_variant.movable[VarArgsSpanThreshold] :\n"
+					 << INDENT3 "new scardot_variant.movable[vararg_length];\n";
 
 			r_output << INDENT2 "Span<IntPtr> " C_LOCAL_PTRCALL_ARGS "_span = total_length <= VarArgsSpanThreshold ?\n"
 					 << INDENT3 "stackalloc IntPtr[VarArgsSpanThreshold] :\n"
 					 << INDENT3 "new IntPtr[total_length];\n";
 
-			r_output << INDENT2 "fixed (godot_variant.movable* varargs = &MemoryMarshal.GetReference(varargs_span))\n"
+			r_output << INDENT2 "fixed (scardot_variant.movable* varargs = &MemoryMarshal.GetReference(varargs_span))\n"
 					 << INDENT2 "fixed (IntPtr* " C_LOCAL_PTRCALL_ARGS " = "
 								"&MemoryMarshal.GetReference(" C_LOCAL_PTRCALL_ARGS "_span))\n"
 					 << OPEN_BLOCK_L2;
@@ -4363,11 +4363,11 @@ void BindingsGenerator::_populate_builtin_type_interfaces() {
 	itype = TypeInterface::create_value_type(String("bool"));
 	itype.cs_in_expr = "%0.ToscardotBool()";
 	itype.cs_out = "%5return %0(%1).ToBool();";
-	itype.c_type = "godot_bool";
+	itype.c_type = "scardot_bool";
 	itype.c_type_in = itype.c_type;
 	itype.c_type_out = itype.c_type;
 	itype.c_arg_in = "&%s";
-	itype.c_in_vararg = "%5using godot_variant %1_in = VariantUtils.CreateFromBool(%1);\n";
+	itype.c_in_vararg = "%5using scardot_variant %1_in = VariantUtils.CreateFromBool(%1);\n";
 	builtin_types.insert(itype.cname, itype);
 
 	// Integer types
@@ -4387,7 +4387,7 @@ void BindingsGenerator::_populate_builtin_type_interfaces() {
 		}                                                                                      \
 		itype.c_type_in = itype.name;                                                          \
 		itype.c_type_out = itype.name;                                                         \
-		itype.c_in_vararg = "%5using godot_variant %1_in = VariantUtils.CreateFromInt(%1);\n"; \
+		itype.c_in_vararg = "%5using scardot_variant %1_in = VariantUtils.CreateFromInt(%1);\n"; \
 		builtin_types.insert(itype.cname, itype);                                              \
 	}
 
@@ -4422,7 +4422,7 @@ void BindingsGenerator::_populate_builtin_type_interfaces() {
 		}
 		itype.c_type_in = itype.proxy_name;
 		itype.c_type_out = itype.proxy_name;
-		itype.c_in_vararg = "%5using godot_variant %1_in = VariantUtils.CreateFromFloat(%1);\n";
+		itype.c_in_vararg = "%5using scardot_variant %1_in = VariantUtils.CreateFromFloat(%1);\n";
 		builtin_types.insert(itype.cname, itype);
 
 		// double
@@ -4435,7 +4435,7 @@ void BindingsGenerator::_populate_builtin_type_interfaces() {
 		itype.c_arg_in = "&%s";
 		itype.c_type_in = itype.proxy_name;
 		itype.c_type_out = itype.proxy_name;
-		itype.c_in_vararg = "%5using godot_variant %1_in = VariantUtils.CreateFromFloat(%1);\n";
+		itype.c_in_vararg = "%5using scardot_variant %1_in = VariantUtils.CreateFromFloat(%1);\n";
 		builtin_types.insert(itype.cname, itype);
 	}
 
@@ -4448,11 +4448,11 @@ void BindingsGenerator::_populate_builtin_type_interfaces() {
 	itype.c_in = "%5using %0 %1_in = " C_METHOD_MONOSTR_TO_SCARDOT "(%1);\n";
 	itype.c_out = "%5return " C_METHOD_MONOSTR_FROM_SCARDOT "(%1);\n";
 	itype.c_arg_in = "&%s_in";
-	itype.c_type = "godot_string";
+	itype.c_type = "scardot_string";
 	itype.c_type_in = itype.cs_type;
 	itype.c_type_out = itype.cs_type;
 	itype.c_type_is_disposable_struct = true;
-	itype.c_in_vararg = "%5using godot_variant %1_in = VariantUtils.CreateFromString(%1);\n";
+	itype.c_in_vararg = "%5using scardot_variant %1_in = VariantUtils.CreateFromString(%1);\n";
 	builtin_types.insert(itype.cname, itype);
 
 	// StringName
@@ -4465,10 +4465,10 @@ void BindingsGenerator::_populate_builtin_type_interfaces() {
 	// Cannot pass null StringName to ptrcall
 	itype.c_out = "%5return %0.CreateTakingOwnershipOfDisposableValue(%1);\n";
 	itype.c_arg_in = "&%s";
-	itype.c_type = "godot_string_name";
+	itype.c_type = "scardot_string_name";
 	itype.c_type_in = itype.c_type;
 	itype.c_type_out = itype.cs_type;
-	itype.c_in_vararg = "%5using godot_variant %1_in = VariantUtils.CreateFromStringName(%1);\n";
+	itype.c_in_vararg = "%5using scardot_variant %1_in = VariantUtils.CreateFromStringName(%1);\n";
 	itype.c_type_is_disposable_struct = false; // [c_out] takes ownership
 	itype.c_ret_needs_default_initialization = true;
 	builtin_types.insert(itype.cname, itype);
@@ -4483,7 +4483,7 @@ void BindingsGenerator::_populate_builtin_type_interfaces() {
 	// Cannot pass null NodePath to ptrcall
 	itype.c_out = "%5return %0.CreateTakingOwnershipOfDisposableValue(%1);\n";
 	itype.c_arg_in = "&%s";
-	itype.c_type = "godot_node_path";
+	itype.c_type = "scardot_node_path";
 	itype.c_type_in = itype.c_type;
 	itype.c_type_out = itype.cs_type;
 	itype.c_type_is_disposable_struct = false; // [c_out] takes ownership
@@ -4511,7 +4511,7 @@ void BindingsGenerator::_populate_builtin_type_interfaces() {
 	itype.c_in = "%5%0 %1_in = (%0)%1.NativeVar;\n";
 	itype.c_out = "%5return Variant.CreateTakingOwnershipOfDisposableValue(%1);\n";
 	itype.c_arg_in = "&%s_in";
-	itype.c_type = "godot_variant";
+	itype.c_type = "scardot_variant";
 	itype.c_type_in = itype.cs_type;
 	itype.c_type_out = itype.cs_type;
 	itype.c_type_is_disposable_struct = false; // [c_out] takes ownership
@@ -4524,7 +4524,7 @@ void BindingsGenerator::_populate_builtin_type_interfaces() {
 	itype.c_in = "%5using %0 %1_in = " C_METHOD_MANAGED_TO_CALLABLE "(in %1);\n";
 	itype.c_out = "%5return " C_METHOD_MANAGED_FROM_CALLABLE "(in %1);\n";
 	itype.c_arg_in = "&%s_in";
-	itype.c_type = "godot_callable";
+	itype.c_type = "scardot_callable";
 	itype.c_type_in = "in " + itype.cs_type;
 	itype.c_type_out = itype.cs_type;
 	itype.c_type_is_disposable_struct = true;
@@ -4540,7 +4540,7 @@ void BindingsGenerator::_populate_builtin_type_interfaces() {
 	itype.c_in = "%5using %0 %1_in = " C_METHOD_MANAGED_TO_SIGNAL "(in %1);\n";
 	itype.c_out = "%5return " C_METHOD_MANAGED_FROM_SIGNAL "(in %1);\n";
 	itype.c_arg_in = "&%s_in";
-	itype.c_type = "godot_signal";
+	itype.c_type = "scardot_signal";
 	itype.c_type_in = "in " + itype.cs_type;
 	itype.c_type_out = itype.cs_type;
 	itype.c_type_is_disposable_struct = true;
@@ -4578,19 +4578,19 @@ void BindingsGenerator::_populate_builtin_type_interfaces() {
 
 #define INSERT_ARRAY(m_type, m_managed_type, m_proxy_t) INSERT_ARRAY_FULL(m_type, m_type, m_managed_type, m_proxy_t)
 
-	INSERT_ARRAY(PackedInt32Array, godot_packed_int32_array, int);
-	INSERT_ARRAY(PackedInt64Array, godot_packed_int64_array, long);
-	INSERT_ARRAY_FULL(PackedByteArray, PackedByteArray, godot_packed_byte_array, byte);
+	INSERT_ARRAY(PackedInt32Array, scardot_packed_int32_array, int);
+	INSERT_ARRAY(PackedInt64Array, scardot_packed_int64_array, long);
+	INSERT_ARRAY_FULL(PackedByteArray, PackedByteArray, scardot_packed_byte_array, byte);
 
-	INSERT_ARRAY(PackedFloat32Array, godot_packed_float32_array, float);
-	INSERT_ARRAY(PackedFloat64Array, godot_packed_float64_array, double);
+	INSERT_ARRAY(PackedFloat32Array, scardot_packed_float32_array, float);
+	INSERT_ARRAY(PackedFloat64Array, scardot_packed_float64_array, double);
 
-	INSERT_ARRAY(PackedStringArray, godot_packed_string_array, string);
+	INSERT_ARRAY(PackedStringArray, scardot_packed_string_array, string);
 
-	INSERT_ARRAY(PackedColorArray, godot_packed_color_array, Color);
-	INSERT_ARRAY(PackedVector2Array, godot_packed_vector2_array, Vector2);
-	INSERT_ARRAY(PackedVector3Array, godot_packed_vector3_array, Vector3);
-	INSERT_ARRAY(PackedVector4Array, godot_packed_vector4_array, Vector4);
+	INSERT_ARRAY(PackedColorArray, scardot_packed_color_array, Color);
+	INSERT_ARRAY(PackedVector2Array, scardot_packed_vector2_array, Vector2);
+	INSERT_ARRAY(PackedVector3Array, scardot_packed_vector3_array, Vector3);
+	INSERT_ARRAY(PackedVector4Array, scardot_packed_vector4_array, Vector4);
 
 #undef INSERT_ARRAY
 
@@ -4604,7 +4604,7 @@ void BindingsGenerator::_populate_builtin_type_interfaces() {
 	itype.cs_in_expr = "(%1)(%0 ?? new()).NativeValue";
 	itype.c_out = "%5return %0.CreateTakingOwnershipOfDisposableValue(%1);\n";
 	itype.c_arg_in = "&%s";
-	itype.c_type = "godot_array";
+	itype.c_type = "scardot_array";
 	itype.c_type_in = itype.c_type;
 	itype.c_type_out = itype.cs_type;
 	itype.c_type_is_disposable_struct = false; // [c_out] takes ownership
@@ -4631,7 +4631,7 @@ void BindingsGenerator::_populate_builtin_type_interfaces() {
 	itype.cs_in_expr = "(%1)(%0 ?? new()).NativeValue";
 	itype.c_out = "%5return %0.CreateTakingOwnershipOfDisposableValue(%1);\n";
 	itype.c_arg_in = "&%s";
-	itype.c_type = "godot_dictionary";
+	itype.c_type = "scardot_dictionary";
 	itype.c_type_in = itype.c_type;
 	itype.c_type_out = itype.cs_type;
 	itype.c_type_is_disposable_struct = false; // [c_out] takes ownership
@@ -4859,7 +4859,7 @@ static void handle_cmdline_options(String glue_dir_path) {
 	}
 }
 
-static void cleanup_and_exit_godot() {
+static void cleanup_and_exit_scardot() {
 	// Exit once done.
 	Main::cleanup(true);
 	::exit(0);
@@ -4880,7 +4880,7 @@ void BindingsGenerator::handle_cmdline_args(const List<String> &p_cmdline_args) 
 			} else {
 				ERR_PRINT(generate_all_glue_option + ": No output directory specified (expected path to '{SCARDOT_ROOT}/modules/mono/glue').");
 				// Exit once done with invalid command line arguments.
-				cleanup_and_exit_godot();
+				cleanup_and_exit_scardot();
 			}
 
 			break;
@@ -4898,7 +4898,7 @@ void BindingsGenerator::handle_cmdline_args(const List<String> &p_cmdline_args) 
 			ERR_PRINT(generate_all_glue_option + ": Cannot generate Mono glue while running a game project. Change current directory or enable --editor.");
 		}
 		// Exit once done.
-		cleanup_and_exit_godot();
+		cleanup_and_exit_scardot();
 	}
 }
 

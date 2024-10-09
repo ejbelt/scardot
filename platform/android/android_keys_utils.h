@@ -39,10 +39,10 @@
 
 struct AndroidscardotCodePair {
 	unsigned int android_code = 0;
-	Key godot_code = Key::NONE;
+	Key scardot_code = Key::NONE;
 };
 
-static AndroidscardotCodePair android_godot_code_pairs[] = {
+static AndroidscardotCodePair android_scardot_code_pairs[] = {
 	{ AKEYCODE_UNKNOWN, Key::UNKNOWN }, // (0) Unknown key code.
 	{ AKEYCODE_BACK, Key::BACK }, // (4) Back key.
 	{ AKEYCODE_0, Key::KEY_0 }, // (7) '0' key.
@@ -175,15 +175,15 @@ static AndroidscardotCodePair android_godot_code_pairs[] = {
 	{ AKEYCODE_MAX, Key::UNKNOWN }
 };
 
-Key godot_code_from_android_code(unsigned int p_code);
+Key scardot_code_from_android_code(unsigned int p_code);
 
 // Key location determination.
 struct AndroidscardotLocationPair {
 	unsigned int android_code = 0;
-	KeyLocation godot_code = KeyLocation::UNSPECIFIED;
+	KeyLocation scardot_code = KeyLocation::UNSPECIFIED;
 };
 
-static AndroidscardotLocationPair android_godot_location_pairs[] = {
+static AndroidscardotLocationPair android_scardot_location_pairs[] = {
 	{ AKEYCODE_ALT_LEFT, KeyLocation::LEFT },
 	{ AKEYCODE_ALT_RIGHT, KeyLocation::RIGHT },
 	{ AKEYCODE_SHIFT_LEFT, KeyLocation::LEFT },
@@ -195,6 +195,6 @@ static AndroidscardotLocationPair android_godot_location_pairs[] = {
 	{ AKEYCODE_MAX, KeyLocation::UNSPECIFIED }
 };
 
-KeyLocation godot_location_from_android_code(unsigned int p_code);
+KeyLocation scardot_location_from_android_code(unsigned int p_code);
 
 #endif // ANDROID_KEYS_UTILS_H

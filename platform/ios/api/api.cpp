@@ -33,11 +33,11 @@
 #if defined(IOS_ENABLED)
 
 void register_ios_api() {
-	godot_ios_plugins_initialize();
+	scardot_ios_plugins_initialize();
 }
 
 void unregister_ios_api() {
-	godot_ios_plugins_deinitialize();
+	scardot_ios_plugins_deinitialize();
 }
 
 #else

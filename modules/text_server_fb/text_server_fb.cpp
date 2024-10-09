@@ -33,16 +33,16 @@
 #ifdef GDEXTENSION
 // Headers for building as GDExtension plug-in.
 
-#include <godot_cpp/classes/file_access.hpp>
-#include <godot_cpp/classes/os.hpp>
-#include <godot_cpp/classes/project_settings.hpp>
-#include <godot_cpp/classes/rendering_server.hpp>
-#include <godot_cpp/classes/translation_server.hpp>
-#include <godot_cpp/core/error_macros.hpp>
+#include <scardot_cpp/classes/file_access.hpp>
+#include <scardot_cpp/classes/os.hpp>
+#include <scardot_cpp/classes/project_settings.hpp>
+#include <scardot_cpp/classes/rendering_server.hpp>
+#include <scardot_cpp/classes/translation_server.hpp>
+#include <scardot_cpp/core/error_macros.hpp>
 
 #define OT_TAG(m_c1, m_c2, m_c3, m_c4) ((int32_t)((((uint32_t)(m_c1) & 0xff) << 24) | (((uint32_t)(m_c2) & 0xff) << 16) | (((uint32_t)(m_c3) & 0xff) << 8) | ((uint32_t)(m_c4) & 0xff)))
 
-using namespace godot;
+using namespace scardot;
 
 #define GLOBAL_GET(m_var) ProjectSettings::get_singleton()->get_setting_with_override(m_var)
 

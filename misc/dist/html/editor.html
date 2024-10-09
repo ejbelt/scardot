@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
-		<meta name="author" content="scardot Engine">
+		<meta name="author" content="Scardot Engine">
 		<meta name="description" content="Use the scardot Engine editor directly in your web browser, without having to install anything.">
 		<meta name="mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-capable" content="yes">
@@ -17,7 +17,7 @@
 		<meta property="og:url" name="twitter:url" content="https://editor.godotengine.org/releases/latest/">
 		<meta property="og:title" name="twitter:title" content="Free and open source 2D and 3D game engine">
 		<meta property="og:description" name="twitter:description" content="Use the scardot Engine editor directly in your web browser, without having to install anything.">
-		<meta property="og:image" name="twitter:image" content="https://godotengine.org/themes/godotengine/assets/og_image.png">
+		<meta property="og:image" name="twitter:image" content="https://godotengine.org/themes/scardotengine/assets/og_image.png">
 		<meta property="og:type" content="website">
 		<meta name="twitter:card" content="summary">
 		<link id="-gd-engine-icon" rel="icon" type="image/png" href="favicon.png">
@@ -113,7 +113,7 @@ a:active {
 	outline: none;
 }
 
-.godot {
+.scardot {
 	color: #e0e0e0;
 	background-color: #3b3943;
 	background-image: linear-gradient(to bottom, #403e48, #35333c);
@@ -345,7 +345,7 @@ a:active {
 					<div></div>
 					<div></div>
 				</div>
-				<div id="status-notice" class="godot" style="display: none;"></div>
+				<div id="status-notice" class="scardot" style="display: none;"></div>
 			</div>
 		</div>
 		<script>
@@ -413,7 +413,7 @@ function closeWelcomeModal(dontShowAgain) { // eslint-disable-line no-unused-var
 	}
 }
 		</script>
-		<script src="godot.editor.js"></script>
+		<script src="scardot.editor.js"></script>
 		<script>
 let editor = null;
 let game = null;
@@ -716,7 +716,7 @@ function startEditor(zip) {
 		displayFailureNotice('WebGL not available');
 	} else {
 		setStatusMode('indeterminate');
-		editor.init('godot.editor').then(function () {
+		editor.init('scardot.editor').then(function () {
 			if (zip) {
 				editor.copyToFS('/tmp/preload.zip', zip);
 			}

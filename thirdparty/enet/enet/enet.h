@@ -21,7 +21,7 @@ extern "C"
 #include "enet/unix.h"
 #endif
 #endif
-#include "enet/godot.h"
+#include "enet/scardot.h"
 // -- scardot end --
 
 #include "enet/types.h"
@@ -619,7 +619,7 @@ ENET_API size_t enet_range_coder_decompress (void *, const enet_uint8 *, size_t,
 extern size_t enet_protocol_command_size (enet_uint8);
 
 // -- scardot start --
-#include "enet/godot_ext.h"
+#include "enet/scardot_ext.h"
 // -- scardot end --
 
 #ifdef __cplusplus

@@ -883,11 +883,11 @@ String OS_Unix::get_user_data_dir() const {
 			}
 			return get_data_path().path_join(custom_dir);
 		} else {
-			return get_data_path().path_join(get_godot_dir_name()).path_join("app_userdata").path_join(appname);
+			return get_data_path().path_join(get_scardot_dir_name()).path_join("app_userdata").path_join(appname);
 		}
 	}
 
-	return get_data_path().path_join(get_godot_dir_name()).path_join("app_userdata").path_join("[unnamed project]");
+	return get_data_path().path_join(get_scardot_dir_name()).path_join("app_userdata").path_join("[unnamed project]");
 }
 
 String OS_Unix::get_executable_path() const {

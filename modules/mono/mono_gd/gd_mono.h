@@ -31,7 +31,7 @@
 #ifndef GD_MONO_H
 #define GD_MONO_H
 
-#include "../godotsharp_defs.h"
+#include "../scardotsharp_defs.h"
 
 #include "core/io/config_file.h"
 
@@ -83,7 +83,7 @@ class GDMono {
 #ifdef TOOLS_ENABLED
 	uint64_t api_editor_hash = 0;
 #endif
-	void _init_godot_api_hashes();
+	void _init_scardot_api_hashes();
 
 #ifdef TOOLS_ENABLED
 	gdmono::PluginCallbacks plugin_callbacks;

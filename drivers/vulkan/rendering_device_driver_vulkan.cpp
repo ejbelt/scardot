@@ -678,7 +678,7 @@ Error RenderingDeviceDriverVulkan::_check_device_capabilities() {
 	const RenderingContextDriverVulkan::Functions &functions = context_driver->functions_get();
 	if (functions.GetPhysicalDeviceFeatures2 != nullptr) {
 		// We must check that the corresponding extension is present before assuming a feature as enabled.
-		// See also: https://github.com/godotengine/godot/issues/65409
+		// See also: https://github.com/scardotengine/scardot/issues/65409
 
 		void *next_features = nullptr;
 		VkPhysicalDeviceVulkan12Features device_features_vk_1_2 = {};

@@ -28,7 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#import "godot_app_delegate.h"
+#import "scardot_app_delegate.h"
 
 #import <UIKit/UIKit.h>
 #include <stdio.h>

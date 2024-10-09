@@ -11,7 +11,7 @@
 	<key>CFBundleIconFile</key>
 	<string>scardot.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.godotengine.godot</string>
+	<string>org.scardotengine.scardot</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -19,7 +19,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$short_version</string>
 	<key>CFBundleSignature</key>
-	<string>godot</string>
+	<string>scardot</string>
 	<key>CFBundleVersion</key>
 	<string>$version</string>
 	<key>NSMicrophoneUsageDescription</key>
@@ -66,11 +66,11 @@
 			<string>Editor</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>public.godot</string>
+				<string>public.scardot</string>
 			</array>
 			<key>NSExportableTypes</key>
 			<array>
-				<string>public.godot</string>
+				<string>public.scardot</string>
 			</array>
 		</dict>
 	</array>
@@ -98,7 +98,7 @@
 					<string>escn</string>
 				</array>
 				<key>public.mime-type</key>
-				<string>application/x-godot-scene</string>
+				<string>application/x-scardot-scene</string>
 			</dict>
 		</dict>
 		<dict>
@@ -145,7 +145,7 @@
 					<string>tres</string>
 				</array>
 				<key>public.mime-type</key>
-				<string>application/x-godot-resource</string>
+				<string>application/x-scardot-resource</string>
 			</dict>
 		</dict>
 		<dict>
@@ -168,12 +168,12 @@
 					<string>gdshader</string>
 				</array>
 				<key>public.mime-type</key>
-				<string>application/x-godot-shader</string>
+				<string>application/x-scardot-shader</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>UTTypeIdentifier</key>
-			<string>public.godot</string>
+			<string>public.scardot</string>
 			<key>UTTypeReferenceURL</key>
 			<string></string>
 			<key>UTTypeDescription</key>
@@ -188,10 +188,10 @@
 			<dict>
 				<key>public.filename-extension</key>
 				<array>
-					<string>godot</string>
+					<string>scardot</string>
 				</array>
 				<key>public.mime-type</key>
-				<string>application/x-godot-project</string>
+				<string>application/x-scardot-project</string>
 			</dict>
 		</dict>
 	</array>

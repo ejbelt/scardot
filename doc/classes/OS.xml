@@ -222,7 +222,7 @@
 				Returns the command-line user arguments passed to the engine. User arguments are ignored by the engine and reserved for the user. They are passed after the double dash [code]--[/code] argument. [code]++[/code] may be used when [code]--[/code] is intercepted by another program (such as [code]startx[/code]).
 				[codeblock]
 				# scardot has been executed with the following command:
-				# godot --fullscreen -- --level=2 --hardcore
+				# scardot --fullscreen -- --level=2 --hardcore
 
 				OS.get_cmdline_args()      # Returns ["--fullscreen", "--level=2", "--hardcore"]
 				OS.get_cmdline_user_args() # Returns ["--level=2", "--hardcore"]
@@ -538,7 +538,7 @@
 				Returns the absolute directory path where user data is written (the [code]user://[/code] directory in scardot). The path depends on the project name and [member ProjectSettings.application/config/use_custom_user_dir].
 				- On Windows, this is [code]%AppData%\scardot\app_userdata\[project_name][/code], or [code]%AppData%\[custom_name][/code] if [code]use_custom_user_dir[/code] is set. [code]%AppData%[/code] expands to [code]%UserProfile%\AppData\Roaming[/code].
 				- On macOS, this is [code]~/Library/Application Support/scardot/app_userdata/[project_name][/code], or [code]~/Library/Application Support/[custom_name][/code] if [code]use_custom_user_dir[/code] is set.
-				- On Linux and BSD, this is [code]~/.local/share/godot/app_userdata/[project_name][/code], or [code]~/.local/share/[custom_name][/code] if [code]use_custom_user_dir[/code] is set.
+				- On Linux and BSD, this is [code]~/.local/share/scardot/app_userdata/[project_name][/code], or [code]~/.local/share/[custom_name][/code] if [code]use_custom_user_dir[/code] is set.
 				- On Android and iOS, this is a sandboxed directory in either internal or external storage, depending on the user's configuration.
 				- On Web, this is a virtual directory managed by the browser.
 				If the project name is empty, [code][project_name][/code] falls back to [code][unnamed project][/code].

@@ -54,7 +54,7 @@ public:
 
 	struct HandTracker {
 		bool is_initialized = false;
-		Ref<XRHandTracker> godot_tracker;
+		Ref<XRHandTracker> scardot_tracker;
 		XrHandJointsMotionRangeEXT motion_range = XR_HAND_JOINTS_MOTION_RANGE_UNOBSTRUCTED_EXT;
 		HandTrackedSource source = OPENXR_SOURCE_UNKNOWN;
 

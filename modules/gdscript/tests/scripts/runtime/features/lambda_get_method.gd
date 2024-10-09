@@ -1,4 +1,4 @@
-# https://github.com/godotengine/godot/issues/94074
+# https://github.com/scardotengine/scardot/issues/94074
 
 func foo():
 	pass

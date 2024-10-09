@@ -1,5 +1,5 @@
 /**************************************************************************/
-/*  godot.audio.position.worklet.js                                                      */
+/*  scardot.audio.position.worklet.js                                                      */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             SCARDOT ENGINE                               */
@@ -47,4 +47,4 @@ class scardotPositionReportingProcessor extends AudioWorkletProcessor {
 	}
 }
 
-registerProcessor('godot-position-reporting-processor', scardotPositionReportingProcessor);
+registerProcessor('scardot-position-reporting-processor', scardotPositionReportingProcessor);

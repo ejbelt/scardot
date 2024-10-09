@@ -94,7 +94,7 @@
 		You can use both methods to allow your game or app to support a wider or narrower set of devices and input methods, or to allow more advanced interactions with more advanced devices.
 	</description>
 	<tutorials>
-		<link title="How to make a VR game for WebXR with scardot 4">https://www.snopekgames.com/tutorial/2023/how-make-vr-game-webxr-godot-4</link>
+		<link title="How to make a VR game for WebXR with scardot 4">https://www.snopekgames.com/tutorial/2023/how-make-vr-game-webxr-scardot-4</link>
 	</tutorials>
 	<methods>
 		<method name="get_available_display_refresh_rates" qualifiers="const">

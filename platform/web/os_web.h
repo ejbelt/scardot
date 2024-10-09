@@ -33,7 +33,7 @@
 
 #include "audio_driver_web.h"
 
-#include "godot_js.h"
+#include "scardot_js.h"
 
 #include "core/input/input.h"
 #include "drivers/unix/os_unix.h"

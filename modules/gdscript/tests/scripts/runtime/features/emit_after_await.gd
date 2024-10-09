@@ -1,4 +1,4 @@
-# https://github.com/godotengine/godot/issues/89439
+# https://github.com/scardotengine/scardot/issues/89439
 extends Node
 
 signal my_signal

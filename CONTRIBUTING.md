@@ -11,17 +11,17 @@ which details these points and more, and is a recommended read.
 - [Reporting bugs](#reporting-bugs)
 - [Proposing features or improvements](#proposing-features-or-improvements)
 - [Contributing pull requests](#contributing-pull-requests)
-- [Contributing to scardot translations](#contributing-to-godot-translations)
+- [Contributing to scardot translations](#contributing-to-scardot-translations)
 - [Communicating with developers](#communicating-with-developers)
 
 ## Reporting bugs
 
-Report bugs [here](https://github.com/godotengine/godot/issues/new?assignees=&labels=&template=bug_report.yml).
+Report bugs [here](https://github.com/scardotengine/scardot/issues/new?assignees=&labels=&template=bug_report.yml).
 Please follow the instructions in the template when you do.
 
 Notably, please include a Minimal Reproduction Project (MRP), which is a small
 scardot project which reproduces the issue, with no unnecessary files included.
-Be sure to not include the `.godot` folder in the archive to save space.
+Be sure to not include the `.scardot` folder in the archive to save space.
 
 Make sure that the bug you are experiencing is reproducible in the latest scardot
 releases. You can find an overview of all scardot releases [on the website](https://godotengine.org/download/archive/)
@@ -37,7 +37,7 @@ call a _regression_), please mention it and clarify which versions you tested
 
 **The main issue tracker is for bug reports and does not accept feature proposals.**
 
-Instead, head to the [scardot Proposals repository](https://github.com/godotengine/godot-proposals)
+Instead, head to the [scardot Proposals repository](https://github.com/scardotengine/scardot-proposals)
 and follow the instructions in the README file and issue template.
 
 ## Contributing pull requests
@@ -179,7 +179,7 @@ for information on writing tests in scardot's C++ codebase.
 
 ## Contributing to scardot translations
 
-You can contribute to scardot translations on [Hosted Weblate](https://hosted.weblate.org/projects/godot-engine/),
+You can contribute to scardot translations on [Hosted Weblate](https://hosted.weblate.org/projects/scardot-engine/),
 an open source and web-based translation platform.
 
 Please refer to our [editor and documentation localization guidelines](https://docs.godotengine.org/en/latest/contributing/documentation/editor_and_docs_localization.html)
@@ -199,11 +199,11 @@ or a bug you want to fix), the following channels can be used:
   about scardot Engine development. Browse the [Directory](https://chat.godotengine.org/directory/channels)
   for an overview of public channels focusing on various engine areas which you
   might be interested in.
-- [Bug tracker](https://github.com/godotengine/godot/issues): If there is an
+- [Bug tracker](https://github.com/scardotengine/scardot/issues): If there is an
   existing issue about a topic you want to discuss, you can participate directly.
   If not, you can open a new issue. Please mind the guidelines outlined above
   for bug reporting.
-- [Feature proposals](https://github.com/godotengine/godot-proposals/issues):
+- [Feature proposals](https://github.com/scardotengine/scardot-proposals/issues):
   To propose a new feature, we have a dedicated issue tracker for that. Don't
   hesitate to start by talking about your idea on the scardot Contributors Chat
   to make sure that it makes sense in scardot's context.

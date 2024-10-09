@@ -129,7 +129,7 @@ def generateBuildTasks(String flavor = "template") {
                     buildTasks += tasks.create(name: copyAARTaskName, type: Copy) {
                         dependsOn ":lib:assembleTemplate${capitalizedTarget}"
                         from('lib/build/outputs/aar')
-                        include("godot-lib.template_${targetSuffix}.aar")
+                        include("scardot-lib.template_${targetSuffix}.aar")
                         into("app/libs/${target}")
                     }
                 }
@@ -143,7 +143,7 @@ def generateBuildTasks(String flavor = "template") {
                     buildTasks += tasks.create(name: copyAARToBinTaskName, type: Copy) {
                         dependsOn ":lib:assembleTemplate${capitalizedTarget}"
                         from('lib/build/outputs/aar')
-                        include("godot-lib.template_${targetSuffix}.aar")
+                        include("scardot-lib.template_${targetSuffix}.aar")
                         into(binDir)
                     }
                 }
@@ -277,12 +277,12 @@ task cleanscardotTemplates(type: Delete) {
     delete("$binDir/android_dev.apk")
     delete("$binDir/android_release.apk")
     delete("$binDir/android_source.zip")
-    delete("$binDir/godot-lib.template_debug.aar")
-    delete("$binDir/godot-lib.template_debug.dev.aar")
-    delete("$binDir/godot-lib.template_release.aar")
+    delete("$binDir/scardot-lib.template_debug.aar")
+    delete("$binDir/scardot-lib.template_debug.dev.aar")
+    delete("$binDir/scardot-lib.template_release.aar")
 
     // Cover deletion for the libs using the previous naming scheme
-    delete("$binDir/godot-lib.debug.aar")
-    delete("$binDir/godot-lib.dev.aar")
-    delete("$binDir/godot-lib.release.aar")
+    delete("$binDir/scardot-lib.debug.aar")
+    delete("$binDir/scardot-lib.dev.aar")
+    delete("$binDir/scardot-lib.release.aar")
 }

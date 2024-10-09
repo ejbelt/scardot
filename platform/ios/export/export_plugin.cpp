@@ -458,8 +458,8 @@ void EditorExportPlatformIOS::_fix_config_file(const Ref<EditorExportPreset> &p_
 			strnew += lines[i].replace("$code_sign_identity_release", rel_sign_id) + "\n";
 		} else if (lines[i].contains("$additional_plist_content")) {
 			strnew += lines[i].replace("$additional_plist_content", p_config.plist_content) + "\n";
-		} else if (lines[i].contains("$godot_archs")) {
-			strnew += lines[i].replace("$godot_archs", p_config.architectures) + "\n";
+		} else if (lines[i].contains("$scardot_archs")) {
+			strnew += lines[i].replace("$scardot_archs", p_config.architectures) + "\n";
 		} else if (lines[i].contains("$linker_flags")) {
 			strnew += lines[i].replace("$linker_flags", p_config.linker_flags) + "\n";
 		} else if (lines[i].contains("$targeted_device_family")) {
@@ -1603,7 +1603,7 @@ Error EditorExportPlatformIOS::_copy_asset(const Ref<EditorExportPreset> &p_pres
 		return ERR_FILE_NOT_FOUND;
 	}
 
-	String base_dir = p_asset.get_base_dir().replace("res://", "").replace(".godot/mono/temp/bin/", "");
+	String base_dir = p_asset.get_base_dir().replace("res://", "").replace(".scardot/mono/temp/bin/", "");
 	String asset = p_asset.ends_with("/") ? p_asset.left(p_asset.length() - 1) : p_asset;
 	String destination_dir;
 	String destination;
@@ -1979,15 +1979,15 @@ Error EditorExportPlatformIOS::_export_ios_plugins(const Ref<EditorExportPreset>
 		plugin_format["deinitialization"] = plugin_deinitialization_cpp_code;
 
 		String plugin_cpp_code = "\n// scardot Plugins\n"
-								 "void godot_ios_plugins_initialize();\n"
-								 "void godot_ios_plugins_deinitialize();\n"
+								 "void scardot_ios_plugins_initialize();\n"
+								 "void scardot_ios_plugins_deinitialize();\n"
 								 "// Exported Plugins\n\n"
 								 "$definition"
 								 "// Use Plugins\n"
-								 "void godot_ios_plugins_initialize() {\n"
+								 "void scardot_ios_plugins_initialize() {\n"
 								 "$initialization"
 								 "}\n\n"
-								 "void godot_ios_plugins_deinitialize() {\n"
+								 "void scardot_ios_plugins_deinitialize() {\n"
 								 "$deinitialization"
 								 "}\n";
 
@@ -2106,7 +2106,7 @@ Error EditorExportPlatformIOS::_export_project_helper(const Ref<EditorExportPres
 					for (String n = da->get_next(); !n.is_empty(); n = da->get_next()) {
 						if (!n.begins_with(".")) { // Ignore ".", ".." and hidden files.
 							if (da->current_is_dir()) {
-								if (n == "dylibs" || n == "Images.xcassets" || n.ends_with(".lproj") || n == "godot-publish-dotnet" || n.ends_with(".xcframework") || n.ends_with(".framework")) {
+								if (n == "dylibs" || n == "Images.xcassets" || n.ends_with(".lproj") || n == "scardot-publish-dotnet" || n.ends_with(".xcframework") || n.ends_with(".framework")) {
 									expected_files++;
 								}
 							} else {
@@ -2153,7 +2153,7 @@ Error EditorExportPlatformIOS::_export_project_helper(const Ref<EditorExportPres
 		return ERR_SKIP;
 	}
 
-	String library_to_use = "libgodot.ios." + String(p_debug ? "debug" : "release") + ".xcframework";
+	String library_to_use = "libscardot.ios." + String(p_debug ? "debug" : "release") + ".xcframework";
 
 	print_line("Static framework: " + library_to_use);
 	String pkg_name;
@@ -2165,16 +2165,16 @@ Error EditorExportPlatformIOS::_export_project_helper(const Ref<EditorExportPres
 
 	bool found_library = false;
 
-	const String project_file = "godot_ios.xcodeproj/project.pbxproj";
+	const String project_file = "scardot_ios.xcodeproj/project.pbxproj";
 	HashSet<String> files_to_parse;
-	files_to_parse.insert("godot_ios/godot_ios-Info.plist");
+	files_to_parse.insert("scardot_ios/scardot_ios-Info.plist");
 	files_to_parse.insert(project_file);
-	files_to_parse.insert("godot_ios/export_options.plist");
-	files_to_parse.insert("godot_ios/dummy.cpp");
-	files_to_parse.insert("godot_ios.xcodeproj/project.xcworkspace/contents.xcworkspacedata");
-	files_to_parse.insert("godot_ios.xcodeproj/xcshareddata/xcschemes/godot_ios.xcscheme");
-	files_to_parse.insert("godot_ios/godot_ios.entitlements");
-	files_to_parse.insert("godot_ios/Launch Screen.storyboard");
+	files_to_parse.insert("scardot_ios/export_options.plist");
+	files_to_parse.insert("scardot_ios/dummy.cpp");
+	files_to_parse.insert("scardot_ios.xcodeproj/project.xcworkspace/contents.xcworkspacedata");
+	files_to_parse.insert("scardot_ios.xcodeproj/xcshareddata/xcschemes/scardot_ios.xcscheme");
+	files_to_parse.insert("scardot_ios/scardot_ios.entitlements");
+	files_to_parse.insert("scardot_ios/Launch Screen.storyboard");
 	files_to_parse.insert("PrivacyInfo.xcprivacy");
 
 	IOSConfigData config_data = {
@@ -2251,7 +2251,7 @@ Error EditorExportPlatformIOS::_export_project_helper(const Ref<EditorExportPres
 
 		if (files_to_parse.has(file)) {
 			_fix_config_file(p_preset, data, config_data, p_debug);
-		} else if (file.begins_with("libgodot.ios")) {
+		} else if (file.begins_with("libscardot.ios")) {
 			if (!file.begins_with(library_to_use) || file.ends_with(String("/empty"))) {
 				ret = unzGoToNextFile(src_pkg_zip);
 				continue; //ignore!
@@ -2270,7 +2270,7 @@ Error EditorExportPlatformIOS::_export_project_helper(const Ref<EditorExportPres
 		///@TODO need to parse logo files
 
 		if (data.size() > 0) {
-			file = file.replace("godot_ios", binary_name);
+			file = file.replace("scardot_ios", binary_name);
 
 			print_line("ADDING: " + file + " size: " + itos(data.size()));
 
@@ -2321,8 +2321,8 @@ Error EditorExportPlatformIOS::_export_project_helper(const Ref<EditorExportPres
 
 	// Check and generate missing ARM64 simulator library.
 	if (p_preset->get("application/generate_simulator_library_if_missing").operator bool()) {
-		String sim_lib_path = dest_dir + String(binary_name + ".xcframework").path_join("ios-arm64_x86_64-simulator").path_join("libgodot.a");
-		String dev_lib_path = dest_dir + String(binary_name + ".xcframework").path_join("ios-arm64").path_join("libgodot.a");
+		String sim_lib_path = dest_dir + String(binary_name + ".xcframework").path_join("ios-arm64_x86_64-simulator").path_join("libscardot.a");
+		String dev_lib_path = dest_dir + String(binary_name + ".xcframework").path_join("ios-arm64").path_join("libscardot.a");
 		String tmp_lib_path = EditorPaths::get_singleton()->get_cache_dir().path_join(binary_name + "_lipo_");
 		uint32_t cputype = 0;
 		uint32_t cpusubtype = 0;

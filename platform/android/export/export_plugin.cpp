@@ -1541,8 +1541,8 @@ void EditorExportPlatformAndroid::_fix_resources(const Ref<EditorExportPreset> &
 
 		String str = _parse_string(&r_manifest[offset], string_flags & UTF8_FLAG);
 
-		if (str.begins_with("godot-project-name")) {
-			if (str == "godot-project-name") {
+		if (str.begins_with("scardot-project-name")) {
+			if (str == "scardot-project-name") {
 				//project name
 				str = get_project_name(package_name);
 
@@ -2163,7 +2163,7 @@ Error EditorExportPlatformAndroid::run(const Ref<EditorExportPreset> &p_preset, 
 	args.push_back("-a");
 	args.push_back("android.intent.action.MAIN");
 	args.push_back("-n");
-	args.push_back(get_package_name(package_name) + "/com.godot.game.scardotApp");
+	args.push_back(get_package_name(package_name) + "/com.scardot.game.scardotApp");
 
 	output.clear();
 	err = OS::get_singleton()->execute(adb, args, &output, &rv, true);
@@ -3247,7 +3247,7 @@ Error EditorExportPlatformAndroid::export_project_helper(const Ref<EditorExportP
 		cmdline.push_back("-Pperform_zipalign=" + zipalign_flag); // argument to specify whether the build should be zipaligned.
 		cmdline.push_back("-Pperform_signing=" + sign_flag); // argument to specify whether the build should be signed.
 		cmdline.push_back("-Pcompress_native_libraries=" + compress_native_libraries_flag); // argument to specify whether the build should compress native libraries.
-		cmdline.push_back("-Pgodot_editor_version=" + String(VERSION_FULL_CONFIG));
+		cmdline.push_back("-Pscardot_editor_version=" + String(VERSION_FULL_CONFIG));
 
 		// NOTE: The release keystore is not included in the verbose logging
 		// to avoid accidentally leaking sensitive information when sharing verbose logs for troubleshooting.

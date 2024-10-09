@@ -46,160 +46,160 @@ extern "C" {
 
 typedef struct {
 	uint8_t _dont_touch_that[SCARDOT_VARIANT_SIZE];
-} godot_variant;
+} scardot_variant;
 
 #define SCARDOT_ARRAY_SIZE sizeof(void *)
 
 typedef struct {
 	uint8_t _dont_touch_that[SCARDOT_ARRAY_SIZE];
-} godot_array;
+} scardot_array;
 
 #define SCARDOT_DICTIONARY_SIZE sizeof(void *)
 
 typedef struct {
 	uint8_t _dont_touch_that[SCARDOT_DICTIONARY_SIZE];
-} godot_dictionary;
+} scardot_dictionary;
 
 #define SCARDOT_STRING_SIZE sizeof(void *)
 
 typedef struct {
 	uint8_t _dont_touch_that[SCARDOT_STRING_SIZE];
-} godot_string;
+} scardot_string;
 
 #define SCARDOT_STRING_NAME_SIZE sizeof(void *)
 
 typedef struct {
 	uint8_t _dont_touch_that[SCARDOT_STRING_NAME_SIZE];
-} godot_string_name;
+} scardot_string_name;
 
 #define SCARDOT_PACKED_ARRAY_SIZE (2 * sizeof(void *))
 
 typedef struct {
 	uint8_t _dont_touch_that[SCARDOT_PACKED_ARRAY_SIZE];
-} godot_packed_array;
+} scardot_packed_array;
 
 #define SCARDOT_VECTOR2_SIZE (sizeof(real_t) * 2)
 
 typedef struct {
 	uint8_t _dont_touch_that[SCARDOT_VECTOR2_SIZE];
-} godot_vector2;
+} scardot_vector2;
 
 #define SCARDOT_VECTOR2I_SIZE (sizeof(int32_t) * 2)
 
 typedef struct {
 	uint8_t _dont_touch_that[SCARDOT_VECTOR2I_SIZE];
-} godot_vector2i;
+} scardot_vector2i;
 
 #define SCARDOT_RECT2_SIZE (sizeof(real_t) * 4)
 
-typedef struct godot_rect2 {
+typedef struct scardot_rect2 {
 	uint8_t _dont_touch_that[SCARDOT_RECT2_SIZE];
-} godot_rect2;
+} scardot_rect2;
 
 #define SCARDOT_RECT2I_SIZE (sizeof(int32_t) * 4)
 
-typedef struct godot_rect2i {
+typedef struct scardot_rect2i {
 	uint8_t _dont_touch_that[SCARDOT_RECT2I_SIZE];
-} godot_rect2i;
+} scardot_rect2i;
 
 #define SCARDOT_VECTOR3_SIZE (sizeof(real_t) * 3)
 
 typedef struct {
 	uint8_t _dont_touch_that[SCARDOT_VECTOR3_SIZE];
-} godot_vector3;
+} scardot_vector3;
 
 #define SCARDOT_VECTOR3I_SIZE (sizeof(int32_t) * 3)
 
 typedef struct {
 	uint8_t _dont_touch_that[SCARDOT_VECTOR3I_SIZE];
-} godot_vector3i;
+} scardot_vector3i;
 
 #define SCARDOT_TRANSFORM2D_SIZE (sizeof(real_t) * 6)
 
 typedef struct {
 	uint8_t _dont_touch_that[SCARDOT_TRANSFORM2D_SIZE];
-} godot_transform2d;
+} scardot_transform2d;
 
 #define SCARDOT_VECTOR4_SIZE (sizeof(real_t) * 4)
 
 typedef struct {
 	uint8_t _dont_touch_that[SCARDOT_VECTOR4_SIZE];
-} godot_vector4;
+} scardot_vector4;
 
 #define SCARDOT_VECTOR4I_SIZE (sizeof(int32_t) * 4)
 
 typedef struct {
 	uint8_t _dont_touch_that[SCARDOT_VECTOR4I_SIZE];
-} godot_vector4i;
+} scardot_vector4i;
 
 #define SCARDOT_PLANE_SIZE (sizeof(real_t) * 4)
 
 typedef struct {
 	uint8_t _dont_touch_that[SCARDOT_PLANE_SIZE];
-} godot_plane;
+} scardot_plane;
 
 #define SCARDOT_QUATERNION_SIZE (sizeof(real_t) * 4)
 
 typedef struct {
 	uint8_t _dont_touch_that[SCARDOT_QUATERNION_SIZE];
-} godot_quaternion;
+} scardot_quaternion;
 
 #define SCARDOT_AABB_SIZE (sizeof(real_t) * 6)
 
 typedef struct {
 	uint8_t _dont_touch_that[SCARDOT_AABB_SIZE];
-} godot_aabb;
+} scardot_aabb;
 
 #define SCARDOT_BASIS_SIZE (sizeof(real_t) * 9)
 
 typedef struct {
 	uint8_t _dont_touch_that[SCARDOT_BASIS_SIZE];
-} godot_basis;
+} scardot_basis;
 
 #define SCARDOT_TRANSFORM3D_SIZE (sizeof(real_t) * 12)
 
 typedef struct {
 	uint8_t _dont_touch_that[SCARDOT_TRANSFORM3D_SIZE];
-} godot_transform3d;
+} scardot_transform3d;
 
 #define SCARDOT_PROJECTION_SIZE (sizeof(real_t) * 4 * 4)
 
 typedef struct {
 	uint8_t _dont_touch_that[SCARDOT_PROJECTION_SIZE];
-} godot_projection;
+} scardot_projection;
 
 // Colors should always use 32-bit floats, so don't use real_t here.
 #define SCARDOT_COLOR_SIZE (sizeof(float) * 4)
 
 typedef struct {
 	uint8_t _dont_touch_that[SCARDOT_COLOR_SIZE];
-} godot_color;
+} scardot_color;
 
 #define SCARDOT_NODE_PATH_SIZE sizeof(void *)
 
 typedef struct {
 	uint8_t _dont_touch_that[SCARDOT_NODE_PATH_SIZE];
-} godot_node_path;
+} scardot_node_path;
 
 #define SCARDOT_RID_SIZE sizeof(uint64_t)
 
 typedef struct {
 	uint8_t _dont_touch_that[SCARDOT_RID_SIZE];
-} godot_rid;
+} scardot_rid;
 
 // Alignment hardcoded in `core/variant/callable.h`.
 #define SCARDOT_CALLABLE_SIZE (16)
 
 typedef struct {
 	uint8_t _dont_touch_that[SCARDOT_CALLABLE_SIZE];
-} godot_callable;
+} scardot_callable;
 
 // Alignment hardcoded in `core/variant/callable.h`.
 #define SCARDOT_SIGNAL_SIZE (16)
 
 typedef struct {
 	uint8_t _dont_touch_that[SCARDOT_SIGNAL_SIZE];
-} godot_signal;
+} scardot_signal;
 
 #ifdef __cplusplus
 }

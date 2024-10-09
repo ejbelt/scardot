@@ -1194,10 +1194,10 @@ void EditorNode::_scan_external_changes() {
 		}
 	}
 
-	String project_settings_path = ProjectSettings::get_singleton()->get_resource_path().path_join("project.godot");
+	String project_settings_path = ProjectSettings::get_singleton()->get_resource_path().path_join("project.scardot");
 	if (FileAccess::get_modified_time(project_settings_path) > ProjectSettings::get_singleton()->get_last_saved_time()) {
 		TreeItem *ti = disk_changed_list->create_item(r);
-		ti->set_text(0, "project.godot");
+		ti->set_text(0, "project.scardot");
 		need_reload = true;
 	}
 
@@ -3190,17 +3190,17 @@ void EditorNode::_menu_option_confirm(int p_option, bool p_confirmed) {
 			OS::get_singleton()->shell_open("https://forum.godotengine.org/");
 		} break;
 		case HELP_REPORT_A_BUG: {
-			OS::get_singleton()->shell_open("https://github.com/godotengine/godot/issues");
+			OS::get_singleton()->shell_open("https://github.com/scardotengine/scardot/issues");
 		} break;
 		case HELP_COPY_SYSTEM_INFO: {
 			String info = _get_system_info();
 			DisplayServer::get_singleton()->clipboard_set(info);
 		} break;
 		case HELP_SUGGEST_A_FEATURE: {
-			OS::get_singleton()->shell_open("https://github.com/godotengine/godot-proposals#readme");
+			OS::get_singleton()->shell_open("https://github.com/scardotengine/scardot-proposals#readme");
 		} break;
 		case HELP_SEND_DOCS_FEEDBACK: {
-			OS::get_singleton()->shell_open("https://github.com/godotengine/godot-docs/issues");
+			OS::get_singleton()->shell_open("https://github.com/scardotengine/scardot-docs/issues");
 		} break;
 		case HELP_COMMUNITY: {
 			OS::get_singleton()->shell_open("https://godotengine.org/community");
@@ -5006,11 +5006,11 @@ String EditorNode::_get_system_info() const {
 	}
 	const String distribution_version = OS::get_singleton()->get_version();
 
-	String godot_version = "scardot v" + String(VERSION_FULL_CONFIG);
+	String scardot_version = "scardot v" + String(VERSION_FULL_CONFIG);
 	if (String(VERSION_BUILD) != "official") {
 		String hash = String(VERSION_HASH);
 		hash = hash.is_empty() ? String("unknown") : vformat("(%s)", hash.left(9));
-		godot_version += " " + hash;
+		scardot_version += " " + hash;
 	}
 
 #ifdef LINUXBSD_ENABLED
@@ -5065,7 +5065,7 @@ String EditorNode::_get_system_info() const {
 
 	// Join info.
 	Vector<String> info;
-	info.push_back(godot_version);
+	info.push_back(scardot_version);
 	if (!distribution_version.is_empty()) {
 		info.push_back(distribution_name + " " + distribution_version);
 	} else {
@@ -5167,7 +5167,7 @@ Vector<EditorNodeInitCallback> EditorNode::_init_callbacks;
 
 void EditorNode::_begin_first_scan() {
 	// In headless mode, scan right away.
-	// This allows users to continue using `godot --headless --editor --quit` to prepare a project.
+	// This allows users to continue using `scardot --headless --editor --quit` to prepare a project.
 	if (!DisplayServer::get_singleton()->window_can_draw()) {
 		OS::get_singleton()->benchmark_begin_measure("Editor", "First Scan");
 		EditorFileSystem::get_singleton()->scan();

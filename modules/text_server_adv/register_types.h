@@ -32,8 +32,8 @@
 #define TEXT_SERVER_ADV_REGISTER_TYPES_H
 
 #ifdef GDEXTENSION
-#include <godot_cpp/core/class_db.hpp>
-using namespace godot;
+#include <scardot_cpp/core/class_db.hpp>
+using namespace scardot;
 #elif defined(SCARDOT_MODULE)
 #include "modules/register_module_types.h"
 #endif

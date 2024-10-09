@@ -104,7 +104,7 @@ TEST_SUITE("Validate tests") {
 		StringName string_name("has_method");
 		INFO(string_name);
 
-		NodePath node_path("godot/sprite");
+		NodePath node_path("scardot/sprite");
 		INFO(node_path);
 
 		INFO(RID());

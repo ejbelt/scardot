@@ -31,7 +31,7 @@
 #ifndef IOS_EXPORT_PLUGIN_H
 #define IOS_EXPORT_PLUGIN_H
 
-#include "godot_plugin_config.h"
+#include "scardot_plugin_config.h"
 
 #include "core/config/project_settings.h"
 #include "core/io/file_access.h"

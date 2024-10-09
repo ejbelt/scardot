@@ -188,12 +188,12 @@ Files extracted from upstream source:
 
 Files extracted from upstream:
 
-- All `.cpp` files listed in `modules/raycast/godot_update_embree.py`
-- All header files in the directories listed in `modules/raycast/godot_update_embree.py`
-- All config files listed in `modules/raycast/godot_update_embree.py`
+- All `.cpp` files listed in `modules/raycast/scardot_update_embree.py`
+- All header files in the directories listed in `modules/raycast/scardot_update_embree.py`
+- All config files listed in `modules/raycast/scardot_update_embree.py`
 - `LICENSE.txt`
 
-The `modules/raycast/godot_update_embree.py` script can be used to pull the
+The `modules/raycast/scardot_update_embree.py` script can be used to pull the
 relevant files from the latest Embree release and apply some automatic changes.
 
 Some changes have been made in order to remove exceptions and fix minor build errors.
@@ -219,7 +219,7 @@ to be usable by scardot's socket implementation and allow IPv6 and DTLS.
 Apply the patches in the `patches/` folder when syncing on newer upstream
 commits.
 
-Three files (`godot.cpp`, `enet/godot.h`, `enet/godot_ext.h`) have been added to
+Three files (`scardot.cpp`, `enet/scardot.h`, `enet/scardot_ext.h`) have been added to
 provide ENet socket implementation using scardot classes.
 
 It is still possible to build against a system wide ENet but doing so will limit
@@ -414,7 +414,7 @@ Files extracted from upstream source:
 
 Files generated from upstream source:
 
-- The `icudt75l.dat` built with the provided `godot_data.json` config file (see
+- The `icudt75l.dat` built with the provided `scardot_data.json` config file (see
   https://github.com/unicode-org/icu/blob/master/docs/userguide/icu_data/buildtool.md
   for instructions).
 
@@ -422,7 +422,7 @@ Files generated from upstream source:
   (replace `data` subfolder from the main source archive)
 2. Build ICU with default options: `./runConfigureICU {PLATFORM} && make`
 3. Reconfigure ICU with custom data config:
-   `ICU_DATA_FILTER_FILE={SCARDOT_SOURCE}/thirdparty/icu4c/godot_data.json ./runConfigureICU {PLATFORM} --with-data-packaging=common`
+   `ICU_DATA_FILTER_FILE={SCARDOT_SOURCE}/thirdparty/icu4c/scardot_data.json ./runConfigureICU {PLATFORM} --with-data-packaging=common`
 4. Delete `data/out` folder and rebuild data: `cd data && rm -rf ./out && make`
 5. Copy `source/data/out/icudt75l.dat` to the `{SCARDOT_SOURCE}/thirdparty/icu4c/icudt75l.dat`
 
@@ -536,7 +536,7 @@ Files extracted from upstream source:
 - `src/` and `sharpyuv/` except from `.am`, `.rc` and `.in` files
 - `AUTHORS`, `COPYING`, `PATENTS`
 
-Patch `godot-node-debug-fix.patch` workarounds shadowing of scardot's Node class
+Patch `scardot-node-debug-fix.patch` workarounds shadowing of scardot's Node class
 in the MSVC debugger.
 
 
@@ -557,9 +557,9 @@ File extracted from upstream release tarball:
   upstream GH-9020)
 - Applied the patch `msvc-redeclaration-bug.diff` to fix a compilation error
   with some MSVC versions
-- Added 2 files `godot_core_mbedtls_platform.c` and `godot_core_mbedtls_config.h`
+- Added 2 files `scardot_core_mbedtls_platform.c` and `scardot_core_mbedtls_config.h`
   providing configuration for light bundling with core
-- Added the file `godot_module_mbedtls_config.h` to customize the build
+- Added the file `scardot_module_mbedtls_config.h` to customize the build
   configuration when bundling the full library
 
 
@@ -593,7 +593,7 @@ Files extracted from upstream repository:
 - `mingw.shared_mutex.h`
 - `mingw.thread.h`
 
-Once copied, apply `godot.patch` (needed because scardot is built without exceptions
+Once copied, apply `scardot.patch` (needed because scardot is built without exceptions
 and to avoid std:: replacements leak in Clang builds).
 
 

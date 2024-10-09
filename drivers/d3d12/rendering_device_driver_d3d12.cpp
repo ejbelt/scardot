@@ -35,7 +35,7 @@
 #include "servers/rendering/rendering_device.h"
 #include "thirdparty/zlib/zlib.h"
 
-#include "d3d12_godot_nir_bridge.h"
+#include "d3d12_scardot_nir_bridge.h"
 #include "dxil_hash.h"
 #include "rendering_context_driver_d3d12.h"
 
@@ -3194,10 +3194,10 @@ Vector<uint8_t> RenderingDeviceDriverD3D12::shader_compile_binary_from_spirv(Vec
 				Vector<ShaderBinary::SpecializationConstant> &specialization_constants;
 			} shader_data{ stage, binary_data, sets_bindings, specialization_constants };
 
-			scardotNirCallbacks godot_nir_callbacks = {};
-			godot_nir_callbacks.data = &shader_data;
+			scardotNirCallbacks scardot_nir_callbacks = {};
+			scardot_nir_callbacks.data = &shader_data;
 
-			godot_nir_callbacks.report_resource = [](uint32_t p_register, uint32_t p_space, uint32_t p_dxil_type, void *p_data) {
+			scardot_nir_callbacks.report_resource = [](uint32_t p_register, uint32_t p_space, uint32_t p_dxil_type, void *p_data) {
 				ShaderData &shader_data_in = *(ShaderData *)p_data;
 
 				// Types based on Mesa's dxil_container.h.
@@ -3255,7 +3255,7 @@ Vector<uint8_t> RenderingDeviceDriverD3D12::shader_compile_binary_from_spirv(Vec
 				}
 			};
 
-			godot_nir_callbacks.report_sc_bit_offset_fn = [](uint32_t p_sc_id, uint64_t p_bit_offset, void *p_data) {
+			scardot_nir_callbacks.report_sc_bit_offset_fn = [](uint32_t p_sc_id, uint64_t p_bit_offset, void *p_data) {
 				ShaderData &shader_data_in = *(ShaderData *)p_data;
 				[[maybe_unused]] bool found = false;
 				for (int j = 0; j < shader_data_in.specialization_constants.size(); j++) {
@@ -3272,7 +3272,7 @@ Vector<uint8_t> RenderingDeviceDriverD3D12::shader_compile_binary_from_spirv(Vec
 				DEV_ASSERT(found);
 			};
 
-			godot_nir_callbacks.report_bitcode_bit_offset_fn = [](uint64_t p_bit_offset, void *p_data) {
+			scardot_nir_callbacks.report_bitcode_bit_offset_fn = [](uint64_t p_bit_offset, void *p_data) {
 				DEV_ASSERT(p_bit_offset % 8 == 0);
 				ShaderData &shader_data_in = *(ShaderData *)p_data;
 				uint32_t offset_idx = SHADER_STAGES_BIT_OFFSET_INDICES[shader_data_in.stage];
@@ -3297,7 +3297,7 @@ Vector<uint8_t> RenderingDeviceDriverD3D12::shader_compile_binary_from_spirv(Vec
 			nir_to_dxil_options.environment = DXIL_ENVIRONMENT_VULKAN;
 			nir_to_dxil_options.shader_model_max = shader_model_d3d_to_dxil(shader_capabilities.shader_model);
 			nir_to_dxil_options.validator_version_max = NO_DXIL_VALIDATION;
-			nir_to_dxil_options.godot_nir_callbacks = &godot_nir_callbacks;
+			nir_to_dxil_options.scardot_nir_callbacks = &scardot_nir_callbacks;
 
 			dxil_logger logger = {};
 			logger.log = [](void *p_priv, const char *p_msg) {

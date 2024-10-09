@@ -240,11 +240,11 @@ GDExtensionInterfaceFunctionPtr gdextension_get_proc_address(const char *p_name)
 	return GDExtension::get_interface_function(p_name);
 }
 
-static void gdextension_get_godot_version(GDExtensionscardotVersion *r_godot_version) {
-	r_godot_version->major = VERSION_MAJOR;
-	r_godot_version->minor = VERSION_MINOR;
-	r_godot_version->patch = VERSION_PATCH;
-	r_godot_version->string = VERSION_FULL_NAME;
+static void gdextension_get_scardot_version(GDExtensionscardotVersion *r_scardot_version) {
+	r_scardot_version->major = VERSION_MAJOR;
+	r_scardot_version->minor = VERSION_MINOR;
+	r_scardot_version->patch = VERSION_PATCH;
+	r_scardot_version->string = VERSION_FULL_NAME;
 }
 
 // Memory Functions
@@ -1563,7 +1563,7 @@ static void gdextension_editor_help_load_xml_from_utf8_chars(const char *p_data)
 #define REGISTER_INTERFACE_FUNC(m_name) GDExtension::register_interface_function(#m_name, (GDExtensionInterfaceFunctionPtr) & gdextension_##m_name)
 
 void gdextension_setup_interface() {
-	REGISTER_INTERFACE_FUNC(get_godot_version);
+	REGISTER_INTERFACE_FUNC(get_scardot_version);
 	REGISTER_INTERFACE_FUNC(mem_alloc);
 	REGISTER_INTERFACE_FUNC(mem_realloc);
 	REGISTER_INTERFACE_FUNC(mem_free);

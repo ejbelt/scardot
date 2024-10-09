@@ -48,7 +48,7 @@
 	self = [super initWithCoder:coder];
 
 	if (self) {
-		[self godot_commonInit];
+		[self scardot_commonInit];
 	}
 
 	return self;
@@ -58,13 +58,13 @@
 	self = [super initWithFrame:frame textContainer:textContainer];
 
 	if (self) {
-		[self godot_commonInit];
+		[self scardot_commonInit];
 	}
 
 	return self;
 }
 
-- (void)godot_commonInit {
+- (void)scardot_commonInit {
 	self.hidden = YES;
 	self.delegate = self;
 

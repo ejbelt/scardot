@@ -1,11 +1,11 @@
 /**
- * An object used to configure the Engine instance based on godot export options, and to override those in custom HTML
+ * An object used to configure the Engine instance based on scardot export options, and to override those in custom HTML
  * templates if needed.
  *
  * @header Engine configuration
  * @summary The Engine configuration object. This is just a typedef, create it like a regular object, e.g.:
  *
- * ``const MyConfig = { executable: 'godot', unloadAfterInit: false }``
+ * ``const MyConfig = { executable: 'scardot', unloadAfterInit: false }``
  *
  * @typedef {Object} EngineConfig
  */
@@ -293,7 +293,7 @@ const InternalConfig = function (initConfig) { // eslint-disable-line no-unused-
 				return {};
 			},
 			'locateFile': function (path) {
-				if (!path.startsWith('godot.')) {
+				if (!path.startsWith('scardot.')) {
 					return path;
 				} else if (path.endsWith('.worker.js')) {
 					return `${loadPath}.worker.js`;

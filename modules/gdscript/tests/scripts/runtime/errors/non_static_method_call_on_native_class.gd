@@ -1,4 +1,4 @@
-# https://github.com/godotengine/godot/issues/66675
+# https://github.com/scardotengine/scardot/issues/66675
 func test():
 	example(Node2D)
 

@@ -32,8 +32,8 @@
 
 #include "dir_access_macos.h"
 #include "display_server_macos.h"
-#include "godot_application.h"
-#include "godot_application_delegate.h"
+#include "scardot_application.h"
+#include "scardot_application_delegate.h"
 #include "macos_terminal_logger.h"
 
 #include "core/crypto/crypto_core.h"
@@ -289,7 +289,7 @@ String OS_MacOS::get_bundle_icon_path() const {
 }
 
 // Get properly capitalized engine name for system paths
-String OS_MacOS::get_godot_dir_name() const {
+String OS_MacOS::get_scardot_dir_name() const {
 	return String(VERSION_SHORT_NAME).capitalize();
 }
 

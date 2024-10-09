@@ -922,7 +922,7 @@ void NavMeshGenerator3D::generator_bake_from_source_geometry_data(Ref<Navigation
 		for (unsigned int j = 0; j < detail_mesh_ntris; j++) {
 			Vector<int> nav_indices;
 			nav_indices.resize(3);
-			// Polygon order in recast is opposite than godot's
+			// Polygon order in recast is opposite than scardot's
 			int index1 = ((int)(detail_mesh_bverts + detail_mesh_tris[j * 4 + 0]));
 			int index2 = ((int)(detail_mesh_bverts + detail_mesh_tris[j * 4 + 2]));
 			int index3 = ((int)(detail_mesh_bverts + detail_mesh_tris[j * 4 + 1]));

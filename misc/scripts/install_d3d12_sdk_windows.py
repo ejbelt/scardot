@@ -26,9 +26,9 @@ else:
     deps_folder = os.path.join("bin", "build_deps")
 
 # Mesa NIR
-# Check for latest version: https://github.com/godotengine/godot-nir-static/releases/latest
+# Check for latest version: https://github.com/scardotengine/scardot-nir-static/releases/latest
 mesa_version = "23.1.9"
-mesa_filename = "godot-nir-23.1.9.zip"
+mesa_filename = "scardot-nir-23.1.9.zip"
 mesa_archive = os.path.join(deps_folder, mesa_filename)
 mesa_folder = os.path.join(deps_folder, "mesa")
 # WinPixEventRuntime
@@ -54,7 +54,7 @@ if os.path.isfile(mesa_archive):
     os.remove(mesa_archive)
 print(f"Downloading Mesa NIR {mesa_filename} ...")
 urllib.request.urlretrieve(
-    f"https://github.com/godotengine/godot-nir-static/releases/download/{mesa_version}/{mesa_filename}",
+    f"https://github.com/scardotengine/scardot-nir-static/releases/download/{mesa_version}/{mesa_filename}",
     mesa_archive,
 )
 if os.path.exists(mesa_folder):

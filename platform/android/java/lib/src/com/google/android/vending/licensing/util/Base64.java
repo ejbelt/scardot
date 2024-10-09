@@ -32,7 +32,7 @@ package com.google.android.vending.licensing.util;
  */
 
 // -- SCARDOT start --
-import org.godotengine.godot.BuildConfig;
+import org.scardotengine.scardot.BuildConfig;
 // -- SCARDOT end --
 
 /**

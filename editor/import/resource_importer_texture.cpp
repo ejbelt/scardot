@@ -348,7 +348,7 @@ void ResourceImporterTexture::_save_ctex(const Ref<Image> &p_image, const String
 	f->store_8('G');
 	f->store_8('S');
 	f->store_8('T');
-	f->store_8('2'); //godot streamable texture 2D
+	f->store_8('2'); //scardot streamable texture 2D
 
 	//format version
 	f->store_32(CompressedTexture2D::FORMAT_VERSION);

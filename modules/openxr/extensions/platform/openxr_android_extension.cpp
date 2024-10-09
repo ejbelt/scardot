@@ -32,7 +32,7 @@
 
 #include "../../openxr_api.h"
 
-#include "java_godot_wrapper.h"
+#include "java_scardot_wrapper.h"
 #include "os_android.h"
 #include "thread_jandroid.h"
 
@@ -52,7 +52,7 @@ OpenXRAndroidExtension::OpenXRAndroidExtension() {
 	ERR_FAIL_NULL(env);
 
 	env->GetJavaVM(&vm);
-	activity_object = env->NewGlobalRef(static_cast<OS_Android *>(OS::get_singleton())->get_godot_java()->get_activity());
+	activity_object = env->NewGlobalRef(static_cast<OS_Android *>(OS::get_singleton())->get_scardot_java()->get_activity());
 }
 
 HashMap<String, bool *> OpenXRAndroidExtension::get_requested_extensions() {

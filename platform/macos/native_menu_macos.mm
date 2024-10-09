@@ -31,7 +31,7 @@
 #include "native_menu_macos.h"
 
 #include "display_server_macos.h"
-#include "godot_menu_item.h"
+#include "scardot_menu_item.h"
 #include "key_mapping_macos.h"
 
 #include "scene/resources/image_texture.h"

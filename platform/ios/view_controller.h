@@ -36,7 +36,7 @@
 
 @interface ViewController : UIViewController
 
-@property(nonatomic, readonly, strong) scardotView *godotView;
+@property(nonatomic, readonly, strong) scardotView *scardotView;
 @property(nonatomic, readonly, strong) scardotKeyboardInputView *keyboardView;
 
 @end

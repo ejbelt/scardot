@@ -55,7 +55,7 @@
 #include <algorithm>
 
 // This may one day be used in scardot for interoperability between C arrays, Vector and LocalVector.
-// (See https://github.com/godotengine/godot-proposals/issues/5144.)
+// (See https://github.com/scardotengine/scardot-proposals/issues/5144.)
 template <typename T>
 class VectorView {
 	const T *_ptr = nullptr;

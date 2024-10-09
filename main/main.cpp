@@ -498,7 +498,7 @@ void Main::print_help(const char *p_binary) {
 	print_help_copyright("(c) 2014-present scardot Engine contributors. (c) 2007-present Juan Linietsky, Ariel Manzur.");
 
 	print_help_title("Usage");
-	OS::get_singleton()->print("  %s \u001b[96m[options] [path to scene or \"project.godot\" file]\u001b[0m\n", p_binary);
+	OS::get_singleton()->print("  %s \u001b[96m[options] [path to scene or \"project.scardot\" file]\u001b[0m\n", p_binary);
 
 #if defined(TOOLS_ENABLED)
 	print_help_title("Option legend (this build = editor)");
@@ -537,8 +537,8 @@ void Main::print_help(const char *p_binary) {
 	print_help_option("--quit", "Quit after the first iteration.\n");
 	print_help_option("--quit-after <int>", "Quit after the given number of iterations. Set to 0 to disable.\n");
 	print_help_option("-l, --language <locale>", "Use a specific locale (<locale> being a two-letter code).\n");
-	print_help_option("--path <directory>", "Path to a project (<directory> must contain a \"project.godot\" file).\n");
-	print_help_option("-u, --upwards", "Scan folders upwards for project.godot file.\n");
+	print_help_option("--path <directory>", "Path to a project (<directory> must contain a \"project.scardot\" file).\n");
+	print_help_option("-u, --upwards", "Scan folders upwards for project.scardot file.\n");
 	print_help_option("--main-pack <file>", "Path to a pack (.pck) file to load.\n");
 	print_help_option("--render-thread <mode>", "Render thread mode (\"unsafe\", \"safe\", \"separate\").\n");
 	print_help_option("--remote-fs <address>", "Remote filesystem (<host/IP>[:<port>] address).\n");
@@ -607,7 +607,7 @@ void Main::print_help(const char *p_binary) {
 #endif
 	print_help_option("--generate-spirv-debug-info", "Generate SPIR-V debug information. This allows source-level shader debugging with RenderDoc.\n");
 #if defined(DEBUG_ENABLED) || defined(DEV_ENABLED)
-	print_help_option("--extra-gpu-memory-tracking", "Enables additional memory tracking (see class reference for `RenderingDevice.get_driver_and_device_memory_report()` and linked methods). Currently only implemented for Vulkan. Enabling this feature may cause crashes on some systems due to buggy drivers or bugs in the Vulkan Loader. See https://github.com/godotengine/godot/issues/95967\n");
+	print_help_option("--extra-gpu-memory-tracking", "Enables additional memory tracking (see class reference for `RenderingDevice.get_driver_and_device_memory_report()` and linked methods). Currently only implemented for Vulkan. Enabling this feature may cause crashes on some systems due to buggy drivers or bugs in the Vulkan Loader. See https://github.com/scardotengine/scardot/issues/95967\n");
 #endif
 	print_help_option("--remote-debug <uri>", "Remote debug (<protocol>://<host/IP>[:<port>], e.g. tcp://127.0.0.1:6007).\n");
 	print_help_option("--single-threaded-scene", "Force scene tree to run in single-threaded mode. Sub-thread groups are disabled and run on the main thread.\n");
@@ -1551,7 +1551,7 @@ Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_ph
 				OS::get_singleton()->print("Missing number of iterations, aborting.\n");
 				goto error;
 			}
-		} else if (arg.ends_with("project.godot")) {
+		} else if (arg.ends_with("project.scardot")) {
 			String path;
 			String file = arg;
 			int sep = MAX(file.rfind("/"), file.rfind("\\"));
@@ -1768,7 +1768,7 @@ Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_ph
 #endif
 
 	// Network file system needs to be configured before globals, since globals are based on the
-	// 'project.godot' file which will only be available through the network if this is enabled
+	// 'project.scardot' file which will only be available through the network if this is enabled
 	if (!remotefs.is_empty()) {
 		int port;
 		if (remotefs.contains(":")) {
@@ -1874,7 +1874,7 @@ Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_ph
 	// This also prevents logs from being created for the editor instance, as feature tags
 	// are disabled while in the editor (even if they should logically apply).
 	GLOBAL_DEF("debug/file_logging/enable_file_logging.pc", true);
-	GLOBAL_DEF("debug/file_logging/log_path", "user://logs/godot.log");
+	GLOBAL_DEF("debug/file_logging/log_path", "user://logs/scardot.log");
 	GLOBAL_DEF(PropertyInfo(Variant::INT, "debug/file_logging/max_log_files", PROPERTY_HINT_RANGE, "0,20,1,or_greater"), 5);
 
 	// If `--log-file` is used to override the log path, allow creating logs for the project manager or editor
@@ -2454,7 +2454,7 @@ Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_ph
 	GLOBAL_DEF_NOVAL(PropertyInfo(Variant::STRING, "display/display_server/driver.macos", PROPERTY_HINT_ENUM_SUGGESTION, "default,macos,headless"), "default");
 
 	GLOBAL_DEF_RST_NOVAL("audio/driver/driver", AudioDriverManager::get_driver(0)->get_name());
-	if (audio_driver.is_empty()) { // Specified in project.godot.
+	if (audio_driver.is_empty()) { // Specified in project.scardot.
 		audio_driver = GLOBAL_GET("audio/driver/driver");
 	}
 
@@ -3012,7 +3012,7 @@ Error Main::setup2(bool p_show_boot_logo) {
 		GLOBAL_DEF_RST_NOVAL("input_devices/pen_tablet/driver", "");
 		GLOBAL_DEF_RST_NOVAL(PropertyInfo(Variant::STRING, "input_devices/pen_tablet/driver.windows", PROPERTY_HINT_ENUM, "winink,wintab,dummy"), "");
 
-		if (tablet_driver.is_empty()) { // specified in project.godot
+		if (tablet_driver.is_empty()) { // specified in project.scardot
 			tablet_driver = GLOBAL_GET("input_devices/pen_tablet/driver");
 			if (tablet_driver.is_empty()) {
 				tablet_driver = DisplayServer::get_singleton()->tablet_get_driver_name(0);

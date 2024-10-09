@@ -56,7 +56,7 @@ void DebugAdapterParser::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("req_next", "params"), &DebugAdapterParser::req_next);
 	ClassDB::bind_method(D_METHOD("req_stepIn", "params"), &DebugAdapterParser::req_stepIn);
 	ClassDB::bind_method(D_METHOD("req_evaluate", "params"), &DebugAdapterParser::req_evaluate);
-	ClassDB::bind_method(D_METHOD("req_godot/put_msg", "params"), &DebugAdapterParser::req_godot_put_msg);
+	ClassDB::bind_method(D_METHOD("req_scardot/put_msg", "params"), &DebugAdapterParser::req_scardot_put_msg);
 }
 
 Dictionary DebugAdapterParser::prepare_base_event() const {
@@ -176,8 +176,8 @@ Dictionary DebugAdapterParser::req_launch(const Dictionary &p_params) const {
 		return prepare_error_response(p_params, DAP::ErrorType::WRONG_PATH, variables);
 	}
 
-	if (args.has("godot/custom_data")) {
-		DebugAdapterProtocol::get_singleton()->get_current_peer()->supportsCustomData = args["godot/custom_data"];
+	if (args.has("scardot/custom_data")) {
+		DebugAdapterProtocol::get_singleton()->get_current_peer()->supportsCustomData = args["scardot/custom_data"];
 	}
 
 	DebugAdapterProtocol::get_singleton()->get_current_peer()->pending_launch = p_params;
@@ -491,7 +491,7 @@ Dictionary DebugAdapterParser::req_evaluate(const Dictionary &p_params) const {
 	return response;
 }
 
-Dictionary DebugAdapterParser::req_godot_put_msg(const Dictionary &p_params) const {
+Dictionary DebugAdapterParser::req_scardot_put_msg(const Dictionary &p_params) const {
 	Dictionary args = p_params["arguments"];
 
 	String msg = args["message"];
@@ -626,7 +626,7 @@ Dictionary DebugAdapterParser::ev_breakpoint(const DAP::Breakpoint &p_breakpoint
 
 Dictionary DebugAdapterParser::ev_custom_data(const String &p_msg, const Array &p_data) const {
 	Dictionary event = prepare_base_event(), body;
-	event["event"] = "godot/custom_data";
+	event["event"] = "scardot/custom_data";
 	event["body"] = body;
 
 	body["message"] = p_msg;

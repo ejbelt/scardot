@@ -309,7 +309,7 @@ RasterizerGLES3::RasterizerGLES3() {
 			}
 
 			if (callback) {
-				print_line("godot: ENABLING GL DEBUG");
+				print_line("scardot: ENABLING GL DEBUG");
 				glEnable(_EXT_DEBUG_OUTPUT_SYNCHRONOUS_ARB);
 				callback((DEBUGPROCARB)_gl_debug_print, nullptr);
 				glEnable(_EXT_DEBUG_OUTPUT);

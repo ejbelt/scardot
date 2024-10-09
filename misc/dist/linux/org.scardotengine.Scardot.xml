@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/x-scardot-project">
+    <comment>scardot Engine project</comment>
+    <sub-class-of type="text/plain"/>
+    <icon name="x-scardot-project"/>
+    <glob pattern="project.scardot"/>
+  </mime-type>
+
+  <mime-type type="application/x-scardot-resource">
+    <comment>scardot Engine resource</comment>
+    <icon name="x-scardot-resource"/>
+    <glob pattern="*.res"/>
+    <glob pattern="*.tres"/>
+  </mime-type>
+
+  <mime-type type="application/x-scardot-scene">
+    <comment>scardot Engine scene</comment>
+    <icon name="x-scardot-scene"/>
+    <glob pattern="*.scn"/>
+    <glob pattern="*.tscn"/>
+    <glob pattern="*.escn"/>
+  </mime-type>
+
+  <mime-type type="application/x-scardot-shader">
+    <comment>scardot Engine shader</comment>
+    <sub-class-of type="text/plain"/>
+    <icon name="x-scardot-shader"/>
+    <glob pattern="*.gdshader"/>
+  </mime-type>
+
+  <mime-type type="application/x-gdscript">
+    <comment>GDScript script</comment>
+    <sub-class-of type="text/plain"/>
+    <icon name="x-gdscript"/>
+    <glob pattern="*.gd"/>
+  </mime-type>
+</mime-info>

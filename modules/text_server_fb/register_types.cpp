@@ -54,11 +54,11 @@ void uninitialize_text_server_fb_module(ModuleInitializationLevel p_level) {
 
 #ifdef GDEXTENSION
 
-#include <godot_cpp/core/class_db.hpp>
-#include <godot_cpp/core/defs.hpp>
-#include <godot_cpp/core/memory.hpp>
+#include <scardot_cpp/core/class_db.hpp>
+#include <scardot_cpp/core/defs.hpp>
+#include <scardot_cpp/core/memory.hpp>
 
-using namespace godot;
+using namespace scardot;
 
 extern "C" {
 

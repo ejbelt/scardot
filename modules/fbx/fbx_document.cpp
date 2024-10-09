@@ -420,11 +420,11 @@ Error FBXDocument::_parse_nodes(Ref<FBXState> p_state) {
 				}
 			}
 
-			Transform3D godot_rest_xform = node->transform;
+			Transform3D scardot_rest_xform = node->transform;
 			if (found_rest_xform && !bad_rest_xform) {
-				godot_rest_xform = candidate_rest_xform;
+				scardot_rest_xform = candidate_rest_xform;
 			}
-			node->set_additional_data("SCARDOT_rest_transform", godot_rest_xform);
+			node->set_additional_data("SCARDOT_rest_transform", scardot_rest_xform);
 		}
 
 		for (const ufbx_node *child : fbx_node->children) {
@@ -1678,7 +1678,7 @@ void FBXDocument::_generate_skeleton_bone_node(Ref<FBXState> p_state, const GLTF
 
 	Node3D *current_node = nullptr;
 
-	Skeleton3D *skeleton = p_state->skeletons[fbx_node->skeleton]->godot_skeleton;
+	Skeleton3D *skeleton = p_state->skeletons[fbx_node->skeleton]->scardot_skeleton;
 	// In this case, this node is already a bone in skeleton.
 	const bool is_skinned_mesh = (fbx_node->skin >= 0 && fbx_node->mesh >= 0);
 	const bool requires_extra_node = (fbx_node->mesh >= 0 || fbx_node->camera >= 0 || fbx_node->light >= 0);
@@ -1801,7 +1801,7 @@ void FBXDocument::_import_animation(Ref<FBXState> p_state, AnimationPlayer *p_an
 		const Ref<GLTFNode> fbx_node = p_state->nodes[track_i.key];
 
 		if (fbx_node->skeleton >= 0) {
-			const Skeleton3D *sk = p_state->skeletons[fbx_node->skeleton]->godot_skeleton;
+			const Skeleton3D *sk = p_state->skeletons[fbx_node->skeleton]->scardot_skeleton;
 			ERR_FAIL_NULL(sk);
 
 			const String path = p_animation_player->get_parent()->get_path_to(sk);
@@ -2013,7 +2013,7 @@ void FBXDocument::_process_mesh_instances(Ref<FBXState> p_state, Node *p_scene_r
 
 		const GLTFSkeletonIndex skel_i = p_state->skins.write[node->skin]->skeleton;
 		Ref<GLTFSkeleton> fbx_skeleton = p_state->skeletons.write[skel_i];
-		Skeleton3D *skeleton = fbx_skeleton->godot_skeleton;
+		Skeleton3D *skeleton = fbx_skeleton->scardot_skeleton;
 		ERR_CONTINUE_MSG(skeleton == nullptr, vformat("Unable to find Skeleton for node %d skin %d", node_i, skin_i));
 
 		mi->get_parent()->remove_child(mi);
@@ -2021,7 +2021,7 @@ void FBXDocument::_process_mesh_instances(Ref<FBXState> p_state, Node *p_scene_r
 		skeleton->add_child(mi, true);
 		mi->set_owner(skeleton->get_owner());
 
-		mi->set_skin(p_state->skins.write[skin_i]->godot_skin);
+		mi->set_skin(p_state->skins.write[skin_i]->scardot_skin);
 		mi->set_skeleton_path(mi->get_path_to(skeleton));
 		mi->set_transform(Transform3D());
 	}

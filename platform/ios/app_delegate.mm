@@ -30,7 +30,7 @@
 
 #import "app_delegate.h"
 
-#import "godot_view.h"
+#import "scardot_view.h"
 #import "os_ios.h"
 #import "view_controller.h"
 
@@ -85,8 +85,8 @@ static ViewController *mainViewController = nil;
 	}
 
 	ViewController *viewController = [[ViewController alloc] init];
-	viewController.godotView.useCADisplayLink = bool(GLOBAL_DEF("display.iOS/use_cadisplaylink", true)) ? YES : NO;
-	viewController.godotView.renderingInterval = 1.0 / kRenderingFrequency;
+	viewController.scardotView.useCADisplayLink = bool(GLOBAL_DEF("display.iOS/use_cadisplaylink", true)) ? YES : NO;
+	viewController.scardotView.renderingInterval = 1.0 / kRenderingFrequency;
 
 	self.window.rootViewController = viewController;
 

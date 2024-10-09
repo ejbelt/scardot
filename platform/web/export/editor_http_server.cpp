@@ -65,7 +65,7 @@ void EditorHTTPServer::_set_internal_certs(Ref<Crypto> p_crypto) {
 	if (regen) {
 		key = p_crypto->generate_rsa(2048);
 		key->save(key_path);
-		cert = p_crypto->generate_self_signed_certificate(key, "CN=godot-debug.local,O=A Game Dev,C=XXA", "20140101000000", "20340101000000");
+		cert = p_crypto->generate_self_signed_certificate(key, "CN=scardot-debug.local,O=A Game Dev,C=XXA", "20140101000000", "20340101000000");
 		cert->save(crt_path);
 	}
 }

@@ -26,7 +26,7 @@ import android.util.Log;
 
 // -- SCARDOT start --
 //import com.android.vending.expansion.downloader.R;
-import org.godotengine.godot.R;
+import org.scardotengine.scardot.R;
 // -- SCARDOT end --
 
 import java.io.File;

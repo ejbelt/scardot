@@ -80,8 +80,8 @@ private:
 	HashSet<String> font_names;
 	bool font_config_loaded = false;
 
-	scardotJavaWrapper *godot_java = nullptr;
-	scardotIOJavaWrapper *godot_io_java = nullptr;
+	scardotJavaWrapper *scardot_java = nullptr;
+	scardotIOJavaWrapper *scardot_io_java = nullptr;
 
 	void _load_system_font_config();
 	String get_system_property(const char *key) const;
@@ -109,8 +109,8 @@ public:
 	typedef int64_t ProcessID;
 
 	static OS_Android *get_singleton();
-	scardotJavaWrapper *get_godot_java();
-	scardotIOJavaWrapper *get_godot_io_java();
+	scardotJavaWrapper *get_scardot_java();
+	scardotIOJavaWrapper *get_scardot_io_java();
 
 	virtual bool request_permission(const String &p_name) override;
 	virtual bool request_permissions() override;
@@ -177,7 +177,7 @@ public:
 	virtual void load_platform_gdextensions() const override;
 
 	virtual bool _check_internal_feature_support(const String &p_feature) override;
-	OS_Android(scardotJavaWrapper *p_godot_java, scardotIOJavaWrapper *p_godot_io_java, bool p_use_apk_expansion);
+	OS_Android(scardotJavaWrapper *p_scardot_java, scardotIOJavaWrapper *p_scardot_io_java, bool p_use_apk_expansion);
 	~OS_Android();
 
 private:

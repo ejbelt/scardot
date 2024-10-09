@@ -18,7 +18,7 @@ package com.google.android.vending.expansion.downloader.impl;
 
 // -- SCARDOT start --
 //import com.android.vending.expansion.downloader.R;
-import org.godotengine.godot.R;
+import org.scardotengine.scardot.R;
 // -- SCARDOT end --
 
 import com.google.android.vending.expansion.downloader.DownloadProgressInfo;

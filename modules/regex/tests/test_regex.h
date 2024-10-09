@@ -197,7 +197,7 @@ TEST_CASE("[RegEx] Complex Grouping") {
 	CHECK(expr->get_string(0) == "https://docs.godotengine.org");
 
 	CHECK(expr->get_string(1) == "docs");
-	CHECK(expr->get_string(2) == "godotengine");
+	CHECK(expr->get_string(2) == "scardotengine");
 	CHECK(expr->get_string(3) == "org");
 }
 
@@ -247,7 +247,7 @@ TEST_CASE("[RegEx] Invalid end position") {
 }
 
 TEST_CASE("[RegEx] Get match string list") {
-	const String s = "scardot Engine";
+	const String s = "Scardot Engine";
 
 	RegEx re("(Go)(dot)");
 	Ref<RegExMatch> match = re.search(s);
@@ -278,7 +278,7 @@ TEST_CASE("[RegEx] Match start and end positions") {
 }
 
 TEST_CASE("[RegEx] Asterisk search all") {
-	const String s = "scardot Engine";
+	const String s = "Scardot Engine";
 
 	RegEx re("o*");
 	REQUIRE(re.is_valid());
@@ -302,7 +302,7 @@ TEST_CASE("[RegEx] Asterisk search all") {
 }
 
 TEST_CASE("[RegEx] Simple lookahead") {
-	const String s = "scardot Engine";
+	const String s = "Scardot Engine";
 
 	RegEx re("o(?=t)");
 	REQUIRE(re.is_valid());
@@ -336,7 +336,7 @@ TEST_CASE("[RegEx] Lookahead groups empty matches") {
 }
 
 TEST_CASE("[RegEx] Simple lookbehind") {
-	const String s = "scardot Engine";
+	const String s = "Scardot Engine";
 
 	RegEx re("(?<=d)o");
 	REQUIRE(re.is_valid());

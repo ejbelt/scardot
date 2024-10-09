@@ -641,7 +641,7 @@ def configure_msvc(env: "SConsEnvironment", vcvars_msvc_config):
     env["BUILDERS"]["ProgramOriginal"] = env["BUILDERS"]["Program"]
     env["BUILDERS"]["Program"] = methods.precious_program
 
-    env.Append(LINKFLAGS=["/NATVIS:platform\\windows\\godot.natvis"])
+    env.Append(LINKFLAGS=["/NATVIS:platform\\windows\\scardot.natvis"])
 
     if env["use_asan"]:
         env.AppendUnique(LINKFLAGS=["/STACK:" + str(STACK_SIZE_SANITIZERS)])

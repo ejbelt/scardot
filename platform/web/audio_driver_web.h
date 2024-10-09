@@ -31,8 +31,8 @@
 #ifndef AUDIO_DRIVER_WEB_H
 #define AUDIO_DRIVER_WEB_H
 
-#include "godot_audio.h"
-#include "godot_js.h"
+#include "scardot_audio.h"
+#include "scardot_js.h"
 
 #include "core/os/mutex.h"
 #include "core/os/thread.h"

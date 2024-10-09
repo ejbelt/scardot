@@ -34,7 +34,7 @@
 
 #import "app_delegate.h"
 #import "display_server_ios.h"
-#import "godot_view.h"
+#import "scardot_view.h"
 #import "ios_terminal_logger.h"
 #import "view_controller.h"
 
@@ -607,7 +607,7 @@ void OS_IOS::on_focus_out() {
 			OS::get_singleton()->get_main_loop()->notification(MainLoop::NOTIFICATION_APPLICATION_FOCUS_OUT);
 		}
 
-		[AppDelegate.viewController.godotView stopRendering];
+		[AppDelegate.viewController.scardotView stopRendering];
 
 		audio_driver.stop();
 	}
@@ -625,7 +625,7 @@ void OS_IOS::on_focus_in() {
 			OS::get_singleton()->get_main_loop()->notification(MainLoop::NOTIFICATION_APPLICATION_FOCUS_IN);
 		}
 
-		[AppDelegate.viewController.godotView startRendering];
+		[AppDelegate.viewController.scardotView startRendering];
 
 		audio_driver.start();
 	}

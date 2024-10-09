@@ -108,7 +108,7 @@ TEST_CASE("[SceneTree][Tree]") {
 		memdelete(tree);
 	}
 
-	// https://github.com/godotengine/godot/issues/96205
+	// https://github.com/scardotengine/scardot/issues/96205
 	SUBCASE("[Tree] Get last item after removal.") {
 		Tree *tree = memnew(Tree);
 		TreeItem *root = tree->create_item();

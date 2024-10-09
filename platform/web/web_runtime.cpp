@@ -28,8 +28,8 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-extern int godot_web_main(int argc, char *argv[]);
+extern int scardot_web_main(int argc, char *argv[]);
 
 int main(int argc, char *argv[]) {
-	return godot_web_main(argc, argv);
+	return scardot_web_main(argc, argv);
 }

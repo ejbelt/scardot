@@ -1106,10 +1106,10 @@ TEST_CASE("[SceneTree][Viewport] Controls and InputEvent handling") {
 	// Unit tests for Viewport::_gui_input_event (Drag and Drop)
 	SUBCASE("[Viewport][GuiInputEvent] Drag and Drop") {
 		// FIXME: Drag-Preview will likely change. Tests for this part would have to be rewritten anyway.
-		// See https://github.com/godotengine/godot/pull/67531#issuecomment-1385353430 for details.
+		// See https://github.com/scardotengine/scardot/pull/67531#issuecomment-1385353430 for details.
 		// FIXME: Testing Drag and Drop with non-embedded windows would require DisplayServerMock additions
 		// FIXME: Drag and Drop currently doesn't work with embedded Windows and SubViewports - not testing.
-		// See https://github.com/godotengine/godot/issues/28522 for example.
+		// See https://github.com/scardotengine/scardot/issues/28522 for example.
 		int min_grab_movement = 11;
 		SUBCASE("[Viewport][GuiInputEvent] Drag from one Control to another in the same viewport.") {
 			SUBCASE("[Viewport][GuiInputEvent] Perform successful Drag and Drop on a different Control.") {

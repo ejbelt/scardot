@@ -868,7 +868,7 @@
 		<member name="interface/theme/icon_and_font_color" type="int" setter="" getter="">
 			The icon and font color scheme to use in the editor.
 			- [b]Auto[/b] determines the color scheme to use automatically based on [member interface/theme/base_color].
-			- [b]Dark[/b] makes fonts and icons dark (suitable for light themes). Icon colors are automatically converted by the editor following the set of rules defined in [url=https://github.com/godotengine/godot/blob/master/editor/themes/editor_theme_manager.cpp]this file[/url].
+			- [b]Dark[/b] makes fonts and icons dark (suitable for light themes). Icon colors are automatically converted by the editor following the set of rules defined in [url=https://github.com/scardotengine/scardot/blob/master/editor/themes/editor_theme_manager.cpp]this file[/url].
 			- [b]Light[/b] makes fonts and icons light (suitable for dark themes).
 		</member>
 		<member name="interface/theme/icon_saturation" type="float" setter="" getter="">
@@ -930,7 +930,7 @@
 			[b]Note:[/b] scardot currently doesn't automatically use system proxy settings, so you have to enter them manually here if needed.
 		</member>
 		<member name="network/tls/editor_tls_certificates" type="String" setter="" getter="">
-			The TLS certificate bundle to use for HTTP requests made within the editor (e.g. from the AssetLib tab). If left empty, the [url=https://github.com/godotengine/godot/blob/master/thirdparty/certs/ca-certificates.crt]included Mozilla certificate bundle[/url] will be used.
+			The TLS certificate bundle to use for HTTP requests made within the editor (e.g. from the AssetLib tab). If left empty, the [url=https://github.com/scardotengine/scardot/blob/master/thirdparty/certs/ca-certificates.crt]included Mozilla certificate bundle[/url] will be used.
 		</member>
 		<member name="project_manager/default_renderer" type="String" setter="" getter="">
 			The renderer type that will be checked off by default when creating a new project. Accepted strings are "forward_plus", "mobile" or "gl_compatibility".
@@ -1166,7 +1166,7 @@
 		<member name="text_editor/theme/color_theme" type="String" setter="" getter="">
 			The syntax theme to use in the script editor.
 			You can save your own syntax theme from your current settings by using [b]File &gt; Theme &gt; Save As...[/b] at the top of the script editor. The syntax theme will then be available locally in the list of color themes.
-			You can find additional syntax themes to install in the [url=https://github.com/godotengine/godot-syntax-themes]godot-syntax-themes[/url] repository.
+			You can find additional syntax themes to install in the [url=https://github.com/scardotengine/scardot-syntax-themes]scardot-syntax-themes[/url] repository.
 		</member>
 		<member name="text_editor/theme/highlighting/background_color" type="Color" setter="" getter="">
 			The script editor's background color. If set to a translucent color, the editor theme's base color will be visible behind.

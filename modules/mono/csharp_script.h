@@ -428,7 +428,7 @@ class CSharpLanguage : public ScriptLanguage {
 	friend class GDMono;
 
 #ifdef TOOLS_ENABLED
-	EditorPlugin *godotsharp_editor = nullptr;
+	EditorPlugin *scardotsharp_editor = nullptr;
 
 	static void _editor_init_callback();
 #endif
@@ -462,8 +462,8 @@ public:
 	}
 
 #ifdef TOOLS_ENABLED
-	_FORCE_INLINE_ EditorPlugin *get_godotsharp_editor() const {
-		return godotsharp_editor;
+	_FORCE_INLINE_ EditorPlugin *get_scardotsharp_editor() const {
+		return scardotsharp_editor;
 	}
 #endif
 
