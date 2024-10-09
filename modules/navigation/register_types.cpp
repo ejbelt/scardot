@@ -2,10 +2,10 @@
 /*  register_types.cpp                                                    */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -54,11 +54,11 @@ NavigationMeshGenerator *_nav_mesh_generator = nullptr;
 #endif // DISABLE_DEPRECATED
 
 NavigationServer3D *new_navigation_server_3d() {
-	return memnew(GodotNavigationServer3D);
+	return memnew(scardotNavigationServer3D);
 }
 
 NavigationServer2D *new_navigation_server_2d() {
-	return memnew(GodotNavigationServer2D);
+	return memnew(scardotNavigationServer2D);
 }
 
 void initialize_navigation_module(ModuleInitializationLevel p_level) {

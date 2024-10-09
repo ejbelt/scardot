@@ -1,6 +1,6 @@
 using System;
 
-namespace Godot
+namespace scardot
 {
     public partial class PackedScene
     {

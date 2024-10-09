@@ -2,10 +2,10 @@
 /*  export_plugin.cpp                                                     */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -619,7 +619,7 @@ void EditorExportPlatformIOS::_fix_config_file(const Ref<EditorExportPreset> &p_
 				case 0: {
 					String logo_path = GLOBAL_GET("application/boot_splash/image");
 					bool is_on = GLOBAL_GET("application/boot_splash/fullsize");
-					// If custom logo is not specified, Godot does not scale default one, so we should do the same.
+					// If custom logo is not specified, scardot does not scale default one, so we should do the same.
 					value = (is_on && logo_path.length() > 0) ? "scaleAspectFit" : "center";
 				} break;
 				default: {
@@ -1021,7 +1021,7 @@ Error EditorExportPlatformIOS::_export_loading_screen_file(const Ref<EditorExpor
 		}
 
 		// Using same image for both @2x and @3x
-		// because Godot's own boot logo uses single image for all resolutions.
+		// because scardot's own boot logo uses single image for all resolutions.
 		// Also not using @1x image, because devices using this image variant
 		// are not supported by iOS 9, which is minimal target.
 		const String splash_png_path_2x = p_dest_dir.path_join("splash@2x.png");
@@ -1498,7 +1498,7 @@ Error EditorExportPlatformIOS::_convert_to_framework(const String &p_source, con
 }
 
 void EditorExportPlatformIOS::_add_assets_to_project(const String &p_out_dir, const Ref<EditorExportPreset> &p_preset, Vector<uint8_t> &p_project_data, const Vector<IOSExportAsset> &p_additional_assets) {
-	// that is just a random number, we just need Godot IDs not to clash with
+	// that is just a random number, we just need scardot IDs not to clash with
 	// existing IDs in the project.
 	PbxId current_id = { 0x58938401, 0, 0 };
 	String pbx_files;
@@ -1978,7 +1978,7 @@ Error EditorExportPlatformIOS::_export_ios_plugins(const Ref<EditorExportPreset>
 		plugin_format["initialization"] = plugin_initialization_cpp_code;
 		plugin_format["deinitialization"] = plugin_deinitialization_cpp_code;
 
-		String plugin_cpp_code = "\n// Godot Plugins\n"
+		String plugin_cpp_code = "\n// scardot Plugins\n"
 								 "void godot_ios_plugins_initialize();\n"
 								 "void godot_ios_plugins_deinitialize();\n"
 								 "// Exported Plugins\n\n"

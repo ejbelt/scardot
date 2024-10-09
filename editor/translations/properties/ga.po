@@ -1,12 +1,12 @@
-# Irish translation of the Godot Engine properties.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Irish translation of the scardot Engine properties.
+# Copyright (c) 2014-present scardot Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the scardot source code.
 # Rónán Quill <ronan085@gmail.com>, 2019, 2020.
 # Aindriú Mac Giolla Eoin <aindriu80@gmail.com>, 2024.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine properties\n"
+"Project-Id-Version: scardot Engine properties\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "PO-Revision-Date: 2024-08-14 13:00+0000\n"
 "Last-Translator: Aindriú Mac Giolla Eoin <aindriu80@gmail.com>\n"
@@ -3548,8 +3548,8 @@ msgstr "Ailt"
 msgid "Roots"
 msgstr "Fréamhacha"
 
-msgid "Godot Bone Node"
-msgstr "Nód Cnámh Godot"
+msgid "scardot Bone Node"
+msgstr "Nód Cnámh scardot"
 
 msgid "Skin Root"
 msgstr "Fréamh an Chraicinn"
@@ -3560,8 +3560,8 @@ msgstr "Ailt Bhunaidh"
 msgid "Non Joints"
 msgstr "Neamh-Ailt"
 
-msgid "Godot Skin"
-msgstr "Craiceann Godot"
+msgid "scardot Skin"
+msgstr "Craiceann scardot"
 
 msgid "Src Image"
 msgstr "Íomhá Src"

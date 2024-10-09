@@ -1,7 +1,7 @@
 # How to build and run
 
-1. Build Godot with the module enabled: `module_mono_enabled=yes`.
-2. After building Godot, use it to generate the C# glue code:
+1. Build scardot with the module enabled: `module_mono_enabled=yes`.
+2. After building scardot, use it to generate the C# glue code:
    ```sh
    <godot_binary> --generate-mono-glue ./modules/mono/glue
    ```
@@ -11,7 +11,7 @@
    ```
 
 The paths specified in these examples assume the command is being run from
-the Godot source root.
+the scardot source root.
 
 # How to deal with NuGet packages
 
@@ -19,7 +19,7 @@ We distribute the API assemblies, our source generators, and our custom
 MSBuild project SDK as NuGet packages. This is all transparent to the user,
 but it can make things complicated during development.
 
-In order to use Godot with a development of those packages, we must create
+In order to use scardot with a development of those packages, we must create
 a local NuGet source where MSBuild can find them. This can be  done with
 the .NET CLI:
 
@@ -27,7 +27,7 @@ the .NET CLI:
 dotnet nuget add source ~/MyLocalNugetSource --name MyLocalNugetSource
 ```
 
-The Godot NuGet packages must be added to that local source. Additionally,
+The scardot NuGet packages must be added to that local source. Additionally,
 we must  make sure there are no other versions of the package in the NuGet
 cache, as MSBuild may pick one of those instead.
 
@@ -46,7 +46,7 @@ C# solutions during development to avoid mistakes.
 
 # Double Precision Support (REAL_T_IS_DOUBLE)
 
-Follow the above instructions but build Godot with the precision=double argument to scons
+Follow the above instructions but build scardot with the precision=double argument to scons
 
 When building the NuGet packages, specify `--precision=double` - for example:
 ```sh

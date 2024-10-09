@@ -4,12 +4,12 @@
 
 using System;
 using System.Runtime.CompilerServices;
-using Godot.Collections;
+using scardot.Collections;
 
 
 #nullable enable
 
-namespace Godot.NativeInterop
+namespace scardot.NativeInterop
 {
     public static partial class VariantUtils
     {
@@ -17,7 +17,7 @@ namespace Godot.NativeInterop
             => new() { Type = Variant.Type.Rid, Rid = from };
 
         public static godot_variant CreateFromBool(bool from)
-            => new() { Type = Variant.Type.Bool, Bool = from.ToGodotBool() };
+            => new() { Type = Variant.Type.Bool, Bool = from.ToscardotBool() };
 
         public static godot_variant CreateFromInt(long from)
             => new() { Type = Variant.Type.Int, Int = from };
@@ -251,32 +251,32 @@ namespace Godot.NativeInterop
         {
             if (from == null)
                 return default;
-            using var fromGodot = new Collections.Array(from);
-            return CreateFromArray((godot_array)fromGodot.NativeValue);
+            using var fromscardot = new Collections.Array(from);
+            return CreateFromArray((godot_array)fromscardot.NativeValue);
         }
 
         public static godot_variant CreateFromSystemArrayOfNodePath(Span<NodePath> from)
         {
             if (from == null)
                 return default;
-            using var fromGodot = new Collections.Array(from);
-            return CreateFromArray((godot_array)fromGodot.NativeValue);
+            using var fromscardot = new Collections.Array(from);
+            return CreateFromArray((godot_array)fromscardot.NativeValue);
         }
 
         public static godot_variant CreateFromSystemArrayOfRid(Span<Rid> from)
         {
             if (from == null)
                 return default;
-            using var fromGodot = new Collections.Array(from);
-            return CreateFromArray((godot_array)fromGodot.NativeValue);
+            using var fromscardot = new Collections.Array(from);
+            return CreateFromArray((godot_array)fromscardot.NativeValue);
         }
 
-        public static godot_variant CreateFromSystemArrayOfGodotObject(GodotObject[]? from)
+        public static godot_variant CreateFromSystemArrayOfscardotObject(scardotObject[]? from)
         {
             if (from == null)
                 return default; // Nil
-            using var fromGodot = new Collections.Array(from);
-            return CreateFromArray((godot_array)fromGodot.NativeValue);
+            using var fromscardot = new Collections.Array(from);
+            return CreateFromArray((godot_array)fromscardot.NativeValue);
         }
 
         public static godot_variant CreateFromArray(godot_array from)
@@ -327,7 +327,7 @@ namespace Godot.NativeInterop
         public static godot_variant CreateFromNodePath(NodePath? from)
             => from != null ? CreateFromNodePath((godot_node_path)from.NativeValue) : default;
 
-        public static godot_variant CreateFromGodotObjectPtr(IntPtr from)
+        public static godot_variant CreateFromscardotObjectPtr(IntPtr from)
         {
             if (from == IntPtr.Zero)
                 return new godot_variant();
@@ -336,8 +336,8 @@ namespace Godot.NativeInterop
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static godot_variant CreateFromGodotObject(GodotObject? from)
-            => from != null ? CreateFromGodotObjectPtr(GodotObject.GetPtr(from)) : default;
+        public static godot_variant CreateFromscardotObject(scardotObject? from)
+            => from != null ? CreateFromscardotObjectPtr(scardotObject.GetPtr(from)) : default;
 
         // We avoid the internal call if the stored type is the same we want.
 
@@ -484,12 +484,12 @@ namespace Godot.NativeInterop
                 p_var.Rid :
                 NativeFuncs.godotsharp_variant_as_rid(p_var);
 
-        public static IntPtr ConvertToGodotObjectPtr(in godot_variant p_var)
+        public static IntPtr ConvertToscardotObjectPtr(in godot_variant p_var)
             => p_var.Type == Variant.Type.Object ? p_var.Object : IntPtr.Zero;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static GodotObject ConvertToGodotObject(in godot_variant p_var)
-            => InteropUtils.UnmanagedGetManaged(ConvertToGodotObjectPtr(p_var));
+        public static scardotObject ConvertToscardotObject(in godot_variant p_var)
+            => InteropUtils.UnmanagedGetManaged(ConvertToscardotObjectPtr(p_var));
 
         public static string ConvertToString(in godot_variant p_var)
         {
@@ -633,26 +633,26 @@ namespace Godot.NativeInterop
         public static StringName[] ConvertToSystemArrayOfStringName(in godot_variant p_var)
         {
             using var godotArray = NativeFuncs.godotsharp_variant_as_array(p_var);
-            return Marshaling.ConvertNativeGodotArrayToSystemArrayOfStringName(godotArray);
+            return Marshaling.ConvertNativescardotArrayToSystemArrayOfStringName(godotArray);
         }
 
         public static NodePath[] ConvertToSystemArrayOfNodePath(in godot_variant p_var)
         {
             using var godotArray = NativeFuncs.godotsharp_variant_as_array(p_var);
-            return Marshaling.ConvertNativeGodotArrayToSystemArrayOfNodePath(godotArray);
+            return Marshaling.ConvertNativescardotArrayToSystemArrayOfNodePath(godotArray);
         }
 
         public static Rid[] ConvertToSystemArrayOfRid(in godot_variant p_var)
         {
             using var godotArray = NativeFuncs.godotsharp_variant_as_array(p_var);
-            return Marshaling.ConvertNativeGodotArrayToSystemArrayOfRid(godotArray);
+            return Marshaling.ConvertNativescardotArrayToSystemArrayOfRid(godotArray);
         }
 
-        public static T[] ConvertToSystemArrayOfGodotObject<T>(in godot_variant p_var)
-            where T : GodotObject
+        public static T[] ConvertToSystemArrayOfscardotObject<T>(in godot_variant p_var)
+            where T : scardotObject
         {
             using var godotArray = NativeFuncs.godotsharp_variant_as_array(p_var);
-            return Marshaling.ConvertNativeGodotArrayToSystemArrayOfGodotObjectType<T>(godotArray);
+            return Marshaling.ConvertNativescardotArrayToSystemArrayOfscardotObjectType<T>(godotArray);
         }
     }
 }

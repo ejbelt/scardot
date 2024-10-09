@@ -2,10 +2,10 @@
 /*  gdscript_highlighter.cpp                                              */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -828,7 +828,7 @@ void GDScriptSyntaxHighlighter::_update_cache() {
 	}
 
 	const String text_edit_color_theme = EDITOR_GET("text_editor/theme/color_theme");
-	const bool godot_2_theme = text_edit_color_theme == "Godot 2";
+	const bool godot_2_theme = text_edit_color_theme == "scardot 2";
 
 	if (godot_2_theme || EditorThemeManager::is_dark_theme()) {
 		function_definition_color = Color(0.4, 0.9, 1.0);

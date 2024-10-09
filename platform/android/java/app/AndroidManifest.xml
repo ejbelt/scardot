@@ -29,15 +29,15 @@
             android:enabled="true"
             tools:targetApi="29" />
 
-        <!-- Records the version of the Godot editor used for building -->
+        <!-- Records the version of the scardot editor used for building -->
         <meta-data
             android:name="org.godotengine.editor.version"
             android:value="${godotEditorVersion}" />
 
         <activity
-            android:name=".GodotApp"
+            android:name=".scardotApp"
             android:label="@string/godot_project_name_string"
-            android:theme="@style/GodotAppSplashTheme"
+            android:theme="@style/scardotAppSplashTheme"
             android:launchMode="singleInstancePerTask"
             android:excludeFromRecents="false"
             android:exported="true"

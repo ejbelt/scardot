@@ -12,9 +12,9 @@ using System.Runtime.InteropServices;
 using System.Runtime.Loader;
 using System.Runtime.Serialization;
 using System.Text;
-using Godot.NativeInterop;
+using scardot.NativeInterop;
 
-namespace Godot.Bridge
+namespace scardot.Bridge
 {
     // TODO: Make class internal once we replace LookupScriptsInAssembly (the only public member) with source generators
     public static partial class ScriptManagerBridge
@@ -81,7 +81,7 @@ namespace Godot.Bridge
         {
             try
             {
-                Dispatcher.DefaultGodotTaskScheduler?.Activate();
+                Dispatcher.DefaultscardotTaskScheduler?.Activate();
             }
             catch (Exception e)
             {
@@ -90,7 +90,7 @@ namespace Godot.Bridge
         }
 
         [UnmanagedCallersOnly]
-        internal static unsafe IntPtr CreateManagedForGodotObjectBinding(godot_string_name* nativeTypeName,
+        internal static unsafe IntPtr CreateManagedForscardotObjectBinding(godot_string_name* nativeTypeName,
             IntPtr godotObject)
         {
             // TODO: Optimize with source generators and delegate pointers.
@@ -103,7 +103,7 @@ namespace Godot.Bridge
 
                 Type nativeType = TypeGetProxyClass(nativeTypeNameStr) ?? throw new InvalidOperationException(
                     "Wrapper class not found for type: " + nativeTypeNameStr);
-                var obj = (GodotObject)FormatterServices.GetUninitializedObject(nativeType);
+                var obj = (scardotObject)FormatterServices.GetUninitializedObject(nativeType);
 
                 var ctor = nativeType.GetConstructor(
                     BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
@@ -123,7 +123,7 @@ namespace Godot.Bridge
         }
 
         [UnmanagedCallersOnly]
-        internal static unsafe godot_bool CreateManagedForGodotObjectScriptInstance(IntPtr scriptPtr,
+        internal static unsafe godot_bool CreateManagedForscardotObjectScriptInstance(IntPtr scriptPtr,
             IntPtr godotObject,
             godot_variant** args, int argCount)
         {
@@ -155,7 +155,7 @@ namespace Godot.Bridge
                     }
                 }
 
-                var obj = (GodotObject)FormatterServices.GetUninitializedObject(scriptType);
+                var obj = (scardotObject)FormatterServices.GetUninitializedObject(scriptType);
 
                 var parameters = ctor.GetParameters();
                 int paramCount = parameters.Length;
@@ -194,7 +194,7 @@ namespace Godot.Bridge
                     return;
                 }
 
-                var native = GodotObject.InternalGetClassNativeBase(scriptType);
+                var native = scardotObject.InternalGetClassNativeBase(scriptType);
 
                 var field = native.GetField("NativeName", BindingFlags.DeclaredOnly | BindingFlags.Static |
                                                            BindingFlags.Public | BindingFlags.NonPublic);
@@ -258,7 +258,7 @@ namespace Godot.Bridge
             {
                 bool foundGlobalBaseScript = false;
 
-                Type native = GodotObject.InternalGetClassNativeBase(scriptType);
+                Type native = scardotObject.InternalGetClassNativeBase(scriptType);
                 Type? top = scriptType.BaseType;
 
                 while (top != null && top != native)
@@ -294,11 +294,11 @@ namespace Godot.Bridge
         }
 
         [UnmanagedCallersOnly]
-        internal static void SetGodotObjectPtr(IntPtr gcHandlePtr, IntPtr newPtr)
+        internal static void SetscardotObjectPtr(IntPtr gcHandlePtr, IntPtr newPtr)
         {
             try
             {
-                var target = (GodotObject?)GCHandle.FromIntPtr(gcHandlePtr).Target;
+                var target = (scardotObject?)GCHandle.FromIntPtr(gcHandlePtr).Target;
                 if (target != null)
                     target.NativePtr = newPtr;
             }
@@ -315,35 +315,35 @@ namespace Godot.Bridge
             if (nativeTypeNameStr[0] == '_')
                 nativeTypeNameStr = nativeTypeNameStr.Substring(1);
 
-            Type? wrapperType = typeof(GodotObject).Assembly.GetType("Godot." + nativeTypeNameStr);
+            Type? wrapperType = typeof(scardotObject).Assembly.GetType("scardot." + nativeTypeNameStr);
 
             if (wrapperType == null)
             {
-                wrapperType = GetTypeByGodotClassAttr(typeof(GodotObject).Assembly, nativeTypeNameStr);
+                wrapperType = GetTypeByscardotClassAttr(typeof(scardotObject).Assembly, nativeTypeNameStr);
             }
 
             if (wrapperType == null)
             {
                 var editorAssembly = AppDomain.CurrentDomain.GetAssemblies()
-                    .FirstOrDefault(a => a.GetName().Name == "GodotSharpEditor");
+                    .FirstOrDefault(a => a.GetName().Name == "scardotSharpEditor");
 
                 if (editorAssembly != null)
                 {
-                    wrapperType = editorAssembly.GetType("Godot." + nativeTypeNameStr);
+                    wrapperType = editorAssembly.GetType("scardot." + nativeTypeNameStr);
 
                     if (wrapperType == null)
                     {
-                        wrapperType = GetTypeByGodotClassAttr(editorAssembly, nativeTypeNameStr);
+                        wrapperType = GetTypeByscardotClassAttr(editorAssembly, nativeTypeNameStr);
                     }
                 }
             }
 
-            static Type? GetTypeByGodotClassAttr(Assembly assembly, string nativeTypeNameStr)
+            static Type? GetTypeByscardotClassAttr(Assembly assembly, string nativeTypeNameStr)
             {
                 var types = assembly.GetTypes();
                 foreach (var type in types)
                 {
-                    var attr = type.GetCustomAttribute<GodotClassNameAttribute>();
+                    var attr = type.GetCustomAttribute<scardotClassNameAttribute>();
                     if (attr?.Name == nativeTypeNameStr)
                     {
                         return type;
@@ -356,19 +356,19 @@ namespace Godot.Bridge
 
             if (wrapperType != null && IsStatic(wrapperType))
             {
-                // A static class means this is a Godot singleton class. Try to get the Instance proxy type.
+                // A static class means this is a scardot singleton class. Try to get the Instance proxy type.
                 wrapperType = TypeGetProxyClass($"{wrapperType.Name}Instance");
                 if (wrapperType == null)
                 {
-                    // Otherwise, fallback to GodotObject.
-                    return typeof(GodotObject);
+                    // Otherwise, fallback to scardotObject.
+                    return typeof(scardotObject);
                 }
             }
 
             return wrapperType;
         }
 
-        // Called from GodotPlugins
+        // Called from scardotPlugins
         // ReSharper disable once UnusedMember.Local
         public static void LookupScriptsInAssembly(Assembly assembly)
         {
@@ -402,14 +402,14 @@ namespace Godot.Bridge
                 // such as when disabling C# source generators (for whatever reason) or when using a
                 // language other than C# that has nothing similar to source generators to automate it.
 
-                var typeOfGodotObject = typeof(GodotObject);
+                var typeOfscardotObject = typeof(scardotObject);
 
                 foreach (var type in assembly.GetTypes())
                 {
                     if (type.IsNested)
                         continue;
 
-                    if (!typeOfGodotObject.IsAssignableFrom(type))
+                    if (!typeOfscardotObject.IsAssignableFrom(type))
                         continue;
 
                     LookupScriptForClass(type);
@@ -448,7 +448,7 @@ namespace Godot.Bridge
         {
             try
             {
-                var owner = (GodotObject?)GCHandle.FromIntPtr(ownerGCHandlePtr).Target;
+                var owner = (scardotObject?)GCHandle.FromIntPtr(ownerGCHandlePtr).Target;
 
                 if (owner == null)
                 {
@@ -458,7 +458,7 @@ namespace Godot.Bridge
 
                 *outOwnerIsNull = godot_bool.False;
 
-                owner.RaiseGodotClassSignalCallbacks(CustomUnsafe.AsRef(eventSignalName),
+                owner.RaisescardotClassSignalCallbacks(CustomUnsafe.AsRef(eventSignalName),
                     new NativeVariantPtrArgs(args, argCount));
             }
             catch (Exception e)
@@ -479,7 +479,7 @@ namespace Godot.Bridge
                 if (!_scriptTypeBiMap.TryGetScriptType(scriptPtrMaybeBase, out Type? maybeBaseType))
                     return godot_bool.False;
 
-                return (scriptType == maybeBaseType || maybeBaseType.IsAssignableFrom(scriptType)).ToGodotBool();
+                return (scriptType == maybeBaseType || maybeBaseType.IsAssignableFrom(scriptType)).ToscardotBool();
             }
             catch (Exception e)
             {
@@ -494,7 +494,7 @@ namespace Godot.Bridge
             try
             {
                 string scriptPathStr = Marshaling.ConvertStringToManaged(*scriptPath);
-                return AddScriptBridgeCore(scriptPtr, scriptPathStr).ToGodotBool();
+                return AddScriptBridgeCore(scriptPtr, scriptPathStr).ToscardotBool();
             }
             catch (Exception e)
             {
@@ -588,7 +588,7 @@ namespace Godot.Bridge
 
             static string GetVirtualConstructedGenericTypeScriptPath(Type scriptType, string scriptPath)
             {
-                // Constructed generic types all have the same path which is not allowed by Godot
+                // Constructed generic types all have the same path which is not allowed by scardot
                 // (every Resource must have a unique path). So we create a unique "virtual" path
                 // for each type.
 
@@ -708,9 +708,9 @@ namespace Godot.Bridge
                         return godot_bool.False;
                     }
 
-                    if (!typeof(GodotObject).IsAssignableFrom(scriptType))
+                    if (!typeof(scardotObject).IsAssignableFrom(scriptType))
                     {
-                        // The class no longer inherits GodotObject, can't reload
+                        // The class no longer inherits scardotObject, can't reload
                         return godot_bool.False;
                     }
 
@@ -730,7 +730,7 @@ namespace Godot.Bridge
 
         private static unsafe void GetScriptTypeInfo(Type scriptType, godot_csharp_type_info* outTypeInfo)
         {
-            Type native = GodotObject.InternalGetClassNativeBase(scriptType);
+            Type native = scardotObject.InternalGetClassNativeBase(scriptType);
 
             string typeName = scriptType.Name;
             if (scriptType.IsGenericType)
@@ -751,8 +751,8 @@ namespace Godot.Bridge
                 isTool = scriptType.DeclaringType?.IsDefined(typeof(ToolAttribute), inherit: false) ?? false;
             }
 
-            // Every script in the GodotTools assembly is a tool script.
-            if (!isTool && scriptType.Assembly.GetName().Name == "GodotTools")
+            // Every script in the scardotTools assembly is a tool script.
+            if (!isTool && scriptType.Assembly.GetName().Name == "scardotTools")
             {
                 isTool = true;
             }
@@ -767,11 +767,11 @@ namespace Godot.Bridge
 
             outTypeInfo->ClassName = className;
             outTypeInfo->IconPath = iconPath;
-            outTypeInfo->IsTool = isTool.ToGodotBool();
-            outTypeInfo->IsGlobalClass = isGlobalClass.ToGodotBool();
-            outTypeInfo->IsAbstract = scriptType.IsAbstract.ToGodotBool();
-            outTypeInfo->IsGenericTypeDefinition = scriptType.IsGenericTypeDefinition.ToGodotBool();
-            outTypeInfo->IsConstructedGenericType = scriptType.IsConstructedGenericType.ToGodotBool();
+            outTypeInfo->IsTool = isTool.ToscardotBool();
+            outTypeInfo->IsGlobalClass = isGlobalClass.ToscardotBool();
+            outTypeInfo->IsAbstract = scriptType.IsAbstract.ToscardotBool();
+            outTypeInfo->IsGenericTypeDefinition = scriptType.IsGenericTypeDefinition.ToscardotBool();
+            outTypeInfo->IsConstructedGenericType = scriptType.IsConstructedGenericType.ToscardotBool();
 
             static void AppendTypeName(StringBuilder sb, Type type)
             {
@@ -805,7 +805,7 @@ namespace Godot.Bridge
 
                 GetScriptTypeInfo(scriptType, outTypeInfo);
 
-                Type native = GodotObject.InternalGetClassNativeBase(scriptType);
+                Type native = scardotObject.InternalGetClassNativeBase(scriptType);
 
                 // Methods
 
@@ -984,28 +984,28 @@ namespace Godot.Bridge
 
         private static List<MethodInfo>? GetSignalListForType(Type type)
         {
-            var getGodotSignalListMethod = type.GetMethod(
-                "GetGodotSignalList",
+            var getscardotSignalListMethod = type.GetMethod(
+                "GetscardotSignalList",
                 BindingFlags.DeclaredOnly | BindingFlags.Static |
                 BindingFlags.NonPublic | BindingFlags.Public);
 
-            if (getGodotSignalListMethod == null)
+            if (getscardotSignalListMethod == null)
                 return null;
 
-            return (List<MethodInfo>?)getGodotSignalListMethod.Invoke(null, null);
+            return (List<MethodInfo>?)getscardotSignalListMethod.Invoke(null, null);
         }
 
         private static List<MethodInfo>? GetMethodListForType(Type type)
         {
-            var getGodotMethodListMethod = type.GetMethod(
-                "GetGodotMethodList",
+            var getscardotMethodListMethod = type.GetMethod(
+                "GetscardotMethodList",
                 BindingFlags.DeclaredOnly | BindingFlags.Static |
                 BindingFlags.NonPublic | BindingFlags.Public);
 
-            if (getGodotMethodListMethod == null)
+            if (getscardotMethodListMethod == null)
                 return null;
 
-            return (List<MethodInfo>?)getGodotMethodListMethod.Invoke(null, null);
+            return (List<MethodInfo>?)getscardotMethodListMethod.Invoke(null, null);
         }
 
 #pragma warning disable IDE1006 // Naming rule violation
@@ -1049,16 +1049,16 @@ namespace Godot.Bridge
         {
             try
             {
-                var getGodotPropertyListMethod = type.GetMethod(
-                    "GetGodotPropertyList",
+                var getscardotPropertyListMethod = type.GetMethod(
+                    "GetscardotPropertyList",
                     BindingFlags.DeclaredOnly | BindingFlags.Static |
                     BindingFlags.NonPublic | BindingFlags.Public);
 
-                if (getGodotPropertyListMethod == null)
+                if (getscardotPropertyListMethod == null)
                     return;
 
                 var properties = (List<PropertyInfo>?)
-                    getGodotPropertyListMethod.Invoke(null, null);
+                    getscardotPropertyListMethod.Invoke(null, null);
 
                 if (properties == null || properties.Count <= 0)
                     return;
@@ -1098,7 +1098,7 @@ namespace Godot.Bridge
                             Hint = (int)property.Hint,
                             HintString = Marshaling.ConvertStringToNative(property.HintString),
                             Usage = (int)property.Usage,
-                            Exported = property.Exported.ToGodotBool()
+                            Exported = property.Exported.ToscardotBool()
                         };
 
                         interopProperties[i] = interopProperty;
@@ -1139,7 +1139,7 @@ namespace Godot.Bridge
         }
 #pragma warning restore IDE1006
 
-        private delegate bool InvokeGodotClassStaticMethodDelegate(in godot_string_name method, NativeVariantPtrArgs args, out godot_variant ret);
+        private delegate bool InvokescardotClassStaticMethodDelegate(in godot_string_name method, NativeVariantPtrArgs args, out godot_variant ret);
 
         [UnmanagedCallersOnly]
         internal static unsafe godot_bool CallStatic(IntPtr scriptPtr, godot_string_name* method,
@@ -1152,18 +1152,18 @@ namespace Godot.Bridge
                 Type scriptType = _scriptTypeBiMap.GetScriptType(scriptPtr);
 
                 Type? top = scriptType;
-                Type native = GodotObject.InternalGetClassNativeBase(top);
+                Type native = scardotObject.InternalGetClassNativeBase(top);
 
                 while (top != null && top != native)
                 {
-                    var invokeGodotClassStaticMethod = top.GetMethod(
-                        "InvokeGodotClassStaticMethod",
+                    var invokescardotClassStaticMethod = top.GetMethod(
+                        "InvokescardotClassStaticMethod",
                         BindingFlags.DeclaredOnly | BindingFlags.Static |
                         BindingFlags.NonPublic | BindingFlags.Public);
 
-                    if (invokeGodotClassStaticMethod != null)
+                    if (invokescardotClassStaticMethod != null)
                     {
-                        var invoked = invokeGodotClassStaticMethod.CreateDelegate<InvokeGodotClassStaticMethodDelegate>()(
+                        var invoked = invokescardotClassStaticMethod.CreateDelegate<InvokescardotClassStaticMethodDelegate>()(
                             CustomUnsafe.AsRef(method), new NativeVariantPtrArgs(args, argCount), out godot_variant retValue);
                         if (invoked)
                         {
@@ -1183,7 +1183,7 @@ namespace Godot.Bridge
             }
 
             *ret = default;
-            (*refCallError).Error = godot_variant_call_error_error.GODOT_CALL_ERROR_CALL_ERROR_INVALID_METHOD;
+            (*refCallError).Error = godot_variant_call_error_error.SCARDOT_CALL_ERROR_CALL_ERROR_INVALID_METHOD;
             return godot_bool.False;
         }
 
@@ -1194,7 +1194,7 @@ namespace Godot.Bridge
             try
             {
                 Type? top = _scriptTypeBiMap.GetScriptType(scriptPtr);
-                Type native = GodotObject.InternalGetClassNativeBase(top);
+                Type native = scardotObject.InternalGetClassNativeBase(top);
 
                 while (top != null && top != native)
                 {
@@ -1215,15 +1215,15 @@ namespace Godot.Bridge
         {
             try
             {
-                var getGodotPropertyDefaultValuesMethod = type.GetMethod(
-                    "GetGodotPropertyDefaultValues",
+                var getscardotPropertyDefaultValuesMethod = type.GetMethod(
+                    "GetscardotPropertyDefaultValues",
                     BindingFlags.DeclaredOnly | BindingFlags.Static |
                     BindingFlags.NonPublic | BindingFlags.Public);
 
-                if (getGodotPropertyDefaultValuesMethod == null)
+                if (getscardotPropertyDefaultValuesMethod == null)
                     return;
 
-                var defaultValuesObj = getGodotPropertyDefaultValuesMethod.Invoke(null, null);
+                var defaultValuesObj = getscardotPropertyDefaultValuesMethod.Invoke(null, null);
 
                 if (defaultValuesObj == null)
                     return;
@@ -1233,7 +1233,7 @@ namespace Godot.Bridge
                 if (defaultValuesObj is Dictionary<StringName, object> defaultValuesLegacy)
                 {
                     // We have to support this for some time, otherwise this could cause data loss for projects
-                    // built with previous releases. Ideally, we should remove this before Godot 4.0 stable.
+                    // built with previous releases. Ideally, we should remove this before scardot 4.0 stable.
 
                     if (defaultValuesLegacy.Count <= 0)
                         return;

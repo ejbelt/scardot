@@ -2,10 +2,10 @@
 /*  debug_adapter_parser.cpp                                              */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -303,7 +303,7 @@ Dictionary DebugAdapterParser::req_threads(const Dictionary &p_params) const {
 	Array arr;
 	DAP::Thread thread;
 
-	thread.id = 1; // Hardcoded because Godot only supports debugging one thread at the moment
+	thread.id = 1; // Hardcoded because scardot only supports debugging one thread at the moment
 	thread.name = "Main";
 	arr.push_back(thread.to_json());
 	body["threads"] = arr;

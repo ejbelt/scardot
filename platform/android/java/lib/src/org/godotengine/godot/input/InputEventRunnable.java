@@ -2,10 +2,10 @@
 /*  InputEventRunnable.java                                               */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -30,7 +30,7 @@
 
 package org.godotengine.godot.input;
 
-import org.godotengine.godot.GodotLib;
+import org.godotengine.godot.scardotLib;
 
 import android.hardware.Sensor;
 import android.util.Log;
@@ -165,8 +165,8 @@ final class InputEventRunnable implements Runnable {
 			positions[i * 6 + 1] = event.getX(i);
 			positions[i * 6 + 2] = event.getY(i);
 			positions[i * 6 + 3] = event.getPressure(i);
-			positions[i * 6 + 4] = GodotInputHandler.getEventTiltX(event);
-			positions[i * 6 + 5] = GodotInputHandler.getEventTiltY(event);
+			positions[i * 6 + 4] = scardotInputHandler.getEventTiltX(event);
+			positions[i * 6 + 5] = scardotInputHandler.getEventTiltY(event);
 		}
 	}
 
@@ -267,7 +267,7 @@ final class InputEventRunnable implements Runnable {
 
 			switch (currentEventType) {
 				case MOUSE:
-					GodotLib.dispatchMouseEvent(
+					scardotLib.dispatchMouseEvent(
 							eventAction,
 							buttonsMask,
 							eventX,
@@ -282,7 +282,7 @@ final class InputEventRunnable implements Runnable {
 					break;
 
 				case TOUCH:
-					GodotLib.dispatchTouchEvent(
+					scardotLib.dispatchTouchEvent(
 							eventAction,
 							actionPointerId,
 							pointerCount,
@@ -291,49 +291,49 @@ final class InputEventRunnable implements Runnable {
 					break;
 
 				case MAGNIFY:
-					GodotLib.magnify(eventX, eventY, magnifyFactor);
+					scardotLib.magnify(eventX, eventY, magnifyFactor);
 					break;
 
 				case PAN:
-					GodotLib.pan(eventX, eventY, eventDeltaX, eventDeltaY);
+					scardotLib.pan(eventX, eventY, eventDeltaX, eventDeltaY);
 					break;
 
 				case JOYSTICK_BUTTON:
-					GodotLib.joybutton(joystickDevice, button, eventPressed);
+					scardotLib.joybutton(joystickDevice, button, eventPressed);
 					break;
 
 				case JOYSTICK_AXIS:
-					GodotLib.joyaxis(joystickDevice, axis, value);
+					scardotLib.joyaxis(joystickDevice, axis, value);
 					break;
 
 				case JOYSTICK_HAT:
-					GodotLib.joyhat(joystickDevice, hatX, hatY);
+					scardotLib.joyhat(joystickDevice, hatX, hatY);
 					break;
 
 				case JOYSTICK_CONNECTION_CHANGED:
-					GodotLib.joyconnectionchanged(joystickDevice, connected, joystickName);
+					scardotLib.joyconnectionchanged(joystickDevice, connected, joystickName);
 					break;
 
 				case KEY:
-					GodotLib.key(physicalKeycode, unicode, keyLabel, eventPressed, echo);
+					scardotLib.key(physicalKeycode, unicode, keyLabel, eventPressed, echo);
 					break;
 
 				case SENSOR:
 					switch (sensorType) {
 						case Sensor.TYPE_ACCELEROMETER:
-							GodotLib.accelerometer(-rotatedValue0, -rotatedValue1, -rotatedValue2);
+							scardotLib.accelerometer(-rotatedValue0, -rotatedValue1, -rotatedValue2);
 							break;
 
 						case Sensor.TYPE_GRAVITY:
-							GodotLib.gravity(-rotatedValue0, -rotatedValue1, -rotatedValue2);
+							scardotLib.gravity(-rotatedValue0, -rotatedValue1, -rotatedValue2);
 							break;
 
 						case Sensor.TYPE_MAGNETIC_FIELD:
-							GodotLib.magnetometer(-rotatedValue0, -rotatedValue1, -rotatedValue2);
+							scardotLib.magnetometer(-rotatedValue0, -rotatedValue1, -rotatedValue2);
 							break;
 
 						case Sensor.TYPE_GYROSCOPE:
-							GodotLib.gyroscope(rotatedValue0, rotatedValue1, rotatedValue2);
+							scardotLib.gyroscope(rotatedValue0, rotatedValue1, rotatedValue2);
 							break;
 					}
 					break;

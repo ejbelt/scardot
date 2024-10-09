@@ -1,6 +1,6 @@
-using Godot;
+using scardot;
 
-public partial class EventSignals : GodotObject
+public partial class EventSignals : scardotObject
 {
     [Signal]
     public delegate void MySignalEventHandler(string str, int num);

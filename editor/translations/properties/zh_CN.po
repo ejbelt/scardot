@@ -1,7 +1,7 @@
-# Chinese (Simplified) translation of the Godot Engine properties.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Chinese (Simplified) translation of the scardot Engine properties.
+# Copyright (c) 2014-present scardot Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the scardot source code.
 # 360119124 <360119124@qq.com>, 2018.
 # 柠檬杀手 <lemonkiller@gmail.com>, 2018, 2020.
 # 纯洁的坏蛋 <tqj.zyy@gmail.com>, 2016.
@@ -94,7 +94,7 @@
 # Arsvine Zhu <2162371684@qq.com>, 2023.
 msgid ""
 msgstr ""
-"Project-Id-Version: Chinese (Simplified) (Godot Engine)\n"
+"Project-Id-Version: Chinese (Simplified) (scardot Engine)\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: 2018-01-20 12:15+0200\n"
 "PO-Revision-Date: 2024-08-12 20:09+0000\n"
@@ -3637,8 +3637,8 @@ msgstr "关节"
 msgid "Roots"
 msgstr "根"
 
-msgid "Godot Bone Node"
-msgstr "Godot 骨骼节点"
+msgid "scardot Bone Node"
+msgstr "scardot 骨骼节点"
 
 msgid "Skin Root"
 msgstr "蒙皮根"
@@ -3649,8 +3649,8 @@ msgstr "原关节"
 msgid "Non Joints"
 msgstr "非关节"
 
-msgid "Godot Skin"
-msgstr "Godot 蒙皮"
+msgid "scardot Skin"
+msgstr "scardot 蒙皮"
 
 msgid "Src Image"
 msgstr "来源图像"

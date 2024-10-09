@@ -1,10 +1,10 @@
 using System;
-using Godot;
+using scardot;
 using JetBrains.Rider.PathLocator;
 using Newtonsoft.Json;
-using OS = GodotTools.Utils.OS;
+using OS = scardotTools.Utils.OS;
 
-namespace GodotTools.Ides.Rider;
+namespace scardotTools.Ides.Rider;
 
 public class RiderLocatorEnvironment : IRiderLocatorEnvironment
 {

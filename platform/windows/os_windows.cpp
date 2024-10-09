@@ -2,10 +2,10 @@
 /*  os_windows.cpp                                                        */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -221,7 +221,7 @@ void OS_Windows::initialize() {
 
 	process_map = memnew((HashMap<ProcessID, ProcessInfo>));
 
-	// Add current Godot PID to the list of known PIDs
+	// Add current scardot PID to the list of known PIDs
 	ProcessInfo current_pi = {};
 	PROCESS_INFORMATION current_pi_pi = {};
 	current_pi.pi = current_pi_pi;

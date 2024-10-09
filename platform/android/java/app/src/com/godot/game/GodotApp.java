@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotApp.java                                                         */
+/*  scardotApp.java                                                         */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -30,17 +30,17 @@
 
 package com.godot.game;
 
-import org.godotengine.godot.GodotActivity;
+import org.godotengine.godot.scardotActivity;
 
 import android.os.Bundle;
 
 import androidx.core.splashscreen.SplashScreen;
 
 /**
- * Template activity for Godot Android builds.
+ * Template activity for scardot Android builds.
  * Feel free to extend and modify this class for your custom logic.
  */
-public class GodotApp extends GodotActivity {
+public class scardotApp extends scardotActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		SplashScreen.installSplashScreen(this);

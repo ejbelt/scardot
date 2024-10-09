@@ -1,5 +1,5 @@
-using Godot;
-using Godot.NativeInterop;
+using scardot;
+using scardot.NativeInterop;
 
 partial class AllReadOnly
 {
@@ -7,59 +7,59 @@ partial class AllReadOnly
     /// <summary>
     /// Cached StringNames for the properties and fields contained in this class, for fast lookup.
     /// </summary>
-    public new class PropertyName : global::Godot.GodotObject.PropertyName {
+    public new class PropertyName : global::scardot.scardotObject.PropertyName {
         /// <summary>
         /// Cached name for the 'ReadOnlyAutoProperty' property.
         /// </summary>
-        public new static readonly global::Godot.StringName @ReadOnlyAutoProperty = "ReadOnlyAutoProperty";
+        public new static readonly global::scardot.StringName @ReadOnlyAutoProperty = "ReadOnlyAutoProperty";
         /// <summary>
         /// Cached name for the 'ReadOnlyProperty' property.
         /// </summary>
-        public new static readonly global::Godot.StringName @ReadOnlyProperty = "ReadOnlyProperty";
+        public new static readonly global::scardot.StringName @ReadOnlyProperty = "ReadOnlyProperty";
         /// <summary>
         /// Cached name for the 'InitOnlyAutoProperty' property.
         /// </summary>
-        public new static readonly global::Godot.StringName @InitOnlyAutoProperty = "InitOnlyAutoProperty";
+        public new static readonly global::scardot.StringName @InitOnlyAutoProperty = "InitOnlyAutoProperty";
         /// <summary>
         /// Cached name for the 'ReadOnlyField' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @ReadOnlyField = "ReadOnlyField";
+        public new static readonly global::scardot.StringName @ReadOnlyField = "ReadOnlyField";
     }
     /// <inheritdoc/>
     [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-    protected override bool GetGodotClassPropertyValue(in godot_string_name name, out godot_variant value)
+    protected override bool GetscardotClassPropertyValue(in godot_string_name name, out godot_variant value)
     {
         if (name == PropertyName.@ReadOnlyAutoProperty) {
-            value = global::Godot.NativeInterop.VariantUtils.CreateFrom<string>(this.@ReadOnlyAutoProperty);
+            value = global::scardot.NativeInterop.VariantUtils.CreateFrom<string>(this.@ReadOnlyAutoProperty);
             return true;
         }
         if (name == PropertyName.@ReadOnlyProperty) {
-            value = global::Godot.NativeInterop.VariantUtils.CreateFrom<string>(this.@ReadOnlyProperty);
+            value = global::scardot.NativeInterop.VariantUtils.CreateFrom<string>(this.@ReadOnlyProperty);
             return true;
         }
         if (name == PropertyName.@InitOnlyAutoProperty) {
-            value = global::Godot.NativeInterop.VariantUtils.CreateFrom<string>(this.@InitOnlyAutoProperty);
+            value = global::scardot.NativeInterop.VariantUtils.CreateFrom<string>(this.@InitOnlyAutoProperty);
             return true;
         }
         if (name == PropertyName.@ReadOnlyField) {
-            value = global::Godot.NativeInterop.VariantUtils.CreateFrom<string>(this.@ReadOnlyField);
+            value = global::scardot.NativeInterop.VariantUtils.CreateFrom<string>(this.@ReadOnlyField);
             return true;
         }
-        return base.GetGodotClassPropertyValue(name, out value);
+        return base.GetscardotClassPropertyValue(name, out value);
     }
     /// <summary>
     /// Get the property information for all the properties declared in this class.
-    /// This method is used by Godot to register the available properties in the editor.
+    /// This method is used by scardot to register the available properties in the editor.
     /// Do not call this method.
     /// </summary>
     [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-    internal new static global::System.Collections.Generic.List<global::Godot.Bridge.PropertyInfo> GetGodotPropertyList()
+    internal new static global::System.Collections.Generic.List<global::scardot.Bridge.PropertyInfo> GetscardotPropertyList()
     {
-        var properties = new global::System.Collections.Generic.List<global::Godot.Bridge.PropertyInfo>();
-        properties.Add(new(type: (global::Godot.Variant.Type)4, name: PropertyName.@ReadOnlyField, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4096, exported: false));
-        properties.Add(new(type: (global::Godot.Variant.Type)4, name: PropertyName.@ReadOnlyAutoProperty, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4096, exported: false));
-        properties.Add(new(type: (global::Godot.Variant.Type)4, name: PropertyName.@ReadOnlyProperty, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4096, exported: false));
-        properties.Add(new(type: (global::Godot.Variant.Type)4, name: PropertyName.@InitOnlyAutoProperty, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4096, exported: false));
+        var properties = new global::System.Collections.Generic.List<global::scardot.Bridge.PropertyInfo>();
+        properties.Add(new(type: (global::scardot.Variant.Type)4, name: PropertyName.@ReadOnlyField, hint: (global::scardot.PropertyHint)0, hintString: "", usage: (global::scardot.PropertyUsageFlags)4096, exported: false));
+        properties.Add(new(type: (global::scardot.Variant.Type)4, name: PropertyName.@ReadOnlyAutoProperty, hint: (global::scardot.PropertyHint)0, hintString: "", usage: (global::scardot.PropertyUsageFlags)4096, exported: false));
+        properties.Add(new(type: (global::scardot.Variant.Type)4, name: PropertyName.@ReadOnlyProperty, hint: (global::scardot.PropertyHint)0, hintString: "", usage: (global::scardot.PropertyUsageFlags)4096, exported: false));
+        properties.Add(new(type: (global::scardot.Variant.Type)4, name: PropertyName.@InitOnlyAutoProperty, hint: (global::scardot.PropertyHint)0, hintString: "", usage: (global::scardot.PropertyUsageFlags)4096, exported: false));
         return properties;
     }
 #pragma warning restore CS0109

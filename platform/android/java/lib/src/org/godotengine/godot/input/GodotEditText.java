@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotEditText.java                                                    */
+/*  scardotEditText.java                                                    */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -50,7 +50,7 @@ import android.widget.EditText;
 import java.lang.ref.WeakReference;
 import java.util.Locale;
 
-public class GodotEditText extends EditText {
+public class scardotEditText extends EditText {
 	// ===========================================================
 	// Constants
 	// ===========================================================
@@ -72,22 +72,22 @@ public class GodotEditText extends EditText {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private GodotRenderView mRenderView;
-	private GodotTextInputWrapper mInputWrapper;
+	private scardotRenderView mRenderView;
+	private scardotTextInputWrapper mInputWrapper;
 	private EditHandler sHandler = new EditHandler(this);
 	private String mOriginText;
 	private int mMaxInputLength = Integer.MAX_VALUE;
 	private VirtualKeyboardType mKeyboardType = VirtualKeyboardType.KEYBOARD_TYPE_DEFAULT;
 
 	private static class EditHandler extends Handler {
-		private final WeakReference<GodotEditText> mEdit;
-		public EditHandler(GodotEditText edit) {
+		private final WeakReference<scardotEditText> mEdit;
+		public EditHandler(scardotEditText edit) {
 			mEdit = new WeakReference<>(edit);
 		}
 
 		@Override
 		public void handleMessage(Message msg) {
-			GodotEditText edit = mEdit.get();
+			scardotEditText edit = mEdit.get();
 			if (edit != null) {
 				edit.handleMessage(msg);
 			}
@@ -97,17 +97,17 @@ public class GodotEditText extends EditText {
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-	public GodotEditText(final Context context) {
+	public scardotEditText(final Context context) {
 		super(context);
 		initView();
 	}
 
-	public GodotEditText(final Context context, final AttributeSet attrs) {
+	public scardotEditText(final Context context, final AttributeSet attrs) {
 		super(context, attrs);
 		initView();
 	}
 
-	public GodotEditText(final Context context, final AttributeSet attrs, final int defStyle) {
+	public scardotEditText(final Context context, final AttributeSet attrs, final int defStyle) {
 		super(context, attrs, defStyle);
 		initView();
 	}
@@ -124,7 +124,7 @@ public class GodotEditText extends EditText {
 	private void handleMessage(final Message msg) {
 		switch (msg.what) {
 			case HANDLER_OPEN_IME_KEYBOARD: {
-				GodotEditText edit = (GodotEditText)msg.obj;
+				scardotEditText edit = (scardotEditText)msg.obj;
 				String text = edit.mOriginText;
 				if (edit.requestFocus()) {
 					edit.removeTextChangedListener(edit.mInputWrapper);
@@ -187,7 +187,7 @@ public class GodotEditText extends EditText {
 			} break;
 
 			case HANDLER_CLOSE_IME_KEYBOARD: {
-				GodotEditText edit = (GodotEditText)msg.obj;
+				scardotEditText edit = (scardotEditText)msg.obj;
 
 				edit.removeTextChangedListener(mInputWrapper);
 				final InputMethodManager imm = (InputMethodManager)mRenderView.getView().getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -206,10 +206,10 @@ public class GodotEditText extends EditText {
 	// ===========================================================
 	// Getter & Setter
 	// ===========================================================
-	public void setView(final GodotRenderView view) {
+	public void setView(final scardotRenderView view) {
 		mRenderView = view;
 		if (mInputWrapper == null)
-			mInputWrapper = new GodotTextInputWrapper(mRenderView, this);
+			mInputWrapper = new scardotTextInputWrapper(mRenderView, this);
 		setOnEditorActionListener(mInputWrapper);
 		view.getView().requestFocus();
 	}
@@ -232,7 +232,7 @@ public class GodotEditText extends EditText {
 		}
 
 		// pass event to godot in special cases
-		if (needHandlingInGodot(keyCode, keyEvent) && mRenderView.getInputHandler().onKeyDown(keyCode, keyEvent)) {
+		if (needHandlingInscardot(keyCode, keyEvent) && mRenderView.getInputHandler().onKeyDown(keyCode, keyEvent)) {
 			return true;
 		} else {
 			return super.onKeyDown(keyCode, keyEvent);
@@ -248,14 +248,14 @@ public class GodotEditText extends EditText {
 			return mRenderView.getInputHandler().onKeyUp(keyCode, keyEvent);
 		}
 
-		if (needHandlingInGodot(keyCode, keyEvent) && mRenderView.getInputHandler().onKeyUp(keyCode, keyEvent)) {
+		if (needHandlingInscardot(keyCode, keyEvent) && mRenderView.getInputHandler().onKeyUp(keyCode, keyEvent)) {
 			return true;
 		} else {
 			return super.onKeyUp(keyCode, keyEvent);
 		}
 	}
 
-	private boolean needHandlingInGodot(int keyCode, KeyEvent keyEvent) {
+	private boolean needHandlingInscardot(int keyCode, KeyEvent keyEvent) {
 		boolean isArrowKey = keyCode == KeyEvent.KEYCODE_DPAD_UP || keyCode == KeyEvent.KEYCODE_DPAD_DOWN ||
 				keyCode == KeyEvent.KEYCODE_DPAD_LEFT || keyCode == KeyEvent.KEYCODE_DPAD_RIGHT;
 		boolean isModifiedKey = keyEvent.isAltPressed() || keyEvent.isCtrlPressed() || keyEvent.isSymPressed() ||

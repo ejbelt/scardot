@@ -1,19 +1,19 @@
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using Godot;
-using Godot.NativeInterop;
-using GodotTools.Core;
-using static GodotTools.Internals.Globals;
+using scardot;
+using scardot.NativeInterop;
+using scardotTools.Core;
+using static scardotTools.Internals.Globals;
 
-namespace GodotTools.Internals
+namespace scardotTools.Internals
 {
-    public static class GodotSharpDirs
+    public static class scardotSharpDirs
     {
         public static string ResMetadataDir
         {
             get
             {
-                Internal.godot_icall_GodotSharpDirs_ResMetadataDir(out godot_string dest);
+                Internal.godot_icall_scardotSharpDirs_ResMetadataDir(out godot_string dest);
                 using (dest)
                     return Marshaling.ConvertStringToManaged(dest);
             }
@@ -23,7 +23,7 @@ namespace GodotTools.Internals
         {
             get
             {
-                Internal.godot_icall_GodotSharpDirs_MonoUserDir(out godot_string dest);
+                Internal.godot_icall_scardotSharpDirs_MonoUserDir(out godot_string dest);
                 using (dest)
                     return Marshaling.ConvertStringToManaged(dest);
             }
@@ -33,7 +33,7 @@ namespace GodotTools.Internals
         {
             get
             {
-                Internal.godot_icall_GodotSharpDirs_BuildLogsDirs(out godot_string dest);
+                Internal.godot_icall_scardotSharpDirs_BuildLogsDirs(out godot_string dest);
                 using (dest)
                     return Marshaling.ConvertStringToManaged(dest);
             }
@@ -43,7 +43,7 @@ namespace GodotTools.Internals
         {
             get
             {
-                Internal.godot_icall_GodotSharpDirs_DataEditorToolsDir(out godot_string dest);
+                Internal.godot_icall_scardotSharpDirs_DataEditorToolsDir(out godot_string dest);
                 using (dest)
                     return Marshaling.ConvertStringToManaged(dest);
             }
@@ -54,7 +54,7 @@ namespace GodotTools.Internals
         {
             get
             {
-                Internal.godot_icall_GodotSharpDirs_CSharpProjectName(out godot_string dest);
+                Internal.godot_icall_scardotSharpDirs_CSharpProjectName(out godot_string dest);
                 using (dest)
                     return Marshaling.ConvertStringToManaged(dest);
             }

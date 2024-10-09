@@ -96,7 +96,7 @@ if lib_arch_dir != "":
             gradle_process = ["./gradlew"]
 
         gradle_process += [
-            "generateGodotEditor" if env["target"] == "editor" else "generateGodotTemplates",
+            "generatescardotEditor" if env["target"] == "editor" else "generatescardotTemplates",
             "--quiet",
         ]
 

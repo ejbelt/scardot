@@ -8,9 +8,9 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using Godot.NativeInterop;
+using scardot.NativeInterop;
 
-namespace Godot
+namespace scardot
 {
     internal static class DelegateUtils
     {
@@ -21,7 +21,7 @@ namespace Godot
             {
                 var @delegateA = (Delegate?)GCHandle.FromIntPtr(delegateGCHandleA).Target;
                 var @delegateB = (Delegate?)GCHandle.FromIntPtr(delegateGCHandleB).Target;
-                return (@delegateA! == @delegateB!).ToGodotBool();
+                return (@delegateA! == @delegateB!).ToscardotBool();
             }
             catch (Exception e)
             {
@@ -99,7 +99,7 @@ namespace Godot
         private enum TargetKind : uint
         {
             Static,
-            GodotObject,
+            scardotObject,
             CompilerGenerated
         }
 
@@ -164,12 +164,12 @@ namespace Godot
                         return true;
                     }
                 }
-                case GodotObject godotObject:
+                case scardotObject godotObject:
                 {
                     using (var stream = new MemoryStream())
                     using (var writer = new BinaryWriter(stream))
                     {
-                        writer.Write((ulong)TargetKind.GodotObject);
+                        writer.Write((ulong)TargetKind.scardotObject);
                         // ReSharper disable once RedundantCast
                         writer.Write((ulong)godotObject.GetInstanceId());
 
@@ -323,7 +323,7 @@ namespace Godot
                 var @delegate = (Delegate)GCHandle.FromIntPtr(delegateGCHandle).Target!;
 
                 return TrySerializeDelegate(@delegate, serializedData)
-                    .ToGodotBool();
+                    .ToscardotBool();
             }
             catch (Exception e)
             {
@@ -433,10 +433,10 @@ namespace Godot
 
                         return true;
                     }
-                    case TargetKind.GodotObject:
+                    case TargetKind.scardotObject:
                     {
                         ulong objectId = reader.ReadUInt64();
-                        GodotObject? godotObject = GodotObject.InstanceFromId(objectId);
+                        scardotObject? godotObject = scardotObject.InstanceFromId(objectId);
                         if (godotObject == null)
                             return false;
 
@@ -580,7 +580,7 @@ namespace Godot
         }
 
         // Returns true, if unloading the delegate is necessary for assembly unloading to succeed.
-        // This check is not perfect and only intended to prevent things in GodotTools from being reloaded.
+        // This check is not perfect and only intended to prevent things in scardotTools from being reloaded.
         internal static bool IsDelegateCollectible(Delegate @delegate)
         {
             if (@delegate.GetType().IsCollectible)
@@ -706,7 +706,7 @@ namespace Godot
                         return VariantUtils.CreateFrom(nodePathArray);
                     case Rid[] ridArray:
                         return VariantUtils.CreateFrom(ridArray);
-                    case GodotObject[] godotObjectArray:
+                    case scardotObject[] godotObjectArray:
                         return VariantUtils.CreateFrom(godotObjectArray);
                     case StringName stringName:
                         return VariantUtils.CreateFrom(stringName);
@@ -720,13 +720,13 @@ namespace Godot
                         return VariantUtils.CreateFrom(godotArray);
                     case Variant variant:
                         return VariantUtils.CreateFrom(variant);
-                    case GodotObject godotObject:
+                    case scardotObject godotObject:
                         return VariantUtils.CreateFrom(godotObject);
                     case Enum @enum:
                         return VariantUtils.CreateFrom(Convert.ToInt64(@enum, CultureInfo.InvariantCulture));
-                    case Collections.IGenericGodotDictionary godotDictionary:
+                    case Collections.IGenericscardotDictionary godotDictionary:
                         return VariantUtils.CreateFrom(godotDictionary.UnderlyingDictionary);
-                    case Collections.IGenericGodotArray godotArray:
+                    case Collections.IGenericscardotArray godotArray:
                         return VariantUtils.CreateFrom(godotArray.UnderlyingArray);
                 }
 
@@ -786,10 +786,10 @@ namespace Godot
                     [typeof(StringName)] = (in godot_variant variant) => VariantUtils.ConvertTo<StringName>(variant),
                     [typeof(NodePath)] = (in godot_variant variant) => VariantUtils.ConvertTo<NodePath>(variant),
                     [typeof(Rid)] = (in godot_variant variant) => VariantUtils.ConvertTo<Rid>(variant),
-                    [typeof(Godot.Collections.Dictionary)] = (in godot_variant variant) =>
-                        VariantUtils.ConvertTo<Godot.Collections.Dictionary>(variant),
-                    [typeof(Godot.Collections.Array)] =
-                        (in godot_variant variant) => VariantUtils.ConvertTo<Godot.Collections.Array>(variant),
+                    [typeof(scardot.Collections.Dictionary)] = (in godot_variant variant) =>
+                        VariantUtils.ConvertTo<scardot.Collections.Dictionary>(variant),
+                    [typeof(scardot.Collections.Array)] =
+                        (in godot_variant variant) => VariantUtils.ConvertTo<scardot.Collections.Array>(variant),
                     [typeof(Variant)] = (in godot_variant variant) => VariantUtils.ConvertTo<Variant>(variant),
                 };
 
@@ -798,27 +798,27 @@ namespace Godot
                 if (_toSystemObjectFuncByType.TryGetValue(type, out var func))
                     return func(variant);
 
-                if (typeof(GodotObject).IsAssignableFrom(type))
-                    return VariantUtils.ConvertTo<GodotObject>(variant);
+                if (typeof(scardotObject).IsAssignableFrom(type))
+                    return VariantUtils.ConvertTo<scardotObject>(variant);
 
-                if (typeof(GodotObject[]).IsAssignableFrom(type))
+                if (typeof(scardotObject[]).IsAssignableFrom(type))
                 {
-                    static GodotObject[] ConvertToSystemArrayOfGodotObject(in godot_array nativeArray, Type type)
+                    static scardotObject[] ConvertToSystemArrayOfscardotObject(in godot_array nativeArray, Type type)
                     {
                         var array = Collections.Array.CreateTakingOwnershipOfDisposableValue(
                             NativeFuncs.godotsharp_array_new_copy(nativeArray));
 
                         int length = array.Count;
-                        var ret = (GodotObject[])Activator.CreateInstance(type, length)!;
+                        var ret = (scardotObject[])Activator.CreateInstance(type, length)!;
 
                         for (int i = 0; i < length; i++)
-                            ret[i] = array[i].AsGodotObject();
+                            ret[i] = array[i].AsscardotObject();
 
                         return ret;
                     }
 
                     using var godotArray = NativeFuncs.godotsharp_variant_as_array(variant);
-                    return ConvertToSystemArrayOfGodotObject(godotArray, type);
+                    return ConvertToSystemArrayOfscardotObject(godotArray, type);
                 }
 
                 if (type.IsEnum)
@@ -857,29 +857,29 @@ namespace Godot
                 {
                     var genericTypeDef = type.GetGenericTypeDefinition();
 
-                    if (genericTypeDef == typeof(Godot.Collections.Dictionary<,>))
+                    if (genericTypeDef == typeof(scardot.Collections.Dictionary<,>))
                     {
-                        var ctor = type.GetConstructor(new[] { typeof(Godot.Collections.Dictionary) });
+                        var ctor = type.GetConstructor(new[] { typeof(scardot.Collections.Dictionary) });
 
                         if (ctor == null)
                             throw new InvalidOperationException("Dictionary constructor not found");
 
                         return ctor.Invoke(new object?[]
                         {
-                            VariantUtils.ConvertTo<Godot.Collections.Dictionary>(variant)
+                            VariantUtils.ConvertTo<scardot.Collections.Dictionary>(variant)
                         });
                     }
 
-                    if (genericTypeDef == typeof(Godot.Collections.Array<>))
+                    if (genericTypeDef == typeof(scardot.Collections.Array<>))
                     {
-                        var ctor = type.GetConstructor(new[] { typeof(Godot.Collections.Array) });
+                        var ctor = type.GetConstructor(new[] { typeof(scardot.Collections.Array) });
 
                         if (ctor == null)
                             throw new InvalidOperationException("Array constructor not found");
 
                         return ctor.Invoke(new object?[]
                         {
-                            VariantUtils.ConvertTo<Godot.Collections.Array>(variant)
+                            VariantUtils.ConvertTo<scardot.Collections.Array>(variant)
                         });
                     }
                 }

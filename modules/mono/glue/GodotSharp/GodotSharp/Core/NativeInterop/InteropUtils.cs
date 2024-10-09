@@ -1,14 +1,14 @@
 using System;
 using System.Runtime.InteropServices;
-using Godot.Bridge;
+using scardot.Bridge;
 
 // ReSharper disable InconsistentNaming
 
-namespace Godot.NativeInterop
+namespace scardot.NativeInterop
 {
     internal static class InteropUtils
     {
-        public static GodotObject UnmanagedGetManaged(IntPtr unmanaged)
+        public static scardotObject UnmanagedGetManaged(IntPtr unmanaged)
         {
             // The native pointer may be null
             if (unmanaged == IntPtr.Zero)
@@ -23,7 +23,7 @@ namespace Godot.NativeInterop
                 unmanaged, out hasCsScriptInstance);
 
             if (gcHandlePtr != IntPtr.Zero)
-                return (GodotObject)GCHandle.FromIntPtr(gcHandlePtr).Target;
+                return (scardotObject)GCHandle.FromIntPtr(gcHandlePtr).Target;
 
             // Otherwise, if the object has a CSharpInstance script instance, return null
 
@@ -37,17 +37,17 @@ namespace Godot.NativeInterop
             object target = gcHandlePtr != IntPtr.Zero ? GCHandle.FromIntPtr(gcHandlePtr).Target : null;
 
             if (target != null)
-                return (GodotObject)target;
+                return (scardotObject)target;
 
             // If the native instance binding GC handle target was collected, create a new one
 
             gcHandlePtr = NativeFuncs.godotsharp_internal_unmanaged_instance_binding_create_managed(
                 unmanaged, gcHandlePtr);
 
-            return gcHandlePtr != IntPtr.Zero ? (GodotObject)GCHandle.FromIntPtr(gcHandlePtr).Target : null;
+            return gcHandlePtr != IntPtr.Zero ? (scardotObject)GCHandle.FromIntPtr(gcHandlePtr).Target : null;
         }
 
-        public static void TieManagedToUnmanaged(GodotObject managed, IntPtr unmanaged,
+        public static void TieManagedToUnmanaged(scardotObject managed, IntPtr unmanaged,
             StringName nativeName, bool refCounted, Type type, Type nativeType)
         {
             var gcHandle = refCounted ?
@@ -58,7 +58,7 @@ namespace Godot.NativeInterop
             {
                 var nativeNameSelf = (godot_string_name)nativeName.NativeValue;
                 NativeFuncs.godotsharp_internal_tie_native_managed_to_unmanaged(
-                    GCHandle.ToIntPtr(gcHandle), unmanaged, nativeNameSelf, refCounted.ToGodotBool());
+                    GCHandle.ToIntPtr(gcHandle), unmanaged, nativeNameSelf, refCounted.ToscardotBool());
             }
             else
             {
@@ -71,12 +71,12 @@ namespace Godot.NativeInterop
 
                     // IMPORTANT: This must be called after GetOrCreateScriptBridgeForType
                     NativeFuncs.godotsharp_internal_tie_user_managed_to_unmanaged(
-                        GCHandle.ToIntPtr(gcHandle), unmanaged, &script, refCounted.ToGodotBool());
+                        GCHandle.ToIntPtr(gcHandle), unmanaged, &script, refCounted.ToscardotBool());
                 }
             }
         }
 
-        public static void TieManagedToUnmanagedWithPreSetup(GodotObject managed, IntPtr unmanaged,
+        public static void TieManagedToUnmanagedWithPreSetup(scardotObject managed, IntPtr unmanaged,
             Type type, Type nativeType)
         {
             if (type == nativeType)
@@ -87,7 +87,7 @@ namespace Godot.NativeInterop
                 GCHandle.ToIntPtr(strongGCHandle), unmanaged);
         }
 
-        public static GodotObject EngineGetSingleton(string name)
+        public static scardotObject EngineGetSingleton(string name)
         {
             using godot_string src = Marshaling.ConvertStringToNative(name);
             return UnmanagedGetManaged(NativeFuncs.godotsharp_engine_get_singleton(src));

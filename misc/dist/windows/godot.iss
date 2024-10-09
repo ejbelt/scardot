@@ -1,6 +1,6 @@
-#define MyAppName "Godot Engine"
+#define MyAppName "scardot Engine"
 #define MyAppVersion "4.4"
-#define MyAppPublisher "Godot Engine contributors"
+#define MyAppPublisher "scardot Engine contributors"
 #define MyAppURL "https://godotengine.org/"
 #define MyAppExeName "godot.exe"
 
@@ -15,10 +15,10 @@ AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
-AppComments=Godot Engine editor
+AppComments=scardot Engine editor
 ChangesEnvironment=yes
-DefaultDirName={localappdata}\Godot
-DefaultGroupName=Godot Engine
+DefaultDirName={localappdata}\scardot
+DefaultGroupName=scardot Engine
 AllowNoIcons=yes
 UninstallDisplayIcon={app}\{#MyAppExeName}
 #ifdef App32Bit
@@ -37,7 +37,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
-Name: "modifypath"; Description: "Add Godot to PATH environment variable"
+Name: "modifypath"; Description: "Add scardot to PATH environment variable"
 
 [Files]
 Source: "{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion

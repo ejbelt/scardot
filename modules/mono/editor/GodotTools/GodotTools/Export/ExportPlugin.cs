@@ -1,4 +1,4 @@
-using Godot;
+using scardot;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -6,15 +6,15 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using GodotTools.Build;
-using GodotTools.Internals;
-using Directory = GodotTools.Utils.Directory;
-using File = GodotTools.Utils.File;
-using OS = GodotTools.Utils.OS;
+using scardotTools.Build;
+using scardotTools.Internals;
+using Directory = scardotTools.Utils.Directory;
+using File = scardotTools.Utils.File;
+using OS = scardotTools.Utils.OS;
 using Path = System.IO.Path;
 using System.Globalization;
 
-namespace GodotTools.Export
+namespace scardotTools.Export
 {
     public partial class ExportPlugin : EditorExportPlugin
     {
@@ -24,7 +24,7 @@ namespace GodotTools.Export
 
         private static bool ProjectContainsDotNet()
         {
-            return File.Exists(GodotSharpDirs.ProjectSlnPath);
+            return File.Exists(scardotSharpDirs.ProjectSlnPath);
         }
 
         public override string[] _GetExportFeatures(EditorExportPlatform platform, bool debug)
@@ -35,14 +35,14 @@ namespace GodotTools.Export
             return new string[] { "dotnet" };
         }
 
-        public override Godot.Collections.Array<Godot.Collections.Dictionary> _GetExportOptions(EditorExportPlatform platform)
+        public override scardot.Collections.Array<scardot.Collections.Dictionary> _GetExportOptions(EditorExportPlatform platform)
         {
-            return new Godot.Collections.Array<Godot.Collections.Dictionary>()
+            return new scardot.Collections.Array<scardot.Collections.Dictionary>()
             {
-                new Godot.Collections.Dictionary()
+                new scardot.Collections.Dictionary()
                 {
                     {
-                        "option", new Godot.Collections.Dictionary()
+                        "option", new scardot.Collections.Dictionary()
                         {
                             { "name", "dotnet/include_scripts_content" },
                             { "type", (int)Variant.Type.Bool }
@@ -50,10 +50,10 @@ namespace GodotTools.Export
                     },
                     { "default_value", false }
                 },
-                new Godot.Collections.Dictionary()
+                new scardot.Collections.Dictionary()
                 {
                     {
-                        "option", new Godot.Collections.Dictionary()
+                        "option", new scardot.Collections.Dictionary()
                         {
                             { "name", "dotnet/include_debug_symbols" },
                             { "type", (int)Variant.Type.Bool }
@@ -61,10 +61,10 @@ namespace GodotTools.Export
                     },
                     { "default_value", true }
                 },
-                new Godot.Collections.Dictionary()
+                new scardot.Collections.Dictionary()
                 {
                     {
-                        "option", new Godot.Collections.Dictionary()
+                        "option", new scardot.Collections.Dictionary()
                         {
                             { "name", "dotnet/embed_build_outputs" },
                             { "type", (int)Variant.Type.Bool }
@@ -104,7 +104,7 @@ namespace GodotTools.Export
 
             if (!ProjectContainsDotNet())
             {
-                GetExportPlatform().AddMessage(EditorExportPlatform.ExportMessageType.Error, "Export .NET Project", $"This project contains C# files but no solution file was found at the following path: {GodotSharpDirs.ProjectSlnPath}\n" +
+                GetExportPlatform().AddMessage(EditorExportPlatform.ExportMessageType.Error, "Export .NET Project", $"This project contains C# files but no solution file was found at the following path: {scardotSharpDirs.ProjectSlnPath}\n" +
                     "A solution file is required for projects with C# files. Please ensure that the solution file exists in the specified location and try again.");
                 throw new InvalidOperationException($"{path} is a C# file but no solution file exists.");
             }
@@ -117,11 +117,11 @@ namespace GodotTools.Export
             {
                 // We don't want to include the source code on exported games.
 
-                // Sadly, Godot prints errors when adding an empty file (nothing goes wrong, it's just noise).
+                // Sadly, scardot prints errors when adding an empty file (nothing goes wrong, it's just noise).
                 // Because of this, we add a file which contains a line break.
                 AddFile(path, System.Text.Encoding.UTF8.GetBytes("\n"), remap: false);
 
-                // Tell the Godot exporter that we already took care of the file.
+                // Tell the scardot exporter that we already took care of the file.
                 Skip();
             }
         }
@@ -226,7 +226,7 @@ namespace GodotTools.Export
                 {
                     string ridArch = DetermineRuntimeIdentifierArch(arch);
                     string runtimeIdentifier = $"{ridOS}-{ridArch}";
-                    string projectDataDirName = $"data_{GodotSharpDirs.CSharpProjectName}_{platform}_{arch}";
+                    string projectDataDirName = $"data_{scardotSharpDirs.CSharpProjectName}_{platform}_{arch}";
                     if (platform == OS.Platforms.MacOS)
                     {
                         projectDataDirName = Path.Combine("Contents", "Resources", projectDataDirName);
@@ -243,7 +243,7 @@ namespace GodotTools.Export
                     }
                     else
                     {
-                        publishOutputDir = Path.Combine(GodotSharpDirs.ProjectBaseOutputPath, "godot-publish-dotnet",
+                        publishOutputDir = Path.Combine(scardotSharpDirs.ProjectBaseOutputPath, "godot-publish-dotnet",
                             $"{buildConfig}-{runtimeIdentifier}");
 
                     }
@@ -267,9 +267,9 @@ namespace GodotTools.Export
                         _ => "so"
                     };
 
-                    string assemblyPath = Path.Combine(publishOutputDir, $"{GodotSharpDirs.ProjectAssemblyName}.dll");
+                    string assemblyPath = Path.Combine(publishOutputDir, $"{scardotSharpDirs.ProjectAssemblyName}.dll");
                     string nativeAotPath = Path.Combine(publishOutputDir,
-                        $"{GodotSharpDirs.ProjectAssemblyName}.{soExt}");
+                        $"{scardotSharpDirs.ProjectAssemblyName}.{soExt}");
 
                     if (!File.Exists(assemblyPath) && !File.Exists(nativeAotPath))
                     {
@@ -300,7 +300,7 @@ namespace GodotTools.Export
                             if (platform == OS.Platforms.iOS)
                             {
                                 // Exclude the dylib artifact, since it's included separately as an xcframework.
-                                return Path.GetFileName(file) != $"{GodotSharpDirs.ProjectAssemblyName}.dylib";
+                                return Path.GetFileName(file) != $"{scardotSharpDirs.ProjectAssemblyName}.dylib";
                             }
 
                             return true;
@@ -361,10 +361,10 @@ namespace GodotTools.Export
                 {
                     // lipo the simulator binaries together
 
-                    string outputPath = Path.Combine(outputPaths[1], $"{GodotSharpDirs.ProjectAssemblyName}.dylib");
+                    string outputPath = Path.Combine(outputPaths[1], $"{scardotSharpDirs.ProjectAssemblyName}.dylib");
                     string[] files = outputPaths
                         .Skip(1)
-                        .Select(path => Path.Combine(path, $"{GodotSharpDirs.ProjectAssemblyName}.dylib"))
+                        .Select(path => Path.Combine(path, $"{scardotSharpDirs.ProjectAssemblyName}.dylib"))
                         .ToArray();
 
                     if (!Internal.LipOCreateFile(outputPath, files))
@@ -375,7 +375,7 @@ namespace GodotTools.Export
                     outputPaths.RemoveRange(2, outputPaths.Count - 2);
                 }
 
-                string xcFrameworkPath = Path.Combine(GodotSharpDirs.ProjectBaseOutputPath, publishConfig.BuildConfig, $"{GodotSharpDirs.ProjectAssemblyName}_aot.xcframework");
+                string xcFrameworkPath = Path.Combine(scardotSharpDirs.ProjectBaseOutputPath, publishConfig.BuildConfig, $"{scardotSharpDirs.ProjectAssemblyName}_aot.xcframework");
                 if (!BuildManager.GenerateXCFrameworkBlocking(outputPaths, xcFrameworkPath))
                 {
                     throw new InvalidOperationException("Failed to generate xcframework.");

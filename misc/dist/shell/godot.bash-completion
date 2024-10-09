@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-# Bash completion for the Godot editor
+# Bash completion for the scardot editor
 # To use it, install this file in `/etc/bash_completion.d` then restart your shell.
 # You can also `source` this file directly in your shell startup file.
 #
-# Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md).
+# Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md).
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy

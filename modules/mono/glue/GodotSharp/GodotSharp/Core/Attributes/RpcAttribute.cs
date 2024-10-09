@@ -1,6 +1,6 @@
 using System;
 
-namespace Godot
+namespace scardot
 {
     /// <summary>
     /// Attribute that changes the RPC mode for the annotated <c>method</c> to the given <see cref="Mode"/>,

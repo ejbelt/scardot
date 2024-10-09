@@ -1,19 +1,19 @@
 using System;
 using System.Runtime.InteropServices;
-using Godot.NativeInterop;
+using scardot.NativeInterop;
 
-namespace Godot
+namespace scardot
 {
     public static class Dispatcher
     {
-        internal static GodotTaskScheduler DefaultGodotTaskScheduler;
+        internal static scardotTaskScheduler DefaultscardotTaskScheduler;
 
-        internal static void InitializeDefaultGodotTaskScheduler()
+        internal static void InitializeDefaultscardotTaskScheduler()
         {
-            DefaultGodotTaskScheduler?.Dispose();
-            DefaultGodotTaskScheduler = new GodotTaskScheduler();
+            DefaultscardotTaskScheduler?.Dispose();
+            DefaultscardotTaskScheduler = new scardotTaskScheduler();
         }
 
-        public static GodotSynchronizationContext SynchronizationContext => DefaultGodotTaskScheduler.Context;
+        public static scardotSynchronizationContext SynchronizationContext => DefaultscardotTaskScheduler.Context;
     }
 }

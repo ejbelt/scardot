@@ -2,10 +2,10 @@
 /*  godot_audio.h                                                         */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -28,8 +28,8 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#ifndef GODOT_AUDIO_H
-#define GODOT_AUDIO_H
+#ifndef SCARDOT_AUDIO_H
+#define SCARDOT_AUDIO_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -70,12 +70,12 @@ extern void godot_audio_sample_bus_set_solo(int p_bus, bool p_enable);
 extern void godot_audio_sample_bus_set_mute(int p_bus, bool p_enable);
 
 // Worklet
-typedef int32_t GodotAudioState[4];
+typedef int32_t scardotAudioState[4];
 extern int godot_audio_worklet_create(int p_channels);
-extern void godot_audio_worklet_start(float *p_in_buf, int p_in_size, float *p_out_buf, int p_out_size, GodotAudioState p_state);
+extern void godot_audio_worklet_start(float *p_in_buf, int p_in_size, float *p_out_buf, int p_out_size, scardotAudioState p_state);
 extern void godot_audio_worklet_start_no_threads(float *p_out_buf, int p_out_size, void (*p_out_cb)(int p_pos, int p_frames), float *p_in_buf, int p_in_size, void (*p_in_cb)(int p_pos, int p_frames));
-extern int godot_audio_worklet_state_add(GodotAudioState p_state, int p_idx, int p_value);
-extern int godot_audio_worklet_state_get(GodotAudioState p_state, int p_idx);
+extern int godot_audio_worklet_state_add(scardotAudioState p_state, int p_idx, int p_value);
+extern int godot_audio_worklet_state_get(scardotAudioState p_state, int p_idx);
 extern int godot_audio_worklet_state_wait(int32_t *p_state, int p_idx, int32_t p_expected, int p_timeout);
 
 // Script
@@ -86,4 +86,4 @@ extern void godot_audio_script_start(float *p_in_buf, int p_in_size, float *p_ou
 }
 #endif
 
-#endif // GODOT_AUDIO_H
+#endif // SCARDOT_AUDIO_H

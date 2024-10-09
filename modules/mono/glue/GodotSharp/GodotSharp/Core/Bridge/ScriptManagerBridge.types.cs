@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
-namespace Godot.Bridge;
+namespace scardot.Bridge;
 
 #nullable enable
 

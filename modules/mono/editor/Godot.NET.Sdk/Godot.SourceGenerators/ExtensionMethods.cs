@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Godot.SourceGenerators
+namespace scardot.SourceGenerators
 {
     internal static class ExtensionMethods
     {
@@ -16,19 +16,19 @@ namespace Godot.SourceGenerators
         ) => context.AnalyzerConfigOptions.GlobalOptions
             .TryGetValue("build_property." + property, out value);
 
-        public static bool AreGodotSourceGeneratorsDisabled(this GeneratorExecutionContext context)
-            => context.TryGetGlobalAnalyzerProperty("GodotSourceGenerators", out string? toggle) &&
+        public static bool ArescardotSourceGeneratorsDisabled(this GeneratorExecutionContext context)
+            => context.TryGetGlobalAnalyzerProperty("scardotSourceGenerators", out string? toggle) &&
                toggle != null &&
                toggle.Equals("disabled", StringComparison.OrdinalIgnoreCase);
 
-        public static bool IsGodotToolsProject(this GeneratorExecutionContext context)
-            => context.TryGetGlobalAnalyzerProperty("IsGodotToolsProject", out string? toggle) &&
+        public static bool IsscardotToolsProject(this GeneratorExecutionContext context)
+            => context.TryGetGlobalAnalyzerProperty("IsscardotToolsProject", out string? toggle) &&
                toggle != null &&
                toggle.Equals("true", StringComparison.OrdinalIgnoreCase);
 
-        public static bool IsGodotSourceGeneratorDisabled(this GeneratorExecutionContext context, string generatorName) =>
-            AreGodotSourceGeneratorsDisabled(context) ||
-            (context.TryGetGlobalAnalyzerProperty("GodotDisabledSourceGenerators", out string? disabledGenerators) &&
+        public static bool IsscardotSourceGeneratorDisabled(this GeneratorExecutionContext context, string generatorName) =>
+            ArescardotSourceGeneratorsDisabled(context) ||
+            (context.TryGetGlobalAnalyzerProperty("scardotDisabledSourceGenerators", out string? disabledGenerators) &&
             disabledGenerators != null &&
             disabledGenerators.Split(';').Contains(generatorName));
 
@@ -48,13 +48,13 @@ namespace Godot.SourceGenerators
             return false;
         }
 
-        public static INamedTypeSymbol? GetGodotScriptNativeClass(this INamedTypeSymbol classTypeSymbol)
+        public static INamedTypeSymbol? GetscardotScriptNativeClass(this INamedTypeSymbol classTypeSymbol)
         {
             var symbol = classTypeSymbol;
 
             while (symbol != null)
             {
-                if (symbol.ContainingAssembly?.Name == "GodotSharp")
+                if (symbol.ContainingAssembly?.Name == "scardotSharp")
                     return symbol;
 
                 symbol = symbol.BaseType;
@@ -63,15 +63,15 @@ namespace Godot.SourceGenerators
             return null;
         }
 
-        public static string? GetGodotScriptNativeClassName(this INamedTypeSymbol classTypeSymbol)
+        public static string? GetscardotScriptNativeClassName(this INamedTypeSymbol classTypeSymbol)
         {
-            var nativeType = classTypeSymbol.GetGodotScriptNativeClass();
+            var nativeType = classTypeSymbol.GetscardotScriptNativeClass();
 
             if (nativeType == null)
                 return null;
 
             var godotClassNameAttr = nativeType.GetAttributes()
-                .FirstOrDefault(a => a.AttributeClass?.IsGodotClassNameAttribute() ?? false);
+                .FirstOrDefault(a => a.AttributeClass?.IsscardotClassNameAttribute() ?? false);
 
             string? godotClassName = null;
 
@@ -81,7 +81,7 @@ namespace Godot.SourceGenerators
             return godotClassName ?? nativeType.Name;
         }
 
-        private static bool TryGetGodotScriptClass(
+        private static bool TryGetscardotScriptClass(
             this ClassDeclarationSyntax cds, Compilation compilation,
             out INamedTypeSymbol? symbol
         )
@@ -91,7 +91,7 @@ namespace Godot.SourceGenerators
             var classTypeSymbol = sm.GetDeclaredSymbol(cds);
 
             if (classTypeSymbol?.BaseType == null
-                || !classTypeSymbol.BaseType.InheritsFrom("GodotSharp", GodotClasses.GodotObject))
+                || !classTypeSymbol.BaseType.InheritsFrom("scardotSharp", scardotClasses.scardotObject))
             {
                 symbol = null;
                 return false;
@@ -101,14 +101,14 @@ namespace Godot.SourceGenerators
             return true;
         }
 
-        public static IEnumerable<(ClassDeclarationSyntax cds, INamedTypeSymbol symbol)> SelectGodotScriptClasses(
+        public static IEnumerable<(ClassDeclarationSyntax cds, INamedTypeSymbol symbol)> SelectscardotScriptClasses(
             this IEnumerable<ClassDeclarationSyntax> source,
             Compilation compilation
         )
         {
             foreach (var cds in source)
             {
-                if (cds.TryGetGodotScriptClass(compilation, out var symbol))
+                if (cds.TryGetscardotScriptClass(compilation, out var symbol))
                     yield return (cds, symbol!);
             }
         }
@@ -246,25 +246,25 @@ namespace Godot.SourceGenerators
                 .Replace("<", "(Of ")
                 .Replace(">", ")");
 
-        public static bool IsGodotExportAttribute(this INamedTypeSymbol symbol)
-            => symbol.FullQualifiedNameOmitGlobal() == GodotClasses.ExportAttr;
+        public static bool IsscardotExportAttribute(this INamedTypeSymbol symbol)
+            => symbol.FullQualifiedNameOmitGlobal() == scardotClasses.ExportAttr;
 
-        public static bool IsGodotSignalAttribute(this INamedTypeSymbol symbol)
-            => symbol.FullQualifiedNameOmitGlobal() == GodotClasses.SignalAttr;
+        public static bool IsscardotSignalAttribute(this INamedTypeSymbol symbol)
+            => symbol.FullQualifiedNameOmitGlobal() == scardotClasses.SignalAttr;
 
-        public static bool IsGodotMustBeVariantAttribute(this INamedTypeSymbol symbol)
-            => symbol.FullQualifiedNameOmitGlobal() == GodotClasses.MustBeVariantAttr;
+        public static bool IsscardotMustBeVariantAttribute(this INamedTypeSymbol symbol)
+            => symbol.FullQualifiedNameOmitGlobal() == scardotClasses.MustBeVariantAttr;
 
-        public static bool IsGodotClassNameAttribute(this INamedTypeSymbol symbol)
-            => symbol.FullQualifiedNameOmitGlobal() == GodotClasses.GodotClassNameAttr;
+        public static bool IsscardotClassNameAttribute(this INamedTypeSymbol symbol)
+            => symbol.FullQualifiedNameOmitGlobal() == scardotClasses.scardotClassNameAttr;
 
-        public static bool IsGodotGlobalClassAttribute(this INamedTypeSymbol symbol)
-            => symbol.FullQualifiedNameOmitGlobal() == GodotClasses.GlobalClassAttr;
+        public static bool IsscardotGlobalClassAttribute(this INamedTypeSymbol symbol)
+            => symbol.FullQualifiedNameOmitGlobal() == scardotClasses.GlobalClassAttr;
 
         public static bool IsSystemFlagsAttribute(this INamedTypeSymbol symbol)
-            => symbol.FullQualifiedNameOmitGlobal() == GodotClasses.SystemFlagsAttr;
+            => symbol.FullQualifiedNameOmitGlobal() == scardotClasses.SystemFlagsAttr;
 
-        public static GodotMethodData? HasGodotCompatibleSignature(
+        public static scardotMethodData? HasscardotCompatibleSignature(
             this IMethodSymbol method,
             MarshalUtils.TypeCache typeCache
         )
@@ -294,26 +294,26 @@ namespace Godot.SourceGenerators
             if (parameters.Length > paramTypes.Length)
                 return null; // Ignore incompatible method
 
-            return new GodotMethodData(method, paramTypes,
+            return new scardotMethodData(method, paramTypes,
                 parameters.Select(p => p.Type).ToImmutableArray(),
                 retType != null ? (retType.Value, retSymbol) : null);
         }
 
-        public static IEnumerable<GodotMethodData> WhereHasGodotCompatibleSignature(
+        public static IEnumerable<scardotMethodData> WhereHasscardotCompatibleSignature(
             this IEnumerable<IMethodSymbol> methods,
             MarshalUtils.TypeCache typeCache
         )
         {
             foreach (var method in methods)
             {
-                var methodData = HasGodotCompatibleSignature(method, typeCache);
+                var methodData = HasscardotCompatibleSignature(method, typeCache);
 
                 if (methodData != null)
                     yield return methodData.Value;
             }
         }
 
-        public static IEnumerable<GodotPropertyData> WhereIsGodotCompatibleType(
+        public static IEnumerable<scardotPropertyData> WhereIsscardotCompatibleType(
             this IEnumerable<IPropertySymbol> properties,
             MarshalUtils.TypeCache typeCache
         )
@@ -325,24 +325,24 @@ namespace Godot.SourceGenerators
                 if (marshalType == null)
                     continue;
 
-                yield return new GodotPropertyData(property, marshalType.Value);
+                yield return new scardotPropertyData(property, marshalType.Value);
             }
         }
 
-        public static IEnumerable<GodotFieldData> WhereIsGodotCompatibleType(
+        public static IEnumerable<scardotFieldData> WhereIsscardotCompatibleType(
             this IEnumerable<IFieldSymbol> fields,
             MarshalUtils.TypeCache typeCache
         )
         {
             foreach (var field in fields)
             {
-                // TODO: We should still restore read-only fields after reloading assembly. Two possible ways: reflection or turn RestoreGodotObjectData into a constructor overload.
+                // TODO: We should still restore read-only fields after reloading assembly. Two possible ways: reflection or turn RestorescardotObjectData into a constructor overload.
                 var marshalType = MarshalUtils.ConvertManagedTypeToMarshalType(field.Type, typeCache);
 
                 if (marshalType == null)
                     continue;
 
-                yield return new GodotFieldData(field, marshalType.Value);
+                yield return new scardotFieldData(field, marshalType.Value);
             }
         }
 

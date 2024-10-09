@@ -2,10 +2,10 @@
 /*  display_layer.h                                                       */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -44,16 +44,16 @@
 #if defined(TARGET_OS_SIMULATOR) && TARGET_OS_SIMULATOR
 #if defined(__IPHONE_13_0)
 API_AVAILABLE(ios(13.0))
-@interface GodotMetalLayer : CAMetalLayer <DisplayLayer>
+@interface scardotMetalLayer : CAMetalLayer <DisplayLayer>
 #else
-@interface GodotMetalLayer : CALayer <DisplayLayer>
+@interface scardotMetalLayer : CALayer <DisplayLayer>
 #endif
 #else
-@interface GodotMetalLayer : CAMetalLayer <DisplayLayer>
+@interface scardotMetalLayer : CAMetalLayer <DisplayLayer>
 #endif
 @end
 
 API_DEPRECATED("OpenGLES is deprecated", ios(2.0, 12.0))
-@interface GodotOpenGLLayer : CAEAGLLayer <DisplayLayer>
+@interface scardotOpenGLLayer : CAEAGLLayer <DisplayLayer>
 
 @end

@@ -1,7 +1,7 @@
-# Romanian translation of the Godot Engine editor interface.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Romanian translation of the scardot Engine editor interface.
+# Copyright (c) 2014-present scardot Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the scardot source code.
 # Calin Sopterean <csopterean@gmail.com>, 2018.
 # Filip <filipanton@tutanota.com>, 2018, 2020.
 # Nitroretro <nitroretro@protonmail.com>, 2018.
@@ -32,7 +32,7 @@
 # Vasile Milea <milea.vasile959@gmail.com>, 2023.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine editor interface\n"
+"Project-Id-Version: scardot Engine editor interface\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2024-02-10 09:01+0000\n"
@@ -902,11 +902,11 @@ msgstr "Directorul nu a putut fi creat."
 msgid "Create Folder"
 msgstr "Creare folder"
 
-msgid "Thanks from the Godot community!"
-msgstr "Mulțumesc din partea comunităţii Godot!"
+msgid "Thanks from the scardot community!"
+msgstr "Mulțumesc din partea comunităţii scardot!"
 
-msgid "Godot Engine contributors"
-msgstr "Contribuabili Motor Godot"
+msgid "scardot Engine contributors"
+msgstr "Contribuabili Motor scardot"
 
 msgid "Project Founders"
 msgstr "Fondatorii Proiectului"
@@ -943,12 +943,12 @@ msgid "Third-party Licenses"
 msgstr "Licenţe Thirdparty"
 
 msgid ""
-"Godot Engine relies on a number of third-party free and open source "
+"scardot Engine relies on a number of third-party free and open source "
 "libraries, all compatible with the terms of its MIT license. The following is "
 "an exhaustive list of all such third-party components with their respective "
 "copyright statements and license terms."
 msgstr ""
-"Motorul Godot se bazează pe un număr de biblioteci thirdparty gratis și "
+"Motorul scardot se bazează pe un număr de biblioteci thirdparty gratis și "
 "opensource, toate compatibile cu termenii licenţei MIT ai lui. Mai jos este o "
 "listă exhaustivă a tuturor acestor componente de thirdparty cu declaraţiile "
 "de autor respective şi termenii licenței."
@@ -1272,7 +1272,7 @@ msgstr ""
 msgid "New profile name:"
 msgstr "Nume de profil nou:"
 
-msgid "Godot Feature Profile"
+msgid "scardot Feature Profile"
 msgstr "Administrează Șabloanele de Export"
 
 msgid "Import Profile(s)"
@@ -1917,8 +1917,8 @@ msgstr "Dezinstalează"
 msgid "Download from:"
 msgstr "Descărcați din:"
 
-msgid "Godot Export Templates"
-msgstr "Șabloane de export Godot"
+msgid "scardot Export Templates"
+msgstr "Șabloane de export scardot"
 
 msgid "Duplicate"
 msgstr "Duplicat"
@@ -3211,8 +3211,8 @@ msgstr "Eroare la importare"
 msgid "Online Docs"
 msgstr "Documentație Online"
 
-msgid "Open Godot online documentation."
-msgstr "Deschideți documentația online Godot."
+msgid "Open scardot online documentation."
+msgstr "Deschideți documentația online scardot."
 
 msgid "File"
 msgstr "Fișier"

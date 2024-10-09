@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.Build.Construction;
 using Microsoft.Build.Locator;
 
-namespace GodotTools.ProjectEditor
+namespace scardotTools.ProjectEditor
 {
     public sealed class MSBuildProject
     {
@@ -52,10 +52,10 @@ namespace GodotTools.ProjectEditor
             project.HasUnsavedChanges = true;
         }
 
-        public static void EnsureGodotSdkIsUpToDate(MSBuildProject project)
+        public static void EnsurescardotSdkIsUpToDate(MSBuildProject project)
         {
             var root = project.Root;
-            string godotSdkAttrValue = ProjectGenerator.GodotSdkAttrValue;
+            string godotSdkAttrValue = ProjectGenerator.scardotSdkAttrValue;
 
             if (!string.IsNullOrEmpty(root.Sdk) &&
                 root.Sdk.Trim().Equals(godotSdkAttrValue, StringComparison.OrdinalIgnoreCase))

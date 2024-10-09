@@ -1,7 +1,7 @@
-# Hebrew translation of the Godot Engine editor interface.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Hebrew translation of the scardot Engine editor interface.
+# Copyright (c) 2014-present scardot Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the scardot source code.
 # Daniel <lorddaniel09@gmail.com>, 2018.
 # Ben Golan <golanben4@gmail.com>, 2017.
 # Luc Stepniewski <lior@gradstein.info>, 2017.
@@ -39,7 +39,7 @@
 # Ofir Tzriker <ofirc36@gmail.com>, 2024.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine editor interface\n"
+"Project-Id-Version: scardot Engine editor interface\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2024-06-23 14:09+0000\n"
@@ -1129,13 +1129,13 @@ msgstr "שם התיקייה תקין."
 msgid "Double-click to open in browser."
 msgstr "לחיצה כפולה לפתיחה בדפדפן."
 
-msgid "Thanks from the Godot community!"
-msgstr "תודות מקהילת Godot!"
+msgid "Thanks from the scardot community!"
+msgstr "תודות מקהילת scardot!"
 
 msgid "(unknown)"
 msgstr "(לא ידוע)"
 
-msgid "Godot Engine contributors"
+msgid "scardot Engine contributors"
 msgstr "מתנדבי מנוע גודו"
 
 msgid "Project Founders"
@@ -1188,12 +1188,12 @@ msgid "Third-party Licenses"
 msgstr "רשיונות צד שלישי"
 
 msgid ""
-"Godot Engine relies on a number of third-party free and open source "
+"scardot Engine relies on a number of third-party free and open source "
 "libraries, all compatible with the terms of its MIT license. The following is "
 "an exhaustive list of all such third-party components with their respective "
 "copyright statements and license terms."
 msgstr ""
-"מנוע Godot מסתמך על מספר ספריות צד־שלישי חופשיות ובקוד פתוח, כולן תואמות את "
+"מנוע scardot מסתמך על מספר ספריות צד־שלישי חופשיות ובקוד פתוח, כולן תואמות את "
 "דרישות רישיון MIT של המנוע. לפניכם רשימה ממצה של כל רכיבי הצד־השלישי במנוע עם "
 "הצהרות זכויות היוצרים ותנאי הרישיון שלהם."
 
@@ -1554,8 +1554,8 @@ msgstr "צור או ייבא פרופיל כדי לערוך מחלקות ומא�
 msgid "New profile name:"
 msgstr "שם פרופיל חדש:"
 
-msgid "Godot Feature Profile"
-msgstr "פרופיל התכונות של Godot"
+msgid "scardot Feature Profile"
+msgstr "פרופיל התכונות של scardot"
 
 msgid "Import Profile(s)"
 msgstr "ייבוא פרופיל(ים)"

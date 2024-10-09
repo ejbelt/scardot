@@ -9,8 +9,8 @@
     <SelfContained>False</SelfContained>
     <RollForward>LatestMajor</RollForward>
   </PropertyGroup>
-  <PropertyGroup Condition="Exists('$(SolutionDir)/../../../../bin/GodotSharp/Api/Debug/GodotSharp.dll') And ('$(GodotPlatform)' == 'windows' Or ('$(GodotPlatform)' == '' And '$(OS)' == 'Windows_NT'))">
-    <OutputPath>$(SolutionDir)/../../../../bin/GodotSharp/Tools</OutputPath>
+  <PropertyGroup Condition="Exists('$(SolutionDir)/../../../../bin/scardotSharp/Api/Debug/scardotSharp.dll') And ('$(scardotPlatform)' == 'windows' Or ('$(scardotPlatform)' == '' And '$(OS)' == 'Windows_NT'))">
+    <OutputPath>$(SolutionDir)/../../../../bin/scardotSharp/Tools</OutputPath>
     <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>False</AppendRuntimeIdentifierToOutputPath>
   </PropertyGroup>

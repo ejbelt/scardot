@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Godot.SourceGenerators
+namespace scardot.SourceGenerators
 {
     internal readonly struct MethodInfo
     {

@@ -2,7 +2,7 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Godot.Collections;
+using scardot.Collections;
 using Array = System.Array;
 
 // ReSharper disable InconsistentNaming
@@ -12,7 +12,7 @@ using Array = System.Array;
 
 #nullable enable
 
-namespace Godot.NativeInterop
+namespace scardot.NativeInterop
 {
     public static class Marshaling
     {
@@ -148,21 +148,21 @@ namespace Godot.NativeInterop
                         if (type == typeof(Rid[]))
                             return Variant.Type.Array;
 
-                        if (typeof(GodotObject[]).IsAssignableFrom(type))
+                        if (typeof(scardotObject[]).IsAssignableFrom(type))
                             return Variant.Type.Array;
                     }
                     else if (type.IsGenericType)
                     {
-                        if (typeof(GodotObject).IsAssignableFrom(type))
+                        if (typeof(scardotObject).IsAssignableFrom(type))
                             return Variant.Type.Object;
 
-                        // We use `IsAssignableFrom` with our helper interfaces to detect generic Godot collections
+                        // We use `IsAssignableFrom` with our helper interfaces to detect generic scardot collections
                         // because `GetGenericTypeDefinition` is not supported in NativeAOT reflection-free mode.
 
-                        if (typeof(IGenericGodotDictionary).IsAssignableFrom(type))
+                        if (typeof(IGenericscardotDictionary).IsAssignableFrom(type))
                             return Variant.Type.Dictionary;
 
-                        if (typeof(IGenericGodotArray).IsAssignableFrom(type))
+                        if (typeof(IGenericscardotArray).IsAssignableFrom(type))
                             return Variant.Type.Array;
                     }
                     else if (type == typeof(Variant))
@@ -172,7 +172,7 @@ namespace Godot.NativeInterop
                     }
                     else
                     {
-                        if (typeof(GodotObject).IsAssignableFrom(type))
+                        if (typeof(scardotObject).IsAssignableFrom(type))
                             return Variant.Type.Object;
 
                         if (typeof(StringName) == type)
@@ -237,7 +237,7 @@ namespace Godot.NativeInterop
                 var gcHandle = CustomGCHandle.AllocStrong(p_managed_callable.Delegate);
 
                 IntPtr objectPtr = p_managed_callable.Target != null ?
-                    GodotObject.GetPtr(p_managed_callable.Target) :
+                    scardotObject.GetPtr(p_managed_callable.Target) :
                     IntPtr.Zero;
 
                 unsafe
@@ -315,7 +315,7 @@ namespace Godot.NativeInterop
 
         public static Signal ConvertSignalToManaged(in godot_signal p_signal)
         {
-            var owner = GodotObject.InstanceFromId(p_signal.ObjectId);
+            var owner = scardotObject.InstanceFromId(p_signal.ObjectId);
             var name = StringName.CreateTakingOwnershipOfDisposableValue(
                 NativeFuncs.godotsharp_string_name_new_copy(p_signal.Name));
             return new Signal(owner, name);
@@ -323,8 +323,8 @@ namespace Godot.NativeInterop
 
         // Array
 
-        internal static T[] ConvertNativeGodotArrayToSystemArrayOfGodotObjectType<T>(in godot_array p_array)
-            where T : GodotObject
+        internal static T[] ConvertNativescardotArrayToSystemArrayOfscardotObjectType<T>(in godot_array p_array)
+            where T : scardotObject
         {
             var array = Collections.Array.CreateTakingOwnershipOfDisposableValue(
                 NativeFuncs.godotsharp_array_new_copy(p_array));
@@ -333,12 +333,12 @@ namespace Godot.NativeInterop
             var ret = new T[length];
 
             for (int i = 0; i < length; i++)
-                ret[i] = (T)array[i].AsGodotObject();
+                ret[i] = (T)array[i].AsscardotObject();
 
             return ret;
         }
 
-        internal static StringName[] ConvertNativeGodotArrayToSystemArrayOfStringName(in godot_array p_array)
+        internal static StringName[] ConvertNativescardotArrayToSystemArrayOfStringName(in godot_array p_array)
         {
             var array = Collections.Array.CreateTakingOwnershipOfDisposableValue(
                 NativeFuncs.godotsharp_array_new_copy(p_array));
@@ -352,7 +352,7 @@ namespace Godot.NativeInterop
             return ret;
         }
 
-        internal static NodePath[] ConvertNativeGodotArrayToSystemArrayOfNodePath(in godot_array p_array)
+        internal static NodePath[] ConvertNativescardotArrayToSystemArrayOfNodePath(in godot_array p_array)
         {
             var array = Collections.Array.CreateTakingOwnershipOfDisposableValue(
                 NativeFuncs.godotsharp_array_new_copy(p_array));
@@ -366,7 +366,7 @@ namespace Godot.NativeInterop
             return ret;
         }
 
-        internal static Rid[] ConvertNativeGodotArrayToSystemArrayOfRid(in godot_array p_array)
+        internal static Rid[] ConvertNativescardotArrayToSystemArrayOfRid(in godot_array p_array)
         {
             var array = Collections.Array.CreateTakingOwnershipOfDisposableValue(
                 NativeFuncs.godotsharp_array_new_copy(p_array));

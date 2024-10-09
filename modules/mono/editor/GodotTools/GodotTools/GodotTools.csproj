@@ -5,25 +5,25 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <LangVersion>10</LangVersion>
     <Nullable>enable</Nullable>
-    <!-- The Godot editor uses the Debug Godot API assemblies -->
-    <GodotApiConfiguration>Debug</GodotApiConfiguration>
-    <GodotSourceRootPath>$(SolutionDir)/../../../../</GodotSourceRootPath>
-    <GodotOutputDataDir>$(GodotSourceRootPath)/bin/GodotSharp</GodotOutputDataDir>
-    <GodotApiAssembliesDir>$(GodotOutputDataDir)/Api/$(GodotApiConfiguration)</GodotApiAssembliesDir>
+    <!-- The scardot editor uses the Debug scardot API assemblies -->
+    <scardotApiConfiguration>Debug</scardotApiConfiguration>
+    <scardotSourceRootPath>$(SolutionDir)/../../../../</scardotSourceRootPath>
+    <scardotOutputDataDir>$(scardotSourceRootPath)/bin/scardotSharp</scardotOutputDataDir>
+    <scardotApiAssembliesDir>$(scardotOutputDataDir)/Api/$(scardotApiConfiguration)</scardotApiAssembliesDir>
     <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-  <!-- Needed for our source generators to work despite this not being a Godot game project -->
+  <!-- Needed for our source generators to work despite this not being a scardot game project -->
   <PropertyGroup>
-    <IsGodotToolsProject>true</IsGodotToolsProject>
+    <IsscardotToolsProject>true</IsscardotToolsProject>
   </PropertyGroup>
   <ItemGroup>
-    <CompilerVisibleProperty Include="IsGodotToolsProject" />
+    <CompilerVisibleProperty Include="IsscardotToolsProject" />
   </ItemGroup>
-  <PropertyGroup Condition=" Exists('$(GodotApiAssembliesDir)/GodotSharp.dll') ">
-    <!-- The project is part of the Godot source tree -->
-    <!-- Use the Godot source tree output folder instead of '$(ProjectDir)/bin' -->
-    <OutputPath>$(GodotOutputDataDir)/Tools</OutputPath>
+  <PropertyGroup Condition=" Exists('$(scardotApiAssembliesDir)/scardotSharp.dll') ">
+    <!-- The project is part of the scardot source tree -->
+    <!-- Use the scardot source tree output folder instead of '$(ProjectDir)/bin' -->
+    <OutputPath>$(scardotOutputDataDir)/Tools</OutputPath>
     <!-- Must not append '$(TargetFramework)' to the output path in this case -->
     <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
@@ -32,23 +32,23 @@
     <PackageReference Include="JetBrains.Rider.PathLocator" Version="1.0.9" />
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <Reference Include="GodotSharp">
-      <HintPath>$(GodotApiAssembliesDir)/GodotSharp.dll</HintPath>
+    <Reference Include="scardotSharp">
+      <HintPath>$(scardotApiAssembliesDir)/scardotSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="GodotSharpEditor">
-      <HintPath>$(GodotApiAssembliesDir)/GodotSharpEditor.dll</HintPath>
+    <Reference Include="scardotSharpEditor">
+      <HintPath>$(scardotApiAssembliesDir)/scardotSharpEditor.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Godot.NET.Sdk\Godot.SourceGenerators\Godot.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-    <ProjectReference Include="..\..\..\glue\GodotSharp\Godot.SourceGenerators.Internal\Godot.SourceGenerators.Internal.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\..\scardot.NET.Sdk\scardot.SourceGenerators\scardot.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\..\..\glue\scardotSharp\scardot.SourceGenerators.Internal\scardot.SourceGenerators.Internal.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GodotTools.BuildLogger\GodotTools.BuildLogger.csproj" />
-    <ProjectReference Include="..\GodotTools.IdeMessaging\GodotTools.IdeMessaging.csproj" />
-    <ProjectReference Include="..\GodotTools.ProjectEditor\GodotTools.ProjectEditor.csproj" />
-    <ProjectReference Include="..\GodotTools.Core\GodotTools.Core.csproj" />
+    <ProjectReference Include="..\scardotTools.BuildLogger\scardotTools.BuildLogger.csproj" />
+    <ProjectReference Include="..\scardotTools.IdeMessaging\scardotTools.IdeMessaging.csproj" />
+    <ProjectReference Include="..\scardotTools.ProjectEditor\scardotTools.ProjectEditor.csproj" />
+    <ProjectReference Include="..\scardotTools.Core\scardotTools.Core.csproj" />
   </ItemGroup>
 </Project>

@@ -2,10 +2,10 @@
 /*  library_godot_webgl2.js                                               */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -28,9 +28,9 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-const GodotWebGL2 = {
-	$GodotWebGL2__deps: ['$GL', '$GodotRuntime'],
-	$GodotWebGL2: {},
+const scardotWebGL2 = {
+	$scardotWebGL2__deps: ['$GL', '$scardotRuntime'],
+	$scardotWebGL2: {},
 
 	// This is implemented as "glGetBufferSubData" in new emscripten versions.
 	// Since we have to support older (pre 2.0.17) emscripten versions, we add this wrapper function instead.
@@ -53,7 +53,7 @@ const GodotWebGL2 = {
 		if (typeof context.multiviewExt === 'undefined') {
 			const /** OVR_multiview2 */ ext = context.GLctx.getExtension('OVR_multiview2');
 			if (!ext) {
-				GodotRuntime.error('Trying to call glFramebufferTextureMultiviewOVR() without the OVR_multiview2 extension');
+				scardotRuntime.error('Trying to call glFramebufferTextureMultiviewOVR() without the OVR_multiview2 extension');
 				return;
 			}
 			context.multiviewExt = ext;
@@ -70,7 +70,7 @@ const GodotWebGL2 = {
 		if (typeof context.oculusMultiviewExt === 'undefined') {
 			const /** OCULUS_multiview */ ext = context.GLctx.getExtension('OCULUS_multiview');
 			if (!ext) {
-				GodotRuntime.error('Trying to call glFramebufferTextureMultisampleMultiviewOVR() without the OCULUS_multiview extension');
+				scardotRuntime.error('Trying to call glFramebufferTextureMultisampleMultiviewOVR() without the OCULUS_multiview extension');
 				return;
 			}
 			context.oculusMultiviewExt = ext;
@@ -80,5 +80,5 @@ const GodotWebGL2 = {
 	},
 };
 
-autoAddDeps(GodotWebGL2, '$GodotWebGL2');
-mergeInto(LibraryManager.library, GodotWebGL2);
+autoAddDeps(scardotWebGL2, '$scardotWebGL2');
+mergeInto(LibraryManager.library, scardotWebGL2);

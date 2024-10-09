@@ -4,13 +4,13 @@ using System.Runtime.InteropServices;
 
 #nullable enable
 
-namespace Godot.NativeInterop
+namespace scardot.NativeInterop
 {
-    public class GodotDllImportResolver
+    public class scardotDllImportResolver
     {
         private IntPtr _internalHandle;
 
-        public GodotDllImportResolver(IntPtr internalHandle)
+        public scardotDllImportResolver(IntPtr internalHandle)
         {
             _internalHandle = internalHandle;
         }

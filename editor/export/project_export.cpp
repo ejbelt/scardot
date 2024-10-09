@@ -2,10 +2,10 @@
 /*  project_export.cpp                                                    */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -1487,11 +1487,11 @@ ProjectExportDialog::ProjectExportDialog() {
 
 	set_cancel_button_text(TTR("Close"));
 	set_ok_button_text(TTR("Export PCK/ZIP..."));
-	get_ok_button()->set_tooltip_text(TTR("Export the project resources as a PCK or ZIP package. This is not a playable build, only the project data without a Godot executable."));
+	get_ok_button()->set_tooltip_text(TTR("Export the project resources as a PCK or ZIP package. This is not a playable build, only the project data without a scardot executable."));
 	get_ok_button()->set_disabled(true);
 
 	export_button = add_button(TTR("Export Project..."), !DisplayServer::get_singleton()->get_swap_cancel_ok(), "export");
-	export_button->set_tooltip_text(TTR("Export the project as a playable build (Godot executable and project data) for the selected preset."));
+	export_button->set_tooltip_text(TTR("Export the project as a playable build (scardot executable and project data) for the selected preset."));
 	export_button->connect(SceneStringName(pressed), callable_mp(this, &ProjectExportDialog::_export_project));
 	// Disable initially before we select a valid preset
 	export_button->set_disabled(true);
@@ -1511,7 +1511,7 @@ ProjectExportDialog::ProjectExportDialog() {
 
 	export_pck_zip = memnew(EditorFileDialog);
 	export_pck_zip->add_filter("*.zip", TTR("ZIP File"));
-	export_pck_zip->add_filter("*.pck", TTR("Godot Project Pack"));
+	export_pck_zip->add_filter("*.pck", TTR("scardot Project Pack"));
 	export_pck_zip->set_access(EditorFileDialog::ACCESS_FILESYSTEM);
 	export_pck_zip->set_file_mode(EditorFileDialog::FILE_MODE_SAVE_FILE);
 	add_child(export_pck_zip);

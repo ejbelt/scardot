@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotRenderView.java                                                  */
+/*  scardotRenderView.java                                                  */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -30,15 +30,15 @@
 
 package org.godotengine.godot;
 
-import org.godotengine.godot.input.GodotInputHandler;
+import org.godotengine.godot.input.scardotInputHandler;
 
 import android.view.SurfaceView;
 
-public interface GodotRenderView {
+public interface scardotRenderView {
 	SurfaceView getView();
 
 	/**
-	 * Starts the thread that will drive Godot's rendering.
+	 * Starts the thread that will drive scardot's rendering.
 	 */
 	void startRenderer();
 
@@ -57,7 +57,7 @@ public interface GodotRenderView {
 
 	void onActivityDestroyed();
 
-	GodotInputHandler getInputHandler();
+	scardotInputHandler getInputHandler();
 
 	void configurePointerIcon(int pointerType, String imagePath, float hotSpotX, float hotSpotY);
 

@@ -2,10 +2,10 @@
 /*  editor_internal_calls.cpp                                             */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -58,31 +58,31 @@
 extern "C" {
 #endif
 
-void godot_icall_GodotSharpDirs_ResMetadataDir(godot_string *r_dest) {
-	memnew_placement(r_dest, String(GodotSharpDirs::get_res_metadata_dir()));
+void godot_icall_scardotSharpDirs_ResMetadataDir(godot_string *r_dest) {
+	memnew_placement(r_dest, String(scardotSharpDirs::get_res_metadata_dir()));
 }
 
-void godot_icall_GodotSharpDirs_MonoUserDir(godot_string *r_dest) {
-	memnew_placement(r_dest, String(GodotSharpDirs::get_mono_user_dir()));
+void godot_icall_scardotSharpDirs_MonoUserDir(godot_string *r_dest) {
+	memnew_placement(r_dest, String(scardotSharpDirs::get_mono_user_dir()));
 }
 
-void godot_icall_GodotSharpDirs_BuildLogsDirs(godot_string *r_dest) {
+void godot_icall_scardotSharpDirs_BuildLogsDirs(godot_string *r_dest) {
 #ifdef TOOLS_ENABLED
-	memnew_placement(r_dest, String(GodotSharpDirs::get_build_logs_dir()));
+	memnew_placement(r_dest, String(scardotSharpDirs::get_build_logs_dir()));
 #else
 	return nullptr;
 #endif
 }
 
-void godot_icall_GodotSharpDirs_DataEditorToolsDir(godot_string *r_dest) {
+void godot_icall_scardotSharpDirs_DataEditorToolsDir(godot_string *r_dest) {
 #ifdef TOOLS_ENABLED
-	memnew_placement(r_dest, String(GodotSharpDirs::get_data_editor_tools_dir()));
+	memnew_placement(r_dest, String(scardotSharpDirs::get_data_editor_tools_dir()));
 #else
 	return nullptr;
 #endif
 }
 
-void godot_icall_GodotSharpDirs_CSharpProjectName(godot_string *r_dest) {
+void godot_icall_scardotSharpDirs_CSharpProjectName(godot_string *r_dest) {
 	memnew_placement(r_dest, String(path::get_csharp_project_name()));
 }
 
@@ -125,11 +125,11 @@ bool godot_icall_Internal_LipOCreateFile(const godot_string *p_output_path, cons
 	return lip.create_file(output_path, files);
 }
 
-bool godot_icall_Internal_GodotIs32Bits() {
+bool godot_icall_Internal_scardotIs32Bits() {
 	return sizeof(void *) == 4;
 }
 
-bool godot_icall_Internal_GodotIsRealTDouble() {
+bool godot_icall_Internal_scardotIsRealTDouble() {
 #ifdef REAL_T_IS_DOUBLE
 	return (bool)true;
 #else
@@ -137,7 +137,7 @@ bool godot_icall_Internal_GodotIsRealTDouble() {
 #endif
 }
 
-void godot_icall_Internal_GodotMainIteration() {
+void godot_icall_Internal_scardotMainIteration() {
 	Main::iteration();
 }
 
@@ -151,7 +151,7 @@ bool godot_icall_Internal_IsAssembliesReloadingNeeded() {
 
 void godot_icall_Internal_ReloadAssemblies(bool p_soft_reload) {
 #ifdef GD_MONO_HOT_RELOAD
-	callable_mp(mono_bind::GodotSharp::get_singleton(), &mono_bind::GodotSharp::reload_assemblies).call_deferred(p_soft_reload);
+	callable_mp(mono_bind::scardotSharp::get_singleton(), &mono_bind::scardotSharp::reload_assemblies).call_deferred(p_soft_reload);
 #endif
 }
 
@@ -254,22 +254,22 @@ bool godot_icall_Utils_OS_UnixFileHasExecutableAccess(const godot_string *p_file
 #endif
 
 // The order in this array must match the declaration order of
-// the methods in 'GodotTools/Internals/Internal.cs'.
+// the methods in 'scardotTools/Internals/Internal.cs'.
 static const void *unmanaged_callbacks[]{
-	(void *)godot_icall_GodotSharpDirs_ResMetadataDir,
-	(void *)godot_icall_GodotSharpDirs_MonoUserDir,
-	(void *)godot_icall_GodotSharpDirs_BuildLogsDirs,
-	(void *)godot_icall_GodotSharpDirs_DataEditorToolsDir,
-	(void *)godot_icall_GodotSharpDirs_CSharpProjectName,
+	(void *)godot_icall_scardotSharpDirs_ResMetadataDir,
+	(void *)godot_icall_scardotSharpDirs_MonoUserDir,
+	(void *)godot_icall_scardotSharpDirs_BuildLogsDirs,
+	(void *)godot_icall_scardotSharpDirs_DataEditorToolsDir,
+	(void *)godot_icall_scardotSharpDirs_CSharpProjectName,
 	(void *)godot_icall_EditorProgress_Create,
 	(void *)godot_icall_EditorProgress_Dispose,
 	(void *)godot_icall_EditorProgress_Step,
 	(void *)godot_icall_Internal_FullExportTemplatesDir,
 	(void *)godot_icall_Internal_IsMacOSAppBundleInstalled,
 	(void *)godot_icall_Internal_LipOCreateFile,
-	(void *)godot_icall_Internal_GodotIs32Bits,
-	(void *)godot_icall_Internal_GodotIsRealTDouble,
-	(void *)godot_icall_Internal_GodotMainIteration,
+	(void *)godot_icall_Internal_scardotIs32Bits,
+	(void *)godot_icall_Internal_scardotIsRealTDouble,
+	(void *)godot_icall_Internal_scardotMainIteration,
 	(void *)godot_icall_Internal_IsAssembliesReloadingNeeded,
 	(void *)godot_icall_Internal_ReloadAssemblies,
 	(void *)godot_icall_Internal_EditorDebuggerNodeReloadScripts,

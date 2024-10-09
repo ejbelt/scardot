@@ -1,8 +1,8 @@
-namespace Godot
+namespace scardot
 {
     /// <summary>
-    /// Allows a GodotObject to react to the serialization/deserialization
-    /// that occurs when Godot reloads assemblies.
+    /// Allows a scardotObject to react to the serialization/deserialization
+    /// that occurs when scardot reloads assemblies.
     /// </summary>
     public interface ISerializationListener
     {

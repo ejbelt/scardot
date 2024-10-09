@@ -1,8 +1,8 @@
 using System;
 using System.Runtime.InteropServices;
-using Godot.NativeInterop;
+using scardot.NativeInterop;
 
-namespace Godot.Bridge
+namespace scardot.Bridge
 {
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct ManagedCallbacks
@@ -16,11 +16,11 @@ namespace Godot.Bridge
         public delegate* unmanaged<IntPtr, godot_array*, godot_bool> DelegateUtils_TrySerializeDelegateWithGCHandle;
         public delegate* unmanaged<godot_array*, IntPtr*, godot_bool> DelegateUtils_TryDeserializeDelegateWithGCHandle;
         public delegate* unmanaged<void> ScriptManagerBridge_FrameCallback;
-        public delegate* unmanaged<godot_string_name*, IntPtr, IntPtr> ScriptManagerBridge_CreateManagedForGodotObjectBinding;
-        public delegate* unmanaged<IntPtr, IntPtr, godot_variant**, int, godot_bool> ScriptManagerBridge_CreateManagedForGodotObjectScriptInstance;
+        public delegate* unmanaged<godot_string_name*, IntPtr, IntPtr> ScriptManagerBridge_CreateManagedForscardotObjectBinding;
+        public delegate* unmanaged<IntPtr, IntPtr, godot_variant**, int, godot_bool> ScriptManagerBridge_CreateManagedForscardotObjectScriptInstance;
         public delegate* unmanaged<IntPtr, godot_string_name*, void> ScriptManagerBridge_GetScriptNativeName;
         public delegate* unmanaged<godot_string*, godot_string*, godot_string*, godot_string*, void> ScriptManagerBridge_GetGlobalClassName;
-        public delegate* unmanaged<IntPtr, IntPtr, void> ScriptManagerBridge_SetGodotObjectPtr;
+        public delegate* unmanaged<IntPtr, IntPtr, void> ScriptManagerBridge_SetscardotObjectPtr;
         public delegate* unmanaged<IntPtr, godot_string_name*, godot_variant**, int, godot_bool*, void> ScriptManagerBridge_RaiseEventSignal;
         public delegate* unmanaged<IntPtr, IntPtr, godot_bool> ScriptManagerBridge_ScriptIsOrInherits;
         public delegate* unmanaged<IntPtr, godot_string*, godot_bool> ScriptManagerBridge_AddScriptBridge;
@@ -43,7 +43,7 @@ namespace Godot.Bridge
         public delegate* unmanaged<IntPtr, void> GCHandleBridge_FreeGCHandle;
         public delegate* unmanaged<IntPtr, godot_bool> GCHandleBridge_GCHandleIsTargetCollectible;
         public delegate* unmanaged<void*, void> DebuggingUtils_GetCurrentStackInfo;
-        public delegate* unmanaged<void> DisposablesTracker_OnGodotShuttingDown;
+        public delegate* unmanaged<void> DisposablesTracker_OnscardotShuttingDown;
         public delegate* unmanaged<godot_bool, void> GD_OnCoreApiAssemblyLoaded;
         // @formatter:on
 
@@ -60,11 +60,11 @@ namespace Godot.Bridge
                 DelegateUtils_TrySerializeDelegateWithGCHandle = &DelegateUtils.TrySerializeDelegateWithGCHandle,
                 DelegateUtils_TryDeserializeDelegateWithGCHandle = &DelegateUtils.TryDeserializeDelegateWithGCHandle,
                 ScriptManagerBridge_FrameCallback = &ScriptManagerBridge.FrameCallback,
-                ScriptManagerBridge_CreateManagedForGodotObjectBinding = &ScriptManagerBridge.CreateManagedForGodotObjectBinding,
-                ScriptManagerBridge_CreateManagedForGodotObjectScriptInstance = &ScriptManagerBridge.CreateManagedForGodotObjectScriptInstance,
+                ScriptManagerBridge_CreateManagedForscardotObjectBinding = &ScriptManagerBridge.CreateManagedForscardotObjectBinding,
+                ScriptManagerBridge_CreateManagedForscardotObjectScriptInstance = &ScriptManagerBridge.CreateManagedForscardotObjectScriptInstance,
                 ScriptManagerBridge_GetScriptNativeName = &ScriptManagerBridge.GetScriptNativeName,
                 ScriptManagerBridge_GetGlobalClassName = &ScriptManagerBridge.GetGlobalClassName,
-                ScriptManagerBridge_SetGodotObjectPtr = &ScriptManagerBridge.SetGodotObjectPtr,
+                ScriptManagerBridge_SetscardotObjectPtr = &ScriptManagerBridge.SetscardotObjectPtr,
                 ScriptManagerBridge_RaiseEventSignal = &ScriptManagerBridge.RaiseEventSignal,
                 ScriptManagerBridge_ScriptIsOrInherits = &ScriptManagerBridge.ScriptIsOrInherits,
                 ScriptManagerBridge_AddScriptBridge = &ScriptManagerBridge.AddScriptBridge,
@@ -87,7 +87,7 @@ namespace Godot.Bridge
                 GCHandleBridge_FreeGCHandle = &GCHandleBridge.FreeGCHandle,
                 GCHandleBridge_GCHandleIsTargetCollectible = &GCHandleBridge.GCHandleIsTargetCollectible,
                 DebuggingUtils_GetCurrentStackInfo = &DebuggingUtils.GetCurrentStackInfo,
-                DisposablesTracker_OnGodotShuttingDown = &DisposablesTracker.OnGodotShuttingDown,
+                DisposablesTracker_OnscardotShuttingDown = &DisposablesTracker.OnscardotShuttingDown,
                 GD_OnCoreApiAssemblyLoaded = &GD.OnCoreApiAssemblyLoaded,
                 // @formatter:on
             };

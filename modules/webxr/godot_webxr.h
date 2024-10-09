@@ -2,10 +2,10 @@
 /*  godot_webxr.h                                                         */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -28,8 +28,8 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#ifndef GODOT_WEBXR_H
-#define GODOT_WEBXR_H
+#ifndef SCARDOT_WEBXR_H
+#define SCARDOT_WEBXR_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -44,26 +44,26 @@ enum WebXRInputEvent {
 	WEBXR_INPUT_EVENT_SQUEEZEEND,
 };
 
-typedef void (*GodotWebXRSupportedCallback)(char *p_session_mode, int p_supported);
-typedef void (*GodotWebXRStartedCallback)(char *p_reference_space_type, char *p_enabled_features, char *p_environment_blend_mode);
-typedef void (*GodotWebXREndedCallback)();
-typedef void (*GodotWebXRFailedCallback)(char *p_message);
-typedef void (*GodotWebXRInputEventCallback)(int p_event_type, int p_input_source_id);
-typedef void (*GodotWebXRSimpleEventCallback)(char *p_signal_name);
+typedef void (*scardotWebXRSupportedCallback)(char *p_session_mode, int p_supported);
+typedef void (*scardotWebXRStartedCallback)(char *p_reference_space_type, char *p_enabled_features, char *p_environment_blend_mode);
+typedef void (*scardotWebXREndedCallback)();
+typedef void (*scardotWebXRFailedCallback)(char *p_message);
+typedef void (*scardotWebXRInputEventCallback)(int p_event_type, int p_input_source_id);
+typedef void (*scardotWebXRSimpleEventCallback)(char *p_signal_name);
 
 extern int godot_webxr_is_supported();
-extern void godot_webxr_is_session_supported(const char *p_session_mode, GodotWebXRSupportedCallback p_callback);
+extern void godot_webxr_is_session_supported(const char *p_session_mode, scardotWebXRSupportedCallback p_callback);
 
 extern void godot_webxr_initialize(
 		const char *p_session_mode,
 		const char *p_required_features,
 		const char *p_optional_features,
 		const char *p_requested_reference_space_types,
-		GodotWebXRStartedCallback p_on_session_started,
-		GodotWebXREndedCallback p_on_session_ended,
-		GodotWebXRFailedCallback p_on_session_failed,
-		GodotWebXRInputEventCallback p_on_input_event,
-		GodotWebXRSimpleEventCallback p_on_simple_event);
+		scardotWebXRStartedCallback p_on_session_started,
+		scardotWebXREndedCallback p_on_session_ended,
+		scardotWebXRFailedCallback p_on_session_failed,
+		scardotWebXRInputEventCallback p_on_input_event,
+		scardotWebXRSimpleEventCallback p_on_simple_event);
 extern void godot_webxr_uninitialize();
 
 extern int godot_webxr_get_view_count();
@@ -101,4 +101,4 @@ extern int godot_webxr_get_supported_frame_rates(float **r_frame_rates);
 }
 #endif
 
-#endif // GODOT_WEBXR_H
+#endif // SCARDOT_WEBXR_H

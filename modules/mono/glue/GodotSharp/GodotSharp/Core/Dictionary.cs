@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
-using Godot.NativeInterop;
+using scardot.NativeInterop;
 using System.Diagnostics;
 
 #nullable enable
 
-namespace Godot.Collections
+namespace scardot.Collections
 {
     /// <summary>
-    /// Wrapper around Godot's Dictionary class, a dictionary of Variant
+    /// Wrapper around scardot's Dictionary class, a dictionary of Variant
     /// typed elements allocated in the engine in C++. Useful when
     /// interfacing with the engine.
     /// </summary>
@@ -79,17 +79,17 @@ namespace Godot.Collections
         /// the original dictionary. If <see langword="false"/>, a shallow copy is made and
         /// references to the original nested arrays and dictionaries are kept, so that
         /// modifying a sub-array or dictionary in the copy will also impact those
-        /// referenced in the source dictionary. Note that any <see cref="GodotObject"/> derived
+        /// referenced in the source dictionary. Note that any <see cref="scardotObject"/> derived
         /// elements will be shallow copied regardless of the <paramref name="deep"/>
         /// setting.
         /// </summary>
         /// <param name="deep">If <see langword="true"/>, performs a deep copy.</param>
-        /// <returns>A new Godot Dictionary.</returns>
+        /// <returns>A new scardot Dictionary.</returns>
         public Dictionary Duplicate(bool deep = false)
         {
             godot_dictionary newDictionary;
             var self = (godot_dictionary)NativeValue;
-            NativeFuncs.godotsharp_dictionary_duplicate(ref self, deep.ToGodotBool(), out newDictionary);
+            NativeFuncs.godotsharp_dictionary_duplicate(ref self, deep.ToscardotBool(), out newDictionary);
             return CreateTakingOwnershipOfDisposableValue(newDictionary);
         }
 
@@ -109,7 +109,7 @@ namespace Godot.Collections
 
             var self = (godot_dictionary)NativeValue;
             var other = (godot_dictionary)dictionary.NativeValue;
-            NativeFuncs.godotsharp_dictionary_merge(ref self, in other, overwrite.ToGodotBool());
+            NativeFuncs.godotsharp_dictionary_merge(ref self, in other, overwrite.ToscardotBool());
         }
 
         /// <summary>
@@ -470,13 +470,13 @@ namespace Godot.Collections
         }
     }
 
-    internal interface IGenericGodotDictionary
+    internal interface IGenericscardotDictionary
     {
         public Dictionary UnderlyingDictionary { get; }
     }
 
     /// <summary>
-    /// Typed wrapper around Godot's Dictionary class, a dictionary of Variant
+    /// Typed wrapper around scardot's Dictionary class, a dictionary of Variant
     /// typed elements allocated in the engine in C++. Useful when
     /// interfacing with the engine. Otherwise prefer .NET collections
     /// such as <see cref="System.Collections.Generic.Dictionary{TKey, TValue}"/>.
@@ -488,7 +488,7 @@ namespace Godot.Collections
     public class Dictionary<[MustBeVariant] TKey, [MustBeVariant] TValue> :
         IDictionary<TKey, TValue>,
         IReadOnlyDictionary<TKey, TValue>,
-        IGenericGodotDictionary
+        IGenericscardotDictionary
     {
         private static godot_variant ToVariantFunc(in Dictionary<TKey, TValue> godotDictionary) =>
             VariantUtils.CreateFromDictionary(godotDictionary);
@@ -504,7 +504,7 @@ namespace Godot.Collections
 
         private readonly Dictionary _underlyingDict;
 
-        Dictionary IGenericGodotDictionary.UnderlyingDictionary => _underlyingDict;
+        Dictionary IGenericscardotDictionary.UnderlyingDictionary => _underlyingDict;
 
         internal ref godot_dictionary.movable NativeValue
         {
@@ -515,7 +515,7 @@ namespace Godot.Collections
         /// <summary>
         /// Constructs a new empty <see cref="Dictionary{TKey, TValue}"/>.
         /// </summary>
-        /// <returns>A new Godot Dictionary.</returns>
+        /// <returns>A new scardot Dictionary.</returns>
         public Dictionary()
         {
             _underlyingDict = new Dictionary();
@@ -528,7 +528,7 @@ namespace Godot.Collections
         /// The <paramref name="dictionary"/> is <see langword="null"/>.
         /// </exception>
         /// <param name="dictionary">The dictionary to construct from.</param>
-        /// <returns>A new Godot Dictionary.</returns>
+        /// <returns>A new scardot Dictionary.</returns>
         public Dictionary(IDictionary<TKey, TValue> dictionary)
         {
             if (dictionary == null)
@@ -547,7 +547,7 @@ namespace Godot.Collections
         /// The <paramref name="dictionary"/> is <see langword="null"/>.
         /// </exception>
         /// <param name="dictionary">The dictionary to construct from.</param>
-        /// <returns>A new Godot Dictionary.</returns>
+        /// <returns>A new scardot Dictionary.</returns>
         public Dictionary(Dictionary dictionary)
         {
             if (dictionary == null)
@@ -565,7 +565,7 @@ namespace Godot.Collections
         /// Converts this typed <see cref="Dictionary{TKey, TValue}"/> to an untyped <see cref="Dictionary"/>.
         /// </summary>
         /// <param name="from">The typed dictionary to convert.</param>
-        /// <returns>A new Godot Dictionary, or <see langword="null"/> if <see paramref="from"/> was null.</returns>
+        /// <returns>A new scardot Dictionary, or <see langword="null"/> if <see paramref="from"/> was null.</returns>
         [return: NotNullIfNotNull("from")]
         public static explicit operator Dictionary?(Dictionary<TKey, TValue>? from)
         {
@@ -579,12 +579,12 @@ namespace Godot.Collections
         /// the original dictionary. If <see langword="false"/>, a shallow copy is made and
         /// references to the original nested arrays and dictionaries are kept, so that
         /// modifying a sub-array or dictionary in the copy will also impact those
-        /// referenced in the source dictionary. Note that any <see cref="GodotObject"/> derived
+        /// referenced in the source dictionary. Note that any <see cref="scardotObject"/> derived
         /// elements will be shallow copied regardless of the <paramref name="deep"/>
         /// setting.
         /// </summary>
         /// <param name="deep">If <see langword="true"/>, performs a deep copy.</param>
-        /// <returns>A new Godot Dictionary.</returns>
+        /// <returns>A new scardot Dictionary.</returns>
         public Dictionary<TKey, TValue> Duplicate(bool deep = false)
         {
             return new Dictionary<TKey, TValue>(_underlyingDict.Duplicate(deep));
@@ -928,7 +928,7 @@ namespace Godot.Collections
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Dictionary<TKey, TValue>(Variant from) =>
-            from.AsGodotDictionary<TKey, TValue>();
+            from.AsscardotDictionary<TKey, TValue>();
 
         private void ThrowIfReadOnly()
         {

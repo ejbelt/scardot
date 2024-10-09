@@ -2,10 +2,10 @@
 /*  test_marshalls.h                                                      */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -141,7 +141,7 @@ TEST_CASE("[Marshalls] Floating point double precision decoding") {
 }
 
 TEST_CASE("[Marshalls] C string encoding") {
-	char cstring[] = "Godot"; // 5 characters
+	char cstring[] = "scardot"; // 5 characters
 	uint8_t data[6];
 
 	int actual_size = encode_cstring(cstring, data);

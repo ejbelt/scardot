@@ -2,10 +2,10 @@
 /*  particle_process_material.cpp                                         */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -1005,7 +1005,7 @@ void ParticleProcessMaterial::_update_shader() {
 		code += "\n";
 		code += "	vec3 noise_direction = get_noise_direction(TRANSFORM[3].xyz);\n";
 
-		// Godot detects when the COLLIDED keyword is used. If it's used anywhere in the shader then Godot will generate the screen space SDF for collisions.
+		// scardot detects when the COLLIDED keyword is used. If it's used anywhere in the shader then scardot will generate the screen space SDF for collisions.
 		// We don't need it as long as collision is disabled. Refer to GH-83744 for more info.
 		if (collision_mode == COLLISION_RIGID) {
 			code += "	if (!COLLIDED) {\n";

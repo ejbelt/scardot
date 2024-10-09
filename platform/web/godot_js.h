@@ -2,10 +2,10 @@
 /*  godot_js.h                                                            */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -28,8 +28,8 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#ifndef GODOT_JS_H
-#define GODOT_JS_H
+#ifndef SCARDOT_JS_H
+#define SCARDOT_JS_H
 
 #define WASM_EXPORT __attribute__((visibility("default")))
 
@@ -137,4 +137,4 @@ extern void godot_js_display_vk_hide();
 }
 #endif
 
-#endif // GODOT_JS_H
+#endif // SCARDOT_JS_H

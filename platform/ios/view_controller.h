@@ -2,10 +2,10 @@
 /*  view_controller.h                                                     */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -30,13 +30,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class GodotView;
-@class GodotNativeVideoView;
-@class GodotKeyboardInputView;
+@class scardotView;
+@class scardotNativeVideoView;
+@class scardotKeyboardInputView;
 
 @interface ViewController : UIViewController
 
-@property(nonatomic, readonly, strong) GodotView *godotView;
-@property(nonatomic, readonly, strong) GodotKeyboardInputView *keyboardView;
+@property(nonatomic, readonly, strong) scardotView *godotView;
+@property(nonatomic, readonly, strong) scardotKeyboardInputView *keyboardView;
 
 @end

@@ -2,10 +2,10 @@
 /*  godot_view.mm                                                         */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -43,7 +43,7 @@
 static const int max_touches = 32;
 static const float earth_gravity = 9.80665;
 
-@interface GodotView () {
+@interface scardotView () {
 	UITouch *godot_touches[max_touches];
 }
 
@@ -62,7 +62,7 @@ static const float earth_gravity = 9.80665;
 
 @end
 
-@implementation GodotView
+@implementation scardotView
 
 - (CALayer<DisplayLayer> *)initializeRenderingForDriver:(NSString *)driverName {
 	if (self.renderingLayer) {
@@ -74,17 +74,17 @@ static const float earth_gravity = 9.80665;
 	if ([driverName isEqualToString:@"vulkan"] || [driverName isEqualToString:@"metal"]) {
 #if defined(TARGET_OS_SIMULATOR) && TARGET_OS_SIMULATOR
 		if (@available(iOS 13, *)) {
-			layer = [GodotMetalLayer layer];
+			layer = [scardotMetalLayer layer];
 		} else {
 			return nil;
 		}
 #else
-		layer = [GodotMetalLayer layer];
+		layer = [scardotMetalLayer layer];
 #endif
 	} else if ([driverName isEqualToString:@"opengl3"]) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations" // OpenGL is deprecated in iOS 12.0
-		layer = [GodotOpenGLLayer layer];
+		layer = [scardotOpenGLLayer layer];
 #pragma clang diagnostic pop
 	} else {
 		return nil;
@@ -435,7 +435,7 @@ static const float earth_gravity = 9.80665;
 	// output
 
 	///@TODO Using [[UIApplication sharedApplication] statusBarOrientation]
-	/// is a bit of a hack. Godot obviously knows the orientation so maybe
+	/// is a bit of a hack. scardot obviously knows the orientation so maybe
 	/// we
 	// can use that instead? (note that left and right seem swapped)
 

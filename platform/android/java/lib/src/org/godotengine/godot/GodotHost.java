@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotHost.java                                                        */
+/*  scardotHost.java                                                        */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -31,7 +31,7 @@
 package org.godotengine.godot;
 
 import org.godotengine.godot.error.Error;
-import org.godotengine.godot.plugin.GodotPlugin;
+import org.godotengine.godot.plugin.scardotPlugin;
 
 import android.app.Activity;
 
@@ -42,73 +42,73 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Denotate a component (e.g: Activity, Fragment) that hosts the {@link Godot} engine.
+ * Denotate a component (e.g: Activity, Fragment) that hosts the {@link scardot} engine.
  */
-public interface GodotHost {
+public interface scardotHost {
 	/**
-	 * Provides a set of command line parameters to setup the {@link Godot} engine.
+	 * Provides a set of command line parameters to setup the {@link scardot} engine.
 	 */
 	default List<String> getCommandLine() {
 		return Collections.emptyList();
 	}
 
 	/**
-	 * Invoked on the render thread when setup of the {@link Godot} engine is complete.
+	 * Invoked on the render thread when setup of the {@link scardot} engine is complete.
 	 */
-	default void onGodotSetupCompleted() {}
+	default void onscardotSetupCompleted() {}
 
 	/**
-	 * Invoked on the render thread when the {@link Godot} engine main loop has started.
+	 * Invoked on the render thread when the {@link scardot} engine main loop has started.
 	 */
-	default void onGodotMainLoopStarted() {}
+	default void onscardotMainLoopStarted() {}
 
 	/**
-	 * Invoked on the render thread to terminate the given {@link Godot} engine instance.
+	 * Invoked on the render thread to terminate the given {@link scardot} engine instance.
 	 */
-	default void onGodotForceQuit(Godot instance) {}
+	default void onscardotForceQuit(scardot instance) {}
 
 	/**
-	 * Invoked on the render thread to terminate the {@link Godot} engine instance with the given id.
-	 * @param godotInstanceId id of the Godot instance to terminate. See {@code onNewGodotInstanceRequested}
+	 * Invoked on the render thread to terminate the {@link scardot} engine instance with the given id.
+	 * @param godotInstanceId id of the scardot instance to terminate. See {@code onNewscardotInstanceRequested}
 	 *
 	 * @return true if successful, false otherwise.
 	 */
-	default boolean onGodotForceQuit(int godotInstanceId) {
+	default boolean onscardotForceQuit(int godotInstanceId) {
 		return false;
 	}
 
 	/**
-	 * Invoked on the render thread when the Godot instance wants to be restarted. It's up to the host
+	 * Invoked on the render thread when the scardot instance wants to be restarted. It's up to the host
 	 * to perform the appropriate action(s).
 	 */
-	default void onGodotRestartRequested(Godot instance) {}
+	default void onscardotRestartRequested(scardot instance) {}
 
 	/**
-	 * Invoked on the render thread when a new Godot instance is requested. It's up to the host to
+	 * Invoked on the render thread when a new scardot instance is requested. It's up to the host to
 	 * perform the appropriate action(s).
 	 *
 	 * @param args Arguments used to initialize the new instance.
 	 *
-	 * @return the id of the new instance. See {@code onGodotForceQuit}
+	 * @return the id of the new instance. See {@code onscardotForceQuit}
 	 */
-	default int onNewGodotInstanceRequested(String[] args) {
+	default int onNewscardotInstanceRequested(String[] args) {
 		return 0;
 	}
 
 	/**
-	 * Provide access to the Activity hosting the {@link Godot} engine.
+	 * Provide access to the Activity hosting the {@link scardot} engine.
 	 */
 	Activity getActivity();
 
 	/**
-	 * Provide access to the hosted {@link Godot} engine.
+	 * Provide access to the hosted {@link scardot} engine.
 	 */
-	Godot getGodot();
+	scardot getscardot();
 
 	/**
-	 * Returns a set of {@link GodotPlugin} to be registered with the hosted {@link Godot} engine.
+	 * Returns a set of {@link scardotPlugin} to be registered with the hosted {@link scardot} engine.
 	 */
-	default Set<GodotPlugin> getHostPlugins(Godot engine) {
+	default Set<scardotPlugin> getHostPlugins(scardot engine) {
 		return Collections.emptySet();
 	}
 

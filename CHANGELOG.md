@@ -453,7 +453,7 @@ Table of contents:
 - Add `generate_apk=yes` to generate an APK after building ([GH-84440](https://github.com/godotengine/godot/pull/84440)).
 - Use Python venv if detected when building VS project ([GH-84593](https://github.com/godotengine/godot/pull/84593)).
 - Only build glslang if Vulkan or Direct3D 12 rendering is enabled ([GH-84613](https://github.com/godotengine/godot/pull/84613)).
-- Add parameter to allow generation of the Godot native shared libraries from gradle ([GH-84674](https://github.com/godotengine/godot/pull/84674)).
+- Add parameter to allow generation of the scardot native shared libraries from gradle ([GH-84674](https://github.com/godotengine/godot/pull/84674)).
 - New Visual Studio project generation logic that supports any platform that wants to opt in ([GH-84885](https://github.com/godotengine/godot/pull/84885)).
 - Alias `platform=javascript` SCons option to `platform=web` ([GH-84979](https://github.com/godotengine/godot/pull/84979)).
 - SCons: Add two new `COMSTR` environment variables ([GH-85153](https://github.com/godotengine/godot/pull/85153)).
@@ -676,7 +676,7 @@ Table of contents:
 - Add code sample language parity check to `make_rst.py` ([GH-86971](https://github.com/godotengine/godot/pull/86971)).
 - Fix return type hint for methods ([GH-86972](https://github.com/godotengine/godot/pull/86972)).
 - Enforce globalization code quality rules ([GH-87133](https://github.com/godotengine/godot/pull/87133)).
-- Enable nullable environment for `GodotTools` ([GH-87137](https://github.com/godotengine/godot/pull/87137)).
+- Enable nullable environment for `scardotTools` ([GH-87137](https://github.com/godotengine/godot/pull/87137)).
 - Provide a roslyn analyzers corresponding to the GD0001 and GD0002 ([GH-87253](https://github.com/godotengine/godot/pull/87253)).
 - [C#] Fix `Encloses` failing on shared upper bound for `AABB` and `Rect2(I)` ([GH-87264](https://github.com/godotengine/godot/pull/87264)).
 - Use SymbolEqualityComparer ([GH-87342](https://github.com/godotengine/godot/pull/87342)).
@@ -713,9 +713,9 @@ Table of contents:
 - Fix C# epsilon compiler error on double precision build ([GH-88994](https://github.com/godotengine/godot/pull/88994)).
 - [.NET] Fix interpolated strings in ScriptPropertyDefVal ([GH-89007](https://github.com/godotengine/godot/pull/89007)).
 - Hint fallback property as node when it is a node ([GH-89175](https://github.com/godotengine/godot/pull/89175)).
-- Fix warnings in GodotSharp ([GH-89317](https://github.com/godotengine/godot/pull/89317)).
+- Fix warnings in scardotSharp ([GH-89317](https://github.com/godotengine/godot/pull/89317)).
 - Implement `InvariantCulture` on Variant strings ([GH-89547](https://github.com/godotengine/godot/pull/89547)).
-- Add property `UsingGodotNETSdk` to Godot.NET.Sdk ([GH-89652](https://github.com/godotengine/godot/pull/89652)).
+- Add property `UsingscardotNETSdk` to scardot.NET.Sdk ([GH-89652](https://github.com/godotengine/godot/pull/89652)).
 - Fix errors when creating `Variant` from null array ([GH-89756](https://github.com/godotengine/godot/pull/89756)).
 - [C#] Fix `Transform3D.InterpolateWith` applying rotation before scale ([GH-89843](https://github.com/godotengine/godot/pull/89843)).
 - Fix regression with C# build editor crash due to `EditorHelpHighlighter` ([GH-89861](https://github.com/godotengine/godot/pull/89861)).
@@ -733,7 +733,7 @@ Table of contents:
 - Fix generator crash w/ generic arrays ([GH-91375](https://github.com/godotengine/godot/pull/91375)).
 - Fix attributes for `sln`/`csproj` files ([GH-91479](https://github.com/godotengine/godot/pull/91479)).
 - .NET: Prevent generating mono glue in project folder ([GH-91509](https://github.com/godotengine/godot/pull/91509)).
-- [C#] Unexpose `GodotSharp` ([GH-91557](https://github.com/godotengine/godot/pull/91557)).
+- [C#] Unexpose `scardotSharp` ([GH-91557](https://github.com/godotengine/godot/pull/91557)).
 - CSharpScript should not own method infos of the base class ([GH-91564](https://github.com/godotengine/godot/pull/91564)).
 - Fix C# Hint NodeType and ResourceType HintString ([GH-91645](https://github.com/godotengine/godot/pull/91645)).
 - Specify a runtime rollforward for OpenVisualStudio ([GH-91670](https://github.com/godotengine/godot/pull/91670)).
@@ -1436,7 +1436,7 @@ Table of contents:
 - Display functions that were previously forgotten in Profiler ([GH-86772](https://github.com/godotengine/godot/pull/86772)).
 - Allow opening scenes with missing scene dependency ([GH-86781](https://github.com/godotengine/godot/pull/86781)).
 - Allow all editor modes to select nodes in the viewport ([GH-86804](https://github.com/godotengine/godot/pull/86804)).
-- Added compatibility for Blend Mode in `Light2D`/`PointLight2D` when converting from Godot 3 to 4 ([GH-86811](https://github.com/godotengine/godot/pull/86811)).
+- Added compatibility for Blend Mode in `Light2D`/`PointLight2D` when converting from scardot 3 to 4 ([GH-86811](https://github.com/godotengine/godot/pull/86811)).
 - Parse the names of children of `TabContainer`s on POT generation ([GH-86878](https://github.com/godotengine/godot/pull/86878)).
 - Add autocompletion for a few EditorInterface methods ([GH-86893](https://github.com/godotengine/godot/pull/86893)).
 - A couple of enhancements to user-visible threading semantics ([GH-86957](https://github.com/godotengine/godot/pull/86957)).
@@ -1501,7 +1501,7 @@ Table of contents:
 - Show keywords in `EditorHelpSearch` ([GH-88450](https://github.com/godotengine/godot/pull/88450)).
 - Hide Search Results by default and show it on first search ([GH-88465](https://github.com/godotengine/godot/pull/88465)).
 - Improve merging of docs on generation ([GH-88514](https://github.com/godotengine/godot/pull/88514)).
-- Add separate program case for Godot Resources ([GH-88523](https://github.com/godotengine/godot/pull/88523)).
+- Add separate program case for scardot Resources ([GH-88523](https://github.com/godotengine/godot/pull/88523)).
 - Fix crash on documentation generation on macOS ([GH-88545](https://github.com/godotengine/godot/pull/88545)).
 - Fix crash on changing resource type of dictionary new key/value while editing the resource ([GH-88572](https://github.com/godotengine/godot/pull/88572)).
 - Add `android` to auto-generated `.gitignore` ([GH-88591](https://github.com/godotengine/godot/pull/88591)).
@@ -1601,7 +1601,7 @@ Table of contents:
 - SceneTreeEditor: Fix crash when TreeItem is removed before callback ([GH-90266](https://github.com/godotengine/godot/pull/90266)).
 - Ignore `ERR_FILE_CANT_OPEN` error when loading ([GH-90269](https://github.com/godotengine/godot/pull/90269)).
 - Prevent dropping Resource to the same resource picker ([GH-90278](https://github.com/godotengine/godot/pull/90278)).
-- Fix duplicated folder reference in Godot Editor after changing filename case ([GH-90280](https://github.com/godotengine/godot/pull/90280)).
+- Fix duplicated folder reference in scardot Editor after changing filename case ([GH-90280](https://github.com/godotengine/godot/pull/90280)).
 - Inspect hovered node while dragging ([GH-90378](https://github.com/godotengine/godot/pull/90378)).
 - Fix `_node_assign` will crash when `base_node` is nullptr ([GH-90414](https://github.com/godotengine/godot/pull/90414)).
 - Add option to copy absolute path in file system dock popup ([GH-90421](https://github.com/godotengine/godot/pull/90421)).
@@ -1626,7 +1626,7 @@ Table of contents:
 - Fix editor's file explorer will show directories that should be skipped ([GH-90680](https://github.com/godotengine/godot/pull/90680)).
 - Allow closing scene tab preview using Escape ([GH-90720](https://github.com/godotengine/godot/pull/90720)).
 - Change update checker version source ([GH-90742](https://github.com/godotengine/godot/pull/90742)).
-- Display Godot version and last edited timestamp in project manager ([GH-90770](https://github.com/godotengine/godot/pull/90770)).
+- Display scardot version and last edited timestamp in project manager ([GH-90770](https://github.com/godotengine/godot/pull/90770)).
 - Don't show scene group progress for 1 scene ([GH-90784](https://github.com/godotengine/godot/pull/90784)).
 - Disable Create button for abstract classes ([GH-90807](https://github.com/godotengine/godot/pull/90807)).
 - Avoid double editing when clicking AnimatedSprite ([GH-90815](https://github.com/godotengine/godot/pull/90815)).
@@ -1884,7 +1884,7 @@ Table of contents:
 - Disable remote debug button when there are no runnable presets ([GH-92032](https://github.com/godotengine/godot/pull/92032)).
 - Use `GLOBAL_GET` for `window_{height,width}_override` ([GH-92075](https://github.com/godotengine/godot/pull/92075)).
 - Fix web export state for Remote Debug ([GH-92163](https://github.com/godotengine/godot/pull/92163)).
-- Ensure that Godot's version of `libc++_shared.so` is always selected ([GH-92525](https://github.com/godotengine/godot/pull/92525)).
+- Ensure that scardot's version of `libc++_shared.so` is always selected ([GH-92525](https://github.com/godotengine/godot/pull/92525)).
 - Fix iOS exports never embedding framework bundles ([GH-92692](https://github.com/godotengine/godot/pull/92692)).
 - [iOS export] Automatically generate ARM64 simulator library from device library if it's missing ([GH-92750](https://github.com/godotengine/godot/pull/92750)).
 - Fix issues related to code-signing for macOS exports ([GH-93101](https://github.com/godotengine/godot/pull/93101)).
@@ -1926,7 +1926,7 @@ Table of contents:
 - Fix `-Wtype-limits` warning in `compatibility_maximum` patch check ([GH-88527](https://github.com/godotengine/godot/pull/88527)).
 - Expose OpenXR hand tracker handles ([GH-88566](https://github.com/godotengine/godot/pull/88566)).
 - Allow registering "runtime classes" in modules (not just GDExtension) ([GH-88683](https://github.com/godotengine/godot/pull/88683)).
-- Use godot-cpp 4.2 for the "Godot CPP" CI workflow ([GH-88736](https://github.com/godotengine/godot/pull/88736)).
+- Use godot-cpp 4.2 for the "scardot CPP" CI workflow ([GH-88736](https://github.com/godotengine/godot/pull/88736)).
 - Fix calling ancestor methods on runtime classes ([GH-88870](https://github.com/godotengine/godot/pull/88870)).
 - Add extension support for argument count to `ScriptInstance` ([GH-89050](https://github.com/godotengine/godot/pull/89050)).
 - Pass count when freeing method and property lists for script instances ([GH-89055](https://github.com/godotengine/godot/pull/89055)).
@@ -2763,7 +2763,7 @@ Table of contents:
 - Change ShapeCast3D and RayCast3D debug to use RenderingServer directly ([GH-82599](https://github.com/godotengine/godot/pull/82599)).
 - Orthonormalize PhysicalBone3D transforms when resetting them ([GH-82933](https://github.com/godotengine/godot/pull/82933)).
 - Fix body leaving area gravity influence ([GH-82961](https://github.com/godotengine/godot/pull/82961)).
-- Replace confusing code in `GodotCapsuleShape2D::get_supports` ([GH-83655](https://github.com/godotengine/godot/pull/83655)).
+- Replace confusing code in `scardotCapsuleShape2D::get_supports` ([GH-83655](https://github.com/godotengine/godot/pull/83655)).
 - Fix CollisionObject3D Gizmo not updated after calling `shape_owner_*` functions ([GH-84610](https://github.com/godotengine/godot/pull/84610)).
 - Expose a method to get gravity for any physics body ([GH-84640](https://github.com/godotengine/godot/pull/84640)).
 - Fix `PhysicsShapeQueryParameters3D.motion` type wrongly set to Vector2 ([GH-85393](https://github.com/godotengine/godot/pull/85393)).
@@ -2780,7 +2780,7 @@ Table of contents:
 - Fix `max_collisions` not being passed in `PhysicsBody3D::test_move` ([GH-87903](https://github.com/godotengine/godot/pull/87903)).
 - Fix crash with `PhysicsBody2D/3D::get_gravity` with invalid state ([GH-87976](https://github.com/godotengine/godot/pull/87976)).
 - Fix `get_contact_count` sometimes being incorrect in `_process` ([GH-88019](https://github.com/godotengine/godot/pull/88019)).
-- `GodotCollisionSolver2D::solve_concave`: Fix culling in case of motion ([GH-88282](https://github.com/godotengine/godot/pull/88282)).
+- `scardotCollisionSolver2D::solve_concave`: Fix culling in case of motion ([GH-88282](https://github.com/godotengine/godot/pull/88282)).
 - Fix `SoftBody3D` for double-precision builds ([GH-88402](https://github.com/godotengine/godot/pull/88402)).
 - Physics interpolation (2D) ([GH-88424](https://github.com/godotengine/godot/pull/88424)).
 - Split monolithic physics class files ([GH-88862](https://github.com/godotengine/godot/pull/88862)).
@@ -2800,10 +2800,10 @@ Table of contents:
 - Use same colors for editor and running project for collision/path debug ([GH-90966](https://github.com/godotengine/godot/pull/90966)).
 - Deprecate unused parameter `angular_limit/softness` in `HingeJoint3D` ([GH-91127](https://github.com/godotengine/godot/pull/91127)).
 - Update `body_create` description in PhysicsServer2D/3D ([GH-91596](https://github.com/godotengine/godot/pull/91596)).
-- Add useful error msg in `GodotSoftBody3D::set_mesh` ([GH-91896](https://github.com/godotengine/godot/pull/91896)).
+- Add useful error msg in `scardotSoftBody3D::set_mesh` ([GH-91896](https://github.com/godotengine/godot/pull/91896)).
 - Avoid duplicate connect in Joint2D and Joint3D `_update_joint` ([GH-91936](https://github.com/godotengine/godot/pull/91936)).
 - Bind shape margin methods for `PhysicsServer3D` ([GH-92110](https://github.com/godotengine/godot/pull/92110)).
-- GodotPhysics: Fix crash on null space ([GH-93286](https://github.com/godotengine/godot/pull/93286)).
+- scardotPhysics: Fix crash on null space ([GH-93286](https://github.com/godotengine/godot/pull/93286)).
 - Fix physics tick counter ([GH-94039](https://github.com/godotengine/godot/pull/94039)).
 - Only print physics sync warning on dev builds to avoid warning spam from using `move_and_slide` ([GH-94279](https://github.com/godotengine/godot/pull/94279)).
 - Fix dynamic-stack-buffer-overflow crash when executing random functions on random physics objects ([GH-94521](https://github.com/godotengine/godot/pull/94521)).
@@ -2823,7 +2823,7 @@ Table of contents:
 - Update scene tabs after marking as unsaved ([GH-90135](https://github.com/godotengine/godot/pull/90135)).
 - Fix `add_root_node()` being no-op ([GH-90136](https://github.com/godotengine/godot/pull/90136)).
 - Expose `EditorFileDialog::popup_file_dialog()` to GDScript and GDExtension ([GH-91331](https://github.com/godotengine/godot/pull/91331)).
-- Add logic to unregister the Godot plugins on engine termination ([GH-92143](https://github.com/godotengine/godot/pull/92143)).
+- Add logic to unregister the scardot plugins on engine termination ([GH-92143](https://github.com/godotengine/godot/pull/92143)).
 - Prevent static XCFramework bundles from being embedded on iOS ([GH-92519](https://github.com/godotengine/godot/pull/92519)).
 
 #### Porting
@@ -2841,16 +2841,16 @@ Table of contents:
 - Enhance mobile suspend MainLoop notifications ([GH-85100](https://github.com/godotengine/godot/pull/85100)).
 - Windows: Fix NVIDIA app profile creation ([GH-85188](https://github.com/godotengine/godot/pull/85188)).
 - Do not consume mouse messages in windows with `no_focus` on Windows OS ([GH-85484](https://github.com/godotengine/godot/pull/85484)).
-- Add `THREADS_ENABLED` macro in order to compile Godot to run on the main thread ([GH-85939](https://github.com/godotengine/godot/pull/85939)).
+- Add `THREADS_ENABLED` macro in order to compile scardot to run on the main thread ([GH-85939](https://github.com/godotengine/godot/pull/85939)).
 - Android: Ensure cleanup of all subobjects in the OpenSL audio driver ([GH-85955](https://github.com/godotengine/godot/pull/85955)).
 - X11: Partial fix for Editor and Project Manager stealing focus on some window managers ([GH-86101](https://github.com/godotengine/godot/pull/86101)).
 - Fix key mapping for `XK_KP_Delete` key ([GH-86160](https://github.com/godotengine/godot/pull/86160)).
 - Add Wayland support ([GH-86180](https://github.com/godotengine/godot/pull/86180)).
 - Android: Update the logic used to start / stop the render thread ([GH-86379](https://github.com/godotengine/godot/pull/86379)).
-- X11: Fix Godot stealing focus on alternative window managers ([GH-86441](https://github.com/godotengine/godot/pull/86441)).
+- X11: Fix scardot stealing focus on alternative window managers ([GH-86441](https://github.com/godotengine/godot/pull/86441)).
 - Fix `OS.get_system_font_path` and `OS.get_system_font_path_for_text` to return correct slashes ([GH-86552](https://github.com/godotengine/godot/pull/86552)).
 - Fix virtual keyboard for decimal values on Android ([GH-86619](https://github.com/godotengine/godot/pull/86619)).
-- X11: Don't re-set input focus if the given window already has it (fixes Godot stealing input focus on i3) ([GH-86671](https://github.com/godotengine/godot/pull/86671)).
+- X11: Don't re-set input focus if the given window already has it (fixes scardot stealing input focus on i3) ([GH-86671](https://github.com/godotengine/godot/pull/86671)).
 - iOS: Set provisioning style for both `iPhone Developer` and `iPhone Distribution` to automatic ([GH-86748](https://github.com/godotengine/godot/pull/86748)).
 - Fix `get_window_safe_area` on Android ([GH-86761](https://github.com/godotengine/godot/pull/86761)).
 - Attempt parsing environment variables as UTF-8 ([GH-86936](https://github.com/godotengine/godot/pull/86936)).
@@ -2877,7 +2877,7 @@ Table of contents:
 - Fix the fetching of images in `CF_DIB` format in `DisplayServerWindows::clipboard_get_image` ([GH-88220](https://github.com/godotengine/godot/pull/88220)).
 - macOS: Fix color picker on HDR screens ([GH-88274](https://github.com/godotengine/godot/pull/88274)).
 - Windows: Add support for enabling Alt+Space menu and fix borderless maximize ([GH-88329](https://github.com/godotengine/godot/pull/88329)).
-- [Android 14] Fix GodotEditText white box showing during editor load ([GH-88351](https://github.com/godotengine/godot/pull/88351)).
+- [Android 14] Fix scardotEditText white box showing during editor load ([GH-88351](https://github.com/godotengine/godot/pull/88351)).
 - libdecor: Update to 0.2.2 ([GH-88374](https://github.com/godotengine/godot/pull/88374)).
 - Windows: Fix reading non-BGRA8 DIBs from clipboard ([GH-88405](https://github.com/godotengine/godot/pull/88405)).
 - macOS: Add null checks for `NSString stringWithUTF8String` ([GH-88694](https://github.com/godotengine/godot/pull/88694)).
@@ -2968,7 +2968,7 @@ Table of contents:
 - Disable FP contraction ([GH-94655](https://github.com/godotengine/godot/pull/94655)).
 - Fix the cleanup logic for the Android render thread ([GH-94661](https://github.com/godotengine/godot/pull/94661)).
 - Pass window exclusive and transient properties for subwindow creation ([GH-94706](https://github.com/godotengine/godot/pull/94706)).
-- Fix crash that occurs on termination of the Godot engine on Android ([GH-94923](https://github.com/godotengine/godot/pull/94923)).
+- Fix crash that occurs on termination of the scardot engine on Android ([GH-94923](https://github.com/godotengine/godot/pull/94923)).
 - Windows: Improve OpenGL/ANGLE switching on ARM64 ([GH-94943](https://github.com/godotengine/godot/pull/94943)).
 - Add missing null check before disconnecting source ([GH-94958](https://github.com/godotengine/godot/pull/94958)).
 - macOS: Fix `is_process_running` and `kill` for bundled apps ([GH-94978](https://github.com/godotengine/godot/pull/94978)).
@@ -2998,7 +2998,7 @@ Table of contents:
 - Expose `energy_multiplier` to remaining SkyMaterials ([GH-83938](https://github.com/godotengine/godot/pull/83938)).
 - Add 3D MSAA and scaling support to GLES3 ([GH-83976](https://github.com/godotengine/godot/pull/83976)).
 - Merge passes in Vulkan mobile renderer ([GH-84169](https://github.com/godotengine/godot/pull/84169)).
-- Fix bad parameter for `rendering_method` crashes Godot ([GH-84241](https://github.com/godotengine/godot/pull/84241)).
+- Fix bad parameter for `rendering_method` crashes scardot ([GH-84241](https://github.com/godotengine/godot/pull/84241)).
 - Skip swapchain logic if there is nothing to present (Android OpenXR) ([GH-84244](https://github.com/godotengine/godot/pull/84244)).
 - Add `shadows_disabled` macro in Compatibility renderer ([GH-84416](https://github.com/godotengine/godot/pull/84416)).
 - Transform mesh's AABB to skeleton's space when calculating mesh's bounds ([GH-84451](https://github.com/godotengine/godot/pull/84451)).

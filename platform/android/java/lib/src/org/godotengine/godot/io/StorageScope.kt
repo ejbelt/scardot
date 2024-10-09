@@ -2,10 +2,10 @@
 /*  StorageScope.kt                                                       */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -34,7 +34,7 @@ import android.content.Context
 import android.os.Build
 import android.os.Environment
 import java.io.File
-import org.godotengine.godot.GodotLib
+import org.godotengine.godot.scardotLib
 
 /**
  * Represents the different storage scopes.
@@ -95,7 +95,7 @@ internal enum class StorageScope {
 
 			var pathFile = File(path)
 			if (!pathFile.isAbsolute) {
-				pathFile = File(GodotLib.getProjectResourceDir(), path)
+				pathFile = File(scardotLib.getProjectResourceDir(), path)
 				if (!pathFile.isAbsolute) {
 					return UNKNOWN
 				}

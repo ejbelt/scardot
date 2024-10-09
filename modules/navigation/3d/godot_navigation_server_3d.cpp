@@ -2,10 +2,10 @@
 /*  godot_navigation_server_3d.cpp                                        */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -49,16 +49,16 @@ using namespace NavigationUtilities;
 		MERGE(F_NAME, _command)                                       \
 		(T_0 p_d_0) :                                                 \
 				d_0(p_d_0) {}                                         \
-		virtual void exec(GodotNavigationServer3D *server) override { \
+		virtual void exec(scardotNavigationServer3D *server) override { \
 			server->MERGE(_cmd_, F_NAME)(d_0);                        \
 		}                                                             \
 	};                                                                \
-	void GodotNavigationServer3D::F_NAME(T_0 D_0) {                   \
+	void scardotNavigationServer3D::F_NAME(T_0 D_0) {                   \
 		auto cmd = memnew(MERGE(F_NAME, _command)(                    \
 				D_0));                                                \
 		add_command(cmd);                                             \
 	}                                                                 \
-	void GodotNavigationServer3D::MERGE(_cmd_, F_NAME)(T_0 D_0)
+	void scardotNavigationServer3D::MERGE(_cmd_, F_NAME)(T_0 D_0)
 
 #define COMMAND_2(F_NAME, T_0, D_0, T_1, D_1)                         \
 	struct MERGE(F_NAME, _command) : public SetCommand {              \
@@ -70,31 +70,31 @@ using namespace NavigationUtilities;
 				T_1 p_d_1) :                                          \
 				d_0(p_d_0),                                           \
 				d_1(p_d_1) {}                                         \
-		virtual void exec(GodotNavigationServer3D *server) override { \
+		virtual void exec(scardotNavigationServer3D *server) override { \
 			server->MERGE(_cmd_, F_NAME)(d_0, d_1);                   \
 		}                                                             \
 	};                                                                \
-	void GodotNavigationServer3D::F_NAME(T_0 D_0, T_1 D_1) {          \
+	void scardotNavigationServer3D::F_NAME(T_0 D_0, T_1 D_1) {          \
 		auto cmd = memnew(MERGE(F_NAME, _command)(                    \
 				D_0,                                                  \
 				D_1));                                                \
 		add_command(cmd);                                             \
 	}                                                                 \
-	void GodotNavigationServer3D::MERGE(_cmd_, F_NAME)(T_0 D_0, T_1 D_1)
+	void scardotNavigationServer3D::MERGE(_cmd_, F_NAME)(T_0 D_0, T_1 D_1)
 
-GodotNavigationServer3D::GodotNavigationServer3D() {}
+scardotNavigationServer3D::scardotNavigationServer3D() {}
 
-GodotNavigationServer3D::~GodotNavigationServer3D() {
+scardotNavigationServer3D::~scardotNavigationServer3D() {
 	flush_queries();
 }
 
-void GodotNavigationServer3D::add_command(SetCommand *command) {
+void scardotNavigationServer3D::add_command(SetCommand *command) {
 	MutexLock lock(commands_mutex);
 
 	commands.push_back(command);
 }
 
-TypedArray<RID> GodotNavigationServer3D::get_maps() const {
+TypedArray<RID> scardotNavigationServer3D::get_maps() const {
 	TypedArray<RID> all_map_rids;
 	List<RID> maps_owned;
 	map_owner.get_owned_list(&maps_owned);
@@ -106,7 +106,7 @@ TypedArray<RID> GodotNavigationServer3D::get_maps() const {
 	return all_map_rids;
 }
 
-RID GodotNavigationServer3D::map_create() {
+RID scardotNavigationServer3D::map_create() {
 	MutexLock lock(operations_mutex);
 
 	RID rid = map_owner.make_rid();
@@ -132,7 +132,7 @@ COMMAND_2(map_set_active, RID, p_map, bool, p_active) {
 	}
 }
 
-bool GodotNavigationServer3D::map_is_active(RID p_map) const {
+bool scardotNavigationServer3D::map_is_active(RID p_map) const {
 	NavMap *map = map_owner.get_or_null(p_map);
 	ERR_FAIL_NULL_V(map, false);
 
@@ -146,7 +146,7 @@ COMMAND_2(map_set_up, RID, p_map, Vector3, p_up) {
 	map->set_up(p_up);
 }
 
-Vector3 GodotNavigationServer3D::map_get_up(RID p_map) const {
+Vector3 scardotNavigationServer3D::map_get_up(RID p_map) const {
 	const NavMap *map = map_owner.get_or_null(p_map);
 	ERR_FAIL_NULL_V(map, Vector3());
 
@@ -160,7 +160,7 @@ COMMAND_2(map_set_cell_size, RID, p_map, real_t, p_cell_size) {
 	map->set_cell_size(p_cell_size);
 }
 
-real_t GodotNavigationServer3D::map_get_cell_size(RID p_map) const {
+real_t scardotNavigationServer3D::map_get_cell_size(RID p_map) const {
 	const NavMap *map = map_owner.get_or_null(p_map);
 	ERR_FAIL_NULL_V(map, 0);
 
@@ -174,7 +174,7 @@ COMMAND_2(map_set_cell_height, RID, p_map, real_t, p_cell_height) {
 	map->set_cell_height(p_cell_height);
 }
 
-real_t GodotNavigationServer3D::map_get_cell_height(RID p_map) const {
+real_t scardotNavigationServer3D::map_get_cell_height(RID p_map) const {
 	const NavMap *map = map_owner.get_or_null(p_map);
 	ERR_FAIL_NULL_V(map, 0);
 
@@ -188,7 +188,7 @@ COMMAND_2(map_set_merge_rasterizer_cell_scale, RID, p_map, float, p_value) {
 	map->set_merge_rasterizer_cell_scale(p_value);
 }
 
-float GodotNavigationServer3D::map_get_merge_rasterizer_cell_scale(RID p_map) const {
+float scardotNavigationServer3D::map_get_merge_rasterizer_cell_scale(RID p_map) const {
 	NavMap *map = map_owner.get_or_null(p_map);
 	ERR_FAIL_NULL_V(map, false);
 
@@ -202,7 +202,7 @@ COMMAND_2(map_set_use_edge_connections, RID, p_map, bool, p_enabled) {
 	map->set_use_edge_connections(p_enabled);
 }
 
-bool GodotNavigationServer3D::map_get_use_edge_connections(RID p_map) const {
+bool scardotNavigationServer3D::map_get_use_edge_connections(RID p_map) const {
 	NavMap *map = map_owner.get_or_null(p_map);
 	ERR_FAIL_NULL_V(map, false);
 
@@ -216,7 +216,7 @@ COMMAND_2(map_set_edge_connection_margin, RID, p_map, real_t, p_connection_margi
 	map->set_edge_connection_margin(p_connection_margin);
 }
 
-real_t GodotNavigationServer3D::map_get_edge_connection_margin(RID p_map) const {
+real_t scardotNavigationServer3D::map_get_edge_connection_margin(RID p_map) const {
 	const NavMap *map = map_owner.get_or_null(p_map);
 	ERR_FAIL_NULL_V(map, 0);
 
@@ -230,49 +230,49 @@ COMMAND_2(map_set_link_connection_radius, RID, p_map, real_t, p_connection_radiu
 	map->set_link_connection_radius(p_connection_radius);
 }
 
-real_t GodotNavigationServer3D::map_get_link_connection_radius(RID p_map) const {
+real_t scardotNavigationServer3D::map_get_link_connection_radius(RID p_map) const {
 	const NavMap *map = map_owner.get_or_null(p_map);
 	ERR_FAIL_NULL_V(map, 0);
 
 	return map->get_link_connection_radius();
 }
 
-Vector<Vector3> GodotNavigationServer3D::map_get_path(RID p_map, Vector3 p_origin, Vector3 p_destination, bool p_optimize, uint32_t p_navigation_layers) const {
+Vector<Vector3> scardotNavigationServer3D::map_get_path(RID p_map, Vector3 p_origin, Vector3 p_destination, bool p_optimize, uint32_t p_navigation_layers) const {
 	const NavMap *map = map_owner.get_or_null(p_map);
 	ERR_FAIL_NULL_V(map, Vector<Vector3>());
 
 	return map->get_path(p_origin, p_destination, p_optimize, p_navigation_layers, nullptr, nullptr, nullptr);
 }
 
-Vector3 GodotNavigationServer3D::map_get_closest_point_to_segment(RID p_map, const Vector3 &p_from, const Vector3 &p_to, const bool p_use_collision) const {
+Vector3 scardotNavigationServer3D::map_get_closest_point_to_segment(RID p_map, const Vector3 &p_from, const Vector3 &p_to, const bool p_use_collision) const {
 	const NavMap *map = map_owner.get_or_null(p_map);
 	ERR_FAIL_NULL_V(map, Vector3());
 
 	return map->get_closest_point_to_segment(p_from, p_to, p_use_collision);
 }
 
-Vector3 GodotNavigationServer3D::map_get_closest_point(RID p_map, const Vector3 &p_point) const {
+Vector3 scardotNavigationServer3D::map_get_closest_point(RID p_map, const Vector3 &p_point) const {
 	const NavMap *map = map_owner.get_or_null(p_map);
 	ERR_FAIL_NULL_V(map, Vector3());
 
 	return map->get_closest_point(p_point);
 }
 
-Vector3 GodotNavigationServer3D::map_get_closest_point_normal(RID p_map, const Vector3 &p_point) const {
+Vector3 scardotNavigationServer3D::map_get_closest_point_normal(RID p_map, const Vector3 &p_point) const {
 	const NavMap *map = map_owner.get_or_null(p_map);
 	ERR_FAIL_NULL_V(map, Vector3());
 
 	return map->get_closest_point_normal(p_point);
 }
 
-RID GodotNavigationServer3D::map_get_closest_point_owner(RID p_map, const Vector3 &p_point) const {
+RID scardotNavigationServer3D::map_get_closest_point_owner(RID p_map, const Vector3 &p_point) const {
 	const NavMap *map = map_owner.get_or_null(p_map);
 	ERR_FAIL_NULL_V(map, RID());
 
 	return map->get_closest_point_owner(p_point);
 }
 
-TypedArray<RID> GodotNavigationServer3D::map_get_links(RID p_map) const {
+TypedArray<RID> scardotNavigationServer3D::map_get_links(RID p_map) const {
 	TypedArray<RID> link_rids;
 	const NavMap *map = map_owner.get_or_null(p_map);
 	ERR_FAIL_NULL_V(map, link_rids);
@@ -286,7 +286,7 @@ TypedArray<RID> GodotNavigationServer3D::map_get_links(RID p_map) const {
 	return link_rids;
 }
 
-TypedArray<RID> GodotNavigationServer3D::map_get_regions(RID p_map) const {
+TypedArray<RID> scardotNavigationServer3D::map_get_regions(RID p_map) const {
 	TypedArray<RID> regions_rids;
 	const NavMap *map = map_owner.get_or_null(p_map);
 	ERR_FAIL_NULL_V(map, regions_rids);
@@ -300,7 +300,7 @@ TypedArray<RID> GodotNavigationServer3D::map_get_regions(RID p_map) const {
 	return regions_rids;
 }
 
-TypedArray<RID> GodotNavigationServer3D::map_get_agents(RID p_map) const {
+TypedArray<RID> scardotNavigationServer3D::map_get_agents(RID p_map) const {
 	TypedArray<RID> agents_rids;
 	const NavMap *map = map_owner.get_or_null(p_map);
 	ERR_FAIL_NULL_V(map, agents_rids);
@@ -314,7 +314,7 @@ TypedArray<RID> GodotNavigationServer3D::map_get_agents(RID p_map) const {
 	return agents_rids;
 }
 
-TypedArray<RID> GodotNavigationServer3D::map_get_obstacles(RID p_map) const {
+TypedArray<RID> scardotNavigationServer3D::map_get_obstacles(RID p_map) const {
 	TypedArray<RID> obstacles_rids;
 	const NavMap *map = map_owner.get_or_null(p_map);
 	ERR_FAIL_NULL_V(map, obstacles_rids);
@@ -326,7 +326,7 @@ TypedArray<RID> GodotNavigationServer3D::map_get_obstacles(RID p_map) const {
 	return obstacles_rids;
 }
 
-RID GodotNavigationServer3D::region_get_map(RID p_region) const {
+RID scardotNavigationServer3D::region_get_map(RID p_region) const {
 	NavRegion *region = region_owner.get_or_null(p_region);
 	ERR_FAIL_NULL_V(region, RID());
 
@@ -336,7 +336,7 @@ RID GodotNavigationServer3D::region_get_map(RID p_region) const {
 	return RID();
 }
 
-RID GodotNavigationServer3D::agent_get_map(RID p_agent) const {
+RID scardotNavigationServer3D::agent_get_map(RID p_agent) const {
 	NavAgent *agent = agent_owner.get_or_null(p_agent);
 	ERR_FAIL_NULL_V(agent, RID());
 
@@ -346,14 +346,14 @@ RID GodotNavigationServer3D::agent_get_map(RID p_agent) const {
 	return RID();
 }
 
-Vector3 GodotNavigationServer3D::map_get_random_point(RID p_map, uint32_t p_navigation_layers, bool p_uniformly) const {
+Vector3 scardotNavigationServer3D::map_get_random_point(RID p_map, uint32_t p_navigation_layers, bool p_uniformly) const {
 	const NavMap *map = map_owner.get_or_null(p_map);
 	ERR_FAIL_NULL_V(map, Vector3());
 
 	return map->get_random_point(p_navigation_layers, p_uniformly);
 }
 
-RID GodotNavigationServer3D::region_create() {
+RID scardotNavigationServer3D::region_create() {
 	MutexLock lock(operations_mutex);
 
 	RID rid = region_owner.make_rid();
@@ -369,7 +369,7 @@ COMMAND_2(region_set_enabled, RID, p_region, bool, p_enabled) {
 	region->set_enabled(p_enabled);
 }
 
-bool GodotNavigationServer3D::region_get_enabled(RID p_region) const {
+bool scardotNavigationServer3D::region_get_enabled(RID p_region) const {
 	const NavRegion *region = region_owner.get_or_null(p_region);
 	ERR_FAIL_NULL_V(region, false);
 
@@ -383,7 +383,7 @@ COMMAND_2(region_set_use_edge_connections, RID, p_region, bool, p_enabled) {
 	region->set_use_edge_connections(p_enabled);
 }
 
-bool GodotNavigationServer3D::region_get_use_edge_connections(RID p_region) const {
+bool scardotNavigationServer3D::region_get_use_edge_connections(RID p_region) const {
 	NavRegion *region = region_owner.get_or_null(p_region);
 	ERR_FAIL_NULL_V(region, false);
 
@@ -406,7 +406,7 @@ COMMAND_2(region_set_transform, RID, p_region, Transform3D, p_transform) {
 	region->set_transform(p_transform);
 }
 
-Transform3D GodotNavigationServer3D::region_get_transform(RID p_region) const {
+Transform3D scardotNavigationServer3D::region_get_transform(RID p_region) const {
 	NavRegion *region = region_owner.get_or_null(p_region);
 	ERR_FAIL_NULL_V(region, Transform3D());
 
@@ -421,7 +421,7 @@ COMMAND_2(region_set_enter_cost, RID, p_region, real_t, p_enter_cost) {
 	region->set_enter_cost(p_enter_cost);
 }
 
-real_t GodotNavigationServer3D::region_get_enter_cost(RID p_region) const {
+real_t scardotNavigationServer3D::region_get_enter_cost(RID p_region) const {
 	NavRegion *region = region_owner.get_or_null(p_region);
 	ERR_FAIL_NULL_V(region, 0);
 
@@ -436,7 +436,7 @@ COMMAND_2(region_set_travel_cost, RID, p_region, real_t, p_travel_cost) {
 	region->set_travel_cost(p_travel_cost);
 }
 
-real_t GodotNavigationServer3D::region_get_travel_cost(RID p_region) const {
+real_t scardotNavigationServer3D::region_get_travel_cost(RID p_region) const {
 	NavRegion *region = region_owner.get_or_null(p_region);
 	ERR_FAIL_NULL_V(region, 0);
 
@@ -450,14 +450,14 @@ COMMAND_2(region_set_owner_id, RID, p_region, ObjectID, p_owner_id) {
 	region->set_owner_id(p_owner_id);
 }
 
-ObjectID GodotNavigationServer3D::region_get_owner_id(RID p_region) const {
+ObjectID scardotNavigationServer3D::region_get_owner_id(RID p_region) const {
 	const NavRegion *region = region_owner.get_or_null(p_region);
 	ERR_FAIL_NULL_V(region, ObjectID());
 
 	return region->get_owner_id();
 }
 
-bool GodotNavigationServer3D::region_owns_point(RID p_region, const Vector3 &p_point) const {
+bool scardotNavigationServer3D::region_owns_point(RID p_region, const Vector3 &p_point) const {
 	const NavRegion *region = region_owner.get_or_null(p_region);
 	ERR_FAIL_NULL_V(region, false);
 
@@ -475,7 +475,7 @@ COMMAND_2(region_set_navigation_layers, RID, p_region, uint32_t, p_navigation_la
 	region->set_navigation_layers(p_navigation_layers);
 }
 
-uint32_t GodotNavigationServer3D::region_get_navigation_layers(RID p_region) const {
+uint32_t scardotNavigationServer3D::region_get_navigation_layers(RID p_region) const {
 	NavRegion *region = region_owner.get_or_null(p_region);
 	ERR_FAIL_NULL_V(region, 0);
 
@@ -490,7 +490,7 @@ COMMAND_2(region_set_navigation_mesh, RID, p_region, Ref<NavigationMesh>, p_navi
 }
 
 #ifndef DISABLE_DEPRECATED
-void GodotNavigationServer3D::region_bake_navigation_mesh(Ref<NavigationMesh> p_navigation_mesh, Node *p_root_node) {
+void scardotNavigationServer3D::region_bake_navigation_mesh(Ref<NavigationMesh> p_navigation_mesh, Node *p_root_node) {
 	ERR_FAIL_COND(p_navigation_mesh.is_null());
 	ERR_FAIL_NULL(p_root_node);
 
@@ -506,7 +506,7 @@ void GodotNavigationServer3D::region_bake_navigation_mesh(Ref<NavigationMesh> p_
 }
 #endif // DISABLE_DEPRECATED
 
-int GodotNavigationServer3D::region_get_connections_count(RID p_region) const {
+int scardotNavigationServer3D::region_get_connections_count(RID p_region) const {
 	NavRegion *region = region_owner.get_or_null(p_region);
 	ERR_FAIL_NULL_V(region, 0);
 	NavMap *map = region->get_map();
@@ -516,7 +516,7 @@ int GodotNavigationServer3D::region_get_connections_count(RID p_region) const {
 	return 0;
 }
 
-Vector3 GodotNavigationServer3D::region_get_connection_pathway_start(RID p_region, int p_connection_id) const {
+Vector3 scardotNavigationServer3D::region_get_connection_pathway_start(RID p_region, int p_connection_id) const {
 	NavRegion *region = region_owner.get_or_null(p_region);
 	ERR_FAIL_NULL_V(region, Vector3());
 	NavMap *map = region->get_map();
@@ -526,7 +526,7 @@ Vector3 GodotNavigationServer3D::region_get_connection_pathway_start(RID p_regio
 	return Vector3();
 }
 
-Vector3 GodotNavigationServer3D::region_get_connection_pathway_end(RID p_region, int p_connection_id) const {
+Vector3 scardotNavigationServer3D::region_get_connection_pathway_end(RID p_region, int p_connection_id) const {
 	NavRegion *region = region_owner.get_or_null(p_region);
 	ERR_FAIL_NULL_V(region, Vector3());
 	NavMap *map = region->get_map();
@@ -536,14 +536,14 @@ Vector3 GodotNavigationServer3D::region_get_connection_pathway_end(RID p_region,
 	return Vector3();
 }
 
-Vector3 GodotNavigationServer3D::region_get_random_point(RID p_region, uint32_t p_navigation_layers, bool p_uniformly) const {
+Vector3 scardotNavigationServer3D::region_get_random_point(RID p_region, uint32_t p_navigation_layers, bool p_uniformly) const {
 	const NavRegion *region = region_owner.get_or_null(p_region);
 	ERR_FAIL_NULL_V(region, Vector3());
 
 	return region->get_random_point(p_navigation_layers, p_uniformly);
 }
 
-RID GodotNavigationServer3D::link_create() {
+RID scardotNavigationServer3D::link_create() {
 	MutexLock lock(operations_mutex);
 
 	RID rid = link_owner.make_rid();
@@ -561,7 +561,7 @@ COMMAND_2(link_set_map, RID, p_link, RID, p_map) {
 	link->set_map(map);
 }
 
-RID GodotNavigationServer3D::link_get_map(const RID p_link) const {
+RID scardotNavigationServer3D::link_get_map(const RID p_link) const {
 	const NavLink *link = link_owner.get_or_null(p_link);
 	ERR_FAIL_NULL_V(link, RID());
 
@@ -578,7 +578,7 @@ COMMAND_2(link_set_enabled, RID, p_link, bool, p_enabled) {
 	link->set_enabled(p_enabled);
 }
 
-bool GodotNavigationServer3D::link_get_enabled(RID p_link) const {
+bool scardotNavigationServer3D::link_get_enabled(RID p_link) const {
 	const NavLink *link = link_owner.get_or_null(p_link);
 	ERR_FAIL_NULL_V(link, false);
 
@@ -592,7 +592,7 @@ COMMAND_2(link_set_bidirectional, RID, p_link, bool, p_bidirectional) {
 	link->set_bidirectional(p_bidirectional);
 }
 
-bool GodotNavigationServer3D::link_is_bidirectional(RID p_link) const {
+bool scardotNavigationServer3D::link_is_bidirectional(RID p_link) const {
 	const NavLink *link = link_owner.get_or_null(p_link);
 	ERR_FAIL_NULL_V(link, false);
 
@@ -606,7 +606,7 @@ COMMAND_2(link_set_navigation_layers, RID, p_link, uint32_t, p_navigation_layers
 	link->set_navigation_layers(p_navigation_layers);
 }
 
-uint32_t GodotNavigationServer3D::link_get_navigation_layers(const RID p_link) const {
+uint32_t scardotNavigationServer3D::link_get_navigation_layers(const RID p_link) const {
 	const NavLink *link = link_owner.get_or_null(p_link);
 	ERR_FAIL_NULL_V(link, 0);
 
@@ -620,7 +620,7 @@ COMMAND_2(link_set_start_position, RID, p_link, Vector3, p_position) {
 	link->set_start_position(p_position);
 }
 
-Vector3 GodotNavigationServer3D::link_get_start_position(RID p_link) const {
+Vector3 scardotNavigationServer3D::link_get_start_position(RID p_link) const {
 	const NavLink *link = link_owner.get_or_null(p_link);
 	ERR_FAIL_NULL_V(link, Vector3());
 
@@ -634,7 +634,7 @@ COMMAND_2(link_set_end_position, RID, p_link, Vector3, p_position) {
 	link->set_end_position(p_position);
 }
 
-Vector3 GodotNavigationServer3D::link_get_end_position(RID p_link) const {
+Vector3 scardotNavigationServer3D::link_get_end_position(RID p_link) const {
 	const NavLink *link = link_owner.get_or_null(p_link);
 	ERR_FAIL_NULL_V(link, Vector3());
 
@@ -648,7 +648,7 @@ COMMAND_2(link_set_enter_cost, RID, p_link, real_t, p_enter_cost) {
 	link->set_enter_cost(p_enter_cost);
 }
 
-real_t GodotNavigationServer3D::link_get_enter_cost(const RID p_link) const {
+real_t scardotNavigationServer3D::link_get_enter_cost(const RID p_link) const {
 	const NavLink *link = link_owner.get_or_null(p_link);
 	ERR_FAIL_NULL_V(link, 0);
 
@@ -662,7 +662,7 @@ COMMAND_2(link_set_travel_cost, RID, p_link, real_t, p_travel_cost) {
 	link->set_travel_cost(p_travel_cost);
 }
 
-real_t GodotNavigationServer3D::link_get_travel_cost(const RID p_link) const {
+real_t scardotNavigationServer3D::link_get_travel_cost(const RID p_link) const {
 	const NavLink *link = link_owner.get_or_null(p_link);
 	ERR_FAIL_NULL_V(link, 0);
 
@@ -676,14 +676,14 @@ COMMAND_2(link_set_owner_id, RID, p_link, ObjectID, p_owner_id) {
 	link->set_owner_id(p_owner_id);
 }
 
-ObjectID GodotNavigationServer3D::link_get_owner_id(RID p_link) const {
+ObjectID scardotNavigationServer3D::link_get_owner_id(RID p_link) const {
 	const NavLink *link = link_owner.get_or_null(p_link);
 	ERR_FAIL_NULL_V(link, ObjectID());
 
 	return link->get_owner_id();
 }
 
-RID GodotNavigationServer3D::agent_create() {
+RID scardotNavigationServer3D::agent_create() {
 	MutexLock lock(operations_mutex);
 
 	RID rid = agent_owner.make_rid();
@@ -699,7 +699,7 @@ COMMAND_2(agent_set_avoidance_enabled, RID, p_agent, bool, p_enabled) {
 	agent->set_avoidance_enabled(p_enabled);
 }
 
-bool GodotNavigationServer3D::agent_get_avoidance_enabled(RID p_agent) const {
+bool scardotNavigationServer3D::agent_get_avoidance_enabled(RID p_agent) const {
 	NavAgent *agent = agent_owner.get_or_null(p_agent);
 	ERR_FAIL_NULL_V(agent, false);
 
@@ -713,7 +713,7 @@ COMMAND_2(agent_set_use_3d_avoidance, RID, p_agent, bool, p_enabled) {
 	agent->set_use_3d_avoidance(p_enabled);
 }
 
-bool GodotNavigationServer3D::agent_get_use_3d_avoidance(RID p_agent) const {
+bool scardotNavigationServer3D::agent_get_use_3d_avoidance(RID p_agent) const {
 	NavAgent *agent = agent_owner.get_or_null(p_agent);
 	ERR_FAIL_NULL_V(agent, false);
 
@@ -736,7 +736,7 @@ COMMAND_2(agent_set_paused, RID, p_agent, bool, p_paused) {
 	agent->set_paused(p_paused);
 }
 
-bool GodotNavigationServer3D::agent_get_paused(RID p_agent) const {
+bool scardotNavigationServer3D::agent_get_paused(RID p_agent) const {
 	NavAgent *agent = agent_owner.get_or_null(p_agent);
 	ERR_FAIL_NULL_V(agent, false);
 
@@ -750,7 +750,7 @@ COMMAND_2(agent_set_neighbor_distance, RID, p_agent, real_t, p_distance) {
 	agent->set_neighbor_distance(p_distance);
 }
 
-real_t GodotNavigationServer3D::agent_get_neighbor_distance(RID p_agent) const {
+real_t scardotNavigationServer3D::agent_get_neighbor_distance(RID p_agent) const {
 	NavAgent *agent = agent_owner.get_or_null(p_agent);
 	ERR_FAIL_NULL_V(agent, 0);
 
@@ -764,7 +764,7 @@ COMMAND_2(agent_set_max_neighbors, RID, p_agent, int, p_count) {
 	agent->set_max_neighbors(p_count);
 }
 
-int GodotNavigationServer3D::agent_get_max_neighbors(RID p_agent) const {
+int scardotNavigationServer3D::agent_get_max_neighbors(RID p_agent) const {
 	NavAgent *agent = agent_owner.get_or_null(p_agent);
 	ERR_FAIL_NULL_V(agent, 0);
 
@@ -779,7 +779,7 @@ COMMAND_2(agent_set_time_horizon_agents, RID, p_agent, real_t, p_time_horizon) {
 	agent->set_time_horizon_agents(p_time_horizon);
 }
 
-real_t GodotNavigationServer3D::agent_get_time_horizon_agents(RID p_agent) const {
+real_t scardotNavigationServer3D::agent_get_time_horizon_agents(RID p_agent) const {
 	NavAgent *agent = agent_owner.get_or_null(p_agent);
 	ERR_FAIL_NULL_V(agent, 0);
 
@@ -794,7 +794,7 @@ COMMAND_2(agent_set_time_horizon_obstacles, RID, p_agent, real_t, p_time_horizon
 	agent->set_time_horizon_obstacles(p_time_horizon);
 }
 
-real_t GodotNavigationServer3D::agent_get_time_horizon_obstacles(RID p_agent) const {
+real_t scardotNavigationServer3D::agent_get_time_horizon_obstacles(RID p_agent) const {
 	NavAgent *agent = agent_owner.get_or_null(p_agent);
 	ERR_FAIL_NULL_V(agent, 0);
 
@@ -809,7 +809,7 @@ COMMAND_2(agent_set_radius, RID, p_agent, real_t, p_radius) {
 	agent->set_radius(p_radius);
 }
 
-real_t GodotNavigationServer3D::agent_get_radius(RID p_agent) const {
+real_t scardotNavigationServer3D::agent_get_radius(RID p_agent) const {
 	NavAgent *agent = agent_owner.get_or_null(p_agent);
 	ERR_FAIL_NULL_V(agent, 0);
 
@@ -824,7 +824,7 @@ COMMAND_2(agent_set_height, RID, p_agent, real_t, p_height) {
 	agent->set_height(p_height);
 }
 
-real_t GodotNavigationServer3D::agent_get_height(RID p_agent) const {
+real_t scardotNavigationServer3D::agent_get_height(RID p_agent) const {
 	NavAgent *agent = agent_owner.get_or_null(p_agent);
 	ERR_FAIL_NULL_V(agent, 0);
 
@@ -839,7 +839,7 @@ COMMAND_2(agent_set_max_speed, RID, p_agent, real_t, p_max_speed) {
 	agent->set_max_speed(p_max_speed);
 }
 
-real_t GodotNavigationServer3D::agent_get_max_speed(RID p_agent) const {
+real_t scardotNavigationServer3D::agent_get_max_speed(RID p_agent) const {
 	NavAgent *agent = agent_owner.get_or_null(p_agent);
 	ERR_FAIL_NULL_V(agent, 0);
 
@@ -853,7 +853,7 @@ COMMAND_2(agent_set_velocity, RID, p_agent, Vector3, p_velocity) {
 	agent->set_velocity(p_velocity);
 }
 
-Vector3 GodotNavigationServer3D::agent_get_velocity(RID p_agent) const {
+Vector3 scardotNavigationServer3D::agent_get_velocity(RID p_agent) const {
 	NavAgent *agent = agent_owner.get_or_null(p_agent);
 	ERR_FAIL_NULL_V(agent, Vector3());
 
@@ -874,14 +874,14 @@ COMMAND_2(agent_set_position, RID, p_agent, Vector3, p_position) {
 	agent->set_position(p_position);
 }
 
-Vector3 GodotNavigationServer3D::agent_get_position(RID p_agent) const {
+Vector3 scardotNavigationServer3D::agent_get_position(RID p_agent) const {
 	NavAgent *agent = agent_owner.get_or_null(p_agent);
 	ERR_FAIL_NULL_V(agent, Vector3());
 
 	return agent->get_position();
 }
 
-bool GodotNavigationServer3D::agent_is_map_changed(RID p_agent) const {
+bool scardotNavigationServer3D::agent_is_map_changed(RID p_agent) const {
 	NavAgent *agent = agent_owner.get_or_null(p_agent);
 	ERR_FAIL_NULL_V(agent, false);
 
@@ -903,7 +903,7 @@ COMMAND_2(agent_set_avoidance_callback, RID, p_agent, Callable, p_callback) {
 	}
 }
 
-bool GodotNavigationServer3D::agent_has_avoidance_callback(RID p_agent) const {
+bool scardotNavigationServer3D::agent_has_avoidance_callback(RID p_agent) const {
 	NavAgent *agent = agent_owner.get_or_null(p_agent);
 	ERR_FAIL_NULL_V(agent, false);
 
@@ -916,7 +916,7 @@ COMMAND_2(agent_set_avoidance_layers, RID, p_agent, uint32_t, p_layers) {
 	agent->set_avoidance_layers(p_layers);
 }
 
-uint32_t GodotNavigationServer3D::agent_get_avoidance_layers(RID p_agent) const {
+uint32_t scardotNavigationServer3D::agent_get_avoidance_layers(RID p_agent) const {
 	NavAgent *agent = agent_owner.get_or_null(p_agent);
 	ERR_FAIL_NULL_V(agent, 0);
 
@@ -929,7 +929,7 @@ COMMAND_2(agent_set_avoidance_mask, RID, p_agent, uint32_t, p_mask) {
 	agent->set_avoidance_mask(p_mask);
 }
 
-uint32_t GodotNavigationServer3D::agent_get_avoidance_mask(RID p_agent) const {
+uint32_t scardotNavigationServer3D::agent_get_avoidance_mask(RID p_agent) const {
 	NavAgent *agent = agent_owner.get_or_null(p_agent);
 	ERR_FAIL_NULL_V(agent, 0);
 
@@ -944,14 +944,14 @@ COMMAND_2(agent_set_avoidance_priority, RID, p_agent, real_t, p_priority) {
 	agent->set_avoidance_priority(p_priority);
 }
 
-real_t GodotNavigationServer3D::agent_get_avoidance_priority(RID p_agent) const {
+real_t scardotNavigationServer3D::agent_get_avoidance_priority(RID p_agent) const {
 	NavAgent *agent = agent_owner.get_or_null(p_agent);
 	ERR_FAIL_NULL_V(agent, 0);
 
 	return agent->get_avoidance_priority();
 }
 
-RID GodotNavigationServer3D::obstacle_create() {
+RID scardotNavigationServer3D::obstacle_create() {
 	MutexLock lock(operations_mutex);
 
 	RID rid = obstacle_owner.make_rid();
@@ -974,7 +974,7 @@ COMMAND_2(obstacle_set_avoidance_enabled, RID, p_obstacle, bool, p_enabled) {
 	obstacle->set_avoidance_enabled(p_enabled);
 }
 
-bool GodotNavigationServer3D::obstacle_get_avoidance_enabled(RID p_obstacle) const {
+bool scardotNavigationServer3D::obstacle_get_avoidance_enabled(RID p_obstacle) const {
 	NavObstacle *obstacle = obstacle_owner.get_or_null(p_obstacle);
 	ERR_FAIL_NULL_V(obstacle, false);
 
@@ -988,7 +988,7 @@ COMMAND_2(obstacle_set_use_3d_avoidance, RID, p_obstacle, bool, p_enabled) {
 	obstacle->set_use_3d_avoidance(p_enabled);
 }
 
-bool GodotNavigationServer3D::obstacle_get_use_3d_avoidance(RID p_obstacle) const {
+bool scardotNavigationServer3D::obstacle_get_use_3d_avoidance(RID p_obstacle) const {
 	NavObstacle *obstacle = obstacle_owner.get_or_null(p_obstacle);
 	ERR_FAIL_NULL_V(obstacle, false);
 
@@ -1004,7 +1004,7 @@ COMMAND_2(obstacle_set_map, RID, p_obstacle, RID, p_map) {
 	obstacle->set_map(map);
 }
 
-RID GodotNavigationServer3D::obstacle_get_map(RID p_obstacle) const {
+RID scardotNavigationServer3D::obstacle_get_map(RID p_obstacle) const {
 	NavObstacle *obstacle = obstacle_owner.get_or_null(p_obstacle);
 	ERR_FAIL_NULL_V(obstacle, RID());
 	if (obstacle->get_map()) {
@@ -1020,7 +1020,7 @@ COMMAND_2(obstacle_set_paused, RID, p_obstacle, bool, p_paused) {
 	obstacle->set_paused(p_paused);
 }
 
-bool GodotNavigationServer3D::obstacle_get_paused(RID p_obstacle) const {
+bool scardotNavigationServer3D::obstacle_get_paused(RID p_obstacle) const {
 	NavObstacle *obstacle = obstacle_owner.get_or_null(p_obstacle);
 	ERR_FAIL_NULL_V(obstacle, false);
 
@@ -1035,7 +1035,7 @@ COMMAND_2(obstacle_set_radius, RID, p_obstacle, real_t, p_radius) {
 	obstacle->set_radius(p_radius);
 }
 
-real_t GodotNavigationServer3D::obstacle_get_radius(RID p_obstacle) const {
+real_t scardotNavigationServer3D::obstacle_get_radius(RID p_obstacle) const {
 	NavObstacle *obstacle = obstacle_owner.get_or_null(p_obstacle);
 	ERR_FAIL_NULL_V(obstacle, 0);
 
@@ -1048,7 +1048,7 @@ COMMAND_2(obstacle_set_height, RID, p_obstacle, real_t, p_height) {
 	obstacle->set_height(p_height);
 }
 
-real_t GodotNavigationServer3D::obstacle_get_height(RID p_obstacle) const {
+real_t scardotNavigationServer3D::obstacle_get_height(RID p_obstacle) const {
 	NavObstacle *obstacle = obstacle_owner.get_or_null(p_obstacle);
 	ERR_FAIL_NULL_V(obstacle, 0);
 
@@ -1062,7 +1062,7 @@ COMMAND_2(obstacle_set_velocity, RID, p_obstacle, Vector3, p_velocity) {
 	obstacle->set_velocity(p_velocity);
 }
 
-Vector3 GodotNavigationServer3D::obstacle_get_velocity(RID p_obstacle) const {
+Vector3 scardotNavigationServer3D::obstacle_get_velocity(RID p_obstacle) const {
 	NavObstacle *obstacle = obstacle_owner.get_or_null(p_obstacle);
 	ERR_FAIL_NULL_V(obstacle, Vector3());
 
@@ -1075,20 +1075,20 @@ COMMAND_2(obstacle_set_position, RID, p_obstacle, Vector3, p_position) {
 	obstacle->set_position(p_position);
 }
 
-Vector3 GodotNavigationServer3D::obstacle_get_position(RID p_obstacle) const {
+Vector3 scardotNavigationServer3D::obstacle_get_position(RID p_obstacle) const {
 	NavObstacle *obstacle = obstacle_owner.get_or_null(p_obstacle);
 	ERR_FAIL_NULL_V(obstacle, Vector3());
 
 	return obstacle->get_position();
 }
 
-void GodotNavigationServer3D::obstacle_set_vertices(RID p_obstacle, const Vector<Vector3> &p_vertices) {
+void scardotNavigationServer3D::obstacle_set_vertices(RID p_obstacle, const Vector<Vector3> &p_vertices) {
 	NavObstacle *obstacle = obstacle_owner.get_or_null(p_obstacle);
 	ERR_FAIL_NULL(obstacle);
 	obstacle->set_vertices(p_vertices);
 }
 
-Vector<Vector3> GodotNavigationServer3D::obstacle_get_vertices(RID p_obstacle) const {
+Vector<Vector3> scardotNavigationServer3D::obstacle_get_vertices(RID p_obstacle) const {
 	NavObstacle *obstacle = obstacle_owner.get_or_null(p_obstacle);
 	ERR_FAIL_NULL_V(obstacle, Vector<Vector3>());
 
@@ -1101,14 +1101,14 @@ COMMAND_2(obstacle_set_avoidance_layers, RID, p_obstacle, uint32_t, p_layers) {
 	obstacle->set_avoidance_layers(p_layers);
 }
 
-uint32_t GodotNavigationServer3D::obstacle_get_avoidance_layers(RID p_obstacle) const {
+uint32_t scardotNavigationServer3D::obstacle_get_avoidance_layers(RID p_obstacle) const {
 	NavObstacle *obstacle = obstacle_owner.get_or_null(p_obstacle);
 	ERR_FAIL_NULL_V(obstacle, 0);
 
 	return obstacle->get_avoidance_layers();
 }
 
-void GodotNavigationServer3D::parse_source_geometry_data(const Ref<NavigationMesh> &p_navigation_mesh, const Ref<NavigationMeshSourceGeometryData3D> &p_source_geometry_data, Node *p_root_node, const Callable &p_callback) {
+void scardotNavigationServer3D::parse_source_geometry_data(const Ref<NavigationMesh> &p_navigation_mesh, const Ref<NavigationMeshSourceGeometryData3D> &p_source_geometry_data, Node *p_root_node, const Callable &p_callback) {
 #ifndef _3D_DISABLED
 	ERR_FAIL_COND_MSG(!Thread::is_main_thread(), "The SceneTree can only be parsed on the main thread. Call this function from the main thread or use call_deferred().");
 	ERR_FAIL_COND_MSG(!p_navigation_mesh.is_valid(), "Invalid navigation mesh.");
@@ -1120,7 +1120,7 @@ void GodotNavigationServer3D::parse_source_geometry_data(const Ref<NavigationMes
 #endif // _3D_DISABLED
 }
 
-void GodotNavigationServer3D::bake_from_source_geometry_data(const Ref<NavigationMesh> &p_navigation_mesh, const Ref<NavigationMeshSourceGeometryData3D> &p_source_geometry_data, const Callable &p_callback) {
+void scardotNavigationServer3D::bake_from_source_geometry_data(const Ref<NavigationMesh> &p_navigation_mesh, const Ref<NavigationMeshSourceGeometryData3D> &p_source_geometry_data, const Callable &p_callback) {
 #ifndef _3D_DISABLED
 	ERR_FAIL_COND_MSG(!p_navigation_mesh.is_valid(), "Invalid navigation mesh.");
 	ERR_FAIL_COND_MSG(!p_source_geometry_data.is_valid(), "Invalid NavigationMeshSourceGeometryData3D.");
@@ -1130,7 +1130,7 @@ void GodotNavigationServer3D::bake_from_source_geometry_data(const Ref<Navigatio
 #endif // _3D_DISABLED
 }
 
-void GodotNavigationServer3D::bake_from_source_geometry_data_async(const Ref<NavigationMesh> &p_navigation_mesh, const Ref<NavigationMeshSourceGeometryData3D> &p_source_geometry_data, const Callable &p_callback) {
+void scardotNavigationServer3D::bake_from_source_geometry_data_async(const Ref<NavigationMesh> &p_navigation_mesh, const Ref<NavigationMeshSourceGeometryData3D> &p_source_geometry_data, const Callable &p_callback) {
 #ifndef _3D_DISABLED
 	ERR_FAIL_COND_MSG(!p_navigation_mesh.is_valid(), "Invalid navigation mesh.");
 	ERR_FAIL_COND_MSG(!p_source_geometry_data.is_valid(), "Invalid NavigationMeshSourceGeometryData3D.");
@@ -1140,7 +1140,7 @@ void GodotNavigationServer3D::bake_from_source_geometry_data_async(const Ref<Nav
 #endif // _3D_DISABLED
 }
 
-bool GodotNavigationServer3D::is_baking_navigation_mesh(Ref<NavigationMesh> p_navigation_mesh) const {
+bool scardotNavigationServer3D::is_baking_navigation_mesh(Ref<NavigationMesh> p_navigation_mesh) const {
 #ifdef _3D_DISABLED
 	return false;
 #else
@@ -1221,7 +1221,7 @@ COMMAND_1(free, RID, p_object) {
 	}
 }
 
-void GodotNavigationServer3D::internal_free_agent(RID p_object) {
+void scardotNavigationServer3D::internal_free_agent(RID p_object) {
 	NavAgent *agent = agent_owner.get_or_null(p_object);
 	if (agent) {
 		if (agent->get_map() != nullptr) {
@@ -1232,7 +1232,7 @@ void GodotNavigationServer3D::internal_free_agent(RID p_object) {
 	}
 }
 
-void GodotNavigationServer3D::internal_free_obstacle(RID p_object) {
+void scardotNavigationServer3D::internal_free_obstacle(RID p_object) {
 	NavObstacle *obstacle = obstacle_owner.get_or_null(p_object);
 	if (obstacle) {
 		NavAgent *obstacle_agent = obstacle->get_agent();
@@ -1249,13 +1249,13 @@ void GodotNavigationServer3D::internal_free_obstacle(RID p_object) {
 	}
 }
 
-void GodotNavigationServer3D::set_active(bool p_active) {
+void scardotNavigationServer3D::set_active(bool p_active) {
 	MutexLock lock(operations_mutex);
 
 	active = p_active;
 }
 
-void GodotNavigationServer3D::flush_queries() {
+void scardotNavigationServer3D::flush_queries() {
 	// In c++ we can't be sure that this is performed in the main thread
 	// even with mutable functions.
 	MutexLock lock(commands_mutex);
@@ -1268,7 +1268,7 @@ void GodotNavigationServer3D::flush_queries() {
 	commands.clear();
 }
 
-void GodotNavigationServer3D::map_force_update(RID p_map) {
+void scardotNavigationServer3D::map_force_update(RID p_map) {
 	NavMap *map = map_owner.get_or_null(p_map);
 	ERR_FAIL_NULL(map);
 
@@ -1277,14 +1277,14 @@ void GodotNavigationServer3D::map_force_update(RID p_map) {
 	map->sync();
 }
 
-uint32_t GodotNavigationServer3D::map_get_iteration_id(RID p_map) const {
+uint32_t scardotNavigationServer3D::map_get_iteration_id(RID p_map) const {
 	NavMap *map = map_owner.get_or_null(p_map);
 	ERR_FAIL_NULL_V(map, 0);
 
 	return map->get_iteration_id();
 }
 
-void GodotNavigationServer3D::sync() {
+void scardotNavigationServer3D::sync() {
 #ifndef _3D_DISABLED
 	if (navmesh_generator_3d) {
 		navmesh_generator_3d->sync();
@@ -1292,7 +1292,7 @@ void GodotNavigationServer3D::sync() {
 #endif // _3D_DISABLED
 }
 
-void GodotNavigationServer3D::process(real_t p_delta_time) {
+void scardotNavigationServer3D::process(real_t p_delta_time) {
 	flush_queries();
 
 	if (!active) {
@@ -1346,13 +1346,13 @@ void GodotNavigationServer3D::process(real_t p_delta_time) {
 	pm_obstacle_count = _new_pm_obstacle_count;
 }
 
-void GodotNavigationServer3D::init() {
+void scardotNavigationServer3D::init() {
 #ifndef _3D_DISABLED
 	navmesh_generator_3d = memnew(NavMeshGenerator3D);
 #endif // _3D_DISABLED
 }
 
-void GodotNavigationServer3D::finish() {
+void scardotNavigationServer3D::finish() {
 	flush_queries();
 #ifndef _3D_DISABLED
 	if (navmesh_generator_3d) {
@@ -1363,7 +1363,7 @@ void GodotNavigationServer3D::finish() {
 #endif // _3D_DISABLED
 }
 
-PathQueryResult GodotNavigationServer3D::_query_path(const PathQueryParameters &p_parameters) const {
+PathQueryResult scardotNavigationServer3D::_query_path(const PathQueryParameters &p_parameters) const {
 	PathQueryResult r_query_result;
 
 	const NavMap *map = map_owner.get_or_null(p_parameters.map);
@@ -1445,7 +1445,7 @@ PathQueryResult GodotNavigationServer3D::_query_path(const PathQueryParameters &
 	return r_query_result;
 }
 
-RID GodotNavigationServer3D::source_geometry_parser_create() {
+RID scardotNavigationServer3D::source_geometry_parser_create() {
 #ifndef _3D_DISABLED
 	if (navmesh_generator_3d) {
 		return navmesh_generator_3d->source_geometry_parser_create();
@@ -1454,7 +1454,7 @@ RID GodotNavigationServer3D::source_geometry_parser_create() {
 	return RID();
 }
 
-void GodotNavigationServer3D::source_geometry_parser_set_callback(RID p_parser, const Callable &p_callback) {
+void scardotNavigationServer3D::source_geometry_parser_set_callback(RID p_parser, const Callable &p_callback) {
 #ifndef _3D_DISABLED
 	if (navmesh_generator_3d) {
 		navmesh_generator_3d->source_geometry_parser_set_callback(p_parser, p_callback);
@@ -1462,7 +1462,7 @@ void GodotNavigationServer3D::source_geometry_parser_set_callback(RID p_parser, 
 #endif // _3D_DISABLED
 }
 
-Vector<Vector3> GodotNavigationServer3D::simplify_path(const Vector<Vector3> &p_path, real_t p_epsilon) {
+Vector<Vector3> scardotNavigationServer3D::simplify_path(const Vector<Vector3> &p_path, real_t p_epsilon) {
 	if (p_path.size() <= 2) {
 		return p_path;
 	}
@@ -1485,7 +1485,7 @@ Vector<Vector3> GodotNavigationServer3D::simplify_path(const Vector<Vector3> &p_
 	return simplified_path;
 }
 
-LocalVector<uint32_t> GodotNavigationServer3D::get_simplified_path_indices(const Vector<Vector3> &p_path, real_t p_epsilon) {
+LocalVector<uint32_t> scardotNavigationServer3D::get_simplified_path_indices(const Vector<Vector3> &p_path, real_t p_epsilon) {
 	p_epsilon = MAX(0.0, p_epsilon);
 	real_t squared_epsilon = p_epsilon * p_epsilon;
 
@@ -1519,7 +1519,7 @@ LocalVector<uint32_t> GodotNavigationServer3D::get_simplified_path_indices(const
 	return simplified_path_indices;
 }
 
-void GodotNavigationServer3D::simplify_path_segment(int p_start_inx, int p_end_inx, const Vector<Vector3> &p_points, real_t p_epsilon, LocalVector<bool> &r_valid_points) {
+void scardotNavigationServer3D::simplify_path_segment(int p_start_inx, int p_end_inx, const Vector<Vector3> &p_points, real_t p_epsilon, LocalVector<bool> &r_valid_points) {
 	r_valid_points[p_start_inx] = true;
 	r_valid_points[p_end_inx] = true;
 
@@ -1549,7 +1549,7 @@ void GodotNavigationServer3D::simplify_path_segment(int p_start_inx, int p_end_i
 	}
 }
 
-int GodotNavigationServer3D::get_process_info(ProcessInfo p_info) const {
+int scardotNavigationServer3D::get_process_info(ProcessInfo p_info) const {
 	switch (p_info) {
 		case INFO_ACTIVE_MAPS: {
 			return active_maps.size();

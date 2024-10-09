@@ -2,10 +2,10 @@
 /*  http_client_web.h                                                     */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -40,10 +40,10 @@ extern "C" {
 #include <stddef.h>
 
 typedef enum {
-	GODOT_JS_FETCH_STATE_REQUESTING = 0,
-	GODOT_JS_FETCH_STATE_BODY = 1,
-	GODOT_JS_FETCH_STATE_DONE = 2,
-	GODOT_JS_FETCH_STATE_ERROR = -1,
+	SCARDOT_JS_FETCH_STATE_REQUESTING = 0,
+	SCARDOT_JS_FETCH_STATE_BODY = 1,
+	SCARDOT_JS_FETCH_STATE_DONE = 2,
+	SCARDOT_JS_FETCH_STATE_ERROR = -1,
 } godot_js_fetch_state_t;
 
 extern int godot_js_fetch_create(const char *p_method, const char *p_url, const char **p_headers, int p_headers_len, const uint8_t *p_body, int p_body_len);

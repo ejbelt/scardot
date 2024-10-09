@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 #nullable enable
 
-namespace Godot
+namespace scardot
 {
     /// <summary>
     /// Plane represents a normalized plane equation.

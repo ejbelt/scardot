@@ -1,6 +1,6 @@
 using System;
 
-namespace Godot
+namespace scardot
 {
     /// <summary>
     /// An attribute that contains the path to the object's script.

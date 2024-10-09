@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotNetUtils.java                                                    */
+/*  scardotNetUtils.java                                                    */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -47,21 +47,21 @@ import java.util.Enumeration;
  * It provides access to the CA certificates KeyStore, and the WifiManager.MulticastLock, which is needed on some devices
  * to receive broadcast and multicast packets.
  */
-public class GodotNetUtils {
+public class scardotNetUtils {
 	/* A single, reference counted, multicast lock, or null if permission CHANGE_WIFI_MULTICAST_STATE is missing */
 	private WifiManager.MulticastLock multicastLock;
 
-	public GodotNetUtils(Context context) {
+	public scardotNetUtils(Context context) {
 		if (PermissionsUtil.hasManifestPermission(context, "android.permission.CHANGE_WIFI_MULTICAST_STATE")) {
 			WifiManager wifi = (WifiManager)context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-			multicastLock = wifi.createMulticastLock("GodotMulticastLock");
+			multicastLock = wifi.createMulticastLock("scardotMulticastLock");
 			multicastLock.setReferenceCounted(true);
 		}
 	}
 
 	/**
 	 * Acquire the multicast lock. This is required on some devices to receive broadcast/multicast packets.
-	 * This is done automatically by Godot when enabling broadcast or joining a multicast group on a socket.
+	 * This is done automatically by scardot when enabling broadcast or joining a multicast group on a socket.
 	 */
 	public void multicastLockAcquire() {
 		if (multicastLock == null)
@@ -69,13 +69,13 @@ public class GodotNetUtils {
 		try {
 			multicastLock.acquire();
 		} catch (RuntimeException e) {
-			Log.e("Godot", "Exception during multicast lock acquire: " + e);
+			Log.e("scardot", "Exception during multicast lock acquire: " + e);
 		}
 	}
 
 	/**
 	 * Release the multicast lock.
-	 * This is done automatically by Godot when the lock is no longer needed by a socket.
+	 * This is done automatically by scardot when the lock is no longer needed by a socket.
 	 */
 	public void multicastLockRelease() {
 		if (multicastLock == null)
@@ -83,7 +83,7 @@ public class GodotNetUtils {
 		try {
 			multicastLock.release();
 		} catch (RuntimeException e) {
-			Log.e("Godot", "Exception during multicast lock release: " + e);
+			Log.e("scardot", "Exception during multicast lock release: " + e);
 		}
 	}
 
@@ -112,7 +112,7 @@ public class GodotNetUtils {
 			}
 			return writer.toString();
 		} catch (Exception e) {
-			Log.e("Godot", "Exception while reading CA certificates: " + e);
+			Log.e("scardot", "Exception while reading CA certificates: " + e);
 			return "";
 		}
 	}

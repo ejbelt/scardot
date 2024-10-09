@@ -1,7 +1,7 @@
-# Korean translation of the Godot Engine properties.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Korean translation of the scardot Engine properties.
+# Copyright (c) 2014-present scardot Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the scardot source code.
 # Ch <ccwpc@hanmail.net>, 2017.
 # paijai 송 (fivejobi) <xotjq237@gmail.com>, 2018.
 # pgyage3263 <pgyage3263@naver.com>, 2018.
@@ -39,7 +39,7 @@
 # 박민규 <80dots@gmail.com>, 2022.
 # 이지민 <jiminaleejung@gmail.com>, 2022.
 # nulltable <un5450@naver.com>, 2022.
-# Godoto <aicompose@gmail.com>, 2022.
+# scardoto <aicompose@gmail.com>, 2022.
 # gaenyang <gaenyang@outlook.com>, 2022.
 # 오지훈 <jule1130@naver.com>, 2023.
 # coolkid <newtype20050831@gmail.com>, 2023.
@@ -54,7 +54,7 @@
 # Sovlus Haesaun <josuke4832@gmail.com>, 2024.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine properties\n"
+"Project-Id-Version: scardot Engine properties\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2024-01-22 23:01+0000\n"
@@ -3038,8 +3038,8 @@ msgstr "관절"
 msgid "Roots"
 msgstr "루트"
 
-msgid "Godot Bone Node"
-msgstr "Godot 본 노드"
+msgid "scardot Bone Node"
+msgstr "scardot 본 노드"
 
 msgid "Skin Root"
 msgstr "스킨 루트"
@@ -3050,8 +3050,8 @@ msgstr "관절 원본"
 msgid "Non Joints"
 msgstr "비 관절"
 
-msgid "Godot Skin"
-msgstr "Godot 스킨"
+msgid "scardot Skin"
+msgstr "scardot 스킨"
 
 msgid "Src Image"
 msgstr "SRC 이미지"

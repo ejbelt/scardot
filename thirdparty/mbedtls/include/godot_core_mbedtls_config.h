@@ -2,10 +2,10 @@
 /*  godot_core_mbedtls_config.h                                           */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -28,8 +28,8 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#ifndef GODOT_CORE_MBEDTLS_CONFIG_H
-#define GODOT_CORE_MBEDTLS_CONFIG_H
+#ifndef SCARDOT_CORE_MBEDTLS_CONFIG_H
+#define SCARDOT_CORE_MBEDTLS_CONFIG_H
 
 #include <limits.h>
 
@@ -57,4 +57,4 @@
 #define MBEDTLS_PLATFORM_C
 #endif
 
-#endif // GODOT_CORE_MBEDTLS_CONFIG_H
+#endif // SCARDOT_CORE_MBEDTLS_CONFIG_H

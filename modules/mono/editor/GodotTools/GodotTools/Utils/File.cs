@@ -1,7 +1,7 @@
 using System;
-using Godot;
+using scardot;
 
-namespace GodotTools.Utils
+namespace scardotTools.Utils
 {
     public static class File
     {

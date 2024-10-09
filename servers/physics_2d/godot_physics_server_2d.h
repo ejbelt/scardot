@@ -2,10 +2,10 @@
 /*  godot_physics_server_2d.h                                             */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -28,8 +28,8 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#ifndef GODOT_PHYSICS_SERVER_2D_H
-#define GODOT_PHYSICS_SERVER_2D_H
+#ifndef SCARDOT_PHYSICS_SERVER_2D_H
+#define SCARDOT_PHYSICS_SERVER_2D_H
 
 #include "godot_joints_2d.h"
 #include "godot_shape_2d.h"
@@ -39,11 +39,11 @@
 #include "core/templates/rid_owner.h"
 #include "servers/physics_server_2d.h"
 
-class GodotPhysicsServer2D : public PhysicsServer2D {
-	GDCLASS(GodotPhysicsServer2D, PhysicsServer2D);
+class scardotPhysicsServer2D : public PhysicsServer2D {
+	GDCLASS(scardotPhysicsServer2D, PhysicsServer2D);
 
-	friend class GodotPhysicsDirectSpaceState2D;
-	friend class GodotPhysicsDirectBodyState2D;
+	friend class scardotPhysicsDirectSpaceState2D;
+	friend class scardotPhysicsDirectBodyState2D;
 	bool active = true;
 	bool doing_sync = false;
 
@@ -55,19 +55,19 @@ class GodotPhysicsServer2D : public PhysicsServer2D {
 
 	bool flushing_queries = false;
 
-	GodotStep2D *stepper = nullptr;
-	HashSet<const GodotSpace2D *> active_spaces;
+	scardotStep2D *stepper = nullptr;
+	HashSet<const scardotSpace2D *> active_spaces;
 
-	mutable RID_PtrOwner<GodotShape2D, true> shape_owner;
-	mutable RID_PtrOwner<GodotSpace2D, true> space_owner;
-	mutable RID_PtrOwner<GodotArea2D, true> area_owner;
-	mutable RID_PtrOwner<GodotBody2D, true> body_owner;
-	mutable RID_PtrOwner<GodotJoint2D, true> joint_owner;
+	mutable RID_PtrOwner<scardotShape2D, true> shape_owner;
+	mutable RID_PtrOwner<scardotSpace2D, true> space_owner;
+	mutable RID_PtrOwner<scardotArea2D, true> area_owner;
+	mutable RID_PtrOwner<scardotBody2D, true> body_owner;
+	mutable RID_PtrOwner<scardotJoint2D, true> joint_owner;
 
-	static GodotPhysicsServer2D *godot_singleton;
+	static scardotPhysicsServer2D *godot_singleton;
 
-	friend class GodotCollisionObject2D;
-	SelfList<GodotCollisionObject2D>::List pending_shape_update_list;
+	friend class scardotCollisionObject2D;
+	SelfList<scardotCollisionObject2D>::List pending_shape_update_list;
 	void _update_shapes();
 
 	RID _shape_create(ShapeType p_shape);
@@ -300,8 +300,8 @@ public:
 
 	int get_process_info(ProcessInfo p_info) override;
 
-	GodotPhysicsServer2D(bool p_using_threads = false);
-	~GodotPhysicsServer2D() {}
+	scardotPhysicsServer2D(bool p_using_threads = false);
+	~scardotPhysicsServer2D() {}
 };
 
-#endif // GODOT_PHYSICS_SERVER_2D_H
+#endif // SCARDOT_PHYSICS_SERVER_2D_H

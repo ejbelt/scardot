@@ -2,7 +2,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 
-namespace Godot.SourceGenerators.Internal;
+namespace scardot.SourceGenerators.Internal;
 
 internal readonly struct CallbacksData
 {

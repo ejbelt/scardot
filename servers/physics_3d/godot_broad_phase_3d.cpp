@@ -2,10 +2,10 @@
 /*  godot_broad_phase_3d.cpp                                              */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -30,7 +30,7 @@
 
 #include "godot_broad_phase_3d.h"
 
-GodotBroadPhase3D::CreateFunction GodotBroadPhase3D::create_func = nullptr;
+scardotBroadPhase3D::CreateFunction scardotBroadPhase3D::create_func = nullptr;
 
-GodotBroadPhase3D::~GodotBroadPhase3D() {
+scardotBroadPhase3D::~scardotBroadPhase3D() {
 }

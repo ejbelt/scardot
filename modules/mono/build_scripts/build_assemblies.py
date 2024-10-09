@@ -196,19 +196,19 @@ def run_msbuild(tools: ToolsLocation, sln: str, chdir_to: str, msbuild_args: Opt
 
 def build_godot_api(msbuild_tool, module_dir, output_dir, push_nupkgs_local, precision):
     target_filenames = [
-        "GodotSharp.dll",
-        "GodotSharp.pdb",
-        "GodotSharp.xml",
-        "GodotSharpEditor.dll",
-        "GodotSharpEditor.pdb",
-        "GodotSharpEditor.xml",
-        "GodotPlugins.dll",
-        "GodotPlugins.pdb",
-        "GodotPlugins.runtimeconfig.json",
+        "scardotSharp.dll",
+        "scardotSharp.pdb",
+        "scardotSharp.xml",
+        "scardotSharpEditor.dll",
+        "scardotSharpEditor.pdb",
+        "scardotSharpEditor.xml",
+        "scardotPlugins.dll",
+        "scardotPlugins.pdb",
+        "scardotPlugins.runtimeconfig.json",
     ]
 
     for build_config in ["Debug", "Release"]:
-        editor_api_dir = os.path.join(output_dir, "GodotSharp", "Api", build_config)
+        editor_api_dir = os.path.join(output_dir, "scardotSharp", "Api", build_config)
 
         targets = [os.path.join(editor_api_dir, filename) for filename in target_filenames]
 
@@ -216,18 +216,18 @@ def build_godot_api(msbuild_tool, module_dir, output_dir, push_nupkgs_local, pre
         if push_nupkgs_local:
             args += ["/p:ClearNuGetLocalCache=true", "/p:PushNuGetToLocalSource=" + push_nupkgs_local]
         if precision == "double":
-            args += ["/p:GodotFloat64=true"]
+            args += ["/p:scardotFloat64=true"]
 
-        sln = os.path.join(module_dir, "glue/GodotSharp/GodotSharp.sln")
+        sln = os.path.join(module_dir, "glue/scardotSharp/scardotSharp.sln")
         exit_code = run_msbuild(msbuild_tool, sln=sln, chdir_to=module_dir, msbuild_args=args)
         if exit_code != 0:
             return exit_code
 
         # Copy targets
 
-        core_src_dir = os.path.abspath(os.path.join(sln, os.pardir, "GodotSharp", "bin", build_config))
-        editor_src_dir = os.path.abspath(os.path.join(sln, os.pardir, "GodotSharpEditor", "bin", build_config))
-        plugins_src_dir = os.path.abspath(os.path.join(sln, os.pardir, "GodotPlugins", "bin", build_config, "net6.0"))
+        core_src_dir = os.path.abspath(os.path.join(sln, os.pardir, "scardotSharp", "bin", build_config))
+        editor_src_dir = os.path.abspath(os.path.join(sln, os.pardir, "scardotSharpEditor", "bin", build_config))
+        plugins_src_dir = os.path.abspath(os.path.join(sln, os.pardir, "scardotPlugins", "bin", build_config, "net6.0"))
 
         if not os.path.isdir(editor_api_dir):
             assert not os.path.isfile(editor_api_dir)
@@ -287,21 +287,21 @@ def generate_sdk_package_versions():
 
     version_defines = (
         [
-            f"GODOT{version.major}",
-            f"GODOT{version.major}_{version.minor}",
-            f"GODOT{version.major}_{version.minor}_{version.patch}",
+            f"SCARDOT{version.major}",
+            f"SCARDOT{version.major}_{version.minor}",
+            f"SCARDOT{version.major}_{version.minor}_{version.patch}",
         ]
-        + [f"GODOT{v}_OR_GREATER" for v in range(4, version.major + 1)]
-        + [f"GODOT{version.major}_{v}_OR_GREATER" for v in range(0, version.minor + 1)]
-        + [f"GODOT{version.major}_{version.minor}_{v}_OR_GREATER" for v in range(0, version.patch + 1)]
+        + [f"SCARDOT{v}_OR_GREATER" for v in range(4, version.major + 1)]
+        + [f"SCARDOT{version.major}_{v}_OR_GREATER" for v in range(0, version.minor + 1)]
+        + [f"SCARDOT{version.major}_{version.minor}_{v}_OR_GREATER" for v in range(0, version.patch + 1)]
     )
 
     props = """<Project>
   <PropertyGroup>
-    <PackageVersion_GodotSharp>{0}</PackageVersion_GodotSharp>
-    <PackageVersion_Godot_NET_Sdk>{0}</PackageVersion_Godot_NET_Sdk>
-    <PackageVersion_Godot_SourceGenerators>{0}</PackageVersion_Godot_SourceGenerators>
-    <GodotVersionConstants>{1}</GodotVersionConstants>
+    <PackageVersion_scardotSharp>{0}</PackageVersion_scardotSharp>
+    <PackageVersion_scardot_NET_Sdk>{0}</PackageVersion_scardot_NET_Sdk>
+    <PackageVersion_scardot_SourceGenerators>{0}</PackageVersion_scardot_SourceGenerators>
+    <scardotVersionConstants>{1}</scardotVersionConstants>
   </PropertyGroup>
 </Project>
 """.format(version_str, ";".join(version_defines))
@@ -312,7 +312,7 @@ def generate_sdk_package_versions():
 
     # Also write the versioned docs URL to a constant for the Source Generators.
 
-    constants = """namespace Godot.SourceGenerators
+    constants = """namespace scardot.SourceGenerators
 {{
 // TODO: This is currently disabled because of https://github.com/dotnet/roslyn/issues/52904
 #pragma warning disable IDE0040 // Add accessibility modifiers.
@@ -326,8 +326,8 @@ def generate_sdk_package_versions():
     generators_dir = os.path.join(
         dirname(script_path),
         "editor",
-        "Godot.NET.Sdk",
-        "Godot.SourceGenerators",
+        "scardot.NET.Sdk",
+        "scardot.SourceGenerators",
         "Generated",
     )
     os.makedirs(generators_dir, exist_ok=True)
@@ -340,31 +340,31 @@ def build_all(msbuild_tool, module_dir, output_dir, godot_platform, dev_debug, p
     # Generate SdkPackageVersions.props and VersionDocsUrl constant
     generate_sdk_package_versions()
 
-    # Godot API
+    # scardot API
     exit_code = build_godot_api(msbuild_tool, module_dir, output_dir, push_nupkgs_local, precision)
     if exit_code != 0:
         return exit_code
 
-    # GodotTools
-    sln = os.path.join(module_dir, "editor/GodotTools/GodotTools.sln")
+    # scardotTools
+    sln = os.path.join(module_dir, "editor/scardotTools/scardotTools.sln")
     args = ["/restore", "/t:Build", "/p:Configuration=" + ("Debug" if dev_debug else "Release")] + (
-        ["/p:GodotPlatform=" + godot_platform] if godot_platform else []
+        ["/p:scardotPlatform=" + godot_platform] if godot_platform else []
     )
     if push_nupkgs_local:
         args += ["/p:ClearNuGetLocalCache=true", "/p:PushNuGetToLocalSource=" + push_nupkgs_local]
     if precision == "double":
-        args += ["/p:GodotFloat64=true"]
+        args += ["/p:scardotFloat64=true"]
     exit_code = run_msbuild(msbuild_tool, sln=sln, chdir_to=module_dir, msbuild_args=args)
     if exit_code != 0:
         return exit_code
 
-    # Godot.NET.Sdk
+    # scardot.NET.Sdk
     args = ["/restore", "/t:Build", "/p:Configuration=Release"]
     if push_nupkgs_local:
         args += ["/p:ClearNuGetLocalCache=true", "/p:PushNuGetToLocalSource=" + push_nupkgs_local]
     if precision == "double":
-        args += ["/p:GodotFloat64=true"]
-    sln = os.path.join(module_dir, "editor/Godot.NET.Sdk/Godot.NET.Sdk.sln")
+        args += ["/p:scardotFloat64=true"]
+    sln = os.path.join(module_dir, "editor/scardot.NET.Sdk/scardot.NET.Sdk.sln")
     exit_code = run_msbuild(msbuild_tool, sln=sln, chdir_to=module_dir, msbuild_args=args)
     if exit_code != 0:
         return exit_code
@@ -376,13 +376,13 @@ def main():
     import argparse
     import sys
 
-    parser = argparse.ArgumentParser(description="Builds all Godot .NET solutions")
+    parser = argparse.ArgumentParser(description="Builds all scardot .NET solutions")
     parser.add_argument("--godot-output-dir", type=str, required=True)
     parser.add_argument(
         "--dev-debug",
         action="store_true",
         default=False,
-        help="Build GodotTools and Godot.NET.Sdk with 'Configuration=Debug'",
+        help="Build scardotTools and scardot.NET.Sdk with 'Configuration=Debug'",
     )
     parser.add_argument("--godot-platform", type=str, default="")
     parser.add_argument("--mono-prefix", type=str, default="")

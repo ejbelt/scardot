@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  Godot.kt                                                              */
+/*  scardot.kt                                                              */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -54,14 +54,14 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.google.android.vending.expansion.downloader.*
 import org.godotengine.godot.error.Error
-import org.godotengine.godot.input.GodotEditText
-import org.godotengine.godot.input.GodotInputHandler
+import org.godotengine.godot.input.scardotEditText
+import org.godotengine.godot.input.scardotInputHandler
 import org.godotengine.godot.io.directory.DirectoryAccessHandler
 import org.godotengine.godot.io.file.FileAccessHandler
-import org.godotengine.godot.plugin.GodotPluginRegistry
-import org.godotengine.godot.tts.GodotTTS
+import org.godotengine.godot.plugin.scardotPluginRegistry
+import org.godotengine.godot.tts.scardotTTS
 import org.godotengine.godot.utils.CommandLineFileParser
-import org.godotengine.godot.utils.GodotNetUtils
+import org.godotengine.godot.utils.scardotNetUtils
 import org.godotengine.godot.utils.PermissionsUtil
 import org.godotengine.godot.utils.PermissionsUtil.requestPermission
 import org.godotengine.godot.utils.beginBenchmarkMeasure
@@ -85,10 +85,10 @@ import java.util.concurrent.atomic.AtomicReference
  * Can be hosted by [Activity], [Fragment] or [Service] android components, so long as its
  * lifecycle methods are properly invoked.
  */
-class Godot(private val context: Context) {
+class scardot(private val context: Context) {
 
 	internal companion object {
-		private val TAG = Godot::class.java.simpleName
+		private val TAG = scardot::class.java.simpleName
 
 		// Supported build flavors
 		const val EDITOR_FLAVOR = "editor"
@@ -104,8 +104,8 @@ class Godot(private val context: Context) {
 	private val mClipboard: ClipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 	private val vibratorService: Vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
-	private val pluginRegistry: GodotPluginRegistry by lazy {
-		GodotPluginRegistry.getPluginRegistry()
+	private val pluginRegistry: scardotPluginRegistry by lazy {
+		scardotPluginRegistry.getPluginRegistry()
 	}
 
 	private val accelerometerEnabled = AtomicBoolean(false)
@@ -128,12 +128,12 @@ class Godot(private val context: Context) {
 		mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
 	}
 
-	val tts = GodotTTS(context)
+	val tts = scardotTTS(context)
 	val directoryAccessHandler = DirectoryAccessHandler(context)
 	val fileAccessHandler = FileAccessHandler(context)
-	val netUtils = GodotNetUtils(context)
+	val netUtils = scardotNetUtils(context)
 	private val commandLineFileParser = CommandLineFileParser()
-	private val godotInputHandler = GodotInputHandler(context, this)
+	private val godotInputHandler = scardotInputHandler(context, this)
 
 	/**
 	 * Task to run when the engine terminates.
@@ -146,12 +146,12 @@ class Godot(private val context: Context) {
 	private var initializationStarted = false
 
 	/**
-	 * Tracks whether [GodotLib.initialize] was completed successfully.
+	 * Tracks whether [scardotLib.initialize] was completed successfully.
 	 */
 	private var nativeLayerInitializeCompleted = false
 
 	/**
-	 * Tracks whether [GodotLib.setup] was completed successfully.
+	 * Tracks whether [scardotLib.setup] was completed successfully.
 	 */
 	private var nativeLayerSetupCompleted = false
 
@@ -159,7 +159,7 @@ class Godot(private val context: Context) {
 	 * Tracks whether [onInitRenderView] was completed successfully.
 	 */
 	private var renderViewInitialized = false
-	private var primaryHost: GodotHost? = null
+	private var primaryHost: scardotHost? = null
 
 	/**
 	 * Tracks whether we're in the RESUMED lifecycle state.
@@ -168,11 +168,11 @@ class Godot(private val context: Context) {
 	private var resumed = false
 
 	/**
-	 * Tracks whether [onGodotSetupCompleted] fired.
+	 * Tracks whether [onscardotSetupCompleted] fired.
 	 */
 	private val godotMainLoopStarted = AtomicBoolean(false)
 
-	var io: GodotIO? = null
+	var io: scardotIO? = null
 
 	private var commandLine : MutableList<String> = ArrayList<String>()
 	private var xrMode = XRMode.REGULAR
@@ -183,7 +183,7 @@ class Godot(private val context: Context) {
 	private var darkMode = false
 
 	private var containerLayout: FrameLayout? = null
-	var renderView: GodotRenderView? = null
+	var renderView: scardotRenderView? = null
 
 	/**
 	 * Returns true if the native engine has been initialized through [onInitNativeLayer], false otherwise.
@@ -202,7 +202,7 @@ class Godot(private val context: Context) {
 	private fun requireActivity() = getActivity() ?: throw IllegalStateException("Host activity must be non-null")
 
 	/**
-	 * Start initialization of the Godot engine.
+	 * Start initialization of the scardot engine.
 	 *
 	 * This must be followed by [onInitNativeLayer] and [onInitRenderView] in that order to complete
 	 * initialization of the engine.
@@ -210,7 +210,7 @@ class Godot(private val context: Context) {
 	 * @throws IllegalArgumentException exception if the specified expansion pack (if any)
 	 * is invalid.
 	 */
-	fun onCreate(primaryHost: GodotHost) {
+	fun onCreate(primaryHost: scardotHost) {
 		if (this.primaryHost != null || initializationStarted) {
 			Log.d(TAG, "OnCreate already invoked")
 			return
@@ -220,17 +220,17 @@ class Godot(private val context: Context) {
 
 		darkMode = context.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
 
-		beginBenchmarkMeasure("Startup", "Godot::onCreate")
+		beginBenchmarkMeasure("Startup", "scardot::onCreate")
 		try {
 			this.primaryHost = primaryHost
 			val activity = requireActivity()
 			val window = activity.window
 			window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON)
 
-			Log.v(TAG, "Initializing Godot plugin registry")
-			GodotPluginRegistry.initializePluginRegistry(this, primaryHost.getHostPlugins(this))
+			Log.v(TAG, "Initializing scardot plugin registry")
+			scardotPluginRegistry.initializePluginRegistry(this, primaryHost.getHostPlugins(this))
 			if (io == null) {
-				io = GodotIO(activity)
+				io = scardotIO(activity)
 			}
 
 			// check for apk expansion API
@@ -318,7 +318,7 @@ class Godot(private val context: Context) {
 			initializationStarted = false
 			throw e
 		} finally {
-			endBenchmarkMeasure("Startup", "Godot::onCreate")
+			endBenchmarkMeasure("Startup", "scardot::onCreate")
 		}
 	}
 
@@ -371,7 +371,7 @@ class Godot(private val context: Context) {
 	fun isInImmersiveMode() = useImmersive.get()
 
 	/**
-	 * Initializes the native layer of the Godot engine.
+	 * Initializes the native layer of the scardot engine.
 	 *
 	 * This must be preceded by [onCreate] and followed by [onInitRenderView] to complete
 	 * initialization of the engine.
@@ -380,7 +380,7 @@ class Godot(private val context: Context) {
 	 *
 	 * @throws IllegalStateException if [onCreate] has not been called.
 	 */
-	fun onInitNativeLayer(host: GodotHost): Boolean {
+	fun onInitNativeLayer(host: scardotHost): Boolean {
 		if (!initializationStarted) {
 			throw IllegalStateException("OnCreate must be invoked successfully prior to initializing the native layer")
 		}
@@ -395,7 +395,7 @@ class Godot(private val context: Context) {
 
 		Log.v(TAG, "OnInitNativeLayer: $host")
 
-		beginBenchmarkMeasure("Startup", "Godot::onInitNativeLayer")
+		beginBenchmarkMeasure("Startup", "scardot::onInitNativeLayer")
 		try {
 			if (expansionPackPath.isNotEmpty()) {
 				commandLine.add("--main-pack")
@@ -403,7 +403,7 @@ class Godot(private val context: Context) {
 			}
 			val activity = requireActivity()
 			if (!nativeLayerInitializeCompleted) {
-				nativeLayerInitializeCompleted = GodotLib.initialize(
+				nativeLayerInitializeCompleted = scardotLib.initialize(
 					activity,
 					this,
 					activity.assets,
@@ -413,19 +413,19 @@ class Godot(private val context: Context) {
 					fileAccessHandler,
 					useApkExpansion,
 				)
-				Log.v(TAG, "Godot native layer initialization completed: $nativeLayerInitializeCompleted")
+				Log.v(TAG, "scardot native layer initialization completed: $nativeLayerInitializeCompleted")
 			}
 
 			if (nativeLayerInitializeCompleted && !nativeLayerSetupCompleted) {
-				nativeLayerSetupCompleted = GodotLib.setup(commandLine.toTypedArray(), tts)
+				nativeLayerSetupCompleted = scardotLib.setup(commandLine.toTypedArray(), tts)
 				if (!nativeLayerSetupCompleted) {
-					throw IllegalStateException("Unable to setup the Godot engine! Aborting...")
+					throw IllegalStateException("Unable to setup the scardot engine! Aborting...")
 				} else {
-					Log.v(TAG, "Godot native layer setup completed")
+					Log.v(TAG, "scardot native layer setup completed")
 				}
 			}
 		} finally {
-			endBenchmarkMeasure("Startup", "Godot::onInitNativeLayer")
+			endBenchmarkMeasure("Startup", "scardot::onInitNativeLayer")
 		}
 		return isNativeInitialized()
 	}
@@ -436,22 +436,22 @@ class Godot(private val context: Context) {
 	 * This must be preceded by [onCreate] and [onInitNativeLayer] in that order to properly
 	 * initialize the engine.
 	 *
-	 * @param host The [GodotHost] that's initializing the render views
-	 * @param providedContainerLayout Optional argument; if provided, this is reused to host the Godot's render views
+	 * @param host The [scardotHost] that's initializing the render views
+	 * @param providedContainerLayout Optional argument; if provided, this is reused to host the scardot's render views
 	 *
-	 * @return A [FrameLayout] instance containing Godot's render views if initialization is successful, null otherwise.
+	 * @return A [FrameLayout] instance containing scardot's render views if initialization is successful, null otherwise.
 	 *
 	 * @throws IllegalStateException if [onInitNativeLayer] has not been called
 	 */
 	@JvmOverloads
-	fun onInitRenderView(host: GodotHost, providedContainerLayout: FrameLayout = FrameLayout(host.activity)): FrameLayout? {
+	fun onInitRenderView(host: scardotHost, providedContainerLayout: FrameLayout = FrameLayout(host.activity)): FrameLayout? {
 		if (!isNativeInitialized()) {
 			throw IllegalStateException("onInitNativeLayer() must be invoked successfully prior to initializing the render view")
 		}
 
 		Log.v(TAG, "OnInitRenderView: $host")
 
-		beginBenchmarkMeasure("Startup", "Godot::onInitRenderView")
+		beginBenchmarkMeasure("Startup", "scardot::onInitRenderView")
 		try {
 			val activity: Activity = host.activity
 			containerLayout = providedContainerLayout
@@ -461,14 +461,14 @@ class Godot(private val context: Context) {
 					ViewGroup.LayoutParams.MATCH_PARENT
 			)
 
-			// GodotEditText layout
-			val editText = GodotEditText(activity)
+			// scardotEditText layout
+			val editText = scardotEditText(activity)
 			editText.layoutParams =
 					ViewGroup.LayoutParams(
 							ViewGroup.LayoutParams.MATCH_PARENT,
 							activity.resources.getDimension(R.dimen.text_edit_height).toInt()
 					)
-			// Prevent GodotEditText from showing on splash screen on devices with Android 14 or newer.
+			// Prevent scardotEditText from showing on splash screen on devices with Android 14 or newer.
 			editText.setBackgroundColor(Color.TRANSPARENT)
 			// ...add to FrameLayout
 			containerLayout?.addView(editText)
@@ -476,10 +476,10 @@ class Godot(private val context: Context) {
 				if (!meetsVulkanRequirements(activity.packageManager)) {
 					throw IllegalStateException(activity.getString(R.string.error_missing_vulkan_requirements_message))
 				}
-				GodotVulkanRenderView(host, this, godotInputHandler)
+				scardotVulkanRenderView(host, this, godotInputHandler)
 			} else {
 				// Fallback to openGl
-				GodotGLRenderView(host, this, godotInputHandler, xrMode, useDebugOpengl)
+				scardotGLRenderView(host, this, godotInputHandler, xrMode, useDebugOpengl)
 			}
 
 			if (host == primaryHost) {
@@ -529,7 +529,7 @@ class Godot(private val context: Context) {
 						val interpolatedFraction = imeAnimation.interpolatedFraction
 						// Linear interpolation between start and end values.
 						val keyboardHeight = startBottom * (1.0f - interpolatedFraction) + endBottom * interpolatedFraction
-						GodotLib.setVirtualKeyboardHeight(keyboardHeight.toInt())
+						scardotLib.setVirtualKeyboardHeight(keyboardHeight.toInt())
 					}
 					return windowInsets
 				}
@@ -540,12 +540,12 @@ class Godot(private val context: Context) {
 			if (host == primaryHost) {
 				renderView?.queueOnRenderThread {
 					for (plugin in pluginRegistry.allPlugins) {
-						plugin.onRegisterPluginWithGodotNative()
+						plugin.onRegisterPluginWithscardotNative()
 					}
-					setKeepScreenOn(java.lang.Boolean.parseBoolean(GodotLib.getGlobal("display/window/energy_saving/keep_screen_on")))
+					setKeepScreenOn(java.lang.Boolean.parseBoolean(scardotLib.getGlobal("display/window/energy_saving/keep_screen_on")))
 				}
 
-				// Include the returned non-null views in the Godot view hierarchy.
+				// Include the returned non-null views in the scardot view hierarchy.
 				for (plugin in pluginRegistry.allPlugins) {
 					val pluginView = plugin.onMainCreate(activity)
 					if (pluginView != null) {
@@ -564,12 +564,12 @@ class Godot(private val context: Context) {
 				containerLayout = null
 			}
 
-			endBenchmarkMeasure("Startup", "Godot::onInitRenderView")
+			endBenchmarkMeasure("Startup", "scardot::onInitRenderView")
 		}
 		return containerLayout
 	}
 
-	fun onStart(host: GodotHost) {
+	fun onStart(host: scardotHost) {
 		Log.v(TAG, "OnStart: $host")
 		if (host != primaryHost) {
 			return
@@ -578,7 +578,7 @@ class Godot(private val context: Context) {
 		renderView?.onActivityStarted()
 	}
 
-	fun onResume(host: GodotHost) {
+	fun onResume(host: scardotHost) {
 		Log.v(TAG, "OnResume: $host")
 		resumed = true
 		if (host != primaryHost) {
@@ -612,7 +612,7 @@ class Godot(private val context: Context) {
 		}
 	}
 
-	fun onPause(host: GodotHost) {
+	fun onPause(host: scardotHost) {
 		Log.v(TAG, "OnPause: $host")
 		resumed = false
 		if (host != primaryHost) {
@@ -626,7 +626,7 @@ class Godot(private val context: Context) {
 		}
 	}
 
-	fun onStop(host: GodotHost) {
+	fun onStop(host: scardotHost) {
 		Log.v(TAG, "OnStop: $host")
 		if (host != primaryHost) {
 			return
@@ -635,7 +635,7 @@ class Godot(private val context: Context) {
 		renderView?.onActivityStopped()
 	}
 
-	fun onDestroy(primaryHost: GodotHost) {
+	fun onDestroy(primaryHost: scardotHost) {
 		Log.v(TAG, "OnDestroy: $primaryHost")
 		if (this.primaryHost != primaryHost) {
 			return
@@ -655,7 +655,7 @@ class Godot(private val context: Context) {
 		val newDarkMode = newConfig.uiMode.and(Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
 		if (darkMode != newDarkMode) {
 			darkMode = newDarkMode
-			GodotLib.onNightModeChanged()
+			scardotLib.onNightModeChanged()
 		}
 	}
 
@@ -680,7 +680,7 @@ class Godot(private val context: Context) {
 			plugin.onMainRequestPermissionsResult(requestCode, permissions, grantResults)
 		}
 		for (i in permissions.indices) {
-			GodotLib.requestPermissionResult(
+			scardotLib.requestPermissionResult(
 				permissions[i],
 				grantResults[i] == PackageManager.PERMISSION_GRANTED
 			)
@@ -688,15 +688,15 @@ class Godot(private val context: Context) {
 	}
 
 	/**
-	 * Invoked on the render thread when the Godot setup is complete.
+	 * Invoked on the render thread when the scardot setup is complete.
 	 */
-	private fun onGodotSetupCompleted() {
-		Log.v(TAG, "OnGodotSetupCompleted")
+	private fun onscardotSetupCompleted() {
+		Log.v(TAG, "OnscardotSetupCompleted")
 
-		// These properties are defined after Godot setup completion, so we retrieve them here.
-		val longPressEnabled = java.lang.Boolean.parseBoolean(GodotLib.getGlobal("input_devices/pointing/android/enable_long_press_as_right_click"))
-		val panScaleEnabled = java.lang.Boolean.parseBoolean(GodotLib.getGlobal("input_devices/pointing/android/enable_pan_and_scale_gestures"))
-		val rotaryInputAxisValue = GodotLib.getGlobal("input_devices/pointing/android/rotary_input_scroll_axis")
+		// These properties are defined after scardot setup completion, so we retrieve them here.
+		val longPressEnabled = java.lang.Boolean.parseBoolean(scardotLib.getGlobal("input_devices/pointing/android/enable_long_press_as_right_click"))
+		val panScaleEnabled = java.lang.Boolean.parseBoolean(scardotLib.getGlobal("input_devices/pointing/android/enable_pan_and_scale_gestures"))
+		val rotaryInputAxisValue = scardotLib.getGlobal("input_devices/pointing/android/rotary_input_scroll_axis")
 
 		runOnUiThread {
 			renderView?.inputHandler?.apply {
@@ -711,44 +711,44 @@ class Godot(private val context: Context) {
 		}
 
 		for (plugin in pluginRegistry.allPlugins) {
-			plugin.onGodotSetupCompleted()
+			plugin.onscardotSetupCompleted()
 		}
-		primaryHost?.onGodotSetupCompleted()
+		primaryHost?.onscardotSetupCompleted()
 	}
 
 	/**
-	 * Invoked on the render thread when the Godot main loop has started.
+	 * Invoked on the render thread when the scardot main loop has started.
 	 */
-	private fun onGodotMainLoopStarted() {
-		Log.v(TAG, "OnGodotMainLoopStarted")
+	private fun onscardotMainLoopStarted() {
+		Log.v(TAG, "OnscardotMainLoopStarted")
 		godotMainLoopStarted.set(true)
 
-		accelerometerEnabled.set(java.lang.Boolean.parseBoolean(GodotLib.getGlobal("input_devices/sensors/enable_accelerometer")))
-		gravityEnabled.set(java.lang.Boolean.parseBoolean(GodotLib.getGlobal("input_devices/sensors/enable_gravity")))
-		gyroscopeEnabled.set(java.lang.Boolean.parseBoolean(GodotLib.getGlobal("input_devices/sensors/enable_gyroscope")))
-		magnetometerEnabled.set(java.lang.Boolean.parseBoolean(GodotLib.getGlobal("input_devices/sensors/enable_magnetometer")))
+		accelerometerEnabled.set(java.lang.Boolean.parseBoolean(scardotLib.getGlobal("input_devices/sensors/enable_accelerometer")))
+		gravityEnabled.set(java.lang.Boolean.parseBoolean(scardotLib.getGlobal("input_devices/sensors/enable_gravity")))
+		gyroscopeEnabled.set(java.lang.Boolean.parseBoolean(scardotLib.getGlobal("input_devices/sensors/enable_gyroscope")))
+		magnetometerEnabled.set(java.lang.Boolean.parseBoolean(scardotLib.getGlobal("input_devices/sensors/enable_magnetometer")))
 
 		runOnUiThread {
 			registerSensorsIfNeeded()
 		}
 
 		for (plugin in pluginRegistry.allPlugins) {
-			plugin.onGodotMainLoopStarted()
+			plugin.onscardotMainLoopStarted()
 		}
-		primaryHost?.onGodotMainLoopStarted()
+		primaryHost?.onscardotMainLoopStarted()
 	}
 
 	/**
 	 * Invoked on the render thread when the engine is about to terminate.
 	 */
 	@Keep
-	private fun onGodotTerminating() {
-		Log.v(TAG, "OnGodotTerminating")
+	private fun onscardotTerminating() {
+		Log.v(TAG, "OnscardotTerminating")
 		runOnTerminate.get()?.run()
 	}
 
 	private fun restart() {
-		primaryHost?.onGodotRestartRequested(this)
+		primaryHost?.onscardotRestartRequested(this)
 	}
 
 	fun alert(
@@ -807,8 +807,8 @@ class Godot(private val context: Context) {
 	 * Returns true if `Vulkan` is used for rendering.
 	 */
 	private fun usesVulkan(): Boolean {
-		val renderer = GodotLib.getGlobal("rendering/renderer/rendering_method")
-		val renderingDevice = GodotLib.getGlobal("rendering/rendering_device/driver")
+		val renderer = scardotLib.getGlobal("rendering/renderer/rendering_method")
+		val renderingDevice = scardotLib.getGlobal("rendering/rendering_device/driver")
 		return ("forward_plus" == renderer || "mobile" == renderer) && "vulkan" == renderingDevice
 	}
 
@@ -873,7 +873,7 @@ class Godot(private val context: Context) {
 	}
 
 	/**
-	 * Destroys the Godot Engine and kill the process it's running in.
+	 * Destroys the scardot Engine and kill the process it's running in.
 	 */
 	@JvmOverloads
 	fun destroyAndKillProcess(destroyRunnable: Runnable? = null) {
@@ -900,10 +900,10 @@ class Godot(private val context: Context) {
 	private fun forceQuit(instanceId: Int): Boolean {
 		primaryHost?.let {
 			if (instanceId == 0) {
-				it.onGodotForceQuit(this)
+				it.onscardotForceQuit(this)
 				return true
 			} else {
-				return it.onGodotForceQuit(instanceId)
+				return it.onscardotForceQuit(instanceId)
 			}
 		} ?: return false
 	}
@@ -916,7 +916,7 @@ class Godot(private val context: Context) {
 			}
 		}
 		if (shouldQuit) {
-			renderView?.queueOnRenderThread { GodotLib.back() }
+			renderView?.queueOnRenderThread { scardotLib.back() }
 		}
 	}
 
@@ -1015,7 +1015,7 @@ class Godot(private val context: Context) {
 
 	@Keep
 	private fun getCACertificates(): String {
-		return GodotNetUtils.getCACertificates()
+		return scardotNetUtils.getCACertificates()
 	}
 
 	private fun obbIsCorrupted(f: String, mainPackMd5: String): Boolean {
@@ -1058,8 +1058,8 @@ class Godot(private val context: Context) {
 	}
 
 	@Keep
-	private fun createNewGodotInstance(args: Array<String>): Int {
-		return primaryHost?.onNewGodotInstanceRequested(args) ?: 0
+	private fun createNewscardotInstance(args: Array<String>): Int {
+		return primaryHost?.onNewscardotInstanceRequested(args) ?: 0
 	}
 
 	@Keep

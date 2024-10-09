@@ -1,8 +1,8 @@
 using System;
 using System.Runtime.InteropServices;
-using Godot.NativeInterop;
+using scardot.NativeInterop;
 
-namespace Godot.Bridge
+namespace scardot.Bridge
 {
     internal static class CSharpInstanceBridge
     {
@@ -12,16 +12,16 @@ namespace Godot.Bridge
         {
             try
             {
-                var godotObject = (GodotObject)GCHandle.FromIntPtr(godotObjectGCHandle).Target;
+                var godotObject = (scardotObject)GCHandle.FromIntPtr(godotObjectGCHandle).Target;
 
                 if (godotObject == null)
                 {
                     *ret = default;
-                    (*refCallError).Error = godot_variant_call_error_error.GODOT_CALL_ERROR_CALL_ERROR_INSTANCE_IS_NULL;
+                    (*refCallError).Error = godot_variant_call_error_error.SCARDOT_CALL_ERROR_CALL_ERROR_INSTANCE_IS_NULL;
                     return godot_bool.False;
                 }
 
-                bool methodInvoked = godotObject.InvokeGodotClassMethod(CustomUnsafe.AsRef(method),
+                bool methodInvoked = godotObject.InvokescardotClassMethod(CustomUnsafe.AsRef(method),
                     new NativeVariantPtrArgs(args, argCount), out godot_variant retValue);
 
                 if (!methodInvoked)
@@ -29,7 +29,7 @@ namespace Godot.Bridge
                     *ret = default;
                     // This is important, as it tells Object::call that no method was called.
                     // Otherwise, it would prevent Object::call from calling native methods.
-                    (*refCallError).Error = godot_variant_call_error_error.GODOT_CALL_ERROR_CALL_ERROR_INVALID_METHOD;
+                    (*refCallError).Error = godot_variant_call_error_error.SCARDOT_CALL_ERROR_CALL_ERROR_INVALID_METHOD;
                     return godot_bool.False;
                 }
 
@@ -49,12 +49,12 @@ namespace Godot.Bridge
         {
             try
             {
-                var godotObject = (GodotObject)GCHandle.FromIntPtr(godotObjectGCHandle).Target;
+                var godotObject = (scardotObject)GCHandle.FromIntPtr(godotObjectGCHandle).Target;
 
                 if (godotObject == null)
                     throw new InvalidOperationException();
 
-                if (godotObject.SetGodotClassPropertyValue(CustomUnsafe.AsRef(name), CustomUnsafe.AsRef(value)))
+                if (godotObject.SetscardotClassPropertyValue(CustomUnsafe.AsRef(name), CustomUnsafe.AsRef(value)))
                 {
                     return godot_bool.True;
                 }
@@ -64,7 +64,7 @@ namespace Godot.Bridge
 
                 Variant valueManaged = Variant.CreateCopyingBorrowed(*value);
 
-                return godotObject._Set(nameManaged, valueManaged).ToGodotBool();
+                return godotObject._Set(nameManaged, valueManaged).ToscardotBool();
             }
             catch (Exception e)
             {
@@ -79,20 +79,20 @@ namespace Godot.Bridge
         {
             try
             {
-                var godotObject = (GodotObject)GCHandle.FromIntPtr(godotObjectGCHandle).Target;
+                var godotObject = (scardotObject)GCHandle.FromIntPtr(godotObjectGCHandle).Target;
 
                 if (godotObject == null)
                     throw new InvalidOperationException();
 
                 // Properties
-                if (godotObject.GetGodotClassPropertyValue(CustomUnsafe.AsRef(name), out godot_variant outRetValue))
+                if (godotObject.GetscardotClassPropertyValue(CustomUnsafe.AsRef(name), out godot_variant outRetValue))
                 {
                     *outRet = outRetValue;
                     return godot_bool.True;
                 }
 
                 // Signals
-                if (godotObject.HasGodotClassSignal(CustomUnsafe.AsRef(name)))
+                if (godotObject.HasscardotClassSignal(CustomUnsafe.AsRef(name)))
                 {
                     godot_signal signal = new godot_signal(NativeFuncs.godotsharp_string_name_new_copy(*name), godotObject.GetInstanceId());
                     *outRet = VariantUtils.CreateFromSignalTakingOwnershipOfDisposableValue(signal);
@@ -100,7 +100,7 @@ namespace Godot.Bridge
                 }
 
                 // Methods
-                if (godotObject.HasGodotClassMethod(CustomUnsafe.AsRef(name)))
+                if (godotObject.HasscardotClassMethod(CustomUnsafe.AsRef(name)))
                 {
                     godot_callable method = new godot_callable(NativeFuncs.godotsharp_string_name_new_copy(*name), godotObject.GetInstanceId());
                     *outRet = VariantUtils.CreateFromCallableTakingOwnershipOfDisposableValue(method);
@@ -134,7 +134,7 @@ namespace Godot.Bridge
         {
             try
             {
-                var godotObject = (GodotObject)GCHandle.FromIntPtr(godotObjectGCHandle).Target;
+                var godotObject = (scardotObject)GCHandle.FromIntPtr(godotObjectGCHandle).Target;
 
                 if (okIfNull.ToBool())
                     godotObject?.Dispose();
@@ -152,7 +152,7 @@ namespace Godot.Bridge
         {
             try
             {
-                var self = (GodotObject)GCHandle.FromIntPtr(godotObjectGCHandle).Target;
+                var self = (scardotObject)GCHandle.FromIntPtr(godotObjectGCHandle).Target;
 
                 if (self == null)
                 {
@@ -186,12 +186,12 @@ namespace Godot.Bridge
         {
             try
             {
-                var godotObject = (GodotObject)GCHandle.FromIntPtr(godotObjectGCHandle).Target;
+                var godotObject = (scardotObject)GCHandle.FromIntPtr(godotObjectGCHandle).Target;
 
                 if (godotObject == null)
                     return godot_bool.False;
 
-                return godotObject.HasGodotClassMethod(CustomUnsafe.AsRef(method)).ToGodotBool();
+                return godotObject.HasscardotClassMethod(CustomUnsafe.AsRef(method)).ToscardotBool();
             }
             catch (Exception e)
             {
@@ -209,7 +209,7 @@ namespace Godot.Bridge
         {
             try
             {
-                var godotObject = (GodotObject)GCHandle.FromIntPtr(godotObjectGCHandle).Target;
+                var godotObject = (scardotObject)GCHandle.FromIntPtr(godotObjectGCHandle).Target;
 
                 if (godotObject == null)
                     return;
@@ -222,10 +222,10 @@ namespace Godot.Bridge
 
                 // Save instance state
 
-                using var info = GodotSerializationInfo.CreateCopyingBorrowed(
+                using var info = scardotSerializationInfo.CreateCopyingBorrowed(
                     *propertiesState, *signalEventsState);
 
-                godotObject.SaveGodotObjectData(info);
+                godotObject.SavescardotObjectData(info);
             }
             catch (Exception e)
             {
@@ -242,17 +242,17 @@ namespace Godot.Bridge
         {
             try
             {
-                var godotObject = (GodotObject)GCHandle.FromIntPtr(godotObjectGCHandle).Target;
+                var godotObject = (scardotObject)GCHandle.FromIntPtr(godotObjectGCHandle).Target;
 
                 if (godotObject == null)
                     return;
 
                 // Restore instance state
 
-                using var info = GodotSerializationInfo.CreateCopyingBorrowed(
+                using var info = scardotSerializationInfo.CreateCopyingBorrowed(
                     *propertiesState, *signalEventsState);
 
-                godotObject.RestoreGodotObjectData(info);
+                godotObject.RestorescardotObjectData(info);
 
                 // Call OnAfterDeserialize
 

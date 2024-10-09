@@ -2,10 +2,10 @@
 /*  godot_menu_delegate.h                                                 */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -28,17 +28,17 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#ifndef GODOT_MENU_DELEGATE_H
-#define GODOT_MENU_DELEGATE_H
+#ifndef SCARDOT_MENU_DELEGATE_H
+#define SCARDOT_MENU_DELEGATE_H
 
 #import <AppKit/AppKit.h>
 #import <Foundation/Foundation.h>
 
-@interface GodotMenuDelegate : NSObject <NSMenuDelegate> {
+@interface scardotMenuDelegate : NSObject <NSMenuDelegate> {
 }
 
 - (void)doNothing:(id)sender;
 
 @end
 
-#endif // GODOT_MENU_DELEGATE_H
+#endif // SCARDOT_MENU_DELEGATE_H

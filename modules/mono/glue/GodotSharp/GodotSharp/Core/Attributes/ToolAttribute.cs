@@ -1,6 +1,6 @@
 using System;
 
-namespace Godot
+namespace scardot
 {
     [AttributeUsage(AttributeTargets.Class)]
     public sealed class ToolAttribute : Attribute { }

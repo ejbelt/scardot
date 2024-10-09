@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotUtterance.java                                                   */
+/*  scardotUtterance.java                                                   */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -31,9 +31,9 @@
 package org.godotengine.godot.tts;
 
 /**
- * A speech request for GodotTTS.
+ * A speech request for scardotTTS.
  */
-class GodotUtterance {
+class scardotUtterance {
 	final String text;
 	final String voice;
 	final int volume;
@@ -44,7 +44,7 @@ class GodotUtterance {
 	int offset = -1;
 	int start = 0;
 
-	GodotUtterance(String text, String voice, int volume, float pitch, float rate, int id) {
+	scardotUtterance(String text, String voice, int volume, float pitch, float rate, int id) {
 		this.text = text;
 		this.voice = voice;
 		this.volume = volume;

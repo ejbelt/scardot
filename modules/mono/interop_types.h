@@ -2,10 +2,10 @@
 /*  interop_types.h                                                       */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -42,163 +42,163 @@ extern "C" {
 
 // This is taken from the old GDNative, which was removed.
 
-#define GODOT_VARIANT_SIZE (sizeof(real_t) * 4 + sizeof(int64_t))
+#define SCARDOT_VARIANT_SIZE (sizeof(real_t) * 4 + sizeof(int64_t))
 
 typedef struct {
-	uint8_t _dont_touch_that[GODOT_VARIANT_SIZE];
+	uint8_t _dont_touch_that[SCARDOT_VARIANT_SIZE];
 } godot_variant;
 
-#define GODOT_ARRAY_SIZE sizeof(void *)
+#define SCARDOT_ARRAY_SIZE sizeof(void *)
 
 typedef struct {
-	uint8_t _dont_touch_that[GODOT_ARRAY_SIZE];
+	uint8_t _dont_touch_that[SCARDOT_ARRAY_SIZE];
 } godot_array;
 
-#define GODOT_DICTIONARY_SIZE sizeof(void *)
+#define SCARDOT_DICTIONARY_SIZE sizeof(void *)
 
 typedef struct {
-	uint8_t _dont_touch_that[GODOT_DICTIONARY_SIZE];
+	uint8_t _dont_touch_that[SCARDOT_DICTIONARY_SIZE];
 } godot_dictionary;
 
-#define GODOT_STRING_SIZE sizeof(void *)
+#define SCARDOT_STRING_SIZE sizeof(void *)
 
 typedef struct {
-	uint8_t _dont_touch_that[GODOT_STRING_SIZE];
+	uint8_t _dont_touch_that[SCARDOT_STRING_SIZE];
 } godot_string;
 
-#define GODOT_STRING_NAME_SIZE sizeof(void *)
+#define SCARDOT_STRING_NAME_SIZE sizeof(void *)
 
 typedef struct {
-	uint8_t _dont_touch_that[GODOT_STRING_NAME_SIZE];
+	uint8_t _dont_touch_that[SCARDOT_STRING_NAME_SIZE];
 } godot_string_name;
 
-#define GODOT_PACKED_ARRAY_SIZE (2 * sizeof(void *))
+#define SCARDOT_PACKED_ARRAY_SIZE (2 * sizeof(void *))
 
 typedef struct {
-	uint8_t _dont_touch_that[GODOT_PACKED_ARRAY_SIZE];
+	uint8_t _dont_touch_that[SCARDOT_PACKED_ARRAY_SIZE];
 } godot_packed_array;
 
-#define GODOT_VECTOR2_SIZE (sizeof(real_t) * 2)
+#define SCARDOT_VECTOR2_SIZE (sizeof(real_t) * 2)
 
 typedef struct {
-	uint8_t _dont_touch_that[GODOT_VECTOR2_SIZE];
+	uint8_t _dont_touch_that[SCARDOT_VECTOR2_SIZE];
 } godot_vector2;
 
-#define GODOT_VECTOR2I_SIZE (sizeof(int32_t) * 2)
+#define SCARDOT_VECTOR2I_SIZE (sizeof(int32_t) * 2)
 
 typedef struct {
-	uint8_t _dont_touch_that[GODOT_VECTOR2I_SIZE];
+	uint8_t _dont_touch_that[SCARDOT_VECTOR2I_SIZE];
 } godot_vector2i;
 
-#define GODOT_RECT2_SIZE (sizeof(real_t) * 4)
+#define SCARDOT_RECT2_SIZE (sizeof(real_t) * 4)
 
 typedef struct godot_rect2 {
-	uint8_t _dont_touch_that[GODOT_RECT2_SIZE];
+	uint8_t _dont_touch_that[SCARDOT_RECT2_SIZE];
 } godot_rect2;
 
-#define GODOT_RECT2I_SIZE (sizeof(int32_t) * 4)
+#define SCARDOT_RECT2I_SIZE (sizeof(int32_t) * 4)
 
 typedef struct godot_rect2i {
-	uint8_t _dont_touch_that[GODOT_RECT2I_SIZE];
+	uint8_t _dont_touch_that[SCARDOT_RECT2I_SIZE];
 } godot_rect2i;
 
-#define GODOT_VECTOR3_SIZE (sizeof(real_t) * 3)
+#define SCARDOT_VECTOR3_SIZE (sizeof(real_t) * 3)
 
 typedef struct {
-	uint8_t _dont_touch_that[GODOT_VECTOR3_SIZE];
+	uint8_t _dont_touch_that[SCARDOT_VECTOR3_SIZE];
 } godot_vector3;
 
-#define GODOT_VECTOR3I_SIZE (sizeof(int32_t) * 3)
+#define SCARDOT_VECTOR3I_SIZE (sizeof(int32_t) * 3)
 
 typedef struct {
-	uint8_t _dont_touch_that[GODOT_VECTOR3I_SIZE];
+	uint8_t _dont_touch_that[SCARDOT_VECTOR3I_SIZE];
 } godot_vector3i;
 
-#define GODOT_TRANSFORM2D_SIZE (sizeof(real_t) * 6)
+#define SCARDOT_TRANSFORM2D_SIZE (sizeof(real_t) * 6)
 
 typedef struct {
-	uint8_t _dont_touch_that[GODOT_TRANSFORM2D_SIZE];
+	uint8_t _dont_touch_that[SCARDOT_TRANSFORM2D_SIZE];
 } godot_transform2d;
 
-#define GODOT_VECTOR4_SIZE (sizeof(real_t) * 4)
+#define SCARDOT_VECTOR4_SIZE (sizeof(real_t) * 4)
 
 typedef struct {
-	uint8_t _dont_touch_that[GODOT_VECTOR4_SIZE];
+	uint8_t _dont_touch_that[SCARDOT_VECTOR4_SIZE];
 } godot_vector4;
 
-#define GODOT_VECTOR4I_SIZE (sizeof(int32_t) * 4)
+#define SCARDOT_VECTOR4I_SIZE (sizeof(int32_t) * 4)
 
 typedef struct {
-	uint8_t _dont_touch_that[GODOT_VECTOR4I_SIZE];
+	uint8_t _dont_touch_that[SCARDOT_VECTOR4I_SIZE];
 } godot_vector4i;
 
-#define GODOT_PLANE_SIZE (sizeof(real_t) * 4)
+#define SCARDOT_PLANE_SIZE (sizeof(real_t) * 4)
 
 typedef struct {
-	uint8_t _dont_touch_that[GODOT_PLANE_SIZE];
+	uint8_t _dont_touch_that[SCARDOT_PLANE_SIZE];
 } godot_plane;
 
-#define GODOT_QUATERNION_SIZE (sizeof(real_t) * 4)
+#define SCARDOT_QUATERNION_SIZE (sizeof(real_t) * 4)
 
 typedef struct {
-	uint8_t _dont_touch_that[GODOT_QUATERNION_SIZE];
+	uint8_t _dont_touch_that[SCARDOT_QUATERNION_SIZE];
 } godot_quaternion;
 
-#define GODOT_AABB_SIZE (sizeof(real_t) * 6)
+#define SCARDOT_AABB_SIZE (sizeof(real_t) * 6)
 
 typedef struct {
-	uint8_t _dont_touch_that[GODOT_AABB_SIZE];
+	uint8_t _dont_touch_that[SCARDOT_AABB_SIZE];
 } godot_aabb;
 
-#define GODOT_BASIS_SIZE (sizeof(real_t) * 9)
+#define SCARDOT_BASIS_SIZE (sizeof(real_t) * 9)
 
 typedef struct {
-	uint8_t _dont_touch_that[GODOT_BASIS_SIZE];
+	uint8_t _dont_touch_that[SCARDOT_BASIS_SIZE];
 } godot_basis;
 
-#define GODOT_TRANSFORM3D_SIZE (sizeof(real_t) * 12)
+#define SCARDOT_TRANSFORM3D_SIZE (sizeof(real_t) * 12)
 
 typedef struct {
-	uint8_t _dont_touch_that[GODOT_TRANSFORM3D_SIZE];
+	uint8_t _dont_touch_that[SCARDOT_TRANSFORM3D_SIZE];
 } godot_transform3d;
 
-#define GODOT_PROJECTION_SIZE (sizeof(real_t) * 4 * 4)
+#define SCARDOT_PROJECTION_SIZE (sizeof(real_t) * 4 * 4)
 
 typedef struct {
-	uint8_t _dont_touch_that[GODOT_PROJECTION_SIZE];
+	uint8_t _dont_touch_that[SCARDOT_PROJECTION_SIZE];
 } godot_projection;
 
 // Colors should always use 32-bit floats, so don't use real_t here.
-#define GODOT_COLOR_SIZE (sizeof(float) * 4)
+#define SCARDOT_COLOR_SIZE (sizeof(float) * 4)
 
 typedef struct {
-	uint8_t _dont_touch_that[GODOT_COLOR_SIZE];
+	uint8_t _dont_touch_that[SCARDOT_COLOR_SIZE];
 } godot_color;
 
-#define GODOT_NODE_PATH_SIZE sizeof(void *)
+#define SCARDOT_NODE_PATH_SIZE sizeof(void *)
 
 typedef struct {
-	uint8_t _dont_touch_that[GODOT_NODE_PATH_SIZE];
+	uint8_t _dont_touch_that[SCARDOT_NODE_PATH_SIZE];
 } godot_node_path;
 
-#define GODOT_RID_SIZE sizeof(uint64_t)
+#define SCARDOT_RID_SIZE sizeof(uint64_t)
 
 typedef struct {
-	uint8_t _dont_touch_that[GODOT_RID_SIZE];
+	uint8_t _dont_touch_that[SCARDOT_RID_SIZE];
 } godot_rid;
 
 // Alignment hardcoded in `core/variant/callable.h`.
-#define GODOT_CALLABLE_SIZE (16)
+#define SCARDOT_CALLABLE_SIZE (16)
 
 typedef struct {
-	uint8_t _dont_touch_that[GODOT_CALLABLE_SIZE];
+	uint8_t _dont_touch_that[SCARDOT_CALLABLE_SIZE];
 } godot_callable;
 
 // Alignment hardcoded in `core/variant/callable.h`.
-#define GODOT_SIGNAL_SIZE (16)
+#define SCARDOT_SIGNAL_SIZE (16)
 
 typedef struct {
-	uint8_t _dont_touch_that[GODOT_SIGNAL_SIZE];
+	uint8_t _dont_touch_that[SCARDOT_SIGNAL_SIZE];
 } godot_signal;
 
 #ifdef __cplusplus

@@ -1,6 +1,6 @@
-using Godot;
+using scardot;
 
-public partial class Foo : GodotObject
+public partial class Foo : scardotObject
 {
 }
 

@@ -1,4 +1,4 @@
-namespace GodotTools.Build
+namespace scardotTools.Build
 {
     public class BuildDiagnostic
     {

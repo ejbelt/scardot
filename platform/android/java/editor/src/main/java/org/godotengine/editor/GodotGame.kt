@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotGame.kt                                                          */
+/*  scardotGame.kt                                                          */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -38,15 +38,15 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import org.godotengine.godot.GodotLib
+import org.godotengine.godot.scardotLib
 
 /**
- * Drives the 'run project' window of the Godot Editor.
+ * Drives the 'run project' window of the scardot Editor.
  */
-class GodotGame : GodotEditor() {
+class scardotGame : scardotEditor() {
 
 	companion object {
-		private val TAG = GodotGame::class.java.simpleName
+		private val TAG = scardotGame::class.java.simpleName
 	}
 
 	private val gameViewSourceRectHint = Rect()
@@ -126,15 +126,15 @@ class GodotGame : GodotEditor() {
 		}
 	}
 
-	override fun getGodotAppLayout() = R.layout.godot_game_layout
+	override fun getscardotAppLayout() = R.layout.godot_game_layout
 
 	override fun getEditorWindowInfo() = RUN_GAME_INFO
 
 	override fun overrideOrientationRequest() = false
 
-	override fun enableLongPressGestures() = java.lang.Boolean.parseBoolean(GodotLib.getGlobal("input_devices/pointing/android/enable_long_press_as_right_click"))
+	override fun enableLongPressGestures() = java.lang.Boolean.parseBoolean(scardotLib.getGlobal("input_devices/pointing/android/enable_long_press_as_right_click"))
 
-	override fun enablePanAndScaleGestures() = java.lang.Boolean.parseBoolean(GodotLib.getGlobal("input_devices/pointing/android/enable_pan_and_scale_gestures"))
+	override fun enablePanAndScaleGestures() = java.lang.Boolean.parseBoolean(scardotLib.getGlobal("input_devices/pointing/android/enable_pan_and_scale_gestures"))
 
 	override fun checkForProjectPermissionsToEnable() {
 		// Nothing to do.. by the time we get here, the project permissions will have already

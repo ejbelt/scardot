@@ -31,8 +31,8 @@ def get_build_version():
     if version.patch > 0:
         v += ".%d" % version.patch
     status = version.status
-    if os.getenv("GODOT_VERSION_STATUS") is not None:
-        status = str(os.getenv("GODOT_VERSION_STATUS"))
+    if os.getenv("SCARDOT_VERSION_STATUS") is not None:
+        status = str(os.getenv("SCARDOT_VERSION_STATUS"))
     v += ".%s.%s" % (status, name)
     return v
 
@@ -40,7 +40,7 @@ def get_build_version():
 def create_engine_file(env, target, source, externs, threads_enabled):
     if env["use_closure_compiler"]:
         return env.BuildJS(target, source, JSEXTERNS=externs)
-    subst_dict = {"___GODOT_THREADS_ENABLED": "true" if threads_enabled else "false"}
+    subst_dict = {"___SCARDOT_THREADS_ENABLED": "true" if threads_enabled else "false"}
     return env.Substfile(target=target, source=[env.File(s) for s in source], SUBST_DICT=subst_dict)
 
 
@@ -64,7 +64,7 @@ def create_template_zip(env, js, wasm, worker, side):
         out_files.append(zip_dir.File(binary_name + ".worker.js"))
     # Dynamic linking (extensions) specific.
     if env["dlink_enabled"]:
-        in_files.append(side)  # Side wasm (contains the actual Godot code).
+        in_files.append(side)  # Side wasm (contains the actual scardot code).
         out_files.append(zip_dir.File(binary_name + ".side.wasm"))
 
     service_worker = "#misc/dist/html/service-worker.js"
@@ -84,12 +84,12 @@ def create_template_zip(env, js, wasm, worker, side):
             cache.append("godot.editor.worker.js")
         opt_cache = ["godot.editor.wasm"]
         subst_dict = {
-            "___GODOT_VERSION___": get_build_version(),
-            "___GODOT_NAME___": "GodotEngine",
-            "___GODOT_CACHE___": json.dumps(cache),
-            "___GODOT_OPT_CACHE___": json.dumps(opt_cache),
-            "___GODOT_OFFLINE_PAGE___": "offline.html",
-            "___GODOT_THREADS_ENABLED___": "true" if env["threads"] else "false",
+            "___SCARDOT_VERSION___": get_build_version(),
+            "___SCARDOT_NAME___": "scardotEngine",
+            "___SCARDOT_CACHE___": json.dumps(cache),
+            "___SCARDOT_OPT_CACHE___": json.dumps(opt_cache),
+            "___SCARDOT_OFFLINE_PAGE___": "offline.html",
+            "___SCARDOT_THREADS_ENABLED___": "true" if env["threads"] else "false",
         }
         html = env.Substfile(target="#bin/godot${PROGSUFFIX}.html", source=html, SUBST_DICT=subst_dict)
         in_files.append(html)

@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotActivity.kt                                                      */
+/*  scardotActivity.kt                                                      */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -42,74 +42,74 @@ import org.godotengine.godot.utils.PermissionsUtil
 import org.godotengine.godot.utils.ProcessPhoenix
 
 /**
- * Base abstract activity for Android apps intending to use Godot as the primary screen.
+ * Base abstract activity for Android apps intending to use scardot as the primary screen.
  *
- * Also a reference implementation for how to setup and use the [GodotFragment] fragment
+ * Also a reference implementation for how to setup and use the [scardotFragment] fragment
  * within an Android app.
  */
-abstract class GodotActivity : FragmentActivity(), GodotHost {
+abstract class scardotActivity : FragmentActivity(), scardotHost {
 
 	companion object {
-		private val TAG = GodotActivity::class.java.simpleName
+		private val TAG = scardotActivity::class.java.simpleName
 
 		@JvmStatic
 		protected val EXTRA_NEW_LAUNCH = "new_launch_requested"
 	}
 
 	/**
-	 * Interaction with the [Godot] object is delegated to the [GodotFragment] class.
+	 * Interaction with the [scardot] object is delegated to the [scardotFragment] class.
 	 */
-	protected var godotFragment: GodotFragment? = null
+	protected var godotFragment: scardotFragment? = null
 		private set
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		setContentView(getGodotAppLayout())
+		setContentView(getscardotAppLayout())
 
 		handleStartIntent(intent, true)
 
 		val currentFragment = supportFragmentManager.findFragmentById(R.id.godot_fragment_container)
-		if (currentFragment is GodotFragment) {
-			Log.v(TAG, "Reusing existing Godot fragment instance.")
+		if (currentFragment is scardotFragment) {
+			Log.v(TAG, "Reusing existing scardot fragment instance.")
 			godotFragment = currentFragment
 		} else {
-			Log.v(TAG, "Creating new Godot fragment instance.")
-			godotFragment = initGodotInstance()
+			Log.v(TAG, "Creating new scardot fragment instance.")
+			godotFragment = initscardotInstance()
 			supportFragmentManager.beginTransaction().replace(R.id.godot_fragment_container, godotFragment!!).setPrimaryNavigationFragment(godotFragment).commitNowAllowingStateLoss()
 		}
 	}
 
 	@LayoutRes
-	protected open fun getGodotAppLayout() = R.layout.godot_app_layout
+	protected open fun getscardotAppLayout() = R.layout.godot_app_layout
 
 	override fun onDestroy() {
-		Log.v(TAG, "Destroying GodotActivity $this...")
+		Log.v(TAG, "Destroying scardotActivity $this...")
 		super.onDestroy()
 	}
 
-	override fun onGodotForceQuit(instance: Godot) {
-		runOnUiThread { terminateGodotInstance(instance) }
+	override fun onscardotForceQuit(instance: scardot) {
+		runOnUiThread { terminatescardotInstance(instance) }
 	}
 
-	private fun terminateGodotInstance(instance: Godot) {
+	private fun terminatescardotInstance(instance: scardot) {
 		godotFragment?.let {
 			if (instance === it.godot) {
-				Log.v(TAG, "Force quitting Godot instance")
+				Log.v(TAG, "Force quitting scardot instance")
 				ProcessPhoenix.forceQuit(this)
 			}
 		}
 	}
 
-	override fun onGodotRestartRequested(instance: Godot) {
+	override fun onscardotRestartRequested(instance: scardot) {
 		runOnUiThread {
 			godotFragment?.let {
 				if (instance === it.godot) {
-					// It's very hard to properly de-initialize Godot on Android to restart the game
+					// It's very hard to properly de-initialize scardot on Android to restart the game
 					// from scratch. Therefore, we need to kill the whole app process and relaunch it.
 					//
 					// Restarting only the activity, wouldn't be enough unless it did proper cleanup (including
 					// releasing and reloading native libs or resetting their state somehow and clearing static data).
-					Log.v(TAG, "Restarting Godot instance...")
+					Log.v(TAG, "Restarting scardot instance...")
 					ProcessPhoenix.triggerRebirth(this)
 				}
 			}
@@ -166,14 +166,14 @@ abstract class GodotActivity : FragmentActivity(), GodotHost {
 		return this
 	}
 
-	override fun getGodot(): Godot? {
+	override fun getscardot(): scardot? {
 		return godotFragment?.godot
 	}
 
 	/**
-	 * Used to initialize the Godot fragment instance in [onCreate].
+	 * Used to initialize the scardot fragment instance in [onCreate].
 	 */
-	protected open fun initGodotInstance(): GodotFragment {
-		return GodotFragment()
+	protected open fun initscardotInstance(): scardotFragment {
+		return scardotFragment()
 	}
 }

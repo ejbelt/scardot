@@ -1,18 +1,18 @@
-namespace Godot.SourceGenerators
+namespace scardot.SourceGenerators
 {
-    public static class GodotClasses
+    public static class scardotClasses
     {
-        public const string GodotObject = "Godot.GodotObject";
-        public const string Node = "Godot.Node";
-        public const string AssemblyHasScriptsAttr = "Godot.AssemblyHasScriptsAttribute";
-        public const string ExportAttr = "Godot.ExportAttribute";
-        public const string ExportCategoryAttr = "Godot.ExportCategoryAttribute";
-        public const string ExportGroupAttr = "Godot.ExportGroupAttribute";
-        public const string ExportSubgroupAttr = "Godot.ExportSubgroupAttribute";
-        public const string SignalAttr = "Godot.SignalAttribute";
-        public const string MustBeVariantAttr = "Godot.MustBeVariantAttribute";
-        public const string GodotClassNameAttr = "Godot.GodotClassNameAttribute";
-        public const string GlobalClassAttr = "Godot.GlobalClassAttribute";
+        public const string scardotObject = "scardot.scardotObject";
+        public const string Node = "scardot.Node";
+        public const string AssemblyHasScriptsAttr = "scardot.AssemblyHasScriptsAttribute";
+        public const string ExportAttr = "scardot.ExportAttribute";
+        public const string ExportCategoryAttr = "scardot.ExportCategoryAttribute";
+        public const string ExportGroupAttr = "scardot.ExportGroupAttribute";
+        public const string ExportSubgroupAttr = "scardot.ExportSubgroupAttribute";
+        public const string SignalAttr = "scardot.SignalAttribute";
+        public const string MustBeVariantAttr = "scardot.MustBeVariantAttribute";
+        public const string scardotClassNameAttr = "scardot.scardotClassNameAttribute";
+        public const string GlobalClassAttr = "scardot.GlobalClassAttribute";
         public const string SystemFlagsAttr = "System.FlagsAttribute";
     }
 }

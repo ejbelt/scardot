@@ -157,7 +157,7 @@ if env["builtin_zstd"]:
 env.core_sources += thirdparty_obj
 
 
-# Godot source files
+# scardot source files
 
 env.add_source_files(env.core_sources, "*.cpp")
 

@@ -2,10 +2,10 @@
 /*  SignalInfo.java                                                       */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -37,7 +37,7 @@ import androidx.annotation.NonNull;
 import java.util.Arrays;
 
 /**
- * Store information about a {@link GodotPlugin}'s signal.
+ * Store information about a {@link scardotPlugin}'s signal.
  */
 public final class SignalInfo {
 	private final String name;

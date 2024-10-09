@@ -1,7 +1,7 @@
-# Spanish translation of the Godot Engine properties.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Spanish translation of the scardot Engine properties.
+# Copyright (c) 2014-present scardot Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the scardot source code.
 # Addiel Lucena Perez <addiell2017@gmail.com>, 2017.
 # Aleix Sanchis <aleixsanchis@hotmail.com>, 2017, 2018.
 # Alejandro Alvarez <eliluminado00@gmail.com>, 2017.
@@ -110,7 +110,7 @@
 # Juan Matias Olmos <ma7as@protonmail.com>, 2024.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine properties\n"
+"Project-Id-Version: scardot Engine properties\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2024-08-01 02:20+0000\n"
@@ -3653,8 +3653,8 @@ msgstr "Articulaciones"
 msgid "Roots"
 msgstr "Raíces"
 
-msgid "Godot Bone Node"
-msgstr "Nodo de Huesos de Godot"
+msgid "scardot Bone Node"
+msgstr "Nodo de Huesos de scardot"
 
 msgid "Skin Root"
 msgstr "Raíz de la Skin"
@@ -3665,8 +3665,8 @@ msgstr "Articulaciones Originales"
 msgid "Non Joints"
 msgstr "Sin Articulaciones"
 
-msgid "Godot Skin"
-msgstr "Skin de Godot"
+msgid "scardot Skin"
+msgstr "Skin de scardot"
 
 msgid "Src Image"
 msgstr "Origen de la Imagen"

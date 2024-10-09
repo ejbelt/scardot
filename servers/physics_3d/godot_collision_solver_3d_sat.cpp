@@ -2,10 +2,10 @@
 /*  godot_collision_solver_3d_sat.cpp                                     */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -68,7 +68,7 @@
  *************************************************************************/
 
 struct _CollectorCallback {
-	GodotCollisionSolver3D::CallbackResult callback = nullptr;
+	scardotCollisionSolver3D::CallbackResult callback = nullptr;
 	void *userdata = nullptr;
 	bool swap = false;
 	bool collided = false;
@@ -547,7 +547,7 @@ static void _generate_contacts_circle_circle(const Vector3 *p_points_A, int p_po
 	}
 }
 
-static void _generate_contacts_from_supports(const Vector3 *p_points_A, int p_point_count_A, GodotShape3D::FeatureType p_feature_type_A, const Vector3 *p_points_B, int p_point_count_B, GodotShape3D::FeatureType p_feature_type_B, _CollectorCallback *p_callback) {
+static void _generate_contacts_from_supports(const Vector3 *p_points_A, int p_point_count_A, scardotShape3D::FeatureType p_feature_type_A, const Vector3 *p_points_B, int p_point_count_B, scardotShape3D::FeatureType p_feature_type_B, _CollectorCallback *p_callback) {
 #ifdef DEBUG_ENABLED
 	ERR_FAIL_COND(p_point_count_A < 1);
 	ERR_FAIL_COND(p_point_count_B < 1);
@@ -717,7 +717,7 @@ public:
 
 		Vector3 supports_A[max_supports];
 		int support_count_A;
-		GodotShape3D::FeatureType support_type_A;
+		scardotShape3D::FeatureType support_type_A;
 		shape_A->get_supports(transform_A->basis.xform_inv(-best_axis).normalized(), max_supports, supports_A, support_count_A, support_type_A);
 		for (int i = 0; i < support_count_A; i++) {
 			supports_A[i] = transform_A->xform(supports_A[i]);
@@ -731,7 +731,7 @@ public:
 
 		Vector3 supports_B[max_supports];
 		int support_count_B;
-		GodotShape3D::FeatureType support_type_B;
+		scardotShape3D::FeatureType support_type_B;
 		shape_B->get_supports(transform_B->basis.xform_inv(best_axis).normalized(), max_supports, supports_B, support_count_B, support_type_B);
 		for (int i = 0; i < support_count_B; i++) {
 			supports_B[i] = transform_B->xform(supports_B[i]);
@@ -765,7 +765,7 @@ public:
 
 /****** SAT TESTS *******/
 
-typedef void (*CollisionFunc)(const GodotShape3D *, const Transform3D &, const GodotShape3D *, const Transform3D &, _CollectorCallback *p_callback, real_t, real_t);
+typedef void (*CollisionFunc)(const scardotShape3D *, const Transform3D &, const scardotShape3D *, const Transform3D &, _CollectorCallback *p_callback, real_t, real_t);
 
 // Perform analytic sphere-sphere collision and report results to collector
 template <bool withMargin>
@@ -820,9 +820,9 @@ static void analytic_sphere_collision(const Vector3 &p_origin_a, real_t p_radius
 }
 
 template <bool withMargin>
-static void _collision_sphere_sphere(const GodotShape3D *p_a, const Transform3D &p_transform_a, const GodotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
-	const GodotSphereShape3D *sphere_A = static_cast<const GodotSphereShape3D *>(p_a);
-	const GodotSphereShape3D *sphere_B = static_cast<const GodotSphereShape3D *>(p_b);
+static void _collision_sphere_sphere(const scardotShape3D *p_a, const Transform3D &p_transform_a, const scardotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
+	const scardotSphereShape3D *sphere_A = static_cast<const scardotSphereShape3D *>(p_a);
+	const scardotSphereShape3D *sphere_B = static_cast<const scardotSphereShape3D *>(p_b);
 
 	// Perform an analytic sphere collision between the two spheres
 	analytic_sphere_collision<withMargin>(
@@ -836,9 +836,9 @@ static void _collision_sphere_sphere(const GodotShape3D *p_a, const Transform3D 
 }
 
 template <bool withMargin>
-static void _collision_sphere_box(const GodotShape3D *p_a, const Transform3D &p_transform_a, const GodotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
-	const GodotSphereShape3D *sphere_A = static_cast<const GodotSphereShape3D *>(p_a);
-	const GodotBoxShape3D *box_B = static_cast<const GodotBoxShape3D *>(p_b);
+static void _collision_sphere_box(const scardotShape3D *p_a, const Transform3D &p_transform_a, const scardotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
+	const scardotSphereShape3D *sphere_A = static_cast<const scardotSphereShape3D *>(p_a);
+	const scardotBoxShape3D *box_B = static_cast<const scardotBoxShape3D *>(p_b);
 
 	// Find the point on the box nearest to the center of the sphere.
 
@@ -874,9 +874,9 @@ static void _collision_sphere_box(const GodotShape3D *p_a, const Transform3D &p_
 }
 
 template <bool withMargin>
-static void _collision_sphere_capsule(const GodotShape3D *p_a, const Transform3D &p_transform_a, const GodotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
-	const GodotSphereShape3D *sphere_A = static_cast<const GodotSphereShape3D *>(p_a);
-	const GodotCapsuleShape3D *capsule_B = static_cast<const GodotCapsuleShape3D *>(p_b);
+static void _collision_sphere_capsule(const scardotShape3D *p_a, const Transform3D &p_transform_a, const scardotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
+	const scardotSphereShape3D *sphere_A = static_cast<const scardotSphereShape3D *>(p_a);
+	const scardotCapsuleShape3D *capsule_B = static_cast<const scardotCapsuleShape3D *>(p_b);
 
 	real_t scale_A = p_transform_a.basis[0].length();
 	real_t scale_B = p_transform_b.basis[0].length();
@@ -942,19 +942,19 @@ static void analytic_sphere_cylinder_collision(real_t p_radius_a, real_t p_radiu
 }
 
 template <bool withMargin>
-static void _collision_sphere_cylinder(const GodotShape3D *p_a, const Transform3D &p_transform_a, const GodotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
-	const GodotSphereShape3D *sphere_A = static_cast<const GodotSphereShape3D *>(p_a);
-	const GodotCylinderShape3D *cylinder_B = static_cast<const GodotCylinderShape3D *>(p_b);
+static void _collision_sphere_cylinder(const scardotShape3D *p_a, const Transform3D &p_transform_a, const scardotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
+	const scardotSphereShape3D *sphere_A = static_cast<const scardotSphereShape3D *>(p_a);
+	const scardotCylinderShape3D *cylinder_B = static_cast<const scardotCylinderShape3D *>(p_b);
 
 	analytic_sphere_cylinder_collision<withMargin>(sphere_A->get_radius(), cylinder_B->get_radius(), cylinder_B->get_height(), p_transform_a, p_transform_b, p_collector, p_margin_a, p_margin_b);
 }
 
 template <bool withMargin>
-static void _collision_sphere_convex_polygon(const GodotShape3D *p_a, const Transform3D &p_transform_a, const GodotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
-	const GodotSphereShape3D *sphere_A = static_cast<const GodotSphereShape3D *>(p_a);
-	const GodotConvexPolygonShape3D *convex_polygon_B = static_cast<const GodotConvexPolygonShape3D *>(p_b);
+static void _collision_sphere_convex_polygon(const scardotShape3D *p_a, const Transform3D &p_transform_a, const scardotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
+	const scardotSphereShape3D *sphere_A = static_cast<const scardotSphereShape3D *>(p_a);
+	const scardotConvexPolygonShape3D *convex_polygon_B = static_cast<const scardotConvexPolygonShape3D *>(p_b);
 
-	SeparatorAxisTest<GodotSphereShape3D, GodotConvexPolygonShape3D, withMargin> separator(sphere_A, p_transform_a, convex_polygon_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
+	SeparatorAxisTest<scardotSphereShape3D, scardotConvexPolygonShape3D, withMargin> separator(sphere_A, p_transform_a, convex_polygon_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
 
 	if (!separator.test_previous_axis()) {
 		return;
@@ -1013,11 +1013,11 @@ static void _collision_sphere_convex_polygon(const GodotShape3D *p_a, const Tran
 }
 
 template <bool withMargin>
-static void _collision_sphere_face(const GodotShape3D *p_a, const Transform3D &p_transform_a, const GodotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
-	const GodotSphereShape3D *sphere_A = static_cast<const GodotSphereShape3D *>(p_a);
-	const GodotFaceShape3D *face_B = static_cast<const GodotFaceShape3D *>(p_b);
+static void _collision_sphere_face(const scardotShape3D *p_a, const Transform3D &p_transform_a, const scardotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
+	const scardotSphereShape3D *sphere_A = static_cast<const scardotSphereShape3D *>(p_a);
+	const scardotFaceShape3D *face_B = static_cast<const scardotFaceShape3D *>(p_b);
 
-	SeparatorAxisTest<GodotSphereShape3D, GodotFaceShape3D, withMargin> separator(sphere_A, p_transform_a, face_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
+	SeparatorAxisTest<scardotSphereShape3D, scardotFaceShape3D, withMargin> separator(sphere_A, p_transform_a, face_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
 
 	Vector3 vertex[3] = {
 		p_transform_b.xform(face_B->vertex[0]),
@@ -1069,11 +1069,11 @@ static void _collision_sphere_face(const GodotShape3D *p_a, const Transform3D &p
 }
 
 template <bool withMargin>
-static void _collision_box_box(const GodotShape3D *p_a, const Transform3D &p_transform_a, const GodotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
-	const GodotBoxShape3D *box_A = static_cast<const GodotBoxShape3D *>(p_a);
-	const GodotBoxShape3D *box_B = static_cast<const GodotBoxShape3D *>(p_b);
+static void _collision_box_box(const scardotShape3D *p_a, const Transform3D &p_transform_a, const scardotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
+	const scardotBoxShape3D *box_A = static_cast<const scardotBoxShape3D *>(p_a);
+	const scardotBoxShape3D *box_B = static_cast<const scardotBoxShape3D *>(p_b);
 
-	SeparatorAxisTest<GodotBoxShape3D, GodotBoxShape3D, withMargin> separator(box_A, p_transform_a, box_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
+	SeparatorAxisTest<scardotBoxShape3D, scardotBoxShape3D, withMargin> separator(box_A, p_transform_a, box_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
 
 	if (!separator.test_previous_axis()) {
 		return;
@@ -1167,11 +1167,11 @@ static void _collision_box_box(const GodotShape3D *p_a, const Transform3D &p_tra
 }
 
 template <bool withMargin>
-static void _collision_box_capsule(const GodotShape3D *p_a, const Transform3D &p_transform_a, const GodotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
-	const GodotBoxShape3D *box_A = static_cast<const GodotBoxShape3D *>(p_a);
-	const GodotCapsuleShape3D *capsule_B = static_cast<const GodotCapsuleShape3D *>(p_b);
+static void _collision_box_capsule(const scardotShape3D *p_a, const Transform3D &p_transform_a, const scardotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
+	const scardotBoxShape3D *box_A = static_cast<const scardotBoxShape3D *>(p_a);
+	const scardotCapsuleShape3D *capsule_B = static_cast<const scardotCapsuleShape3D *>(p_b);
 
-	SeparatorAxisTest<GodotBoxShape3D, GodotCapsuleShape3D, withMargin> separator(box_A, p_transform_a, capsule_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
+	SeparatorAxisTest<scardotBoxShape3D, scardotCapsuleShape3D, withMargin> separator(box_A, p_transform_a, capsule_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
 
 	if (!separator.test_previous_axis()) {
 		return;
@@ -1265,11 +1265,11 @@ static void _collision_box_capsule(const GodotShape3D *p_a, const Transform3D &p
 }
 
 template <bool withMargin>
-static void _collision_box_cylinder(const GodotShape3D *p_a, const Transform3D &p_transform_a, const GodotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
-	const GodotBoxShape3D *box_A = static_cast<const GodotBoxShape3D *>(p_a);
-	const GodotCylinderShape3D *cylinder_B = static_cast<const GodotCylinderShape3D *>(p_b);
+static void _collision_box_cylinder(const scardotShape3D *p_a, const Transform3D &p_transform_a, const scardotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
+	const scardotBoxShape3D *box_A = static_cast<const scardotBoxShape3D *>(p_a);
+	const scardotCylinderShape3D *cylinder_B = static_cast<const scardotCylinderShape3D *>(p_b);
 
-	SeparatorAxisTest<GodotBoxShape3D, GodotCylinderShape3D, withMargin> separator(box_A, p_transform_a, cylinder_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
+	SeparatorAxisTest<scardotBoxShape3D, scardotCylinderShape3D, withMargin> separator(box_A, p_transform_a, cylinder_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
 
 	if (!separator.test_previous_axis()) {
 		return;
@@ -1378,11 +1378,11 @@ static void _collision_box_cylinder(const GodotShape3D *p_a, const Transform3D &
 }
 
 template <bool withMargin>
-static void _collision_box_convex_polygon(const GodotShape3D *p_a, const Transform3D &p_transform_a, const GodotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
-	const GodotBoxShape3D *box_A = static_cast<const GodotBoxShape3D *>(p_a);
-	const GodotConvexPolygonShape3D *convex_polygon_B = static_cast<const GodotConvexPolygonShape3D *>(p_b);
+static void _collision_box_convex_polygon(const scardotShape3D *p_a, const Transform3D &p_transform_a, const scardotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
+	const scardotBoxShape3D *box_A = static_cast<const scardotBoxShape3D *>(p_a);
+	const scardotConvexPolygonShape3D *convex_polygon_B = static_cast<const scardotConvexPolygonShape3D *>(p_b);
 
-	SeparatorAxisTest<GodotBoxShape3D, GodotConvexPolygonShape3D, withMargin> separator(box_A, p_transform_a, convex_polygon_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
+	SeparatorAxisTest<scardotBoxShape3D, scardotConvexPolygonShape3D, withMargin> separator(box_A, p_transform_a, convex_polygon_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
 
 	if (!separator.test_previous_axis()) {
 		return;
@@ -1496,11 +1496,11 @@ static void _collision_box_convex_polygon(const GodotShape3D *p_a, const Transfo
 }
 
 template <bool withMargin>
-static void _collision_box_face(const GodotShape3D *p_a, const Transform3D &p_transform_a, const GodotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
-	const GodotBoxShape3D *box_A = static_cast<const GodotBoxShape3D *>(p_a);
-	const GodotFaceShape3D *face_B = static_cast<const GodotFaceShape3D *>(p_b);
+static void _collision_box_face(const scardotShape3D *p_a, const Transform3D &p_transform_a, const scardotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
+	const scardotBoxShape3D *box_A = static_cast<const scardotBoxShape3D *>(p_a);
+	const scardotFaceShape3D *face_B = static_cast<const scardotFaceShape3D *>(p_b);
 
-	SeparatorAxisTest<GodotBoxShape3D, GodotFaceShape3D, withMargin> separator(box_A, p_transform_a, face_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
+	SeparatorAxisTest<scardotBoxShape3D, scardotFaceShape3D, withMargin> separator(box_A, p_transform_a, face_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
 
 	Vector3 vertex[3] = {
 		p_transform_b.xform(face_B->vertex[0]),
@@ -1630,9 +1630,9 @@ static void _collision_box_face(const GodotShape3D *p_a, const Transform3D &p_tr
 }
 
 template <bool withMargin>
-static void _collision_capsule_capsule(const GodotShape3D *p_a, const Transform3D &p_transform_a, const GodotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
-	const GodotCapsuleShape3D *capsule_A = static_cast<const GodotCapsuleShape3D *>(p_a);
-	const GodotCapsuleShape3D *capsule_B = static_cast<const GodotCapsuleShape3D *>(p_b);
+static void _collision_capsule_capsule(const scardotShape3D *p_a, const Transform3D &p_transform_a, const scardotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
+	const scardotCapsuleShape3D *capsule_A = static_cast<const scardotCapsuleShape3D *>(p_a);
+	const scardotCapsuleShape3D *capsule_B = static_cast<const scardotCapsuleShape3D *>(p_b);
 
 	real_t scale_A = p_transform_a.basis[0].length();
 	real_t scale_B = p_transform_b.basis[0].length();
@@ -1662,9 +1662,9 @@ static void _collision_capsule_capsule(const GodotShape3D *p_a, const Transform3
 }
 
 template <bool withMargin>
-static void _collision_capsule_cylinder(const GodotShape3D *p_a, const Transform3D &p_transform_a, const GodotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
-	const GodotCapsuleShape3D *capsule_A = static_cast<const GodotCapsuleShape3D *>(p_a);
-	const GodotCylinderShape3D *cylinder_B = static_cast<const GodotCylinderShape3D *>(p_b);
+static void _collision_capsule_cylinder(const scardotShape3D *p_a, const Transform3D &p_transform_a, const scardotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
+	const scardotCapsuleShape3D *capsule_A = static_cast<const scardotCapsuleShape3D *>(p_a);
+	const scardotCylinderShape3D *cylinder_B = static_cast<const scardotCylinderShape3D *>(p_b);
 
 	// Find the closest points between the axes of the two objects.
 
@@ -1687,11 +1687,11 @@ static void _collision_capsule_cylinder(const GodotShape3D *p_a, const Transform
 }
 
 template <bool withMargin>
-static void _collision_capsule_convex_polygon(const GodotShape3D *p_a, const Transform3D &p_transform_a, const GodotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
-	const GodotCapsuleShape3D *capsule_A = static_cast<const GodotCapsuleShape3D *>(p_a);
-	const GodotConvexPolygonShape3D *convex_polygon_B = static_cast<const GodotConvexPolygonShape3D *>(p_b);
+static void _collision_capsule_convex_polygon(const scardotShape3D *p_a, const Transform3D &p_transform_a, const scardotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
+	const scardotCapsuleShape3D *capsule_A = static_cast<const scardotCapsuleShape3D *>(p_a);
+	const scardotConvexPolygonShape3D *convex_polygon_B = static_cast<const scardotConvexPolygonShape3D *>(p_b);
 
-	SeparatorAxisTest<GodotCapsuleShape3D, GodotConvexPolygonShape3D, withMargin> separator(capsule_A, p_transform_a, convex_polygon_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
+	SeparatorAxisTest<scardotCapsuleShape3D, scardotConvexPolygonShape3D, withMargin> separator(capsule_A, p_transform_a, convex_polygon_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
 
 	if (!separator.test_previous_axis()) {
 		return;
@@ -1754,11 +1754,11 @@ static void _collision_capsule_convex_polygon(const GodotShape3D *p_a, const Tra
 }
 
 template <bool withMargin>
-static void _collision_capsule_face(const GodotShape3D *p_a, const Transform3D &p_transform_a, const GodotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
-	const GodotCapsuleShape3D *capsule_A = static_cast<const GodotCapsuleShape3D *>(p_a);
-	const GodotFaceShape3D *face_B = static_cast<const GodotFaceShape3D *>(p_b);
+static void _collision_capsule_face(const scardotShape3D *p_a, const Transform3D &p_transform_a, const scardotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
+	const scardotCapsuleShape3D *capsule_A = static_cast<const scardotCapsuleShape3D *>(p_a);
+	const scardotFaceShape3D *face_B = static_cast<const scardotFaceShape3D *>(p_b);
 
-	SeparatorAxisTest<GodotCapsuleShape3D, GodotFaceShape3D, withMargin> separator(capsule_A, p_transform_a, face_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
+	SeparatorAxisTest<scardotCapsuleShape3D, scardotFaceShape3D, withMargin> separator(capsule_A, p_transform_a, face_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
 
 	Vector3 vertex[3] = {
 		p_transform_b.xform(face_B->vertex[0]),
@@ -1839,11 +1839,11 @@ static void _collision_capsule_face(const GodotShape3D *p_a, const Transform3D &
 }
 
 template <bool withMargin>
-static void _collision_cylinder_cylinder(const GodotShape3D *p_a, const Transform3D &p_transform_a, const GodotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
-	const GodotCylinderShape3D *cylinder_A = static_cast<const GodotCylinderShape3D *>(p_a);
-	const GodotCylinderShape3D *cylinder_B = static_cast<const GodotCylinderShape3D *>(p_b);
+static void _collision_cylinder_cylinder(const scardotShape3D *p_a, const Transform3D &p_transform_a, const scardotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
+	const scardotCylinderShape3D *cylinder_A = static_cast<const scardotCylinderShape3D *>(p_a);
+	const scardotCylinderShape3D *cylinder_B = static_cast<const scardotCylinderShape3D *>(p_b);
 
-	SeparatorAxisTest<GodotCylinderShape3D, GodotCylinderShape3D, withMargin> separator(cylinder_A, p_transform_a, cylinder_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
+	SeparatorAxisTest<scardotCylinderShape3D, scardotCylinderShape3D, withMargin> separator(cylinder_A, p_transform_a, cylinder_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
 
 	Vector3 cylinder_A_axis = p_transform_a.basis.get_column(1);
 	Vector3 cylinder_B_axis = p_transform_b.basis.get_column(1);
@@ -1882,7 +1882,7 @@ static void _collision_cylinder_cylinder(const GodotShape3D *p_a, const Transfor
 		return;
 	}
 
-	GodotCollisionSolver3D::CallbackResult callback = SeparatorAxisTest<GodotCylinderShape3D, GodotCylinderShape3D, withMargin>::test_contact_points;
+	scardotCollisionSolver3D::CallbackResult callback = SeparatorAxisTest<scardotCylinderShape3D, scardotCylinderShape3D, withMargin>::test_contact_points;
 
 	// Fallback to generic algorithm to find the best separating axis.
 	if (!fallback_collision_solver(p_a, p_transform_a, p_b, p_transform_b, callback, &separator, false, p_margin_a, p_margin_b)) {
@@ -1893,13 +1893,13 @@ static void _collision_cylinder_cylinder(const GodotShape3D *p_a, const Transfor
 }
 
 template <bool withMargin>
-static void _collision_cylinder_convex_polygon(const GodotShape3D *p_a, const Transform3D &p_transform_a, const GodotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
-	const GodotCylinderShape3D *cylinder_A = static_cast<const GodotCylinderShape3D *>(p_a);
-	const GodotConvexPolygonShape3D *convex_polygon_B = static_cast<const GodotConvexPolygonShape3D *>(p_b);
+static void _collision_cylinder_convex_polygon(const scardotShape3D *p_a, const Transform3D &p_transform_a, const scardotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
+	const scardotCylinderShape3D *cylinder_A = static_cast<const scardotCylinderShape3D *>(p_a);
+	const scardotConvexPolygonShape3D *convex_polygon_B = static_cast<const scardotConvexPolygonShape3D *>(p_b);
 
-	SeparatorAxisTest<GodotCylinderShape3D, GodotConvexPolygonShape3D, withMargin> separator(cylinder_A, p_transform_a, convex_polygon_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
+	SeparatorAxisTest<scardotCylinderShape3D, scardotConvexPolygonShape3D, withMargin> separator(cylinder_A, p_transform_a, convex_polygon_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
 
-	GodotCollisionSolver3D::CallbackResult callback = SeparatorAxisTest<GodotCylinderShape3D, GodotConvexPolygonShape3D, withMargin>::test_contact_points;
+	scardotCollisionSolver3D::CallbackResult callback = SeparatorAxisTest<scardotCylinderShape3D, scardotConvexPolygonShape3D, withMargin>::test_contact_points;
 
 	// Fallback to generic algorithm to find the best separating axis.
 	if (!fallback_collision_solver(p_a, p_transform_a, p_b, p_transform_b, callback, &separator, false, p_margin_a, p_margin_b)) {
@@ -1910,11 +1910,11 @@ static void _collision_cylinder_convex_polygon(const GodotShape3D *p_a, const Tr
 }
 
 template <bool withMargin>
-static void _collision_cylinder_face(const GodotShape3D *p_a, const Transform3D &p_transform_a, const GodotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
-	const GodotCylinderShape3D *cylinder_A = static_cast<const GodotCylinderShape3D *>(p_a);
-	const GodotFaceShape3D *face_B = static_cast<const GodotFaceShape3D *>(p_b);
+static void _collision_cylinder_face(const scardotShape3D *p_a, const Transform3D &p_transform_a, const scardotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
+	const scardotCylinderShape3D *cylinder_A = static_cast<const scardotCylinderShape3D *>(p_a);
+	const scardotFaceShape3D *face_B = static_cast<const scardotFaceShape3D *>(p_b);
 
-	SeparatorAxisTest<GodotCylinderShape3D, GodotFaceShape3D, withMargin> separator(cylinder_A, p_transform_a, face_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
+	SeparatorAxisTest<scardotCylinderShape3D, scardotFaceShape3D, withMargin> separator(cylinder_A, p_transform_a, face_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
 
 	if (!separator.test_previous_axis()) {
 		return;
@@ -2036,11 +2036,11 @@ static _FORCE_INLINE_ bool is_minkowski_face(const Vector3 &A, const Vector3 &B,
 }
 
 template <bool withMargin>
-static void _collision_convex_polygon_convex_polygon(const GodotShape3D *p_a, const Transform3D &p_transform_a, const GodotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
-	const GodotConvexPolygonShape3D *convex_polygon_A = static_cast<const GodotConvexPolygonShape3D *>(p_a);
-	const GodotConvexPolygonShape3D *convex_polygon_B = static_cast<const GodotConvexPolygonShape3D *>(p_b);
+static void _collision_convex_polygon_convex_polygon(const scardotShape3D *p_a, const Transform3D &p_transform_a, const scardotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
+	const scardotConvexPolygonShape3D *convex_polygon_A = static_cast<const scardotConvexPolygonShape3D *>(p_a);
+	const scardotConvexPolygonShape3D *convex_polygon_B = static_cast<const scardotConvexPolygonShape3D *>(p_b);
 
-	SeparatorAxisTest<GodotConvexPolygonShape3D, GodotConvexPolygonShape3D, withMargin> separator(convex_polygon_A, p_transform_a, convex_polygon_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
+	SeparatorAxisTest<scardotConvexPolygonShape3D, scardotConvexPolygonShape3D, withMargin> separator(convex_polygon_A, p_transform_a, convex_polygon_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
 
 	if (!separator.test_previous_axis()) {
 		return;
@@ -2160,11 +2160,11 @@ static void _collision_convex_polygon_convex_polygon(const GodotShape3D *p_a, co
 }
 
 template <bool withMargin>
-static void _collision_convex_polygon_face(const GodotShape3D *p_a, const Transform3D &p_transform_a, const GodotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
-	const GodotConvexPolygonShape3D *convex_polygon_A = static_cast<const GodotConvexPolygonShape3D *>(p_a);
-	const GodotFaceShape3D *face_B = static_cast<const GodotFaceShape3D *>(p_b);
+static void _collision_convex_polygon_face(const scardotShape3D *p_a, const Transform3D &p_transform_a, const scardotShape3D *p_b, const Transform3D &p_transform_b, _CollectorCallback *p_collector, real_t p_margin_a, real_t p_margin_b) {
+	const scardotConvexPolygonShape3D *convex_polygon_A = static_cast<const scardotConvexPolygonShape3D *>(p_a);
+	const scardotFaceShape3D *face_B = static_cast<const scardotFaceShape3D *>(p_b);
 
-	SeparatorAxisTest<GodotConvexPolygonShape3D, GodotFaceShape3D, withMargin> separator(convex_polygon_A, p_transform_a, face_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
+	SeparatorAxisTest<scardotConvexPolygonShape3D, scardotFaceShape3D, withMargin> separator(convex_polygon_A, p_transform_a, face_B, p_transform_b, p_collector, p_margin_a, p_margin_b);
 
 	const Geometry3D::MeshData &mesh = convex_polygon_A->get_mesh();
 
@@ -2289,7 +2289,7 @@ static void _collision_convex_polygon_face(const GodotShape3D *p_a, const Transf
 	separator.generate_contacts();
 }
 
-bool sat_calculate_penetration(const GodotShape3D *p_shape_A, const Transform3D &p_transform_A, const GodotShape3D *p_shape_B, const Transform3D &p_transform_B, GodotCollisionSolver3D::CallbackResult p_result_callback, void *p_userdata, bool p_swap, Vector3 *r_prev_axis, real_t p_margin_a, real_t p_margin_b) {
+bool sat_calculate_penetration(const scardotShape3D *p_shape_A, const Transform3D &p_transform_A, const scardotShape3D *p_shape_B, const Transform3D &p_transform_B, scardotCollisionSolver3D::CallbackResult p_result_callback, void *p_userdata, bool p_swap, Vector3 *r_prev_axis, real_t p_margin_a, real_t p_margin_b) {
 	PhysicsServer3D::ShapeType type_A = p_shape_A->get_type();
 
 	ERR_FAIL_COND_V(type_A == PhysicsServer3D::SHAPE_WORLD_BOUNDARY, false);
@@ -2387,8 +2387,8 @@ bool sat_calculate_penetration(const GodotShape3D *p_shape_A, const Transform3D 
 	callback.collided = false;
 	callback.prev_axis = r_prev_axis;
 
-	const GodotShape3D *A = p_shape_A;
-	const GodotShape3D *B = p_shape_B;
+	const scardotShape3D *A = p_shape_A;
+	const scardotShape3D *B = p_shape_B;
 	const Transform3D *transform_A = &p_transform_A;
 	const Transform3D *transform_B = &p_transform_B;
 	real_t margin_A = p_margin_a;

@@ -4,9 +4,9 @@ using System.Text;
 
 #nullable enable
 
-namespace Godot
+namespace scardot
 {
-    public partial class GodotObject
+    public partial class scardotObject
     {
         public class NativeMemberNotFoundException : Exception
         {

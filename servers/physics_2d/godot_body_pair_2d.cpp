@@ -2,10 +2,10 @@
 /*  godot_body_pair_2d.cpp                                                */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -38,13 +38,13 @@
 #define MIN_VELOCITY 0.001
 #define MAX_BIAS_ROTATION (Math_PI / 8)
 
-void GodotBodyPair2D::_add_contact(const Vector2 &p_point_A, const Vector2 &p_point_B, void *p_self) {
-	GodotBodyPair2D *self = static_cast<GodotBodyPair2D *>(p_self);
+void scardotBodyPair2D::_add_contact(const Vector2 &p_point_A, const Vector2 &p_point_B, void *p_self) {
+	scardotBodyPair2D *self = static_cast<scardotBodyPair2D *>(p_self);
 
 	self->_contact_added_callback(p_point_A, p_point_B);
 }
 
-void GodotBodyPair2D::_contact_added_callback(const Vector2 &p_point_A, const Vector2 &p_point_B) {
+void scardotBodyPair2D::_contact_added_callback(const Vector2 &p_point_A, const Vector2 &p_point_B) {
 	Vector2 local_A = A->get_inv_transform().basis_xform(p_point_A);
 	Vector2 local_B = B->get_inv_transform().basis_xform(p_point_B - offset_B);
 
@@ -119,7 +119,7 @@ void GodotBodyPair2D::_contact_added_callback(const Vector2 &p_point_A, const Ve
 	contact_count++;
 }
 
-void GodotBodyPair2D::_validate_contacts() {
+void scardotBodyPair2D::_validate_contacts() {
 	// Make sure to erase contacts that are no longer valid.
 	real_t max_separation = space->get_contact_max_separation();
 	real_t max_separation2 = max_separation * max_separation;
@@ -166,7 +166,7 @@ void GodotBodyPair2D::_validate_contacts() {
 // Process: only proceed if body A's motion is high relative to its size.
 // cast forward along motion vector to see if A is going to enter/pass B's collider next frame, only proceed if it does.
 // adjust the velocity of A down so that it will just slightly intersect the collider instead of blowing right past it.
-bool GodotBodyPair2D::_test_ccd(real_t p_step, GodotBody2D *p_A, int p_shape_A, const Transform2D &p_xform_A, GodotBody2D *p_B, int p_shape_B, const Transform2D &p_xform_B) {
+bool scardotBodyPair2D::_test_ccd(real_t p_step, scardotBody2D *p_A, int p_shape_A, const Transform2D &p_xform_A, scardotBody2D *p_B, int p_shape_B, const Transform2D &p_xform_B) {
 	Vector2 motion = p_A->get_linear_velocity() * p_step;
 	real_t mlen = motion.length();
 	if (mlen < CMP_EPSILON) {
@@ -237,15 +237,15 @@ bool GodotBodyPair2D::_test_ccd(real_t p_step, GodotBody2D *p_A, int p_shape_A, 
 	return true;
 }
 
-real_t combine_bounce(GodotBody2D *A, GodotBody2D *B) {
+real_t combine_bounce(scardotBody2D *A, scardotBody2D *B) {
 	return CLAMP(A->get_bounce() + B->get_bounce(), 0, 1);
 }
 
-real_t combine_friction(GodotBody2D *A, GodotBody2D *B) {
+real_t combine_friction(scardotBody2D *A, scardotBody2D *B) {
 	return ABS(MIN(A->get_friction(), B->get_friction()));
 }
 
-bool GodotBodyPair2D::setup(real_t p_step) {
+bool scardotBodyPair2D::setup(real_t p_step) {
 	check_ccd = false;
 
 	if (!A->interacts_with(B) || A->has_exception(B->get_self()) || B->has_exception(A->get_self())) {
@@ -279,8 +279,8 @@ bool GodotBodyPair2D::setup(real_t p_step) {
 	xform_Bu.columns[2] -= offset_A;
 	Transform2D xform_B = xform_Bu * B->get_shape_transform(shape_B);
 
-	GodotShape2D *shape_A_ptr = A->get_shape(shape_A);
-	GodotShape2D *shape_B_ptr = B->get_shape(shape_B);
+	scardotShape2D *shape_A_ptr = A->get_shape(shape_A);
+	scardotShape2D *shape_B_ptr = B->get_shape(shape_B);
 
 	Vector2 motion_A, motion_B;
 
@@ -293,7 +293,7 @@ bool GodotBodyPair2D::setup(real_t p_step) {
 
 	bool prev_collided = collided;
 
-	collided = GodotCollisionSolver2D::solve(shape_A_ptr, xform_A, motion_A, shape_B_ptr, xform_B, motion_B, _add_contact, this, &sep_axis);
+	collided = scardotCollisionSolver2D::solve(shape_A_ptr, xform_A, motion_A, shape_B_ptr, xform_B, motion_B, _add_contact, this, &sep_axis);
 	if (!collided) {
 		oneway_disabled = false;
 
@@ -355,7 +355,7 @@ bool GodotBodyPair2D::setup(real_t p_step) {
 	return true;
 }
 
-bool GodotBodyPair2D::pre_solve(real_t p_step) {
+bool scardotBodyPair2D::pre_solve(real_t p_step) {
 	if (oneway_disabled) {
 		return false;
 	}
@@ -386,8 +386,8 @@ bool GodotBodyPair2D::pre_solve(real_t p_step) {
 
 	real_t bias = space->get_contact_bias();
 
-	GodotShape2D *shape_A_ptr = A->get_shape(shape_A);
-	GodotShape2D *shape_B_ptr = B->get_shape(shape_B);
+	scardotShape2D *shape_A_ptr = A->get_shape(shape_A);
+	scardotShape2D *shape_B_ptr = B->get_shape(shape_B);
 
 	if (shape_A_ptr->get_custom_bias() || shape_B_ptr->get_custom_bias()) {
 		if (shape_A_ptr->get_custom_bias() == 0) {
@@ -501,7 +501,7 @@ bool GodotBodyPair2D::pre_solve(real_t p_step) {
 	return do_process;
 }
 
-void GodotBodyPair2D::solve(real_t p_step) {
+void scardotBodyPair2D::solve(real_t p_step) {
 	if (!collided || oneway_disabled) {
 		return;
 	}
@@ -591,8 +591,8 @@ void GodotBodyPair2D::solve(real_t p_step) {
 	}
 }
 
-GodotBodyPair2D::GodotBodyPair2D(GodotBody2D *p_A, int p_shape_A, GodotBody2D *p_B, int p_shape_B) :
-		GodotConstraint2D(_arr, 2) {
+scardotBodyPair2D::scardotBodyPair2D(scardotBody2D *p_A, int p_shape_A, scardotBody2D *p_B, int p_shape_B) :
+		scardotConstraint2D(_arr, 2) {
 	A = p_A;
 	B = p_B;
 	shape_A = p_shape_A;
@@ -602,7 +602,7 @@ GodotBodyPair2D::GodotBodyPair2D(GodotBody2D *p_A, int p_shape_A, GodotBody2D *p
 	B->add_constraint(this, 1);
 }
 
-GodotBodyPair2D::~GodotBodyPair2D() {
+scardotBodyPair2D::~scardotBodyPair2D() {
 	A->remove_constraint(this, 0);
 	B->remove_constraint(this, 1);
 }

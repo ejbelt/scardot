@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GodotTools.IdeMessaging.Utils
+namespace scardotTools.IdeMessaging.Utils
 {
     public static class SemaphoreExtensions
     {

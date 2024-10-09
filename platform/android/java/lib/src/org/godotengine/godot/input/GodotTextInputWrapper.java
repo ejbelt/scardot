@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotTextInputWrapper.java                                            */
+/*  scardotTextInputWrapper.java                                            */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -41,17 +41,17 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
-public class GodotTextInputWrapper implements TextWatcher, OnEditorActionListener {
+public class scardotTextInputWrapper implements TextWatcher, OnEditorActionListener {
 	// ===========================================================
 	// Constants
 	// ===========================================================
-	private static final String TAG = GodotTextInputWrapper.class.getSimpleName();
+	private static final String TAG = scardotTextInputWrapper.class.getSimpleName();
 
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private final GodotRenderView mRenderView;
-	private final GodotEditText mEdit;
+	private final scardotRenderView mRenderView;
+	private final scardotEditText mEdit;
 	private String mOriginText;
 	private boolean mHasSelection;
 
@@ -59,7 +59,7 @@ public class GodotTextInputWrapper implements TextWatcher, OnEditorActionListene
 	// Constructors
 	// ===========================================================
 
-	public GodotTextInputWrapper(final GodotRenderView view, final GodotEditText edit) {
+	public scardotTextInputWrapper(final scardotRenderView view, final scardotEditText edit) {
 		mRenderView = view;
 		mEdit = edit;
 	}
@@ -111,7 +111,7 @@ public class GodotTextInputWrapper implements TextWatcher, OnEditorActionListene
 		}
 		for (int i = 0; i < count; ++i) {
 			final int character = newChars[i];
-			if ((character == '\n') && !(mEdit.getKeyboardType() == GodotEditText.VirtualKeyboardType.KEYBOARD_TYPE_MULTILINE)) {
+			if ((character == '\n') && !(mEdit.getKeyboardType() == scardotEditText.VirtualKeyboardType.KEYBOARD_TYPE_MULTILINE)) {
 				// Return keys are handled through action events
 				continue;
 			}

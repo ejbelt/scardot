@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotRenderer.java                                                    */
+/*  scardotRenderer.java                                                    */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -30,9 +30,9 @@
 
 package org.godotengine.godot.gl;
 
-import org.godotengine.godot.GodotLib;
-import org.godotengine.godot.plugin.GodotPlugin;
-import org.godotengine.godot.plugin.GodotPluginRegistry;
+import org.godotengine.godot.scardotLib;
+import org.godotengine.godot.plugin.scardotPlugin;
+import org.godotengine.godot.plugin.scardotPluginRegistry;
 
 import android.util.Log;
 
@@ -40,26 +40,26 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 /**
- * Godot's GL renderer implementation.
+ * scardot's GL renderer implementation.
  */
-public class GodotRenderer implements GLSurfaceView.Renderer {
-	private final String TAG = GodotRenderer.class.getSimpleName();
+public class scardotRenderer implements GLSurfaceView.Renderer {
+	private final String TAG = scardotRenderer.class.getSimpleName();
 
-	private final GodotPluginRegistry pluginRegistry;
+	private final scardotPluginRegistry pluginRegistry;
 	private boolean activityJustResumed = false;
 
-	public GodotRenderer() {
-		this.pluginRegistry = GodotPluginRegistry.getPluginRegistry();
+	public scardotRenderer() {
+		this.pluginRegistry = scardotPluginRegistry.getPluginRegistry();
 	}
 
 	public boolean onDrawFrame(GL10 gl) {
 		if (activityJustResumed) {
-			GodotLib.onRendererResumed();
+			scardotLib.onRendererResumed();
 			activityJustResumed = false;
 		}
 
-		boolean swapBuffers = GodotLib.step();
-		for (GodotPlugin plugin : pluginRegistry.getAllPlugins()) {
+		boolean swapBuffers = scardotLib.step();
+		for (scardotPlugin plugin : pluginRegistry.getAllPlugins()) {
 			plugin.onGLDrawFrame(gl);
 		}
 
@@ -68,31 +68,31 @@ public class GodotRenderer implements GLSurfaceView.Renderer {
 
 	@Override
 	public void onRenderThreadExiting() {
-		Log.d(TAG, "Destroying Godot Engine");
-		GodotLib.ondestroy();
+		Log.d(TAG, "Destroying scardot Engine");
+		scardotLib.ondestroy();
 	}
 
 	public void onSurfaceChanged(GL10 gl, int width, int height) {
-		GodotLib.resize(null, width, height);
-		for (GodotPlugin plugin : pluginRegistry.getAllPlugins()) {
+		scardotLib.resize(null, width, height);
+		for (scardotPlugin plugin : pluginRegistry.getAllPlugins()) {
 			plugin.onGLSurfaceChanged(gl, width, height);
 		}
 	}
 
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-		GodotLib.newcontext(null);
-		for (GodotPlugin plugin : pluginRegistry.getAllPlugins()) {
+		scardotLib.newcontext(null);
+		for (scardotPlugin plugin : pluginRegistry.getAllPlugins()) {
 			plugin.onGLSurfaceCreated(gl, config);
 		}
 	}
 
 	public void onActivityResumed() {
-		// We defer invoking GodotLib.onRendererResumed() until the first draw frame call.
+		// We defer invoking scardotLib.onRendererResumed() until the first draw frame call.
 		// This ensures we have a valid GL context and surface when we do so.
 		activityJustResumed = true;
 	}
 
 	public void onActivityPaused() {
-		GodotLib.onRendererPaused();
+		scardotLib.onRendererPaused();
 	}
 }

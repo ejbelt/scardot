@@ -3,13 +3,13 @@ using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
 
-namespace Godot.SourceGenerators
+namespace scardot.SourceGenerators
 {
     internal static class MarshalUtils
     {
         public class TypeCache
         {
-            public INamedTypeSymbol GodotObjectType { get; }
+            public INamedTypeSymbol scardotObjectType { get; }
 
             public TypeCache(Compilation compilation)
             {
@@ -19,7 +19,7 @@ namespace Godot.SourceGenerators
                            throw new InvalidOperationException($"Type not found: '{fullyQualifiedMetadataName}'.");
                 }
 
-                GodotObjectType = GetTypeByMetadataNameOrThrow(GodotClasses.GodotObject);
+                scardotObjectType = GetTypeByMetadataNameOrThrow(scardotClasses.scardotObject);
             }
         }
 
@@ -68,19 +68,19 @@ namespace Godot.SourceGenerators
                 MarshalType.Vector3Array => VariantType.PackedVector3Array,
                 MarshalType.Vector4Array => VariantType.PackedVector4Array,
                 MarshalType.ColorArray => VariantType.PackedColorArray,
-                MarshalType.GodotObjectOrDerivedArray => VariantType.Array,
+                MarshalType.scardotObjectOrDerivedArray => VariantType.Array,
                 MarshalType.SystemArrayOfStringName => VariantType.Array,
                 MarshalType.SystemArrayOfNodePath => VariantType.Array,
                 MarshalType.SystemArrayOfRid => VariantType.Array,
                 MarshalType.Variant => VariantType.Nil,
-                MarshalType.GodotObjectOrDerived => VariantType.Object,
+                MarshalType.scardotObjectOrDerived => VariantType.Object,
                 MarshalType.StringName => VariantType.StringName,
                 MarshalType.NodePath => VariantType.NodePath,
                 MarshalType.Rid => VariantType.Rid,
-                MarshalType.GodotDictionary => VariantType.Dictionary,
-                MarshalType.GodotArray => VariantType.Array,
-                MarshalType.GodotGenericDictionary => VariantType.Dictionary,
-                MarshalType.GodotGenericArray => VariantType.Array,
+                MarshalType.scardotDictionary => VariantType.Dictionary,
+                MarshalType.scardotArray => VariantType.Array,
+                MarshalType.scardotGenericDictionary => VariantType.Dictionary,
+                MarshalType.scardotGenericArray => VariantType.Array,
                 _ => null
             };
 
@@ -125,8 +125,8 @@ namespace Godot.SourceGenerators
 
                     if (typeKind == TypeKind.Struct)
                     {
-                        if (type.ContainingAssembly?.Name == "GodotSharp" &&
-                            type.ContainingNamespace?.Name == "Godot")
+                        if (type.ContainingAssembly?.Name == "scardotSharp" &&
+                            type.ContainingNamespace?.Name == "scardot")
                         {
                             return type switch
                             {
@@ -179,11 +179,11 @@ namespace Godot.SourceGenerators
                                 return MarshalType.StringArray;
                         }
 
-                        if (elementType.SimpleDerivesFrom(typeCache.GodotObjectType))
-                            return MarshalType.GodotObjectOrDerivedArray;
+                        if (elementType.SimpleDerivesFrom(typeCache.scardotObjectType))
+                            return MarshalType.scardotObjectOrDerivedArray;
 
-                        if (elementType.ContainingAssembly?.Name == "GodotSharp" &&
-                            elementType.ContainingNamespace?.Name == "Godot")
+                        if (elementType.ContainingAssembly?.Name == "scardotSharp" &&
+                            elementType.ContainingNamespace?.Name == "scardot")
                         {
                             switch (elementType)
                             {
@@ -208,14 +208,14 @@ namespace Godot.SourceGenerators
                     }
                     else
                     {
-                        if (type.SimpleDerivesFrom(typeCache.GodotObjectType))
-                            return MarshalType.GodotObjectOrDerived;
+                        if (type.SimpleDerivesFrom(typeCache.scardotObjectType))
+                            return MarshalType.scardotObjectOrDerived;
 
-                        if (type.ContainingAssembly?.Name == "GodotSharp")
+                        if (type.ContainingAssembly?.Name == "scardotSharp")
                         {
                             switch (type.ContainingNamespace?.Name)
                             {
-                                case "Godot":
+                                case "scardot":
                                     return type switch
                                     {
                                         { Name: "StringName" } => MarshalType.StringName,
@@ -223,17 +223,17 @@ namespace Godot.SourceGenerators
                                         _ => null
                                     };
                                 case "Collections"
-                                    when type.ContainingNamespace?.FullQualifiedNameOmitGlobal() == "Godot.Collections":
+                                    when type.ContainingNamespace?.FullQualifiedNameOmitGlobal() == "scardot.Collections":
                                     return type switch
                                     {
                                         { Name: "Dictionary" } =>
                                             type is INamedTypeSymbol { IsGenericType: false } ?
-                                                MarshalType.GodotDictionary :
-                                                MarshalType.GodotGenericDictionary,
+                                                MarshalType.scardotDictionary :
+                                                MarshalType.scardotGenericDictionary,
                                         { Name: "Array" } =>
                                             type is INamedTypeSymbol { IsGenericType: false } ?
-                                                MarshalType.GodotArray :
-                                                MarshalType.GodotGenericArray,
+                                                MarshalType.scardotArray :
+                                                MarshalType.scardotGenericArray,
                                         _ => null
                                     };
                             }
@@ -300,25 +300,25 @@ namespace Godot.SourceGenerators
             string c, string d, string e, string f, string g, string h)
             => source.Append(a).Append(b).Append(c).Append(d).Append(e).Append(f).Append(g).Append(h);
 
-        private const string VariantUtils = "global::Godot.NativeInterop.VariantUtils";
+        private const string VariantUtils = "global::scardot.NativeInterop.VariantUtils";
 
         public static StringBuilder AppendNativeVariantToManagedExpr(this StringBuilder source,
             string inputExpr, ITypeSymbol typeSymbol, MarshalType marshalType)
         {
             return marshalType switch
             {
-                // We need a special case for GodotObjectOrDerived[], because it's not supported by VariantUtils.ConvertTo<T>
-                MarshalType.GodotObjectOrDerivedArray =>
-                    source.Append(VariantUtils, ".ConvertToSystemArrayOfGodotObject<",
+                // We need a special case for scardotObjectOrDerived[], because it's not supported by VariantUtils.ConvertTo<T>
+                MarshalType.scardotObjectOrDerivedArray =>
+                    source.Append(VariantUtils, ".ConvertToSystemArrayOfscardotObject<",
                         ((IArrayTypeSymbol)typeSymbol).ElementType.FullQualifiedNameIncludeGlobal(), ">(",
                         inputExpr, ")"),
-                // We need a special case for generic Godot collections and GodotObjectOrDerived[], because VariantUtils.ConvertTo<T> is slower
-                MarshalType.GodotGenericDictionary =>
+                // We need a special case for generic scardot collections and scardotObjectOrDerived[], because VariantUtils.ConvertTo<T> is slower
+                MarshalType.scardotGenericDictionary =>
                     source.Append(VariantUtils, ".ConvertToDictionary<",
                         ((INamedTypeSymbol)typeSymbol).TypeArguments[0].FullQualifiedNameIncludeGlobal(), ", ",
                         ((INamedTypeSymbol)typeSymbol).TypeArguments[1].FullQualifiedNameIncludeGlobal(), ">(",
                         inputExpr, ")"),
-                MarshalType.GodotGenericArray =>
+                MarshalType.scardotGenericArray =>
                     source.Append(VariantUtils, ".ConvertToArray<",
                         ((INamedTypeSymbol)typeSymbol).TypeArguments[0].FullQualifiedNameIncludeGlobal(), ">(",
                         inputExpr, ")"),
@@ -332,13 +332,13 @@ namespace Godot.SourceGenerators
         {
             return marshalType switch
             {
-                // We need a special case for GodotObjectOrDerived[], because it's not supported by VariantUtils.CreateFrom<T>
-                MarshalType.GodotObjectOrDerivedArray =>
-                    source.Append(VariantUtils, ".CreateFromSystemArrayOfGodotObject(", inputExpr, ")"),
-                // We need a special case for generic Godot collections and GodotObjectOrDerived[], because VariantUtils.CreateFrom<T> is slower
-                MarshalType.GodotGenericDictionary =>
+                // We need a special case for scardotObjectOrDerived[], because it's not supported by VariantUtils.CreateFrom<T>
+                MarshalType.scardotObjectOrDerivedArray =>
+                    source.Append(VariantUtils, ".CreateFromSystemArrayOfscardotObject(", inputExpr, ")"),
+                // We need a special case for generic scardot collections and scardotObjectOrDerived[], because VariantUtils.CreateFrom<T> is slower
+                MarshalType.scardotGenericDictionary =>
                     source.Append(VariantUtils, ".CreateFromDictionary(", inputExpr, ")"),
-                MarshalType.GodotGenericArray =>
+                MarshalType.scardotGenericArray =>
                     source.Append(VariantUtils, ".CreateFromArray(", inputExpr, ")"),
                 _ => source.Append(VariantUtils, ".CreateFrom<",
                     typeSymbol.FullQualifiedNameIncludeGlobal(), ">(", inputExpr, ")"),
@@ -350,17 +350,17 @@ namespace Godot.SourceGenerators
         {
             return marshalType switch
             {
-                // We need a special case for GodotObjectOrDerived[], because it's not supported by Variant.As<T>
-                MarshalType.GodotObjectOrDerivedArray =>
-                    source.Append(inputExpr, ".AsGodotObjectArray<",
+                // We need a special case for scardotObjectOrDerived[], because it's not supported by Variant.As<T>
+                MarshalType.scardotObjectOrDerivedArray =>
+                    source.Append(inputExpr, ".AsscardotObjectArray<",
                         ((IArrayTypeSymbol)typeSymbol).ElementType.FullQualifiedNameIncludeGlobal(), ">()"),
-                // We need a special case for generic Godot collections and GodotObjectOrDerived[], because Variant.As<T> is slower
-                MarshalType.GodotGenericDictionary =>
-                    source.Append(inputExpr, ".AsGodotDictionary<",
+                // We need a special case for generic scardot collections and scardotObjectOrDerived[], because Variant.As<T> is slower
+                MarshalType.scardotGenericDictionary =>
+                    source.Append(inputExpr, ".AsscardotDictionary<",
                         ((INamedTypeSymbol)typeSymbol).TypeArguments[0].FullQualifiedNameIncludeGlobal(), ", ",
                         ((INamedTypeSymbol)typeSymbol).TypeArguments[1].FullQualifiedNameIncludeGlobal(), ">()"),
-                MarshalType.GodotGenericArray =>
-                    source.Append(inputExpr, ".AsGodotArray<",
+                MarshalType.scardotGenericArray =>
+                    source.Append(inputExpr, ".AsscardotArray<",
                         ((INamedTypeSymbol)typeSymbol).TypeArguments[0].FullQualifiedNameIncludeGlobal(), ">()"),
                 _ => source.Append(inputExpr, ".As<",
                     typeSymbol.FullQualifiedNameIncludeGlobal(), ">()")
@@ -372,13 +372,13 @@ namespace Godot.SourceGenerators
         {
             return marshalType switch
             {
-                // We need a special case for GodotObjectOrDerived[], because it's not supported by Variant.From<T>
-                MarshalType.GodotObjectOrDerivedArray =>
-                    source.Append("global::Godot.Variant.CreateFrom(", inputExpr, ")"),
-                // We need a special case for generic Godot collections, because Variant.From<T> is slower
-                MarshalType.GodotGenericDictionary or MarshalType.GodotGenericArray =>
-                    source.Append("global::Godot.Variant.CreateFrom(", inputExpr, ")"),
-                _ => source.Append("global::Godot.Variant.From<",
+                // We need a special case for scardotObjectOrDerived[], because it's not supported by Variant.From<T>
+                MarshalType.scardotObjectOrDerivedArray =>
+                    source.Append("global::scardot.Variant.CreateFrom(", inputExpr, ")"),
+                // We need a special case for generic scardot collections, because Variant.From<T> is slower
+                MarshalType.scardotGenericDictionary or MarshalType.scardotGenericArray =>
+                    source.Append("global::scardot.Variant.CreateFrom(", inputExpr, ")"),
+                _ => source.Append("global::scardot.Variant.From<",
                     typeSymbol.FullQualifiedNameIncludeGlobal(), ">(", inputExpr, ")")
             };
         }

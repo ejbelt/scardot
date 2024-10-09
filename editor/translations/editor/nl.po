@@ -1,7 +1,7 @@
-# Dutch translation of the Godot Engine editor interface.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Dutch translation of the scardot Engine editor interface.
+# Copyright (c) 2014-present scardot Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the scardot source code.
 # aelspire <aelspire@gmail.com>, 2017.
 # Aram Nap <xyphex.aram@gmail.com>, 2017.
 # Arjan219 <arjannugteren1@gmail.com>, 2017-2018, 2020.
@@ -79,7 +79,7 @@
 # Tycho <tychoschurink@outlook.com>, 2024.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine editor interface\n"
+"Project-Id-Version: scardot Engine editor interface\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2024-07-13 14:07+0000\n"
@@ -2002,8 +2002,8 @@ msgstr "Mapnaam is ongeldig."
 msgid "Double-click to open in browser."
 msgstr "Dubbelklik om in een browser te openen."
 
-msgid "Thanks from the Godot community!"
-msgstr "Bedankt van de Godot-gemeenschap!"
+msgid "Thanks from the scardot community!"
+msgstr "Bedankt van de scardot-gemeenschap!"
 
 msgid "(unknown)"
 msgstr "(onbekend)"
@@ -2015,8 +2015,8 @@ msgstr ""
 "Git commit datum: %s\n"
 "Klik om het versienummer te kopiëeren."
 
-msgid "Godot Engine contributors"
-msgstr "Bijdragers aan Godot Engine"
+msgid "scardot Engine contributors"
+msgstr "Bijdragers aan scardot Engine"
 
 msgid "Project Founders"
 msgstr "Projectoprichters"
@@ -2068,12 +2068,12 @@ msgid "Third-party Licenses"
 msgstr "Licenties van derden"
 
 msgid ""
-"Godot Engine relies on a number of third-party free and open source "
+"scardot Engine relies on a number of third-party free and open source "
 "libraries, all compatible with the terms of its MIT license. The following is "
 "an exhaustive list of all such third-party components with their respective "
 "copyright statements and license terms."
 msgstr ""
-"Godot Engine maakt gebruik van een aantal gratis en open-source bibliotheken, "
+"scardot Engine maakt gebruik van een aantal gratis en open-source bibliotheken, "
 "ontwikkeld door derden, die compatibel zijn met de MIT-licentie. Wat volgt is "
 "een uitputtende lijst van alle componenten van derde partijen met hun "
 "respectievelijke copyrightberichten en licentietermen."
@@ -2530,8 +2530,8 @@ msgstr "[leeg]"
 msgid "[unsaved]"
 msgstr "[niet opgeslagen]"
 
-msgid "%s - Godot Engine"
-msgstr "%s - Godot Engine"
+msgid "%s - scardot Engine"
+msgstr "%s - scardot Engine"
 
 msgid "Dock Position"
 msgstr "Tabbladpositie"
@@ -2680,8 +2680,8 @@ msgstr ""
 msgid "New profile name:"
 msgstr "Nieuwe profielnaam:"
 
-msgid "Godot Feature Profile"
-msgstr "Godot-eigenschappenprofiel"
+msgid "scardot Feature Profile"
+msgstr "scardot-eigenschappenprofiel"
 
 msgid "Import Profile(s)"
 msgstr "Profiel(en) importeren"
@@ -3696,11 +3696,11 @@ msgstr "Stel een functie voor"
 msgid "Send Docs Feedback"
 msgstr "Stuur documentatie­feedback"
 
-msgid "About Godot..."
-msgstr "Over Godot…"
+msgid "About scardot..."
+msgstr "Over scardot…"
 
-msgid "Support Godot Development"
-msgstr "Steun Godot-ontwikkeling"
+msgid "Support scardot Development"
+msgstr "Steun scardot-ontwikkeling"
 
 msgid ""
 "Choose a rendering method.\n"
@@ -4210,8 +4210,8 @@ msgstr "Sjabloon verwijderen"
 msgid "Select Template File"
 msgstr "Selecteer sjabloonbestand"
 
-msgid "Godot Export Templates"
-msgstr "Godot Export Templates"
+msgid "scardot Export Templates"
+msgstr "scardot Export Templates"
 
 msgid ""
 "The templates will continue to download.\n"
@@ -4857,7 +4857,7 @@ msgid "History of recently edited objects."
 msgstr "Geschiedenis van recent bewerkte objecten."
 
 msgid "Open documentation for this object."
-msgstr "Open Godot online documentatie."
+msgstr "Open scardot online documentatie."
 
 msgid "Remove Translation"
 msgstr "Verwijder vertaling"
@@ -6861,8 +6861,8 @@ msgstr "Thema Opslaan Als..."
 msgid "Online Docs"
 msgstr "Online Documentatie"
 
-msgid "Open Godot online documentation."
-msgstr "Open Godot online documentatie."
+msgid "Open scardot online documentation."
+msgstr "Open scardot online documentatie."
 
 msgid "%s Class Reference"
 msgstr "%s Klassereferentie"
@@ -8118,11 +8118,11 @@ msgstr ""
 "en 'y''."
 
 msgid ""
-"Custom Godot Shader Language expression, with custom amount of input and "
+"Custom scardot Shader Language expression, with custom amount of input and "
 "output ports. This is a direct injection of code into the vertex/fragment/"
 "light function, do not use it to write the function declarations inside."
 msgstr ""
-"Aangepaste Godot Shader Language expressie, met aangepast aantal in- en "
+"Aangepaste scardot Shader Language expressie, met aangepast aantal in- en "
 "uitvoerpoorten. Dit is een directe injectie van code in de vertex/fragment/"
 "light functie, niet gebruiken om functie declaraties in te schrijven."
 

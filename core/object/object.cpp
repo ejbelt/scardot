@@ -2,10 +2,10 @@
 /*  object.cpp                                                            */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -1725,7 +1725,7 @@ void Object::_bind_methods() {
 	::ClassDB::add_virtual_method(get_class_static(), m_method, true, Vector<String>(), true);
 
 	MethodInfo notification_mi("_notification", PropertyInfo(Variant::INT, "what"));
-	notification_mi.arguments_metadata.push_back(GodotTypeInfo::Metadata::METADATA_INT_IS_INT32);
+	notification_mi.arguments_metadata.push_back(scardotTypeInfo::Metadata::METADATA_INT_IS_INT32);
 	BIND_OBJ_CORE_METHOD(notification_mi);
 	BIND_OBJ_CORE_METHOD(MethodInfo(Variant::BOOL, "_set", PropertyInfo(Variant::STRING_NAME, "property"), PropertyInfo(Variant::NIL, "value")));
 #ifdef TOOLS_ENABLED

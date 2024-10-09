@@ -1,8 +1,8 @@
 using System;
 using System.Runtime.InteropServices;
-using Godot.NativeInterop;
+using scardot.NativeInterop;
 
-namespace Godot.Bridge
+namespace scardot.Bridge
 {
     internal static class GCHandleBridge
     {
@@ -20,7 +20,7 @@ namespace Godot.Bridge
         }
 
         // Returns true, if releasing the provided handle is necessary for assembly unloading to succeed.
-        // This check is not perfect and only intended to prevent things in GodotTools from being reloaded.
+        // This check is not perfect and only intended to prevent things in scardotTools from being reloaded.
         [UnmanagedCallersOnly]
         internal static godot_bool GCHandleIsTargetCollectible(IntPtr gcHandlePtr)
         {
@@ -29,9 +29,9 @@ namespace Godot.Bridge
                 var target = GCHandle.FromIntPtr(gcHandlePtr).Target;
 
                 if (target is Delegate @delegate)
-                    return DelegateUtils.IsDelegateCollectible(@delegate).ToGodotBool();
+                    return DelegateUtils.IsDelegateCollectible(@delegate).ToscardotBool();
 
-                return target.GetType().IsCollectible.ToGodotBool();
+                return target.GetType().IsCollectible.ToscardotBool();
             }
             catch (Exception e)
             {

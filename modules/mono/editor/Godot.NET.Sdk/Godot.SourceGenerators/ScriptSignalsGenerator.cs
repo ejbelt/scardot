@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Text;
 //     - Expose the generated StringName fields to the user, for use with 'Emit(...)'.
 //     - Generate a 'EmitSignalName' method for each event signal.
 
-namespace Godot.SourceGenerators
+namespace scardot.SourceGenerators
 {
     [Generator]
     public class ScriptSignalsGenerator : ISourceGenerator
@@ -23,7 +23,7 @@ namespace Godot.SourceGenerators
 
         public void Execute(GeneratorExecutionContext context)
         {
-            if (context.IsGodotSourceGeneratorDisabled("ScriptSignals"))
+            if (context.IsscardotSourceGeneratorDisabled("ScriptSignals"))
                 return;
 
             INamedTypeSymbol[] godotClasses = context
@@ -31,7 +31,7 @@ namespace Godot.SourceGenerators
                 .SelectMany(tree =>
                     tree.GetRoot().DescendantNodes()
                         .OfType<ClassDeclarationSyntax>()
-                        .SelectGodotScriptClasses(context.Compilation)
+                        .SelectscardotScriptClasses(context.Compilation)
                         // Report and skip non-partial classes
                         .Where(x =>
                         {
@@ -58,14 +58,14 @@ namespace Godot.SourceGenerators
 
                 foreach (var godotClass in godotClasses)
                 {
-                    VisitGodotScriptClass(context, typeCache, godotClass);
+                    VisitscardotScriptClass(context, typeCache, godotClass);
                 }
             }
         }
 
         internal static string SignalDelegateSuffix = "EventHandler";
 
-        private static void VisitGodotScriptClass(
+        private static void VisitscardotScriptClass(
             GeneratorExecutionContext context,
             MarshalUtils.TypeCache typeCache,
             INamedTypeSymbol symbol
@@ -84,8 +84,8 @@ namespace Godot.SourceGenerators
 
             var source = new StringBuilder();
 
-            source.Append("using Godot;\n");
-            source.Append("using Godot.NativeInterop;\n");
+            source.Append("using scardot;\n");
+            source.Append("using scardot.NativeInterop;\n");
             source.Append("\n");
 
             if (hasNamespace)
@@ -126,9 +126,9 @@ namespace Godot.SourceGenerators
                 .Cast<INamedTypeSymbol>()
                 .Where(namedTypeSymbol => namedTypeSymbol.TypeKind == TypeKind.Delegate)
                 .Where(s => s.GetAttributes()
-                    .Any(a => a.AttributeClass?.IsGodotSignalAttribute() ?? false));
+                    .Any(a => a.AttributeClass?.IsscardotSignalAttribute() ?? false));
 
-            List<GodotSignalDelegateData> godotSignalDelegates = new();
+            List<scardotSignalDelegateData> godotSignalDelegates = new();
 
             foreach (var signalDelegateSymbol in signalDelegateSymbols)
             {
@@ -146,7 +146,7 @@ namespace Godot.SourceGenerators
                 signalName = signalName.Substring(0, signalName.Length - SignalDelegateSuffix.Length);
 
                 var invokeMethodData = signalDelegateSymbol
-                    .DelegateInvokeMethod?.HasGodotCompatibleSignature(typeCache);
+                    .DelegateInvokeMethod?.HasscardotCompatibleSignature(typeCache);
 
                 if (invokeMethodData == null)
                 {
@@ -212,24 +212,24 @@ namespace Godot.SourceGenerators
                     .Append("' signal.\n")
                     .Append("        /// </summary>\n");
 
-                source.Append("        public new static readonly global::Godot.StringName @");
+                source.Append("        public new static readonly global::scardot.StringName @");
                 source.Append(signalName);
                 source.Append(" = \"");
                 source.Append(signalName);
                 source.Append("\";\n");
             }
 
-            source.Append("    }\n"); // class GodotInternal
+            source.Append("    }\n"); // class scardotInternal
 
-            // Generate GetGodotSignalList
+            // Generate GetscardotSignalList
 
             if (godotSignalDelegates.Count > 0)
             {
-                const string ListType = "global::System.Collections.Generic.List<global::Godot.Bridge.MethodInfo>";
+                const string ListType = "global::System.Collections.Generic.List<global::scardot.Bridge.MethodInfo>";
 
                 source.Append("    /// <summary>\n")
                     .Append("    /// Get the signal information for all the signals declared in this class.\n")
-                    .Append("    /// This method is used by Godot to register the available signals in the editor.\n")
+                    .Append("    /// This method is used by scardot to register the available signals in the editor.\n")
                     .Append("    /// Do not call this method.\n")
                     .Append("    /// </summary>\n");
 
@@ -237,7 +237,7 @@ namespace Godot.SourceGenerators
 
                 source.Append("    internal new static ")
                     .Append(ListType)
-                    .Append(" GetGodotSignalList()\n    {\n");
+                    .Append(" GetscardotSignalList()\n    {\n");
 
                 source.Append("        var signals = new ")
                     .Append(ListType)
@@ -290,14 +290,14 @@ namespace Godot.SourceGenerators
                     .Append("}\n");
             }
 
-            // Generate RaiseGodotClassSignalCallbacks
+            // Generate RaisescardotClassSignalCallbacks
 
             if (godotSignalDelegates.Count > 0)
             {
                 source.Append("    /// <inheritdoc/>\n");
                 source.Append("    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]\n");
                 source.Append(
-                    "    protected override void RaiseGodotClassSignalCallbacks(in godot_string_name signal, ");
+                    "    protected override void RaisescardotClassSignalCallbacks(in godot_string_name signal, ");
                 source.Append("NativeVariantPtrArgs args)\n    {\n");
 
                 foreach (var signal in godotSignalDelegates)
@@ -305,26 +305,26 @@ namespace Godot.SourceGenerators
                     GenerateSignalEventInvoker(signal, source);
                 }
 
-                source.Append("        base.RaiseGodotClassSignalCallbacks(signal, args);\n");
+                source.Append("        base.RaisescardotClassSignalCallbacks(signal, args);\n");
 
                 source.Append("    }\n");
             }
 
-            // Generate HasGodotClassSignal
+            // Generate HasscardotClassSignal
 
             if (godotSignalDelegates.Count > 0)
             {
                 source.Append("    /// <inheritdoc/>\n");
                 source.Append("    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]\n");
                 source.Append(
-                    "    protected override bool HasGodotClassSignal(in godot_string_name signal)\n    {\n");
+                    "    protected override bool HasscardotClassSignal(in godot_string_name signal)\n    {\n");
 
                 foreach (var signal in godotSignalDelegates)
                 {
                     GenerateHasSignalEntry(signal.Name, source);
                 }
 
-                source.Append("        return base.HasGodotClassSignal(signal);\n");
+                source.Append("        return base.HasscardotClassSignal(signal);\n");
 
                 source.Append("    }\n");
             }
@@ -359,7 +359,7 @@ namespace Godot.SourceGenerators
 
             AppendPropertyInfo(source, methodInfo.ReturnVal);
 
-            source.Append(", flags: (global::Godot.MethodFlags)")
+            source.Append(", flags: (global::scardot.MethodFlags)")
                 .Append((int)methodInfo.Flags)
                 .Append(", arguments: ");
 
@@ -387,28 +387,28 @@ namespace Godot.SourceGenerators
 
         private static void AppendPropertyInfo(StringBuilder source, PropertyInfo propertyInfo)
         {
-            source.Append("new(type: (global::Godot.Variant.Type)")
+            source.Append("new(type: (global::scardot.Variant.Type)")
                 .Append((int)propertyInfo.Type)
                 .Append(", name: \"")
                 .Append(propertyInfo.Name)
-                .Append("\", hint: (global::Godot.PropertyHint)")
+                .Append("\", hint: (global::scardot.PropertyHint)")
                 .Append((int)propertyInfo.Hint)
                 .Append(", hintString: \"")
                 .Append(propertyInfo.HintString)
-                .Append("\", usage: (global::Godot.PropertyUsageFlags)")
+                .Append("\", usage: (global::scardot.PropertyUsageFlags)")
                 .Append((int)propertyInfo.Usage)
                 .Append(", exported: ")
                 .Append(propertyInfo.Exported ? "true" : "false");
             if (propertyInfo.ClassName != null)
             {
-                source.Append(", className: new global::Godot.StringName(\"")
+                source.Append(", className: new global::scardot.StringName(\"")
                     .Append(propertyInfo.ClassName)
                     .Append("\")");
             }
             source.Append(")");
         }
 
-        private static MethodInfo DetermineMethodInfo(GodotSignalDelegateData signalDelegateData)
+        private static MethodInfo DetermineMethodInfo(scardotSignalDelegateData signalDelegateData)
         {
             var invokeMethodData = signalDelegateData.InvokeMethodData;
 
@@ -462,7 +462,7 @@ namespace Godot.SourceGenerators
             string? className = null;
             if (memberVariantType == VariantType.Object && typeSymbol is INamedTypeSymbol namedTypeSymbol)
             {
-                className = namedTypeSymbol.GetGodotScriptNativeClassName();
+                className = namedTypeSymbol.GetscardotScriptNativeClassName();
             }
 
             return new PropertyInfo(memberVariantType, name,
@@ -481,7 +481,7 @@ namespace Godot.SourceGenerators
         }
 
         private static void GenerateSignalEventInvoker(
-            GodotSignalDelegateData signal,
+            scardotSignalDelegateData signal,
             StringBuilder source
         )
         {

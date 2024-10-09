@@ -2,10 +2,10 @@
 /*  renames_map_3_to_4.cpp                                                */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -1568,7 +1568,7 @@ const char *RenamesMap3To4::class_renames[][2] = {
 	{ "Physics2DDirectBodyState", "PhysicsDirectBodyState2D" },
 	{ "Physics2DDirectSpaceState", "PhysicsDirectSpaceState2D" },
 	{ "Physics2DServer", "PhysicsServer2D" },
-	{ "Physics2DServerSW", "GodotPhysicsServer2D" },
+	{ "Physics2DServerSW", "scardotPhysicsServer2D" },
 	{ "Physics2DShapeQueryParameters", "PhysicsShapeQueryParameters2D" },
 	{ "Physics2DTestMotionResult", "PhysicsTestMotionResult2D" },
 	{ "PhysicsBody", "PhysicsBody3D" },

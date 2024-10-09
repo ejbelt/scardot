@@ -5,12 +5,12 @@
 
     <application>
 
-        <!-- Records the version of the Godot library -->
+        <!-- Records the version of the scardot library -->
         <meta-data
             android:name="org.godotengine.library.version"
             android:value="${godotLibraryVersion}" />
 
-        <service android:name=".GodotDownloaderService" />
+        <service android:name=".scardotDownloaderService" />
 
         <activity
             android:name=".utils.ProcessPhoenix"

@@ -2,10 +2,10 @@
 /*  godot.h                                                               */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -30,11 +30,11 @@
 
 /**
  @file  godot.h
- @brief ENet Godot header
+ @brief ENet scardot header
 */
 
-#ifndef __ENET_GODOT_H__
-#define __ENET_GODOT_H__
+#ifndef __ENET_SCARDOT_H__
+#define __ENET_SCARDOT_H__
 
 #ifdef WINDOWS_ENABLED
 #include <stdint.h>
@@ -78,4 +78,4 @@ typedef struct _ENetAddress
 } ENetAddress;
 #define enet_host_equal(host_a, host_b) (memcmp(&host_a, &host_b,16) == 0)
 
-#endif /* __ENET_GODOT_H__ */
+#endif /* __ENET_SCARDOT_H__ */

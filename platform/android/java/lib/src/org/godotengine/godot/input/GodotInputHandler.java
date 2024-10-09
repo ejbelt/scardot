@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotInputHandler.java                                                */
+/*  scardotInputHandler.java                                                */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -32,9 +32,9 @@ package org.godotengine.godot.input;
 
 import static org.godotengine.godot.utils.GLUtils.DEBUG;
 
-import org.godotengine.godot.Godot;
-import org.godotengine.godot.GodotLib;
-import org.godotengine.godot.GodotRenderView;
+import org.godotengine.godot.scardot;
+import org.godotengine.godot.scardotLib;
+import org.godotengine.godot.scardotRenderView;
 
 import android.content.Context;
 import android.hardware.Sensor;
@@ -60,10 +60,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Handles input related events for the {@link GodotRenderView} view.
+ * Handles input related events for the {@link scardotRenderView} view.
  */
-public class GodotInputHandler implements InputManager.InputDeviceListener, SensorEventListener {
-	private static final String TAG = GodotInputHandler.class.getSimpleName();
+public class scardotInputHandler implements InputManager.InputDeviceListener, SensorEventListener {
+	private static final String TAG = scardotInputHandler.class.getSimpleName();
 
 	private static final int ROTARY_INPUT_VERTICAL_AXIS = 1;
 	private static final int ROTARY_INPUT_HORIZONTAL_AXIS = 0;
@@ -72,12 +72,12 @@ public class GodotInputHandler implements InputManager.InputDeviceListener, Sens
 	private final SparseArray<Joystick> mJoysticksDevices = new SparseArray<>(4);
 	private final HashSet<Integer> mHardwareKeyboardIds = new HashSet<>();
 
-	private final Godot godot;
+	private final scardot godot;
 	private final InputManager mInputManager;
 	private final WindowManager windowManager;
 	private final GestureDetector gestureDetector;
 	private final ScaleGestureDetector scaleGestureDetector;
-	private final GodotGestureHandler godotGestureHandler;
+	private final scardotGestureHandler godotGestureHandler;
 
 	/**
 	 * Used to decide whether mouse capture can be enabled.
@@ -86,14 +86,14 @@ public class GodotInputHandler implements InputManager.InputDeviceListener, Sens
 
 	private int rotaryInputAxis = ROTARY_INPUT_VERTICAL_AXIS;
 
-	public GodotInputHandler(Context context, Godot godot) {
+	public scardotInputHandler(Context context, scardot godot) {
 		this.godot = godot;
 		mInputManager = (InputManager)context.getSystemService(Context.INPUT_SERVICE);
 		mInputManager.registerInputDeviceListener(this, null);
 
 		windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
 
-		this.godotGestureHandler = new GodotGestureHandler(this);
+		this.godotGestureHandler = new scardotGestureHandler(this);
 		this.gestureDetector = new GestureDetector(context, godotGestureHandler);
 		this.gestureDetector.setIsLongpressEnabled(false);
 		this.scaleGestureDetector = new ScaleGestureDetector(context, godotGestureHandler);
@@ -123,7 +123,7 @@ public class GodotInputHandler implements InputManager.InputDeviceListener, Sens
 	 * dispatched from the UI thread.
 	 */
 	private boolean shouldDispatchInputToRenderThread() {
-		return GodotLib.shouldDispatchInputToRenderThread();
+		return scardotLib.shouldDispatchInputToRenderThread();
 	}
 
 	/**
@@ -167,7 +167,7 @@ public class GodotInputHandler implements InputManager.InputDeviceListener, Sens
 			// Check if the device exists
 			final int deviceId = event.getDeviceId();
 			if (mJoystickIds.indexOfKey(deviceId) >= 0) {
-				final int button = getGodotButton(keyCode);
+				final int button = getscardotButton(keyCode);
 				final int godotJoyId = mJoystickIds.get(deviceId);
 				handleJoystickButtonEvent(godotJoyId, button, false);
 			}
@@ -203,7 +203,7 @@ public class GodotInputHandler implements InputManager.InputDeviceListener, Sens
 				return true;
 
 			if (mJoystickIds.indexOfKey(deviceId) >= 0) {
-				final int button = getGodotButton(keyCode);
+				final int button = getscardotButton(keyCode);
 				final int godotJoyId = mJoystickIds.get(deviceId);
 				handleJoystickButtonEvent(godotJoyId, button, true);
 			}
@@ -231,7 +231,7 @@ public class GodotInputHandler implements InputManager.InputDeviceListener, Sens
 			return true;
 		}
 
-		// Drag events are handled by the [GodotGestureHandler]
+		// Drag events are handled by the [scardotGestureHandler]
 		if (event.getActionMasked() == MotionEvent.ACTION_MOVE) {
 			return true;
 		}
@@ -261,7 +261,7 @@ public class GodotInputHandler implements InputManager.InputDeviceListener, Sens
 					final float value = event.getAxisValue(axis);
 					/*
 					  As all axes are polled for each event, only fire an axis event if the value has actually changed.
-					  Prevents flooding Godot with repeated events.
+					  Prevents flooding scardot with repeated events.
 					 */
 					if (joystick.axesValues.indexOfKey(axis) < 0 || (float)joystick.axesValues.get(axis) != value) {
 						// save value to prevent repeats
@@ -380,7 +380,7 @@ public class GodotInputHandler implements InputManager.InputDeviceListener, Sens
 		Collections.sort(joystick.axes);
 		for (int idx = 0; idx < joystick.axes.size(); idx++) {
 			//Helps with creating new joypad mappings.
-			Log.i(TAG, " - Mapping Android axis " + joystick.axes.get(idx) + " to Godot axis " + idx);
+			Log.i(TAG, " - Mapping Android axis " + joystick.axes.get(idx) + " to scardot axis " + idx);
 		}
 		mJoysticksDevices.put(deviceId, joystick);
 
@@ -407,7 +407,7 @@ public class GodotInputHandler implements InputManager.InputDeviceListener, Sens
 		onInputDeviceAdded(deviceId);
 	}
 
-	public static int getGodotButton(int keyCode) {
+	public static int getscardotButton(int keyCode) {
 		int button;
 		switch (keyCode) {
 			case KeyEvent.KEYCODE_BUTTON_A: // Android A is SNES B

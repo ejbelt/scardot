@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
-using Godot;
-using GodotTools.Build;
-using GodotTools.Utils;
+using scardot;
+using scardotTools.Build;
+using scardotTools.Utils;
 
-namespace GodotTools.Inspector
+namespace scardotTools.Inspector
 {
     public partial class InspectorPlugin : EditorInspectorPlugin
     {
-        public override bool _CanHandle(GodotObject godotObject)
+        public override bool _CanHandle(scardotObject godotObject)
         {
             foreach (var script in EnumerateScripts(godotObject))
             {
@@ -20,7 +20,7 @@ namespace GodotTools.Inspector
             return false;
         }
 
-        public override void _ParseBegin(GodotObject godotObject)
+        public override void _ParseBegin(scardotObject godotObject)
         {
             foreach (var script in EnumerateScripts(godotObject))
             {
@@ -31,7 +31,7 @@ namespace GodotTools.Inspector
 
                 if (string.IsNullOrEmpty(scriptPath))
                 {
-                    // Generic types used empty paths in older versions of Godot
+                    // Generic types used empty paths in older versions of scardot
                     // so we assume your project is out of sync.
                     AddCustomControl(new InspectorOutOfSyncWarning());
                     break;
@@ -53,7 +53,7 @@ namespace GodotTools.Inspector
             }
         }
 
-        private static IEnumerable<Script> EnumerateScripts(GodotObject godotObject)
+        private static IEnumerable<Script> EnumerateScripts(scardotObject godotObject)
         {
             var script = godotObject.GetScript().As<Script>();
             while (script != null)

@@ -146,9 +146,9 @@ typedef struct FfxFsr2DispatchDescription {
     float                       autoReactiveScale;                  ///< A value to scale the reactive mask
     float                       autoReactiveMax;                    ///< A value to clamp the reactive mask
 
-    // -- GODOT start --
+    // -- SCARDOT start --
     float                       reprojectionMatrix[16];             ///< The matrix used for reprojecting pixels with invalid motion vectors by using the depth.
-	// -- GODOT end --
+	// -- SCARDOT end --
 
 } FfxFsr2DispatchDescription;
 

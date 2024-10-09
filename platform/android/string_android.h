@@ -2,10 +2,10 @@
 /*  string_android.h                                                      */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -38,10 +38,10 @@
 #include <jni.h>
 
 /**
- * Converts JNI jstring to Godot String.
+ * Converts JNI jstring to scardot String.
  * @param source Source JNI string. If null an empty string is returned.
  * @param env JNI environment instance. If null obtained by get_jni_env().
- * @return Godot string instance.
+ * @return scardot string instance.
  */
 static inline String jstring_to_string(jstring source, JNIEnv *env = nullptr) {
 	String result;

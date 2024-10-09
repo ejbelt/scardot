@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotFragment.java                                                    */
+/*  scardotFragment.java                                                    */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -31,7 +31,7 @@
 package org.godotengine.godot;
 
 import org.godotengine.godot.error.Error;
-import org.godotengine.godot.plugin.GodotPlugin;
+import org.godotengine.godot.plugin.scardotPlugin;
 import org.godotengine.godot.utils.BenchmarkUtils;
 
 import android.app.Activity;
@@ -72,10 +72,10 @@ import java.util.Locale;
 import java.util.Set;
 
 /**
- * Base fragment for Android apps intending to use Godot for part of the app's UI.
+ * Base fragment for Android apps intending to use scardot for part of the app's UI.
  */
-public class GodotFragment extends Fragment implements IDownloaderClient, GodotHost {
-	private static final String TAG = GodotFragment.class.getSimpleName();
+public class scardotFragment extends Fragment implements IDownloaderClient, scardotHost {
+	private static final String TAG = scardotFragment.class.getSimpleName();
 
 	private IStub mDownloaderClientStub;
 	private TextView mStatusText;
@@ -96,8 +96,8 @@ public class GodotFragment extends Fragment implements IDownloaderClient, GodotH
 	private int mState;
 
 	@Nullable
-	private GodotHost parentHost;
-	private Godot godot;
+	private scardotHost parentHost;
+	private scardot godot;
 
 	static private Intent mCurrentIntent;
 
@@ -128,17 +128,17 @@ public class GodotFragment extends Fragment implements IDownloaderClient, GodotH
 	public ResultCallback resultCallback;
 
 	@Override
-	public Godot getGodot() {
+	public scardot getscardot() {
 		return godot;
 	}
 
 	@Override
 	public void onAttach(@NonNull Context context) {
 		super.onAttach(context);
-		if (getParentFragment() instanceof GodotHost) {
-			parentHost = (GodotHost)getParentFragment();
-		} else if (getActivity() instanceof GodotHost) {
-			parentHost = (GodotHost)getActivity();
+		if (getParentFragment() instanceof scardotHost) {
+			parentHost = (scardotHost)getParentFragment();
+		} else if (getActivity() instanceof scardotHost) {
+			parentHost = (scardotHost)getActivity();
 		}
 	}
 
@@ -182,20 +182,20 @@ public class GodotFragment extends Fragment implements IDownloaderClient, GodotH
 
 	@Override
 	public void onCreate(Bundle icicle) {
-		BenchmarkUtils.beginBenchmarkMeasure("Startup", "GodotFragment::onCreate");
+		BenchmarkUtils.beginBenchmarkMeasure("Startup", "scardotFragment::onCreate");
 		super.onCreate(icicle);
 
 		final Activity activity = getActivity();
 		mCurrentIntent = activity.getIntent();
 
 		if (parentHost != null) {
-			godot = parentHost.getGodot();
+			godot = parentHost.getscardot();
 		}
 		if (godot == null) {
-			godot = new Godot(requireContext());
+			godot = new scardot(requireContext());
 		}
 		performEngineInitialization();
-		BenchmarkUtils.endBenchmarkMeasure("Startup", "GodotFragment::onCreate");
+		BenchmarkUtils.endBenchmarkMeasure("Startup", "scardotFragment::onCreate");
 	}
 
 	private void performEngineInitialization() {
@@ -232,12 +232,12 @@ public class GodotFragment extends Fragment implements IDownloaderClient, GodotH
 
 			int startResult;
 			try {
-				startResult = DownloaderClientMarshaller.startDownloadServiceIfRequired(getContext(), pendingIntent, GodotDownloaderService.class);
+				startResult = DownloaderClientMarshaller.startDownloadServiceIfRequired(getContext(), pendingIntent, scardotDownloaderService.class);
 
 				if (startResult != DownloaderClientMarshaller.NO_DOWNLOAD_REQUIRED) {
 					// This is where you do set up to display the download
 					// progress (next step in onCreateView)
-					mDownloaderClientStub = DownloaderClientMarshaller.CreateStub(this, GodotDownloaderService.class);
+					mDownloaderClientStub = DownloaderClientMarshaller.CreateStub(this, scardotDownloaderService.class);
 					return;
 				}
 
@@ -436,50 +436,50 @@ public class GodotFragment extends Fragment implements IDownloaderClient, GodotH
 
 	@CallSuper
 	@Override
-	public void onGodotSetupCompleted() {
+	public void onscardotSetupCompleted() {
 		if (parentHost != null) {
-			parentHost.onGodotSetupCompleted();
+			parentHost.onscardotSetupCompleted();
 		}
 	}
 
 	@CallSuper
 	@Override
-	public void onGodotMainLoopStarted() {
+	public void onscardotMainLoopStarted() {
 		if (parentHost != null) {
-			parentHost.onGodotMainLoopStarted();
+			parentHost.onscardotMainLoopStarted();
 		}
 	}
 
 	@Override
-	public void onGodotForceQuit(Godot instance) {
+	public void onscardotForceQuit(scardot instance) {
 		if (parentHost != null) {
-			parentHost.onGodotForceQuit(instance);
+			parentHost.onscardotForceQuit(instance);
 		}
 	}
 
 	@Override
-	public boolean onGodotForceQuit(int godotInstanceId) {
-		return parentHost != null && parentHost.onGodotForceQuit(godotInstanceId);
+	public boolean onscardotForceQuit(int godotInstanceId) {
+		return parentHost != null && parentHost.onscardotForceQuit(godotInstanceId);
 	}
 
 	@Override
-	public void onGodotRestartRequested(Godot instance) {
+	public void onscardotRestartRequested(scardot instance) {
 		if (parentHost != null) {
-			parentHost.onGodotRestartRequested(instance);
+			parentHost.onscardotRestartRequested(instance);
 		}
 	}
 
 	@Override
-	public int onNewGodotInstanceRequested(String[] args) {
+	public int onNewscardotInstanceRequested(String[] args) {
 		if (parentHost != null) {
-			return parentHost.onNewGodotInstanceRequested(args);
+			return parentHost.onNewscardotInstanceRequested(args);
 		}
 		return 0;
 	}
 
 	@Override
 	@CallSuper
-	public Set<GodotPlugin> getHostPlugins(Godot engine) {
+	public Set<scardotPlugin> getHostPlugins(scardot engine) {
 		if (parentHost != null) {
 			return parentHost.getHostPlugins(engine);
 		}

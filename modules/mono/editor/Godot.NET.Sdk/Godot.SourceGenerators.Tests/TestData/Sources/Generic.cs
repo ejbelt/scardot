@@ -1,6 +1,6 @@
-using Godot;
+using scardot;
 
-public partial class Generic<T> : GodotObject
+public partial class Generic<T> : scardotObject
 {
     private int _field;
 }

@@ -1,9 +1,9 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using Godot.NativeInterop;
+using scardot.NativeInterop;
 
-namespace Godot
+namespace scardot
 {
     /// <summary>
     /// Callable is a first class object which can be held in variables and passed to functions.
@@ -28,7 +28,7 @@ namespace Godot
     /// </example>
     public readonly partial struct Callable
     {
-        private readonly GodotObject _target;
+        private readonly scardotObject _target;
         private readonly StringName _method;
         private readonly Delegate _delegate;
         private readonly unsafe delegate* managed<object, NativeVariantPtrArgs, out godot_variant, void> _trampoline;
@@ -36,7 +36,7 @@ namespace Godot
         /// <summary>
         /// Object that contains the method.
         /// </summary>
-        public GodotObject Target => _target;
+        public scardotObject Target => _target;
 
         /// <summary>
         /// Name of the method that will be called.
@@ -60,7 +60,7 @@ namespace Godot
         /// </summary>
         /// <param name="target">Object that contains the method.</param>
         /// <param name="method">Name of the method that will be called.</param>
-        public unsafe Callable(GodotObject target, StringName method)
+        public unsafe Callable(scardotObject target, StringName method)
         {
             _target = target;
             _method = method;
@@ -71,7 +71,7 @@ namespace Godot
         private unsafe Callable(Delegate @delegate,
             delegate* managed<object, NativeVariantPtrArgs, out godot_variant, void> trampoline)
         {
-            _target = @delegate?.Target as GodotObject;
+            _target = @delegate?.Target as scardotObject;
             _method = null;
             _delegate = @delegate;
             _trampoline = trampoline;

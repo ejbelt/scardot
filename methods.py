@@ -10,7 +10,7 @@ from io import StringIO, TextIOWrapper
 from pathlib import Path
 from typing import Generator, List, Optional, Union
 
-# Get the "Godot" folder name ahead of time
+# Get the "scardot" folder name ahead of time
 base_folder_path = str(os.path.abspath(Path(__file__).parent)) + "/"
 base_folder_only = os.path.basename(os.path.normpath(base_folder_path))
 # Listing all the folders we have converted
@@ -218,8 +218,8 @@ def get_version_info(module_version_string="", silent=False):
 
     # For dev snapshots (alpha, beta, RC, etc.) we do not commit status change to Git,
     # so this define provides a way to override it without having to modify the source.
-    if os.getenv("GODOT_VERSION_STATUS") is not None:
-        version_info["status"] = str(os.getenv("GODOT_VERSION_STATUS"))
+    if os.getenv("SCARDOT_VERSION_STATUS") is not None:
+        version_info["status"] = str(os.getenv("SCARDOT_VERSION_STATUS"))
         if not silent:
             print(f"Using version status '{version_info['status']}', overriding the original '{version.status}'.")
 
@@ -344,11 +344,11 @@ def detect_modules(search_path, recursive=False):
 
     def is_engine(path):
         # Prevent recursively detecting modules in self and other
-        # Godot sources when using `custom_modules` build option.
+        # scardot sources when using `custom_modules` build option.
         version_path = os.path.join(path, "version.py")
         if os.path.exists(version_path):
             with open(version_path, "r", encoding="utf-8") as f:
-                if 'short_name = "godot"' in f.read():
+                if 'short_name = "sscardot"' in f.read():
                     return True
         return False
 
@@ -570,7 +570,7 @@ def detect_visual_c_compiler_version(tools_env):
     # "x86"           Native 32 bit compiler
     # "x86_amd64"     32 bit Cross Compiler for 64 bit
 
-    # There are other architectures, but Godot does not support them currently, so this function does not detect arm/amd64_arm
+    # There are other architectures, but scardot does not support them currently, so this function does not detect arm/amd64_arm
     # and similar architectures/compilers
 
     # Set chosen compiler to "not detected"
@@ -1049,7 +1049,7 @@ def dump(env):
 #
 # To generate AND build from the command line:
 #   scons vsproj=yes vsproj_gen_only=no
-def generate_vs_project(env, original_args, project_name="godot"):
+def generate_vs_project(env, original_args, project_name="sscardot"):
     # Augmented glob_recursive that also fills the dirs argument with traversed directories that have content.
     def glob_recursive_2(pattern, dirs, node="."):
         from SCons import Node
@@ -1331,7 +1331,7 @@ def generate_vs_project(env, original_args, project_name="godot"):
                 vsconf = f'{target}|{a["platform"]}'
                 break
 
-        condition = "'$(GodotConfiguration)|$(GodotPlatform)'=='" + vsconf + "'"
+        condition = "'$(scardotConfiguration)|$(scardotPlatform)'=='" + vsconf + "'"
         itemlist = {}
         for item in activeItems:
             key = os.path.dirname(item).replace("\\", "_")
@@ -1344,7 +1344,7 @@ def generate_vs_project(env, original_args, project_name="godot"):
             properties.append(
                 "<ActiveProjectItemList_%s>;%s;</ActiveProjectItemList_%s>" % (x, ";".join(itemlist[x]), x)
             )
-        output = f'bin\\godot{env["PROGSUFFIX"]}'
+        output = f'bin\\sscardot{env["PROGSUFFIX"]}'
 
         with open("misc/msvs/props.template", "r", encoding="utf-8") as file:
             props_template = file.read()
@@ -1437,43 +1437,43 @@ def generate_vs_project(env, original_args, project_name="godot"):
     section1 = []
     section2 = []
     for conf in confs:
-        godot_platform = conf["platform"]
+        sscardot_platform = conf["platform"]
         for p in conf["arches"]:
             sln_plat = p["platform"]
             proj_plat = sln_plat
-            godot_arch = p["architecture"]
+            sscardot_arch = p["architecture"]
 
             # Redirect editor configurations for non-Windows platforms to the Windows one, so the solution has all the permutations
             # and VS doesn't complain about missing project configurations.
             # These configurations are disabled, so they show up but won't build.
-            if godot_platform != "windows":
+            if sscardot_platform != "windows":
                 section1 += [f"editor|{sln_plat} = editor|{proj_plat}"]
                 section2 += [
                     f"{{{proj_uuid}}}.editor|{proj_plat}.ActiveCfg = editor|{proj_plat}",
                 ]
 
             for t in conf["targets"]:
-                godot_target = t
+                sscardot_target = t
 
                 # Windows x86 is a special little flower that requires a project platform == Win32 but a solution platform == x86.
-                if godot_platform == "windows" and godot_target == "editor" and godot_arch == "x86_32":
+                if sscardot_platform == "windows" and sscardot_target == "editor" and sscardot_arch == "x86_32":
                     sln_plat = "x86"
 
                 configurations += [
-                    f'<ProjectConfiguration Include="{godot_target}|{proj_plat}">',
-                    f"  <Configuration>{godot_target}</Configuration>",
+                    f'<ProjectConfiguration Include="{sscardot_target}|{proj_plat}">',
+                    f"  <Configuration>{sscardot_target}</Configuration>",
                     f"  <Platform>{proj_plat}</Platform>",
                     "</ProjectConfiguration>",
                 ]
 
                 properties += [
-                    f"<PropertyGroup Condition=\"'$(Configuration)|$(Platform)'=='{godot_target}|{proj_plat}'\">",
-                    f"  <GodotConfiguration>{godot_target}</GodotConfiguration>",
-                    f"  <GodotPlatform>{proj_plat}</GodotPlatform>",
+                    f"<PropertyGroup Condition=\"'$(Configuration)|$(Platform)'=='{sscardot_target}|{proj_plat}'\">",
+                    f"  <scardotConfiguration>{sscardot_target}</scardotConfiguration>",
+                    f"  <scardotPlatform>{proj_plat}</scardotPlatform>",
                     "</PropertyGroup>",
                 ]
 
-                if godot_platform != "windows":
+                if sscardot_platform != "windows":
                     configurations += [
                         f'<ProjectConfiguration Include="editor|{proj_plat}">',
                         "  <Configuration>editor</Configuration>",
@@ -1483,21 +1483,21 @@ def generate_vs_project(env, original_args, project_name="godot"):
 
                     properties += [
                         f"<PropertyGroup Condition=\"'$(Configuration)|$(Platform)'=='editor|{proj_plat}'\">",
-                        "  <GodotConfiguration>editor</GodotConfiguration>",
-                        f"  <GodotPlatform>{proj_plat}</GodotPlatform>",
+                        "  <scardotConfiguration>editor</scardotConfiguration>",
+                        f"  <scardotPlatform>{proj_plat}</scardotPlatform>",
                         "</PropertyGroup>",
                     ]
 
-                p = f"{project_name}.{godot_platform}.{godot_target}.{godot_arch}.generated.props"
+                p = f"{project_name}.{sscardot_platform}.{sscardot_target}.{sscardot_arch}.generated.props"
                 imports += [
                     f'<Import Project="$(MSBuildProjectDirectory)\\{p}" Condition="Exists(\'$(MSBuildProjectDirectory)\\{p}\')"/>'
                 ]
 
-                section1 += [f"{godot_target}|{sln_plat} = {godot_target}|{sln_plat}"]
+                section1 += [f"{sscardot_target}|{sln_plat} = {sscardot_target}|{sln_plat}"]
 
                 section2 += [
-                    f"{{{proj_uuid}}}.{godot_target}|{sln_plat}.ActiveCfg = {godot_target}|{proj_plat}",
-                    f"{{{proj_uuid}}}.{godot_target}|{sln_plat}.Build.0 = {godot_target}|{proj_plat}",
+                    f"{{{proj_uuid}}}.{sscardot_target}|{sln_plat}.ActiveCfg = {sscardot_target}|{proj_plat}",
+                    f"{{{proj_uuid}}}.{sscardot_target}|{sln_plat}.Build.0 = {sscardot_target}|{proj_plat}",
                 ]
 
     # Add an extra import for a local user props file at the end, so users can add more overrides.
@@ -1542,10 +1542,10 @@ def generate_copyright_header(filename: str) -> str:
 /*  %s*/
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                             SCARDOT ENGINE                               */
+/*                        https://sscardotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */

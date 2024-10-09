@@ -1,8 +1,8 @@
 using System;
 using System.Runtime.CompilerServices;
-using Godot.NativeInterop;
+using scardot.NativeInterop;
 
-namespace Godot;
+namespace scardot;
 
 #nullable enable
 

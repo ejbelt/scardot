@@ -2,10 +2,10 @@
 /*  godot_slider_joint_3d.h                                               */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -28,11 +28,11 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#ifndef GODOT_SLIDER_JOINT_3D_H
-#define GODOT_SLIDER_JOINT_3D_H
+#ifndef SCARDOT_SLIDER_JOINT_3D_H
+#define SCARDOT_SLIDER_JOINT_3D_H
 
 /*
-Adapted to Godot from the Bullet library.
+Adapted to scardot from the Bullet library.
 */
 
 #include "servers/physics_3d/godot_joint_3d.h"
@@ -65,15 +65,15 @@ April 04, 2008
 
 //-----------------------------------------------------------------------------
 
-class GodotSliderJoint3D : public GodotJoint3D {
+class scardotSliderJoint3D : public scardotJoint3D {
 protected:
 	union {
 		struct {
-			GodotBody3D *A;
-			GodotBody3D *B;
+			scardotBody3D *A;
+			scardotBody3D *B;
 		};
 
-		GodotBody3D *_arr[2] = { nullptr, nullptr };
+		scardotBody3D *_arr[2] = { nullptr, nullptr };
 	};
 
 	Transform3D m_frameInA;
@@ -114,10 +114,10 @@ protected:
 	bool m_solveLinLim = false;
 	bool m_solveAngLim = false;
 
-	GodotJacobianEntry3D m_jacLin[3] = {};
+	scardotJacobianEntry3D m_jacLin[3] = {};
 	real_t m_jacLinDiagABInv[3] = {};
 
-	GodotJacobianEntry3D m_jacAng[3] = {};
+	scardotJacobianEntry3D m_jacAng[3] = {};
 
 	real_t m_timeStep = 0.0;
 	Transform3D m_calculatedTransformA;
@@ -149,13 +149,13 @@ protected:
 
 public:
 	// constructors
-	GodotSliderJoint3D(GodotBody3D *rbA, GodotBody3D *rbB, const Transform3D &frameInA, const Transform3D &frameInB);
+	scardotSliderJoint3D(scardotBody3D *rbA, scardotBody3D *rbB, const Transform3D &frameInA, const Transform3D &frameInB);
 	//SliderJointSW();
 	// overrides
 
 	// access
-	const GodotBody3D *getRigidBodyA() const { return A; }
-	const GodotBody3D *getRigidBodyB() const { return B; }
+	const scardotBody3D *getRigidBodyA() const { return A; }
+	const scardotBody3D *getRigidBodyB() const { return B; }
 	const Transform3D &getCalculatedTransformA() const { return m_calculatedTransformA; }
 	const Transform3D &getCalculatedTransformB() const { return m_calculatedTransformB; }
 	const Transform3D &getFrameOffsetA() const { return m_frameInA; }
@@ -243,4 +243,4 @@ public:
 	virtual PhysicsServer3D::JointType get_type() const override { return PhysicsServer3D::JOINT_TYPE_SLIDER; }
 };
 
-#endif // GODOT_SLIDER_JOINT_3D_H
+#endif // SCARDOT_SLIDER_JOINT_3D_H

@@ -2,10 +2,10 @@
 /*  godot_status_item.h                                                   */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -28,8 +28,8 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#ifndef GODOT_STATUS_ITEM_H
-#define GODOT_STATUS_ITEM_H
+#ifndef SCARDOT_STATUS_ITEM_H
+#define SCARDOT_STATUS_ITEM_H
 
 #include "core/input/input_enums.h"
 #include "core/variant/callable.h"
@@ -37,7 +37,7 @@
 #import <AppKit/AppKit.h>
 #import <Foundation/Foundation.h>
 
-@interface GodotStatusItemDelegate : NSObject {
+@interface scardotStatusItemDelegate : NSObject {
 	Callable cb;
 }
 
@@ -47,4 +47,4 @@
 
 @end
 
-#endif // GODOT_STATUS_ITEM_H
+#endif // SCARDOT_STATUS_ITEM_H

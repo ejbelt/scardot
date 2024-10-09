@@ -1,5 +1,5 @@
-using Godot;
-using Godot.NativeInterop;
+using scardot;
+using scardot.NativeInterop;
 
 partial struct OuterClass
 {
@@ -7,15 +7,15 @@ partial class NestedClass
 {
     /// <inheritdoc/>
     [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-    protected override void SaveGodotObjectData(global::Godot.Bridge.GodotSerializationInfo info)
+    protected override void SavescardotObjectData(global::scardot.Bridge.scardotSerializationInfo info)
     {
-        base.SaveGodotObjectData(info);
+        base.SavescardotObjectData(info);
     }
     /// <inheritdoc/>
     [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-    protected override void RestoreGodotObjectData(global::Godot.Bridge.GodotSerializationInfo info)
+    protected override void RestorescardotObjectData(global::scardot.Bridge.scardotSerializationInfo info)
     {
-        base.RestoreGodotObjectData(info);
+        base.RestorescardotObjectData(info);
     }
 }
 }

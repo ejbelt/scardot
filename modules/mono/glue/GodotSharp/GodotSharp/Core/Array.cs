@@ -4,15 +4,15 @@ using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using Godot.NativeInterop;
+using scardot.NativeInterop;
 using System.Diagnostics;
 
 #nullable enable
 
-namespace Godot.Collections
+namespace scardot.Collections
 {
     /// <summary>
-    /// Wrapper around Godot's Array class, an array of Variant
+    /// Wrapper around scardot's Array class, an array of Variant
     /// typed elements allocated in the engine in C++. Useful when
     /// interfacing with the engine. Otherwise prefer .NET collections
     /// such as <see cref="System.Array"/> or <see cref="List{T}"/>.
@@ -47,7 +47,7 @@ namespace Godot.Collections
         /// The <paramref name="collection"/> is <see langword="null"/>.
         /// </exception>
         /// <param name="collection">The collection of elements to construct from.</param>
-        /// <returns>A new Godot Array.</returns>
+        /// <returns>A new scardot Array.</returns>
         public Array(IEnumerable<Variant> collection) : this()
         {
             if (collection == null)
@@ -64,7 +64,7 @@ namespace Godot.Collections
         /// The <paramref name="array"/> is <see langword="null"/>.
         /// </exception>
         /// <param name="array">The objects to put in the new array.</param>
-        /// <returns>A new Godot Array.</returns>
+        /// <returns>A new scardot Array.</returns>
         public Array(Variant[] array)
         {
             if (array == null)
@@ -87,7 +87,7 @@ namespace Godot.Collections
         /// <exception cref="ArgumentNullException">
         /// The <paramref name="array"/> is <see langword="null"/>.
         /// </exception>
-        /// <returns>A new Godot Array.</returns>
+        /// <returns>A new scardot Array.</returns>
         public Array(Span<StringName> array)
         {
             if (array == null)
@@ -110,7 +110,7 @@ namespace Godot.Collections
         /// <exception cref="ArgumentNullException">
         /// The <paramref name="array"/> is <see langword="null"/>.
         /// </exception>
-        /// <returns>A new Godot Array.</returns>
+        /// <returns>A new scardot Array.</returns>
         public Array(Span<NodePath> array)
         {
             if (array == null)
@@ -133,7 +133,7 @@ namespace Godot.Collections
         /// <exception cref="ArgumentNullException">
         /// The <paramref name="array"/> is <see langword="null"/>.
         /// </exception>
-        /// <returns>A new Godot Array.</returns>
+        /// <returns>A new scardot Array.</returns>
         public Array(Span<Rid> array)
         {
             if (array == null)
@@ -160,8 +160,8 @@ namespace Godot.Collections
         /// <exception cref="ArgumentNullException">
         /// The <paramref name="array"/> is <see langword="null"/>.
         /// </exception>
-        /// <returns>A new Godot Array.</returns>
-        public Array(ReadOnlySpan<GodotObject> array)
+        /// <returns>A new scardot Array.</returns>
+        public Array(ReadOnlySpan<scardotObject> array)
         {
             if (array == null)
                 throw new ArgumentNullException(nameof(array));
@@ -221,17 +221,17 @@ namespace Godot.Collections
         /// the original array. If <see langword="false"/>, a shallow copy is made and
         /// references to the original nested arrays and dictionaries are kept, so that
         /// modifying a sub-array or dictionary in the copy will also impact those
-        /// referenced in the source array. Note that any <see cref="GodotObject"/> derived
+        /// referenced in the source array. Note that any <see cref="scardotObject"/> derived
         /// elements will be shallow copied regardless of the <paramref name="deep"/>
         /// setting.
         /// </summary>
         /// <param name="deep">If <see langword="true"/>, performs a deep copy.</param>
-        /// <returns>A new Godot Array.</returns>
+        /// <returns>A new scardot Array.</returns>
         public Array Duplicate(bool deep = false)
         {
             godot_array newArray;
             var self = (godot_array)NativeValue;
-            NativeFuncs.godotsharp_array_duplicate(ref self, deep.ToGodotBool(), out newArray);
+            NativeFuncs.godotsharp_array_duplicate(ref self, deep.ToscardotBool(), out newArray);
             return CreateTakingOwnershipOfDisposableValue(newArray);
         }
 
@@ -239,14 +239,14 @@ namespace Godot.Collections
         /// Assigns the given value to all elements in the array. This can typically be
         /// used together with <see cref="Resize(int)"/> to create an array with a given
         /// size and initialized elements.
-        /// Note: If <paramref name="value"/> is of a reference type (<see cref="GodotObject"/>
+        /// Note: If <paramref name="value"/> is of a reference type (<see cref="scardotObject"/>
         /// derived, <see cref="Array"/> or <see cref="Dictionary"/>, etc.) then the array
         /// is filled with the references to the same object, i.e. no duplicates are
         /// created.
         /// </summary>
         /// <example>
         /// <code>
-        /// var array = new Godot.Collections.Array();
+        /// var array = new scardot.Collections.Array();
         /// array.Resize(10);
         /// array.Fill(0); // Initialize the 10 elements to 0.
         /// </code>
@@ -297,7 +297,7 @@ namespace Godot.Collections
         /// </summary>
         /// <example>
         /// <code>
-        /// var array = new Godot.Collections.Array { 1, 2, 3, 4 };
+        /// var array = new scardot.Collections.Array { 1, 2, 3, 4 };
         /// GD.Print(array.PickRandom()); // Prints either of the four numbers.
         /// </code>
         /// </example>
@@ -441,7 +441,7 @@ namespace Godot.Collections
         {
             godot_array newArray;
             var self = (godot_array)NativeValue;
-            NativeFuncs.godotsharp_array_slice(ref self, start, end, step, deep.ToGodotBool(), out newArray);
+            NativeFuncs.godotsharp_array_slice(ref self, start, end, step, deep.ToscardotBool(), out newArray);
             return CreateTakingOwnershipOfDisposableValue(newArray);
         }
 
@@ -457,7 +457,7 @@ namespace Godot.Collections
         /// </summary>
         /// <example>
         /// <code>
-        /// var strings = new Godot.Collections.Array { "string1", "string2", "string10", "string11" };
+        /// var strings = new scardot.Collections.Array { "string1", "string2", "string10", "string11" };
         /// strings.Sort();
         /// GD.Print(strings); // Prints [string1, string10, string11, string2]
         /// </code>
@@ -480,7 +480,7 @@ namespace Godot.Collections
         /// </summary>
         /// <param name="left">The first array.</param>
         /// <param name="right">The second array.</param>
-        /// <returns>A new Godot Array with the contents of both arrays.</returns>
+        /// <returns>A new scardot Array with the contents of both arrays.</returns>
         public static Array operator +(Array left, Array right)
         {
             if (left == null)
@@ -572,7 +572,7 @@ namespace Godot.Collections
             if (collection == null)
                 throw new ArgumentNullException(nameof(collection), "Value cannot be null.");
 
-            // If the collection is another Godot Array, we can add the items
+            // If the collection is another scardot Array, we can add the items
             // with a single interop call.
             if (collection is Array array)
             {
@@ -683,7 +683,7 @@ namespace Godot.Collections
         /// </summary>
         /// <example>
         /// <code>
-        /// var arr = new Godot.Collections.Array { "inside", 7 };
+        /// var arr = new scardot.Collections.Array { "inside", 7 };
         /// GD.Print(arr.Contains("inside")); // True
         /// GD.Print(arr.Contains("outside")); // False
         /// GD.Print(arr.Contains(7)); // True
@@ -1031,13 +1031,13 @@ namespace Godot.Collections
         }
     }
 
-    internal interface IGenericGodotArray
+    internal interface IGenericscardotArray
     {
         public Array UnderlyingArray { get; }
     }
 
     /// <summary>
-    /// Typed wrapper around Godot's Array class, an array of Variant
+    /// Typed wrapper around scardot's Array class, an array of Variant
     /// typed elements allocated in the engine in C++. Useful when
     /// interfacing with the engine. Otherwise prefer .NET collections
     /// such as arrays or <see cref="List{T}"/>.
@@ -1052,7 +1052,7 @@ namespace Godot.Collections
         IReadOnlyList<T>,
         ICollection<T>,
         IEnumerable<T>,
-        IGenericGodotArray
+        IGenericscardotArray
     {
         private static godot_variant ToVariantFunc(in Array<T> godotArray) =>
             VariantUtils.CreateFromArray(godotArray);
@@ -1068,7 +1068,7 @@ namespace Godot.Collections
 
         private readonly Array _underlyingArray;
 
-        Array IGenericGodotArray.UnderlyingArray => _underlyingArray;
+        Array IGenericscardotArray.UnderlyingArray => _underlyingArray;
 
         internal ref godot_array.movable NativeValue
         {
@@ -1079,7 +1079,7 @@ namespace Godot.Collections
         /// <summary>
         /// Constructs a new empty <see cref="Array{T}"/>.
         /// </summary>
-        /// <returns>A new Godot Array.</returns>
+        /// <returns>A new scardot Array.</returns>
         public Array()
         {
             _underlyingArray = new Array();
@@ -1092,7 +1092,7 @@ namespace Godot.Collections
         /// The <paramref name="collection"/> is <see langword="null"/>.
         /// </exception>
         /// <param name="collection">The collection of elements to construct from.</param>
-        /// <returns>A new Godot Array.</returns>
+        /// <returns>A new scardot Array.</returns>
         public Array(IEnumerable<T> collection)
         {
             if (collection == null)
@@ -1111,7 +1111,7 @@ namespace Godot.Collections
         /// The <paramref name="array"/> is <see langword="null"/>.
         /// </exception>
         /// <param name="array">The items to put in the new array.</param>
-        /// <returns>A new Godot Array.</returns>
+        /// <returns>A new scardot Array.</returns>
         public Array(T[] array)
         {
             if (array == null)
@@ -1130,7 +1130,7 @@ namespace Godot.Collections
         /// The <paramref name="array"/> is <see langword="null"/>.
         /// </exception>
         /// <param name="array">The untyped array to construct from.</param>
-        /// <returns>A new Godot Array.</returns>
+        /// <returns>A new scardot Array.</returns>
         public Array(Array array)
         {
             if (array == null)
@@ -1147,7 +1147,7 @@ namespace Godot.Collections
         /// Converts this typed <see cref="Array{T}"/> to an untyped <see cref="Array"/>.
         /// </summary>
         /// <param name="from">The typed array to convert.</param>
-        /// <returns>A new Godot Array, or <see langword="null"/> if <see paramref="from"/> was null.</returns>
+        /// <returns>A new scardot Array, or <see langword="null"/> if <see paramref="from"/> was null.</returns>
         [return: NotNullIfNotNull("from")]
         public static explicit operator Array?(Array<T>? from)
         {
@@ -1158,7 +1158,7 @@ namespace Godot.Collections
         /// Duplicates this <see cref="Array{T}"/>.
         /// </summary>
         /// <param name="deep">If <see langword="true"/>, performs a deep copy.</param>
-        /// <returns>A new Godot Array.</returns>
+        /// <returns>A new scardot Array.</returns>
         public Array<T> Duplicate(bool deep = false)
         {
             return new Array<T>(_underlyingArray.Duplicate(deep));
@@ -1168,14 +1168,14 @@ namespace Godot.Collections
         /// Assigns the given value to all elements in the array. This can typically be
         /// used together with <see cref="Resize(int)"/> to create an array with a given
         /// size and initialized elements.
-        /// Note: If <paramref name="value"/> is of a reference type (<see cref="GodotObject"/>
+        /// Note: If <paramref name="value"/> is of a reference type (<see cref="scardotObject"/>
         /// derived, <see cref="Array"/> or <see cref="Dictionary"/>, etc.) then the array
         /// is filled with the references to the same object, i.e. no duplicates are
         /// created.
         /// </summary>
         /// <example>
         /// <code>
-        /// var array = new Godot.Collections.Array&lt;int&gt;();
+        /// var array = new scardot.Collections.Array&lt;int&gt;();
         /// array.Resize(10);
         /// array.Fill(0); // Initialize the 10 elements to 0.
         /// </code>
@@ -1226,7 +1226,7 @@ namespace Godot.Collections
         /// </summary>
         /// <example>
         /// <code>
-        /// var array = new Godot.Collections.Array&lt;int&gt; { 1, 2, 3, 4 };
+        /// var array = new scardot.Collections.Array&lt;int&gt; { 1, 2, 3, 4 };
         /// GD.Print(array.PickRandom()); // Prints either of the four numbers.
         /// </code>
         /// </example>
@@ -1361,7 +1361,7 @@ namespace Godot.Collections
         /// </summary>
         /// <example>
         /// <code>
-        /// var strings = new Godot.Collections.Array&lt;string&gt; { "string1", "string2", "string10", "string11" };
+        /// var strings = new scardot.Collections.Array&lt;string&gt; { "string1", "string2", "string10", "string11" };
         /// strings.Sort();
         /// GD.Print(strings); // Prints [string1, string10, string11, string2]
         /// </code>
@@ -1381,7 +1381,7 @@ namespace Godot.Collections
         /// </summary>
         /// <param name="left">The first array.</param>
         /// <param name="right">The second array.</param>
-        /// <returns>A new Godot Array with the contents of both arrays.</returns>
+        /// <returns>A new scardot Array with the contents of both arrays.</returns>
         public static Array<T> operator +(Array<T> left, Array<T> right)
         {
             if (left == null)
@@ -1621,7 +1621,7 @@ namespace Godot.Collections
             if (collection == null)
                 throw new ArgumentNullException(nameof(collection), "Value cannot be null.");
 
-            // If the collection is another Godot Array, we can add the items
+            // If the collection is another scardot Array, we can add the items
             // with a single interop call.
             if (collection is Array array)
             {
@@ -1744,7 +1744,7 @@ namespace Godot.Collections
         /// </summary>
         /// <example>
         /// <code>
-        /// var arr = new Godot.Collections.Array&lt;string&gt; { "inside", "7" };
+        /// var arr = new scardot.Collections.Array&lt;string&gt; { "inside", "7" };
         /// GD.Print(arr.Contains("inside")); // True
         /// GD.Print(arr.Contains("outside")); // False
         /// GD.Print(arr.Contains(7)); // False
@@ -1847,7 +1847,7 @@ namespace Godot.Collections
         public static implicit operator Variant(Array<T> from) => Variant.CreateFrom(from);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator Array<T>(Variant from) => from.AsGodotArray<T>();
+        public static explicit operator Array<T>(Variant from) => from.AsscardotArray<T>();
 
         private void ThrowIfReadOnly()
         {

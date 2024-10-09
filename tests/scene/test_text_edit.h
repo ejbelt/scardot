@@ -2,10 +2,10 @@
 /*  test_text_edit.h                                                      */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -6344,7 +6344,7 @@ TEST_CASE("[SceneTree][TextEdit] versioning") {
 	CHECK(text_edit->get_saved_version() == 0);
 
 	SUBCASE("[TextEdit] versioning selection") {
-		text_edit->set_text("Godot Engine\nWaiting for Godot\nTest Text for multi carat\nLine 4 Text");
+		text_edit->set_text("scardot Engine\nWaiting for scardot\nTest Text for multi carat\nLine 4 Text");
 		text_edit->set_multiple_carets_enabled(true);
 
 		text_edit->remove_secondary_carets();

@@ -1,7 +1,7 @@
-using Godot;
-using GodotTools.Internals;
+using scardot;
+using scardotTools.Internals;
 
-namespace GodotTools.Inspector
+namespace scardotTools.Inspector
 {
     public partial class InspectorOutOfSyncWarning : HBoxContainer
     {

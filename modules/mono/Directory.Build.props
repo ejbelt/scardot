@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <GodotSdkPackageVersionsFilePath>$(MSBuildThisFileDirectory)\SdkPackageVersions.props</GodotSdkPackageVersionsFilePath>
+    <scardotSdkPackageVersionsFilePath>$(MSBuildThisFileDirectory)\SdkPackageVersions.props</scardotSdkPackageVersionsFilePath>
   </PropertyGroup>
-  <Import Project="$(GodotSdkPackageVersionsFilePath)" />
+  <Import Project="$(scardotSdkPackageVersionsFilePath)" />
 </Project>

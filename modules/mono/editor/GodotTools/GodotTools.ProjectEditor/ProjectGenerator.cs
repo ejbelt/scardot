@@ -4,13 +4,13 @@ using System.IO;
 using System.Text;
 using Microsoft.Build.Construction;
 using Microsoft.Build.Evaluation;
-using GodotTools.Shared;
+using scardotTools.Shared;
 
-namespace GodotTools.ProjectEditor
+namespace scardotTools.ProjectEditor
 {
     public static class ProjectGenerator
     {
-        public static string GodotSdkAttrValue => $"Godot.NET.Sdk/{GeneratedGodotNupkgsVersions.GodotNETSdk}";
+        public static string scardotSdkAttrValue => $"scardot.NET.Sdk/{GeneratedscardotNupkgsVersions.scardotNETSdk}";
 
         public static ProjectRootElement GenGameProject(string name)
         {
@@ -19,16 +19,16 @@ namespace GodotTools.ProjectEditor
 
             var root = ProjectRootElement.Create(NewProjectFileOptions.None);
 
-            root.Sdk = GodotSdkAttrValue;
+            root.Sdk = scardotSdkAttrValue;
 
             var mainGroup = root.AddPropertyGroup();
             mainGroup.AddProperty("TargetFramework", "net6.0");
 
             var net7 = mainGroup.AddProperty("TargetFramework", "net7.0");
-            net7.Condition = " '$(GodotTargetPlatform)' == 'android' ";
+            net7.Condition = " '$(scardotTargetPlatform)' == 'android' ";
 
             var net8 = mainGroup.AddProperty("TargetFramework", "net8.0");
-            net8.Condition = " '$(GodotTargetPlatform)' == 'ios' ";
+            net8.Condition = " '$(scardotTargetPlatform)' == 'ios' ";
 
             mainGroup.AddProperty("EnableDynamicLoading", "true");
 

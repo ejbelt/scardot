@@ -2,10 +2,10 @@
 /*  gradle_export_util.cpp                                                */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -257,7 +257,7 @@ String _get_screen_sizes_tag(const Ref<EditorExportPreset> &p_preset) {
 String _get_activity_tag(const Ref<EditorExportPlatform> &p_export_platform, const Ref<EditorExportPreset> &p_preset, bool p_debug) {
 	String orientation = _get_android_orientation_label(DisplayServer::ScreenOrientation(int(GLOBAL_GET("display/window/handheld/orientation"))));
 	String manifest_activity_text = vformat(
-			"        <activity android:name=\"com.godot.game.GodotApp\" "
+			"        <activity android:name=\"com.godot.game.scardotApp\" "
 			"tools:replace=\"android:screenOrientation,android:excludeFromRecents,android:resizeableActivity\" "
 			"tools:node=\"mergeOnlyAttributes\" "
 			"android:excludeFromRecents=\"%s\" "

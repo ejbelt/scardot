@@ -2,10 +2,10 @@
 /*  webxr_interface_js.cpp                                                */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -746,7 +746,7 @@ void WebXRInterfaceJS::_update_input_source(int p_input_source_id) {
 	if (p_input_source_id < 2) {
 		Ref<XRHandTracker> hand_tracker = hand_trackers[p_input_source_id];
 		if (has_hand_data) {
-			// Transform orientations to match Godot Humanoid skeleton.
+			// Transform orientations to match scardot Humanoid skeleton.
 			const Basis bone_adjustment(
 					Vector3(-1.0, 0.0, 0.0),
 					Vector3(0.0, 0.0, -1.0),

@@ -2,10 +2,10 @@
 /*  godot_window_delegate.mm                                              */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -34,7 +34,7 @@
 #include "godot_button_view.h"
 #include "godot_window.h"
 
-@implementation GodotWindowDelegate
+@implementation scardotWindowDelegate
 
 - (void)setWindowID:(DisplayServer::WindowID)wid {
 	window_id = wid;
@@ -305,7 +305,7 @@
 	DisplayServerMacOS::WindowData &wd = ds->get_window(window_id);
 
 	if (wd.window_button_view) {
-		[(GodotButtonView *)wd.window_button_view displayButtons];
+		[(scardotButtonView *)wd.window_button_view displayButtons];
 	}
 
 	if (ds->mouse_get_mode() == DisplayServer::MOUSE_MODE_CAPTURED) {
@@ -334,7 +334,7 @@
 	DisplayServerMacOS::WindowData &wd = ds->get_window(window_id);
 
 	if (wd.window_button_view) {
-		[(GodotButtonView *)wd.window_button_view displayButtons];
+		[(scardotButtonView *)wd.window_button_view displayButtons];
 	}
 
 	wd.focused = false;

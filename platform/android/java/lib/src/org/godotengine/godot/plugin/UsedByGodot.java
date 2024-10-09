@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  UsedByGodot.java                                                      */
+/*  UsedByscardot.java                                                      */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -36,10 +36,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Annotation to indicate a method is being invoked from the Godot game logic.
+ * Annotation to indicate a method is being invoked from the scardot game logic.
  *
  * At runtime, annotated plugin methods are detected and automatically registered.
  */
 @Target({ ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface UsedByGodot {}
+public @interface UsedByscardot {}

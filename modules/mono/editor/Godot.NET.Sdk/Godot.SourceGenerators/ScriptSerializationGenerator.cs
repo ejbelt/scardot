@@ -5,7 +5,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 
-namespace Godot.SourceGenerators
+namespace scardot.SourceGenerators
 {
     [Generator]
     public class ScriptSerializationGenerator : ISourceGenerator
@@ -16,7 +16,7 @@ namespace Godot.SourceGenerators
 
         public void Execute(GeneratorExecutionContext context)
         {
-            if (context.IsGodotSourceGeneratorDisabled("ScriptSerialization"))
+            if (context.IsscardotSourceGeneratorDisabled("ScriptSerialization"))
                 return;
 
             INamedTypeSymbol[] godotClasses = context
@@ -24,7 +24,7 @@ namespace Godot.SourceGenerators
                 .SelectMany(tree =>
                     tree.GetRoot().DescendantNodes()
                         .OfType<ClassDeclarationSyntax>()
-                        .SelectGodotScriptClasses(context.Compilation)
+                        .SelectscardotScriptClasses(context.Compilation)
                         // Report and skip non-partial classes
                         .Where(x =>
                         {
@@ -51,12 +51,12 @@ namespace Godot.SourceGenerators
 
                 foreach (var godotClass in godotClasses)
                 {
-                    VisitGodotScriptClass(context, typeCache, godotClass);
+                    VisitscardotScriptClass(context, typeCache, godotClass);
                 }
             }
         }
 
-        private static void VisitGodotScriptClass(
+        private static void VisitscardotScriptClass(
             GeneratorExecutionContext context,
             MarshalUtils.TypeCache typeCache,
             INamedTypeSymbol symbol
@@ -75,8 +75,8 @@ namespace Godot.SourceGenerators
 
             var source = new StringBuilder();
 
-            source.Append("using Godot;\n");
-            source.Append("using Godot.NativeInterop;\n");
+            source.Append("using scardot;\n");
+            source.Append("using scardot.NativeInterop;\n");
             source.Append("\n");
 
             if (hasNamespace)
@@ -121,13 +121,13 @@ namespace Godot.SourceGenerators
                 .Where(s => !s.IsStatic && s.Kind == SymbolKind.Field && !s.IsImplicitlyDeclared)
                 .Cast<IFieldSymbol>();
 
-            // TODO: We should still restore read-only properties after reloading assembly. Two possible ways: reflection or turn RestoreGodotObjectData into a constructor overload.
-            // Ignore properties without a getter, without a setter or with an init-only setter. Godot properties must be both readable and writable.
+            // TODO: We should still restore read-only properties after reloading assembly. Two possible ways: reflection or turn RestorescardotObjectData into a constructor overload.
+            // Ignore properties without a getter, without a setter or with an init-only setter. scardot properties must be both readable and writable.
             var godotClassProperties = propertySymbols.Where(property => !(property.IsReadOnly || property.IsWriteOnly || property.SetMethod!.IsInitOnly))
-                .WhereIsGodotCompatibleType(typeCache)
+                .WhereIsscardotCompatibleType(typeCache)
                 .ToArray();
             var godotClassFields = fieldSymbols.Where(property => !property.IsReadOnly)
-                .WhereIsGodotCompatibleType(typeCache)
+                .WhereIsscardotCompatibleType(typeCache)
                 .ToArray();
 
             var signalDelegateSymbols = members
@@ -135,9 +135,9 @@ namespace Godot.SourceGenerators
                 .Cast<INamedTypeSymbol>()
                 .Where(namedTypeSymbol => namedTypeSymbol.TypeKind == TypeKind.Delegate)
                 .Where(s => s.GetAttributes()
-                    .Any(a => a.AttributeClass?.IsGodotSignalAttribute() ?? false));
+                    .Any(a => a.AttributeClass?.IsscardotSignalAttribute() ?? false));
 
-            List<GodotSignalDelegateData> godotSignalDelegates = new();
+            List<scardotSignalDelegateData> godotSignalDelegates = new();
 
             foreach (var signalDelegateSymbol in signalDelegateSymbols)
             {
@@ -149,7 +149,7 @@ namespace Godot.SourceGenerators
                     signalName.Length - ScriptSignalsGenerator.SignalDelegateSuffix.Length);
 
                 var invokeMethodData = signalDelegateSymbol
-                    .DelegateInvokeMethod?.HasGodotCompatibleSignature(typeCache);
+                    .DelegateInvokeMethod?.HasscardotCompatibleSignature(typeCache);
 
                 if (invokeMethodData == null)
                     continue;
@@ -160,8 +160,8 @@ namespace Godot.SourceGenerators
             source.Append("    /// <inheritdoc/>\n");
             source.Append("    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]\n");
             source.Append(
-                "    protected override void SaveGodotObjectData(global::Godot.Bridge.GodotSerializationInfo info)\n    {\n");
-            source.Append("        base.SaveGodotObjectData(info);\n");
+                "    protected override void SavescardotObjectData(global::scardot.Bridge.scardotSerializationInfo info)\n    {\n");
+            source.Append("        base.SavescardotObjectData(info);\n");
 
             // Save properties
 
@@ -209,8 +209,8 @@ namespace Godot.SourceGenerators
             source.Append("    /// <inheritdoc/>\n");
             source.Append("    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]\n");
             source.Append(
-                "    protected override void RestoreGodotObjectData(global::Godot.Bridge.GodotSerializationInfo info)\n    {\n");
-            source.Append("        base.RestoreGodotObjectData(info);\n");
+                "    protected override void RestorescardotObjectData(global::scardot.Bridge.scardotSerializationInfo info)\n    {\n");
+            source.Append("        base.RestorescardotObjectData(info);\n");
 
             // Restore properties
 

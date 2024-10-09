@@ -2,10 +2,10 @@
 /*  gdscript_text_document.cpp                                            */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -69,7 +69,7 @@ void GDScriptTextDocument::didOpen(const Variant &p_param) {
 }
 
 void GDScriptTextDocument::didClose(const Variant &p_param) {
-	// Left empty on purpose. Godot does nothing special on closing a document,
+	// Left empty on purpose. scardot does nothing special on closing a document,
 	// but it satisfies LSP clients that require didClose be implemented.
 }
 

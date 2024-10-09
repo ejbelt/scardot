@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotLib.java                                                         */
+/*  scardotLib.java                                                         */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -30,11 +30,11 @@
 
 package org.godotengine.godot;
 
-import org.godotengine.godot.gl.GodotRenderer;
+import org.godotengine.godot.gl.scardotRenderer;
 import org.godotengine.godot.io.directory.DirectoryAccessHandler;
 import org.godotengine.godot.io.file.FileAccessHandler;
-import org.godotengine.godot.tts.GodotTTS;
-import org.godotengine.godot.utils.GodotNetUtils;
+import org.godotengine.godot.tts.scardotTTS;
+import org.godotengine.godot.utils.scardotNetUtils;
 
 import android.app.Activity;
 import android.content.res.AssetManager;
@@ -46,34 +46,34 @@ import javax.microedition.khronos.opengles.GL10;
 /**
  * Wrapper for native library
  */
-public class GodotLib {
+public class scardotLib {
 	static {
 		System.loadLibrary("godot_android");
 	}
 
 	/**
-	 * Invoked on the main thread to initialize Godot native layer.
+	 * Invoked on the main thread to initialize scardot native layer.
 	 */
 	public static native boolean initialize(Activity activity,
-			Godot p_instance,
+			scardot p_instance,
 			AssetManager p_asset_manager,
-			GodotIO godotIO,
-			GodotNetUtils netUtils,
+			scardotIO godotIO,
+			scardotNetUtils netUtils,
 			DirectoryAccessHandler directoryAccessHandler,
 			FileAccessHandler fileAccessHandler,
 			boolean use_apk_expansion);
 
 	/**
-	 * Invoked on the main thread to clean up Godot native layer.
+	 * Invoked on the main thread to clean up scardot native layer.
 	 * @see androidx.fragment.app.Fragment#onDestroy()
 	 */
 	public static native void ondestroy();
 
 	/**
-	 * Invoked on the GL thread to complete setup for the Godot native layer logic.
-	 * @param p_cmdline Command line arguments used to configure Godot native layer components.
+	 * Invoked on the GL thread to complete setup for the scardot native layer logic.
+	 * @param p_cmdline Command line arguments used to configure scardot native layer components.
 	 */
-	public static native boolean setup(String[] p_cmdline, GodotTTS tts);
+	public static native boolean setup(String[] p_cmdline, scardotTTS tts);
 
 	/**
 	 * Invoked on the GL thread when the underlying Android surface has changed size.
@@ -182,30 +182,30 @@ public class GodotLib {
 	public static native void focusout();
 
 	/**
-	 * Used to access Godot global properties.
+	 * Used to access scardot global properties.
 	 * @param p_key Property key
 	 * @return String value of the property
 	 */
 	public static native String getGlobal(String p_key);
 
 	/**
-	 * Used to access Godot's editor settings.
+	 * Used to access scardot's editor settings.
 	 * @param settingKey Setting key
 	 * @return String value of the setting
 	 */
 	public static native String getEditorSetting(String settingKey);
 
 	/**
-	 * Invoke method |p_method| on the Godot object specified by |p_id|
-	 * @param p_id Id of the Godot object to invoke
+	 * Invoke method |p_method| on the scardot object specified by |p_id|
+	 * @param p_id Id of the scardot object to invoke
 	 * @param p_method Name of the method to invoke
 	 * @param p_params Parameters to use for method invocation
 	 */
 	public static native void callobject(long p_id, String p_method, Object[] p_params);
 
 	/**
-	 * Invoke method |p_method| on the Godot object specified by |p_id| during idle time.
-	 * @param p_id Id of the Godot object to invoke
+	 * Invoke method |p_method| on the scardot object specified by |p_id| during idle time.
+	 * @param p_id Id of the scardot object to invoke
 	 * @param p_method Name of the method to invoke
 	 * @param p_params Parameters to use for method invocation
 	 */
@@ -230,14 +230,14 @@ public class GodotLib {
 	public static native void setVirtualKeyboardHeight(int p_height);
 
 	/**
-	 * Invoked on the GL thread when the {@link GodotRenderer} has been resumed.
-	 * @see GodotRenderer#onActivityResumed()
+	 * Invoked on the GL thread when the {@link scardotRenderer} has been resumed.
+	 * @see scardotRenderer#onActivityResumed()
 	 */
 	public static native void onRendererResumed();
 
 	/**
-	 * Invoked on the GL thread when the {@link GodotRenderer} has been paused.
-	 * @see GodotRenderer#onActivityPaused()
+	 * Invoked on the GL thread when the {@link scardotRenderer} has been paused.
+	 * @see scardotRenderer#onActivityPaused()
 	 */
 	public static native void onRendererPaused();
 

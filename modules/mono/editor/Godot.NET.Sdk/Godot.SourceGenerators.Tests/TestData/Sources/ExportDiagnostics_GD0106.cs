@@ -1,4 +1,4 @@
-using Godot;
+using scardot;
 
 public interface MyInterface
 {

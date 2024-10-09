@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotEditor.kt                                                        */
+/*  scardotEditor.kt                                                        */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -47,8 +47,8 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.window.layout.WindowMetricsCalculator
 import org.godotengine.editor.utils.signApk
 import org.godotengine.editor.utils.verifyApk
-import org.godotengine.godot.GodotActivity
-import org.godotengine.godot.GodotLib
+import org.godotengine.godot.scardotActivity
+import org.godotengine.godot.scardotLib
 import org.godotengine.godot.error.Error
 import org.godotengine.godot.utils.PermissionsUtil
 import org.godotengine.godot.utils.ProcessPhoenix
@@ -56,18 +56,18 @@ import java.util.*
 import kotlin.math.min
 
 /**
- * Base class for the Godot Android Editor activities.
+ * Base class for the scardot Android Editor activities.
  *
  * This provides the basic templates for the activities making up this application.
  * Each derived activity runs in its own process, which enable up to have several instances of
- * the Godot engine up and running at the same time.
+ * the scardot engine up and running at the same time.
  *
  * It also plays the role of the primary editor window.
  */
-open class GodotEditor : GodotActivity() {
+open class scardotEditor : scardotActivity() {
 
 	companion object {
-		private val TAG = GodotEditor::class.java.simpleName
+		private val TAG = scardotEditor::class.java.simpleName
 
 		private const val WAIT_FOR_DEBUGGER = false
 
@@ -89,8 +89,8 @@ open class GodotEditor : GodotActivity() {
 		private const val BREAKPOINTS_ARG_SHORT = "-b"
 
 		// Info for the various classes used by the editor
-		internal val EDITOR_MAIN_INFO = EditorWindowInfo(GodotEditor::class.java, 777, "")
-		internal val RUN_GAME_INFO = EditorWindowInfo(GodotGame::class.java, 667, ":GodotGame", LaunchPolicy.AUTO, true)
+		internal val EDITOR_MAIN_INFO = EditorWindowInfo(scardotEditor::class.java, 777, "")
+		internal val RUN_GAME_INFO = EditorWindowInfo(scardotGame::class.java, 667, ":scardotGame", LaunchPolicy.AUTO, true)
 
 		/**
 		 * Sets of constants to specify the window to use to run the project.
@@ -117,7 +117,7 @@ open class GodotEditor : GodotActivity() {
 	private val commandLineParams = ArrayList<String>()
 	private val editorLoadingIndicator: View? by lazy { findViewById(R.id.editor_loading_indicator) }
 
-	override fun getGodotAppLayout() = R.layout.godot_editor_layout
+	override fun getscardotAppLayout() = R.layout.godot_editor_layout
 
 	internal open fun getEditorWindowInfo() = EDITOR_MAIN_INFO
 
@@ -146,8 +146,8 @@ open class GodotEditor : GodotActivity() {
 		super.onCreate(savedInstanceState)
 	}
 
-	override fun onGodotSetupCompleted() {
-		super.onGodotSetupCompleted()
+	override fun onscardotSetupCompleted() {
+		super.onscardotSetupCompleted()
 		val longPressEnabled = enableLongPressGestures()
 		val panScaleEnabled = enablePanAndScaleGestures()
 
@@ -162,8 +162,8 @@ open class GodotEditor : GodotActivity() {
 		}
 	}
 
-	override fun onGodotMainLoopStarted() {
-		super.onGodotMainLoopStarted()
+	override fun onscardotMainLoopStarted() {
+		super.onscardotMainLoopStarted()
 		runOnUiThread {
 			// Hide the loading indicator
 			editorLoadingIndicator?.visibility = View.GONE
@@ -175,7 +175,7 @@ open class GodotEditor : GodotActivity() {
 	 */
 	protected open fun checkForProjectPermissionsToEnable() {
 		// Check for RECORD_AUDIO permission
-		val audioInputEnabled = java.lang.Boolean.parseBoolean(GodotLib.getGlobal("audio/driver/enable_input"))
+		val audioInputEnabled = java.lang.Boolean.parseBoolean(scardotLib.getGlobal("audio/driver/enable_input"))
 		if (audioInputEnabled) {
 			PermissionsUtil.requestPermission(Manifest.permission.RECORD_AUDIO, this)
 		}
@@ -220,7 +220,7 @@ open class GodotEditor : GodotActivity() {
 		}
 	}
 
-	protected fun getNewGodotInstanceIntent(editorWindowInfo: EditorWindowInfo, args: Array<String>): Intent {
+	protected fun getNewscardotInstanceIntent(editorWindowInfo: EditorWindowInfo, args: Array<String>): Intent {
 		val updatedArgs = if (editorWindowInfo == EDITOR_MAIN_INFO &&
 			godot?.isInImmersiveMode() == true &&
 			!args.contains(FULLSCREEN_ARG) &&
@@ -266,7 +266,7 @@ open class GodotEditor : GodotActivity() {
 		return newInstance
 	}
 
-	override fun onNewGodotInstanceRequested(args: Array<String>): Int {
+	override fun onNewscardotInstanceRequested(args: Array<String>): Int {
 		val editorWindowInfo = getEditorWindowInfo(args)
 
 		// Launch a new activity
@@ -279,7 +279,7 @@ open class GodotEditor : GodotActivity() {
 			ActivityOptions.makeScaleUpAnimation(sourceView, startX, startY, 0, 0)
 		}
 
-		val newInstance = getNewGodotInstanceIntent(editorWindowInfo, args)
+		val newInstance = getNewscardotInstanceIntent(editorWindowInfo, args)
 		if (editorWindowInfo.windowClassName == javaClass.name) {
 			Log.d(TAG, "Restarting ${editorWindowInfo.windowClassName} with parameters ${args.contentToString()}")
 			val godot = godot
@@ -299,8 +299,8 @@ open class GodotEditor : GodotActivity() {
 		return editorWindowInfo.windowId
 	}
 
-	final override fun onGodotForceQuit(godotInstanceId: Int): Boolean {
-		val editorWindowInfo = getEditorWindowInfoForInstanceId(godotInstanceId) ?: return super.onGodotForceQuit(godotInstanceId)
+	final override fun onscardotForceQuit(godotInstanceId: Int): Boolean {
+		val editorWindowInfo = getEditorWindowInfoForInstanceId(godotInstanceId) ?: return super.onscardotForceQuit(godotInstanceId)
 
 		if (editorWindowInfo.windowClassName == javaClass.name) {
 			Log.d(TAG, "Force quitting ${editorWindowInfo.windowClassName}")
@@ -320,13 +320,13 @@ open class GodotEditor : GodotActivity() {
 		for (runningProcess in runningProcesses) {
 			if (runningProcess.processName == processName) {
 				// Killing process directly
-				Log.v(TAG, "Killing Godot process ${runningProcess.processName}")
+				Log.v(TAG, "Killing scardot process ${runningProcess.processName}")
 				Process.killProcess(runningProcess.pid)
 				return true
 			}
 		}
 
-		return super.onGodotForceQuit(godotInstanceId)
+		return super.onscardotForceQuit(godotInstanceId)
 	}
 
 	// Get the screen's density scale
@@ -351,28 +351,28 @@ open class GodotEditor : GodotActivity() {
 	}
 
 	/**
-	 * The Godot Android Editor sets its own orientation via its AndroidManifest
+	 * The scardot Android Editor sets its own orientation via its AndroidManifest
 	 */
 	protected open fun overrideOrientationRequest() = true
 
 	/**
-	 * Enable long press gestures for the Godot Android editor.
+	 * Enable long press gestures for the scardot Android editor.
 	 */
 	protected open fun enableLongPressGestures() =
-		java.lang.Boolean.parseBoolean(GodotLib.getEditorSetting("interface/touchscreen/enable_long_press_as_right_click"))
+		java.lang.Boolean.parseBoolean(scardotLib.getEditorSetting("interface/touchscreen/enable_long_press_as_right_click"))
 
 	/**
-	 * Enable pan and scale gestures for the Godot Android editor.
+	 * Enable pan and scale gestures for the scardot Android editor.
 	 */
 	protected open fun enablePanAndScaleGestures() =
-		java.lang.Boolean.parseBoolean(GodotLib.getEditorSetting("interface/touchscreen/enable_pan_and_scale_gestures"))
+		java.lang.Boolean.parseBoolean(scardotLib.getEditorSetting("interface/touchscreen/enable_pan_and_scale_gestures"))
 
 	/**
 	 * Retrieves the play window pip mode editor setting.
 	 */
 	private fun getPlayWindowPiPMode(): Int {
 		return try {
-			Integer.parseInt(GodotLib.getEditorSetting("run/window_placement/play_window_pip_mode"))
+			Integer.parseInt(scardotLib.getEditorSetting("run/window_placement/play_window_pip_mode"))
 		} catch (e: NumberFormatException) {
 			PLAY_WINDOW_PIP_ENABLED_FOR_SAME_AS_EDITOR
 		}
@@ -400,7 +400,7 @@ open class GodotEditor : GodotActivity() {
 		return when (policy) {
 			LaunchPolicy.AUTO -> {
 				try {
-					when (Integer.parseInt(GodotLib.getEditorSetting("run/window_placement/android_window"))) {
+					when (Integer.parseInt(scardotLib.getEditorSetting("run/window_placement/android_window"))) {
 						ANDROID_WINDOW_SAME_AS_EDITOR -> LaunchPolicy.SAME
 						ANDROID_WINDOW_SIDE_BY_SIDE_WITH_EDITOR -> LaunchPolicy.ADJACENT
 						else -> {

@@ -2,10 +2,10 @@
 /*  project_list.cpp                                                      */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -153,7 +153,7 @@ void ProjectListItemControl::set_unsupported_features(PackedStringArray p_featur
 				}
 				if (VERSION_MAJOR != project_version_major || VERSION_MINOR <= project_version_minor) {
 					// Don't show a warning if the project was last edited in a previous minor version.
-					tooltip_text += TTR("This project was last edited in a different Godot version: ") + p_features[i] + "\n";
+					tooltip_text += TTR("This project was last edited in a different scardot version: ") + p_features[i] + "\n";
 				}
 				p_features.remove_at(i);
 				i--;
@@ -386,7 +386,7 @@ void ProjectList::_migrate_config() {
 	EditorSettings::get_singleton()->get_property_list(&properties);
 
 	for (const PropertyInfo &E : properties) {
-		// This is actually something like "projects/C:::Documents::Godot::Projects::MyGame"
+		// This is actually something like "projects/C:::Documents::scardot::Projects::MyGame"
 		String property_key = E.name;
 		if (!property_key.begins_with("projects/")) {
 			continue;
@@ -432,7 +432,7 @@ ProjectList::Item ProjectList::load_project_data(const String &p_path, bool p_fa
 	}
 
 	if (config_version > ProjectSettings::CONFIG_VERSION) {
-		// Comes from an incompatible (more recent) Godot version, gray it out.
+		// Comes from an incompatible (more recent) scardot version, gray it out.
 		grayed = true;
 	}
 

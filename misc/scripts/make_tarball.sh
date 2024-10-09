@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ ! -e "version.py" ]; then
-  echo "This script should be ran from the root folder of the Godot repository."
+  echo "This script should be ran from the root folder of the scardot repository."
   exit 1
 fi
 

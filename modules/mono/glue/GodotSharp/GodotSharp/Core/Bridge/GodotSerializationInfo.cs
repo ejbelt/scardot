@@ -1,10 +1,10 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
-using Godot.NativeInterop;
+using scardot.NativeInterop;
 
-namespace Godot.Bridge;
+namespace scardot.Bridge;
 
-public sealed class GodotSerializationInfo : IDisposable
+public sealed class scardotSerializationInfo : IDisposable
 {
     private readonly Collections.Dictionary _properties;
     private readonly Collections.Dictionary _signalEvents;
@@ -17,13 +17,13 @@ public sealed class GodotSerializationInfo : IDisposable
         GC.SuppressFinalize(this);
     }
 
-    private GodotSerializationInfo(in godot_dictionary properties, in godot_dictionary signalEvents)
+    private scardotSerializationInfo(in godot_dictionary properties, in godot_dictionary signalEvents)
     {
         _properties = Collections.Dictionary.CreateTakingOwnershipOfDisposableValue(properties);
         _signalEvents = Collections.Dictionary.CreateTakingOwnershipOfDisposableValue(signalEvents);
     }
 
-    internal static GodotSerializationInfo CreateCopyingBorrowed(
+    internal static scardotSerializationInfo CreateCopyingBorrowed(
         in godot_dictionary properties, in godot_dictionary signalEvents)
     {
         return new(NativeFuncs.godotsharp_dictionary_new_copy(properties),
@@ -59,7 +59,7 @@ public sealed class GodotSerializationInfo : IDisposable
     {
         if (_signalEvents.TryGetValue(name, out Variant serializedData))
         {
-            if (DelegateUtils.TryDeserializeDelegate(serializedData.AsGodotArray(), out var eventDelegate))
+            if (DelegateUtils.TryDeserializeDelegate(serializedData.AsscardotArray(), out var eventDelegate))
             {
                 value = eventDelegate as T;
 

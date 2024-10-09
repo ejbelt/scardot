@@ -1,4 +1,4 @@
-namespace GodotTools
+namespace scardotTools
 {
     public enum VerbosityLevelId : long
     {

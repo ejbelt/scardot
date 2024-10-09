@@ -2,10 +2,10 @@
 /*  godot_cone_twist_joint_3d.h                                           */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -28,16 +28,16 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#ifndef GODOT_CONE_TWIST_JOINT_3D_H
-#define GODOT_CONE_TWIST_JOINT_3D_H
+#ifndef SCARDOT_CONE_TWIST_JOINT_3D_H
+#define SCARDOT_CONE_TWIST_JOINT_3D_H
 
 /*
-Adapted to Godot from the Bullet library.
+Adapted to scardot from the Bullet library.
 */
 
 /*
 Bullet Continuous Collision Detection and Physics Library
-GodotConeTwistJoint3D is Copyright (c) 2007 Starbreeze Studios
+scardotConeTwistJoint3D is Copyright (c) 2007 Starbreeze Studios
 
 This software is provided 'as-is', without any express or implied warranty.
 In no event will the authors be held liable for any damages arising from the use of this software.
@@ -55,22 +55,22 @@ Written by: Marcus Hennix
 #include "servers/physics_3d/godot_joint_3d.h"
 #include "servers/physics_3d/joints/godot_jacobian_entry_3d.h"
 
-// GodotConeTwistJoint3D can be used to simulate ragdoll joints (upper arm, leg etc).
-class GodotConeTwistJoint3D : public GodotJoint3D {
+// scardotConeTwistJoint3D can be used to simulate ragdoll joints (upper arm, leg etc).
+class scardotConeTwistJoint3D : public scardotJoint3D {
 #ifdef IN_PARALLELL_SOLVER
 public:
 #endif
 
 	union {
 		struct {
-			GodotBody3D *A;
-			GodotBody3D *B;
+			scardotBody3D *A;
+			scardotBody3D *B;
 		};
 
-		GodotBody3D *_arr[2] = { nullptr, nullptr };
+		scardotBody3D *_arr[2] = { nullptr, nullptr };
 	};
 
-	GodotJacobianEntry3D m_jac[3] = {}; //3 orthogonal linear constraints
+	scardotJacobianEntry3D m_jac[3] = {}; //3 orthogonal linear constraints
 
 	real_t m_appliedImpulse = 0.0;
 	Transform3D m_rbAFrame;
@@ -107,7 +107,7 @@ public:
 	virtual bool setup(real_t p_step) override;
 	virtual void solve(real_t p_step) override;
 
-	GodotConeTwistJoint3D(GodotBody3D *rbA, GodotBody3D *rbB, const Transform3D &rbAFrame, const Transform3D &rbBFrame);
+	scardotConeTwistJoint3D(scardotBody3D *rbA, scardotBody3D *rbB, const Transform3D &rbAFrame, const Transform3D &rbBFrame);
 
 	void setAngularOnly(bool angularOnly) {
 		m_angularOnly = angularOnly;
@@ -139,4 +139,4 @@ public:
 	real_t get_param(PhysicsServer3D::ConeTwistJointParam p_param) const;
 };
 
-#endif // GODOT_CONE_TWIST_JOINT_3D_H
+#endif // SCARDOT_CONE_TWIST_JOINT_3D_H

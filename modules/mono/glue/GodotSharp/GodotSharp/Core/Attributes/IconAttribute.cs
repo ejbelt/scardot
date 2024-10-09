@@ -1,15 +1,15 @@
 using System;
 
-namespace Godot
+namespace scardot
 {
     /// <summary>
-    /// Specifies a custom icon for representing this class in the Godot Editor.
+    /// Specifies a custom icon for representing this class in the scardot Editor.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
     public sealed class IconAttribute : Attribute
     {
         /// <summary>
-        /// File path to a custom icon for representing this class in the Godot Editor.
+        /// File path to a custom icon for representing this class in the scardot Editor.
         /// </summary>
         public string Path { get; }
 

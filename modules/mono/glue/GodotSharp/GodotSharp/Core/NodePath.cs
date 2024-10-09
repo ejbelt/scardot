@@ -1,10 +1,10 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
-using Godot.NativeInterop;
+using scardot.NativeInterop;
 
 #nullable enable
 
-namespace Godot
+namespace scardot
 {
     /// <summary>
     /// A pre-parsed relative or absolute path in a scene tree,

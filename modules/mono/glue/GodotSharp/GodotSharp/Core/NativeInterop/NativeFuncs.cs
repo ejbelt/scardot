@@ -4,10 +4,10 @@
 
 using System;
 using System.Runtime.CompilerServices;
-using Godot.SourceGenerators.Internal;
+using scardot.SourceGenerators.Internal;
 
 
-namespace Godot.NativeInterop
+namespace scardot.NativeInterop
 {
     /*
      * IMPORTANT:

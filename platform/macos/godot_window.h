@@ -2,10 +2,10 @@
 /*  godot_window.h                                                        */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -28,15 +28,15 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#ifndef GODOT_WINDOW_H
-#define GODOT_WINDOW_H
+#ifndef SCARDOT_WINDOW_H
+#define SCARDOT_WINDOW_H
 
 #include "servers/display_server.h"
 
 #import <AppKit/AppKit.h>
 #import <Foundation/Foundation.h>
 
-@interface GodotWindow : NSWindow {
+@interface scardotWindow : NSWindow {
 	DisplayServer::WindowID window_id;
 	NSTimeInterval anim_duration;
 }
@@ -46,4 +46,4 @@
 
 @end
 
-#endif // GODOT_WINDOW_H
+#endif // SCARDOT_WINDOW_H

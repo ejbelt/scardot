@@ -2,10 +2,10 @@ using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
-namespace Godot.SourceGenerators
+namespace scardot.SourceGenerators
 {
     [Generator]
-    public class GodotPluginsInitializerGenerator : ISourceGenerator
+    public class scardotPluginsInitializerGenerator : ISourceGenerator
     {
         public void Initialize(GeneratorInitializationContext context)
         {
@@ -13,16 +13,16 @@ namespace Godot.SourceGenerators
 
         public void Execute(GeneratorExecutionContext context)
         {
-            if (context.IsGodotToolsProject() || context.IsGodotSourceGeneratorDisabled("GodotPluginsInitializer"))
+            if (context.IsscardotToolsProject() || context.IsscardotSourceGeneratorDisabled("scardotPluginsInitializer"))
                 return;
 
             string source =
                 @"using System;
 using System.Runtime.InteropServices;
-using Godot.Bridge;
-using Godot.NativeInterop;
+using scardot.Bridge;
+using scardot.NativeInterop;
 
-namespace GodotPlugins.Game
+namespace scardotPlugins.Game
 {
     internal static partial class Main
     {
@@ -32,9 +32,9 @@ namespace GodotPlugins.Game
         {
             try
             {
-                DllImportResolver dllImportResolver = new GodotDllImportResolver(godotDllHandle).OnResolveDllImport;
+                DllImportResolver dllImportResolver = new scardotDllImportResolver(godotDllHandle).OnResolveDllImport;
 
-                var coreApiAssembly = typeof(global::Godot.GodotObject).Assembly;
+                var coreApiAssembly = typeof(global::scardot.scardotObject).Assembly;
 
                 NativeLibrary.SetDllImportResolver(coreApiAssembly, dllImportResolver);
 
@@ -42,21 +42,21 @@ namespace GodotPlugins.Game
 
                 ManagedCallbacks.Create(outManagedCallbacks);
 
-                ScriptManagerBridge.LookupScriptsInAssembly(typeof(global::GodotPlugins.Game.Main).Assembly);
+                ScriptManagerBridge.LookupScriptsInAssembly(typeof(global::scardotPlugins.Game.Main).Assembly);
 
                 return godot_bool.True;
             }
             catch (Exception e)
             {
                 global::System.Console.Error.WriteLine(e);
-                return false.ToGodotBool();
+                return false.ToscardotBool();
             }
         }
     }
 }
 ";
 
-            context.AddSource("GodotPlugins.Game.generated",
+            context.AddSource("scardotPlugins.Game.generated",
                 SourceText.From(source, Encoding.UTF8));
         }
     }

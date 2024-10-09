@@ -1,11 +1,11 @@
 using System;
 using System.IO;
 using System.Linq;
-using Godot;
-using GodotTools.Internals;
+using scardot;
+using scardotTools.Internals;
 using JetBrains.Rider.PathLocator;
 
-namespace GodotTools.Ides.Rider
+namespace scardotTools.Ides.Rider
 {
     public static class RiderPathManager
     {
@@ -35,13 +35,13 @@ namespace GodotTools.Ides.Rider
         public static void Initialize()
         {
             var editorSettings = EditorInterface.Singleton.GetEditorSettings();
-            var editor = editorSettings.GetSetting(GodotSharpEditor.Settings.ExternalEditor).As<ExternalEditorId>();
+            var editor = editorSettings.GetSetting(scardotSharpEditor.Settings.ExternalEditor).As<ExternalEditorId>();
             if (editor == ExternalEditorId.Rider)
             {
                 if (!editorSettings.HasSetting(EditorPathSettingName))
                 {
                     Globals.EditorDef(EditorPathSettingName, "");
-                    editorSettings.AddPropertyInfo(new Godot.Collections.Dictionary
+                    editorSettings.AddPropertyInfo(new scardot.Collections.Dictionary
                     {
                         ["type"] = (int)Variant.Type.String,
                         ["name"] = EditorPathSettingName,

@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotIO.java                                                          */
+/*  scardotIO.java                                                          */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -30,7 +30,7 @@
 
 package org.godotengine.godot;
 
-import org.godotengine.godot.input.GodotEditText;
+import org.godotengine.godot.input.scardotEditText;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -57,12 +57,12 @@ import java.util.Locale;
 
 // Wrapper for native library
 
-public class GodotIO {
-	private static final String TAG = GodotIO.class.getSimpleName();
+public class scardotIO {
+	private static final String TAG = scardotIO.class.getSimpleName();
 
 	private final Activity activity;
 	private final String uniqueId;
-	GodotEditText edit;
+	scardotEditText edit;
 
 	final int SCREEN_LANDSCAPE = 0;
 	final int SCREEN_PORTRAIT = 1;
@@ -72,7 +72,7 @@ public class GodotIO {
 	final int SCREEN_SENSOR_PORTRAIT = 5;
 	final int SCREEN_SENSOR = 6;
 
-	GodotIO(Activity p_activity) {
+	scardotIO(Activity p_activity) {
 		activity = p_activity;
 		String androidId = Settings.Secure.getString(activity.getContentResolver(),
 				Settings.Secure.ANDROID_ID);
@@ -218,7 +218,7 @@ public class GodotIO {
 
 	public void showKeyboard(String p_existing_text, int p_type, int p_max_input_length, int p_cursor_start, int p_cursor_end) {
 		if (edit != null) {
-			edit.showKeyboard(p_existing_text, GodotEditText.VirtualKeyboardType.values()[p_type], p_max_input_length, p_cursor_start, p_cursor_end);
+			edit.showKeyboard(p_existing_text, scardotEditText.VirtualKeyboardType.values()[p_type], p_max_input_length, p_cursor_start, p_cursor_end);
 		}
 
 		//InputMethodManager inputMgr = (InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -287,7 +287,7 @@ public class GodotIO {
 		}
 	}
 
-	public void setEdit(GodotEditText _edit) {
+	public void setEdit(scardotEditText _edit) {
 		edit = _edit;
 	}
 

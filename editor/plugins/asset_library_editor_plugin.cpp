@@ -2,10 +2,10 @@
 /*  asset_library_editor_plugin.cpp                                       */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -761,8 +761,8 @@ const char *EditorAssetLibrary::sort_text[SORT_MAX] = {
 	TTRC("Least Recently Updated"),
 	TTRC("Name (A-Z)"),
 	TTRC("Name (Z-A)"),
-	TTRC("License (A-Z)"), // "cost" stores the SPDX license name in the Godot Asset Library.
-	TTRC("License (Z-A)"), // "cost" stores the SPDX license name in the Godot Asset Library.
+	TTRC("License (A-Z)"), // "cost" stores the SPDX license name in the scardot Asset Library.
+	TTRC("License (Z-A)"), // "cost" stores the SPDX license name in the scardot Asset Library.
 };
 
 const char *EditorAssetLibrary::support_key[SUPPORT_MAX] = {

@@ -36,7 +36,7 @@ elif env["builtin_wslay"]:
     env.modules_sources += thirdparty_obj
 
 
-# Godot source files
+# scardot source files
 
 module_obj = []
 

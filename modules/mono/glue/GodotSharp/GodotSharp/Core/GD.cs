@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
-using Godot.NativeInterop;
+using scardot.NativeInterop;
 
-namespace Godot
+namespace scardot
 {
     /// <summary>
-    /// Godot's global functions.
+    /// scardot's global functions.
     /// </summary>
     public static partial class GD
     {
@@ -45,7 +45,7 @@ namespace Godot
         /// </summary>
         /// <example>
         /// <code>
-        /// Variant a = new Godot.Collections.Array { 4, 2.5, 1.2 };
+        /// Variant a = new scardot.Collections.Array { 4, 2.5, 1.2 };
         /// GD.Print(a.VariantType == Variant.Type.Array); // Prints true
         ///
         /// var b = GD.Convert(a, Variant.Type.PackedByteArray);
@@ -187,7 +187,7 @@ namespace Godot
         /// </summary>
         /// <example>
         /// <code>
-        /// var a = new Godot.Collections.Array { 1, 2, 3 };
+        /// var a = new scardot.Collections.Array { 1, 2, 3 };
         /// GD.Print("a", "b", a); // Prints ab[1, 2, 3]
         /// </code>
         /// </example>
@@ -351,7 +351,7 @@ namespace Godot
         }
 
         /// <summary>
-        /// Pushes an error message to Godot's built-in debugger and to the OS terminal.
+        /// Pushes an error message to scardot's built-in debugger and to the OS terminal.
         ///
         /// Note: Errors printed this way will not pause project execution.
         /// </summary>
@@ -367,7 +367,7 @@ namespace Godot
         }
 
         /// <summary>
-        /// Pushes an error message to Godot's built-in debugger and to the OS terminal.
+        /// Pushes an error message to scardot's built-in debugger and to the OS terminal.
         ///
         /// Note: Errors printed this way will not pause project execution.
         /// </summary>
@@ -383,7 +383,7 @@ namespace Godot
         }
 
         /// <summary>
-        /// Pushes a warning message to Godot's built-in debugger and to the OS terminal.
+        /// Pushes a warning message to scardot's built-in debugger and to the OS terminal.
         /// </summary>
         /// <example>
         /// <code>
@@ -397,7 +397,7 @@ namespace Godot
         }
 
         /// <summary>
-        /// Pushes a warning message to Godot's built-in debugger and to the OS terminal.
+        /// Pushes a warning message to scardot's built-in debugger and to the OS terminal.
         /// </summary>
         /// <example>
         /// <code>
@@ -589,7 +589,7 @@ namespace Godot
         /// </summary>
         /// <example>
         /// <code>
-        /// ulong mySeed = (ulong)GD.Hash("Godot Rocks");
+        /// ulong mySeed = (ulong)GD.Hash("scardot Rocks");
         /// GD.Seed(mySeed);
         /// var a = GD.Randf() + GD.Randi();
         /// GD.Seed(mySeed);
@@ -610,7 +610,7 @@ namespace Godot
         /// <example>
         /// <code>
         /// string a = "{ \"a\": 1, \"b\": 2 }";        // a is a string
-        /// var b = GD.StrToVar(a).AsGodotDictionary(); // b is a Dictionary
+        /// var b = GD.StrToVar(a).AsscardotDictionary(); // b is a Dictionary
         /// GD.Print(b["a"]);                           // Prints 1
         /// </code>
         /// </example>
@@ -656,7 +656,7 @@ namespace Godot
         /// </summary>
         /// <example>
         /// <code>
-        /// var a = new Godot.Collections.Dictionary { ["a"] = 1, ["b"] = 2 };
+        /// var a = new scardot.Collections.Dictionary { ["a"] = 1, ["b"] = 2 };
         /// GD.Print(GD.VarToStr(a));
         /// // Prints:
         /// // {

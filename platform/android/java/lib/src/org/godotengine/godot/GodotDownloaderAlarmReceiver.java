@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotDownloaderAlarmReceiver.java                                     */
+/*  scardotDownloaderAlarmReceiver.java                                     */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -43,17 +43,17 @@ import com.google.android.vending.expansion.downloader.DownloaderClientMarshalle
  * from the alarm service using the provided service helper function within the
  * DownloaderClientMarshaller. This class must be then registered in your AndroidManifest.xml
  * file with a section like this:
- *         <receiver android:name=".GodotDownloaderAlarmReceiver"/>
+ *         <receiver android:name=".scardotDownloaderAlarmReceiver"/>
  */
-public class GodotDownloaderAlarmReceiver extends BroadcastReceiver {
+public class scardotDownloaderAlarmReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		Log.d("GODOT", "Alarma recivida");
+		Log.d("SCARDOT", "Alarma recivida");
 		try {
-			DownloaderClientMarshaller.startDownloadServiceIfRequired(context, intent, GodotDownloaderService.class);
+			DownloaderClientMarshaller.startDownloadServiceIfRequired(context, intent, scardotDownloaderService.class);
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
-			Log.d("GODOT", "Exception: " + e.getClass().getName() + ":" + e.getMessage());
+			Log.d("SCARDOT", "Exception: " + e.getClass().getName() + ":" + e.getMessage());
 		}
 	}
 }

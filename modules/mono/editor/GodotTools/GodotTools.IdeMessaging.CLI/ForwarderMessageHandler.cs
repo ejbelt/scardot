@@ -3,9 +3,9 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using GodotTools.IdeMessaging.Utils;
+using scardotTools.IdeMessaging.Utils;
 
-namespace GodotTools.IdeMessaging.CLI
+namespace scardotTools.IdeMessaging.CLI
 {
     public class ForwarderMessageHandler : IMessageHandler
     {

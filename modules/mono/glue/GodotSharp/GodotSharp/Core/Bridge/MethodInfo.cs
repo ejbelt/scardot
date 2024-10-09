@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Godot.Bridge;
+namespace scardot.Bridge;
 
 #nullable enable
 

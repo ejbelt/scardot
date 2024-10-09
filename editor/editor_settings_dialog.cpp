@@ -2,10 +2,10 @@
 /*  editor_settings_dialog.cpp                                            */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -95,7 +95,7 @@ void EditorSettingsDialog::update_navigation_preset() {
 	Ref<InputEventKey> zoom_mod_key_2;
 	bool set_preset = false;
 
-	if (nav_scheme == Node3DEditorViewport::NAVIGATION_GODOT) {
+	if (nav_scheme == Node3DEditorViewport::NAVIGATION_SCARDOT) {
 		set_preset = true;
 		set_orbit_mouse_button = Node3DEditorViewport::NAVIGATION_MIDDLE_MOUSE;
 		set_pan_mouse_button = Node3DEditorViewport::NAVIGATION_MIDDLE_MOUSE;

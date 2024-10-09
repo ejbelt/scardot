@@ -1,8 +1,8 @@
 using System;
 using System.Runtime.CompilerServices;
-using Godot.NativeInterop;
+using scardot.NativeInterop;
 
-namespace Godot;
+namespace scardot;
 
 #nullable enable
 
@@ -92,7 +92,7 @@ public partial struct Variant : IDisposable
         new(NativeFuncs.godotsharp_variant_new_copy(nativeValueToOwn));
 
     /// <summary>
-    /// Constructs a new <see cref="Godot.NativeInterop.godot_variant"/> from this instance.
+    /// Constructs a new <see cref="scardot.NativeInterop.godot_variant"/> from this instance.
     /// The caller is responsible of disposing the new instance to avoid memory leaks.
     /// </summary>
     public godot_variant CopyNativeVariant() =>
@@ -136,11 +136,11 @@ public partial struct Variant : IDisposable
             Type.StringName => AsStringName(),
             Type.NodePath => AsNodePath(),
             Type.Rid => AsRid(),
-            Type.Object => AsGodotObject(),
+            Type.Object => AsscardotObject(),
             Type.Callable => AsCallable(),
             Type.Signal => AsSignal(),
-            Type.Dictionary => AsGodotDictionary(),
-            Type.Array => AsGodotArray(),
+            Type.Dictionary => AsscardotDictionary(),
+            Type.Array => AsscardotArray(),
             Type.PackedByteArray => AsByteArray(),
             Type.PackedInt32Array => AsInt32Array(),
             Type.PackedInt64Array => AsInt64Array(),
@@ -329,16 +329,16 @@ public partial struct Variant : IDisposable
         VariantUtils.ConvertAsPackedColorArrayToSystemArray((godot_variant)NativeVar);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public T[] AsGodotObjectArray<T>()
-        where T : GodotObject =>
-        VariantUtils.ConvertToSystemArrayOfGodotObject<T>((godot_variant)NativeVar);
+    public T[] AsscardotObjectArray<T>()
+        where T : scardotObject =>
+        VariantUtils.ConvertToSystemArrayOfscardotObject<T>((godot_variant)NativeVar);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public Collections.Dictionary<TKey, TValue> AsGodotDictionary<[MustBeVariant] TKey, [MustBeVariant] TValue>() =>
+    public Collections.Dictionary<TKey, TValue> AsscardotDictionary<[MustBeVariant] TKey, [MustBeVariant] TValue>() =>
         VariantUtils.ConvertToDictionary<TKey, TValue>((godot_variant)NativeVar);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public Collections.Array<T> AsGodotArray<[MustBeVariant] T>() =>
+    public Collections.Array<T> AsscardotArray<[MustBeVariant] T>() =>
         VariantUtils.ConvertToArray<T>((godot_variant)NativeVar);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -354,8 +354,8 @@ public partial struct Variant : IDisposable
         VariantUtils.ConvertToSystemArrayOfRid((godot_variant)NativeVar);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public GodotObject AsGodotObject() =>
-        VariantUtils.ConvertToGodotObject((godot_variant)NativeVar);
+    public scardotObject AsscardotObject() =>
+        VariantUtils.ConvertToscardotObject((godot_variant)NativeVar);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public StringName AsStringName() =>
@@ -370,11 +370,11 @@ public partial struct Variant : IDisposable
         VariantUtils.ConvertToRid((godot_variant)NativeVar);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public Collections.Dictionary AsGodotDictionary() =>
+    public Collections.Dictionary AsscardotDictionary() =>
         VariantUtils.ConvertToDictionary((godot_variant)NativeVar);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public Collections.Array AsGodotArray() =>
+    public Collections.Array AsscardotArray() =>
         VariantUtils.ConvertToArray((godot_variant)NativeVar);
 
     // Explicit conversion operators to supported types
@@ -512,7 +512,7 @@ public partial struct Variant : IDisposable
     public static explicit operator Rid[](Variant from) => from.AsSystemArrayOfRid();
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static explicit operator GodotObject(Variant from) => from.AsGodotObject();
+    public static explicit operator scardotObject(Variant from) => from.AsscardotObject();
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static explicit operator StringName(Variant from) => from.AsStringName();
@@ -524,10 +524,10 @@ public partial struct Variant : IDisposable
     public static explicit operator Rid(Variant from) => from.AsRid();
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static explicit operator Collections.Dictionary(Variant from) => from.AsGodotDictionary();
+    public static explicit operator Collections.Dictionary(Variant from) => from.AsscardotDictionary();
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static explicit operator Collections.Array(Variant from) => from.AsGodotArray();
+    public static explicit operator Collections.Array(Variant from) => from.AsscardotArray();
 
     // While we provide implicit conversion operators, normal methods are still needed for
     // casts that are not done implicitly (e.g.: raw array to Span, enum to integer, etc).
@@ -656,7 +656,7 @@ public partial struct Variant : IDisposable
     public static Variant CreateFrom(Span<Color> from) => from;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Variant CreateFrom(GodotObject[] from) => from;
+    public static Variant CreateFrom(scardotObject[] from) => from;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Variant CreateFrom<[MustBeVariant] TKey, [MustBeVariant] TValue>(Collections.Dictionary<TKey, TValue> from) =>
@@ -676,7 +676,7 @@ public partial struct Variant : IDisposable
     public static Variant CreateFrom(Span<Rid> from) => from;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Variant CreateFrom(GodotObject from) => from;
+    public static Variant CreateFrom(scardotObject from) => from;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Variant CreateFrom(StringName from) => from;
@@ -860,8 +860,8 @@ public partial struct Variant : IDisposable
         (Variant)from.AsSpan();
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static implicit operator Variant(GodotObject[] from) =>
-        CreateTakingOwnershipOfDisposableValue(VariantUtils.CreateFromSystemArrayOfGodotObject(from));
+    public static implicit operator Variant(scardotObject[] from) =>
+        CreateTakingOwnershipOfDisposableValue(VariantUtils.CreateFromSystemArrayOfscardotObject(from));
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static implicit operator Variant(StringName[] from) =>
@@ -928,8 +928,8 @@ public partial struct Variant : IDisposable
         CreateTakingOwnershipOfDisposableValue(VariantUtils.CreateFromSystemArrayOfRid(from));
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static implicit operator Variant(GodotObject from) =>
-        CreateTakingOwnershipOfDisposableValue(VariantUtils.CreateFromGodotObject(from));
+    public static implicit operator Variant(scardotObject from) =>
+        CreateTakingOwnershipOfDisposableValue(VariantUtils.CreateFromscardotObject(from));
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static implicit operator Variant(StringName from) =>

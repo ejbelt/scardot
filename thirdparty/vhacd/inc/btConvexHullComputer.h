@@ -18,9 +18,9 @@ subject to the following restrictions:
 #include "btAlignedObjectArray.h"
 #include "btVector3.h"
 
-// -- GODOT start --
+// -- SCARDOT start --
 namespace VHACD {
-// -- GODOT end --
+// -- SCARDOT end --
 
 /// Convex hull implementation based on Preparata and Hong
 /// See http://code.google.com/p/bullet/issues/detail?id=275
@@ -98,8 +98,8 @@ public:
     }
 };
 
-// -- GODOT start --
+// -- SCARDOT start --
 }; // namespace VHACD
-// -- GODOT end --
+// -- SCARDOT end --
 
 #endif //BT_CONVEX_HULL_COMPUTER_H

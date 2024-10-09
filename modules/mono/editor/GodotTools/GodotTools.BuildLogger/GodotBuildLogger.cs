@@ -3,9 +3,9 @@ using System.IO;
 using System.Security;
 using Microsoft.Build.Framework;
 
-namespace GodotTools.BuildLogger
+namespace scardotTools.BuildLogger
 {
-    public class GodotBuildLogger : ILogger
+    public class scardotBuildLogger : ILogger
     {
         public string? Parameters { get; set; }
         public LoggerVerbosity Verbosity { get; set; }

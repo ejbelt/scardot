@@ -1,5 +1,5 @@
-using Godot;
-using Godot.Collections;
+using scardot;
+using scardot.Collections;
 
 public partial class ExportDiagnostics_GD0107_OK : Node
 {
@@ -10,13 +10,13 @@ public partial class ExportDiagnostics_GD0107_OK : Node
     public Node[] SystemArrayOfNodesField;
 
     [Export]
-    public Array<Node> GodotArrayOfNodesField;
+    public Array<Node> scardotArrayOfNodesField;
 
     [Export]
-    public Dictionary<Node, string> GodotDictionaryWithNodeAsKeyField;
+    public Dictionary<Node, string> scardotDictionaryWithNodeAsKeyField;
 
     [Export]
-    public Dictionary<string, Node> GodotDictionaryWithNodeAsValueField;
+    public Dictionary<string, Node> scardotDictionaryWithNodeAsValueField;
 
     [Export]
     public Node NodeProperty { get; set; }
@@ -25,13 +25,13 @@ public partial class ExportDiagnostics_GD0107_OK : Node
     public Node[] SystemArrayOfNodesProperty { get; set; }
 
     [Export]
-    public Array<Node> GodotArrayOfNodesProperty { get; set; }
+    public Array<Node> scardotArrayOfNodesProperty { get; set; }
 
     [Export]
-    public Dictionary<Node, string> GodotDictionaryWithNodeAsKeyProperty { get; set; }
+    public Dictionary<Node, string> scardotDictionaryWithNodeAsKeyProperty { get; set; }
 
     [Export]
-    public Dictionary<string, Node> GodotDictionaryWithNodeAsValueProperty { get; set; }
+    public Dictionary<string, Node> scardotDictionaryWithNodeAsValueProperty { get; set; }
 }
 
 public partial class ExportDiagnostics_GD0107_KO : Resource
@@ -43,13 +43,13 @@ public partial class ExportDiagnostics_GD0107_KO : Resource
     public Node[] {|GD0107:SystemArrayOfNodesField|};
 
     [Export]
-    public Array<Node> {|GD0107:GodotArrayOfNodesField|};
+    public Array<Node> {|GD0107:scardotArrayOfNodesField|};
 
     [Export]
-    public Dictionary<Node, string> {|GD0107:GodotDictionaryWithNodeAsKeyField|};
+    public Dictionary<Node, string> {|GD0107:scardotDictionaryWithNodeAsKeyField|};
 
     [Export]
-    public Dictionary<string, Node> {|GD0107:GodotDictionaryWithNodeAsValueField|};
+    public Dictionary<string, Node> {|GD0107:scardotDictionaryWithNodeAsValueField|};
 
     [Export]
     public Node {|GD0107:NodeProperty|} { get; set; }
@@ -58,11 +58,11 @@ public partial class ExportDiagnostics_GD0107_KO : Resource
     public Node[] {|GD0107:SystemArrayOfNodesProperty|} { get; set; }
 
     [Export]
-    public Array<Node> {|GD0107:GodotArrayOfNodesProperty|} { get; set; }
+    public Array<Node> {|GD0107:scardotArrayOfNodesProperty|} { get; set; }
 
     [Export]
-    public Dictionary<Node, string> {|GD0107:GodotDictionaryWithNodeAsKeyProperty|} { get; set; }
+    public Dictionary<Node, string> {|GD0107:scardotDictionaryWithNodeAsKeyProperty|} { get; set; }
 
     [Export]
-    public Dictionary<string, Node> {|GD0107:GodotDictionaryWithNodeAsValueProperty|} { get; set; }
+    public Dictionary<string, Node> {|GD0107:scardotDictionaryWithNodeAsValueProperty|} { get; set; }
 }

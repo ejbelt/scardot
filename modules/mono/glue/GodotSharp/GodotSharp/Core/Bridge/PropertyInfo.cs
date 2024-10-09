@@ -1,4 +1,4 @@
-namespace Godot.Bridge;
+namespace scardot.Bridge;
 
 #nullable enable
 

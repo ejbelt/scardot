@@ -3,7 +3,7 @@ using System.Linq;
 
 #nullable enable
 
-namespace Godot;
+namespace scardot;
 
 internal class ReflectionUtils
 {

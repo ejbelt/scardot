@@ -2,10 +2,10 @@
 /*  godot_navigation_server_3d.h                                          */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -28,8 +28,8 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#ifndef GODOT_NAVIGATION_SERVER_3D_H
-#define GODOT_NAVIGATION_SERVER_3D_H
+#ifndef SCARDOT_NAVIGATION_SERVER_3D_H
+#define SCARDOT_NAVIGATION_SERVER_3D_H
 
 #include "../nav_agent.h"
 #include "../nav_link.h"
@@ -55,17 +55,17 @@
 	virtual void F_NAME(T_0 D_0, T_1 D_1) override; \
 	void MERGE(_cmd_, F_NAME)(T_0 D_0, T_1 D_1)
 
-class GodotNavigationServer3D;
+class scardotNavigationServer3D;
 #ifndef _3D_DISABLED
 class NavMeshGenerator3D;
 #endif // _3D_DISABLED
 
 struct SetCommand {
 	virtual ~SetCommand() {}
-	virtual void exec(GodotNavigationServer3D *server) = 0;
+	virtual void exec(scardotNavigationServer3D *server) = 0;
 };
 
-class GodotNavigationServer3D : public NavigationServer3D {
+class scardotNavigationServer3D : public NavigationServer3D {
 	Mutex commands_mutex;
 	/// Mutex used to make any operation threadsafe.
 	Mutex operations_mutex;
@@ -98,8 +98,8 @@ class GodotNavigationServer3D : public NavigationServer3D {
 	int pm_obstacle_count = 0;
 
 public:
-	GodotNavigationServer3D();
-	virtual ~GodotNavigationServer3D();
+	scardotNavigationServer3D();
+	virtual ~scardotNavigationServer3D();
 
 	void add_command(SetCommand *command);
 
@@ -297,4 +297,4 @@ private:
 #undef COMMAND_1
 #undef COMMAND_2
 
-#endif // GODOT_NAVIGATION_SERVER_3D_H
+#endif // SCARDOT_NAVIGATION_SERVER_3D_H

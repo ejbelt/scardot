@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotDownloaderService.java                                           */
+/*  scardotDownloaderService.java                                           */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -40,7 +40,7 @@ import com.google.android.vending.expansion.downloader.impl.DownloaderService;
  * This class demonstrates the minimal client implementation of the
  * DownloaderService from the Downloader library.
  */
-public class GodotDownloaderService extends DownloaderService {
+public class scardotDownloaderService extends DownloaderService {
 	// stuff for LVL -- MODIFY FOR YOUR APPLICATION!
 	private static final String BASE64_PUBLIC_KEY = "REPLACE THIS WITH YOUR PUBLIC KEY";
 	// used by the preference obfuscater
@@ -56,7 +56,7 @@ public class GodotDownloaderService extends DownloaderService {
 	@Override
 	public String getPublicKey() {
 		SharedPreferences prefs = getApplicationContext().getSharedPreferences("app_data_keys", Context.MODE_PRIVATE);
-		Log.d("GODOT", "getting public key:" + prefs.getString("store_public_key", null));
+		Log.d("SCARDOT", "getting public key:" + prefs.getString("store_public_key", null));
 		return prefs.getString("store_public_key", null);
 
 		//return BASE64_PUBLIC_KEY;
@@ -79,7 +79,7 @@ public class GodotDownloaderService extends DownloaderService {
 	 */
 	@Override
 	public String getAlarmReceiverClassName() {
-		Log.d("GODOT", "getAlarmReceiverClassName()");
-		return GodotDownloaderAlarmReceiver.class.getName();
+		Log.d("SCARDOT", "getAlarmReceiverClassName()");
+		return scardotDownloaderAlarmReceiver.class.getName();
 	}
 }

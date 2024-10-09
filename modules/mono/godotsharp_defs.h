@@ -2,10 +2,10 @@
 /*  godotsharp_defs.h                                                     */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -28,17 +28,17 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#ifndef GODOTSHARP_DEFS_H
-#define GODOTSHARP_DEFS_H
+#ifndef SCARDOTSHARP_DEFS_H
+#define SCARDOTSHARP_DEFS_H
 
-#define BINDINGS_NAMESPACE "Godot"
+#define BINDINGS_NAMESPACE "scardot"
 #define BINDINGS_NAMESPACE_COLLECTIONS BINDINGS_NAMESPACE ".Collections"
-#define API_SOLUTION_NAME "GodotSharp"
-#define CORE_API_ASSEMBLY_NAME "GodotSharp"
-#define EDITOR_API_ASSEMBLY_NAME "GodotSharpEditor"
-#define TOOLS_ASM_NAME "GodotTools"
+#define API_SOLUTION_NAME "scardotSharp"
+#define CORE_API_ASSEMBLY_NAME "scardotSharp"
+#define EDITOR_API_ASSEMBLY_NAME "scardotSharpEditor"
+#define TOOLS_ASM_NAME "scardotTools"
 
 #define BINDINGS_CLASS_NATIVECALLS "NativeCalls"
 #define BINDINGS_CLASS_NATIVECALLS_EDITOR "EditorNativeCalls"
 
-#endif // GODOTSHARP_DEFS_H
+#endif // SCARDOTSHARP_DEFS_H

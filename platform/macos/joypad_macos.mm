@@ -2,10 +2,10 @@
 /*  joypad_macos.mm                                                       */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -340,7 +340,7 @@ void JoypadMacOS::joypad_vibration_stop(Joypad *p_joypad, uint64_t p_timestamp) 
 		controller.playerIndex = [self getFreePlayerIndex];
 	}
 
-	// Tell Godot about our new controller.
+	// Tell scardot about our new controller.
 	Input::get_singleton()->joy_connection_changed(joy_id, true, String::utf8([controller.vendorName UTF8String]));
 
 	Joypad *joypad = [[Joypad alloc] init:controller];
@@ -380,7 +380,7 @@ void JoypadMacOS::joypad_vibration_stop(Joypad *p_joypad, uint64_t p_timestamp) 
 
 	NSArray *keys = [self getAllKeysForController:controller];
 	for (NSNumber *key in keys) {
-		// Tell Godot this joystick is no longer there.
+		// Tell scardot this joystick is no longer there.
 		int joy_id = [key intValue];
 		Input::get_singleton()->joy_connection_changed(joy_id, false, "");
 

@@ -2,10 +2,10 @@
 /*  view_controller.mm                                                    */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -42,10 +42,10 @@
 #import <AVFoundation/AVFoundation.h>
 #import <GameController/GameController.h>
 
-@interface ViewController () <GodotViewDelegate>
+@interface ViewController () <scardotViewDelegate>
 
-@property(strong, nonatomic) GodotViewRenderer *renderer;
-@property(strong, nonatomic) GodotKeyboardInputView *keyboardView;
+@property(strong, nonatomic) scardotViewRenderer *renderer;
+@property(strong, nonatomic) scardotKeyboardInputView *keyboardView;
 
 @property(strong, nonatomic) UIView *godotLoadingOverlay;
 
@@ -53,8 +53,8 @@
 
 @implementation ViewController
 
-- (GodotView *)godotView {
-	return (GodotView *)self.view;
+- (scardotView *)godotView {
+	return (scardotView *)self.view;
 }
 
 - (void)pressesBegan:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event {
@@ -120,8 +120,8 @@
 }
 
 - (void)loadView {
-	GodotView *view = [[GodotView alloc] init];
-	GodotViewRenderer *renderer = [[GodotViewRenderer alloc] init];
+	scardotView *view = [[scardotView alloc] init];
+	scardotViewRenderer *renderer = [[scardotViewRenderer alloc] init];
 
 	self.renderer = renderer;
 	self.view = view;
@@ -170,7 +170,7 @@
 
 - (void)observeKeyboard {
 	print_verbose("Setting up keyboard input view.");
-	self.keyboardView = [GodotKeyboardInputView new];
+	self.keyboardView = [scardotKeyboardInputView new];
 	[self.view addSubview:self.keyboardView];
 
 	print_verbose("Adding observer for keyboard show/hide.");
@@ -204,7 +204,7 @@
 	[self.view addSubview:self.godotLoadingOverlay];
 }
 
-- (BOOL)godotViewFinishedSetup:(GodotView *)view {
+- (BOOL)godotViewFinishedSetup:(scardotView *)view {
 	[self.godotLoadingOverlay removeFromSuperview];
 	self.godotLoadingOverlay = nil;
 

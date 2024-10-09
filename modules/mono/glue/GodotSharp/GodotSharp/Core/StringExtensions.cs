@@ -5,11 +5,11 @@ using System.Security;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using Godot.NativeInterop;
+using scardot.NativeInterop;
 
 #nullable enable
 
-namespace Godot
+namespace scardot
 {
     /// <summary>
     /// Extension methods to manipulate strings.

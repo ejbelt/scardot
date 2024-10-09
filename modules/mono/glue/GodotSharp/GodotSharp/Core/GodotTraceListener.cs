@@ -1,8 +1,8 @@
 using System.Diagnostics;
 
-namespace Godot
+namespace scardot
 {
-    internal class GodotTraceListener : TraceListener
+    internal class scardotTraceListener : TraceListener
     {
         public override void Write(string message)
         {

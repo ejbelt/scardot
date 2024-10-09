@@ -2,10 +2,10 @@
 /*  gdextension_library_loader.cpp                                        */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -311,7 +311,7 @@ Error GDExtensionLibraryLoader::parse_gdextension_file(const String &p_path) {
 		compatible = VERSION_PATCH >= compatibility_minimum[2];
 	}
 	if (!compatible) {
-		ERR_PRINT(vformat("GDExtension only compatible with Godot version %d.%d.%d or later: %s", compatibility_minimum[0], compatibility_minimum[1], compatibility_minimum[2], p_path));
+		ERR_PRINT(vformat("GDExtension only compatible with scardot version %d.%d.%d or later: %s", compatibility_minimum[0], compatibility_minimum[1], compatibility_minimum[2], p_path));
 		return ERR_INVALID_DATA;
 	}
 
@@ -343,7 +343,7 @@ Error GDExtensionLibraryLoader::parse_gdextension_file(const String &p_path) {
 #endif
 
 		if (!compatible) {
-			ERR_PRINT(vformat("GDExtension only compatible with Godot version %s or earlier: %s", compat_string, p_path));
+			ERR_PRINT(vformat("GDExtension only compatible with scardot version %s or earlier: %s", compat_string, p_path));
 			return ERR_INVALID_DATA;
 		}
 	}

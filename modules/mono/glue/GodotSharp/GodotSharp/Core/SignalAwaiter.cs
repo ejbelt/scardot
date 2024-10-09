@@ -1,8 +1,8 @@
 using System;
 using System.Runtime.InteropServices;
-using Godot.NativeInterop;
+using scardot.NativeInterop;
 
-namespace Godot
+namespace scardot
 {
     public class SignalAwaiter : IAwaiter<Variant[]>, IAwaitable<Variant[]>
     {
@@ -10,13 +10,13 @@ namespace Godot
         private Variant[] _result;
         private Action _continuation;
 
-        public SignalAwaiter(GodotObject source, StringName signal, GodotObject target)
+        public SignalAwaiter(scardotObject source, StringName signal, scardotObject target)
         {
             var awaiterGcHandle = CustomGCHandle.AllocStrong(this);
             using godot_string_name signalSrc = NativeFuncs.godotsharp_string_name_new_copy(
                 (godot_string_name)(signal?.NativeValue ?? default));
-            NativeFuncs.godotsharp_internal_signal_awaiter_connect(GodotObject.GetPtr(source), in signalSrc,
-                GodotObject.GetPtr(target), GCHandle.ToIntPtr(awaiterGcHandle));
+            NativeFuncs.godotsharp_internal_signal_awaiter_connect(scardotObject.GetPtr(source), in signalSrc,
+                scardotObject.GetPtr(target), GCHandle.ToIntPtr(awaiterGcHandle));
         }
 
         public bool IsCompleted => _completed;

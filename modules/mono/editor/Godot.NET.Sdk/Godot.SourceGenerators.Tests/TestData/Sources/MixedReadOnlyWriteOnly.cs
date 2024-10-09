@@ -1,6 +1,6 @@
-using Godot;
+using scardot;
 
-public partial class MixedReadOnlyWriteOnly : GodotObject
+public partial class MixedReadOnlyWriteOnly : scardotObject
 {
     public readonly string ReadOnlyField = "foo";
     public string ReadOnlyAutoProperty { get; } = "foo";

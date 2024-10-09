@@ -1,4 +1,4 @@
-using Godot.NativeInterop;
+using scardot.NativeInterop;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,9 +8,9 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Versioning;
 using System.Text;
-using GodotTools.Internals;
+using scardotTools.Internals;
 
-namespace GodotTools.Utils
+namespace scardotTools.Utils
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static class OS
@@ -32,7 +32,7 @@ namespace GodotTools.Utils
         }
 
         /// <summary>
-        /// Godot platform identifiers.
+        /// scardot platform identifiers.
         /// </summary>
         public static class Platforms
         {
@@ -93,7 +93,7 @@ namespace GodotTools.Utils
             // TODO:
             // Does .NET 6 support BSD variants? If it does, it may need the name `unix`
             // instead of `linux` in the runtime identifier. This would be a problem as
-            // Godot has a single export profile for both, named LinuxBSD.
+            // scardot has a single export profile for both, named LinuxBSD.
             [Platforms.LinuxBSD] = DotNetOS.Linux,
             [Platforms.Android] = DotNetOS.Android,
             [Platforms.iOS] = DotNetOS.iOS,

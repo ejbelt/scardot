@@ -35,7 +35,7 @@
 				extends Node
 				[/gdscript]
 				[csharp]
-				using Godot;
+				using scardot;
 
 				[GlobalClass]
 				public partial class MyNode : Node

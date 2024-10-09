@@ -1,7 +1,7 @@
-# Greek translation of the Godot Engine editor interface.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Greek translation of the scardot Engine editor interface.
+# Copyright (c) 2014-present scardot Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the scardot source code.
 # George Tsiamasiotis <gtsiam@windowslive.com>, 2017-2018, 2019, 2020, 2021.
 # Georgios Katsanakis <geo.elgeo@gmail.com>, 2019.
 # Overloaded <manoschool@yahoo.gr>, 2019.
@@ -30,7 +30,7 @@
 # Lentiles GR <lentiles.gr@gmail.com>, 2024.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine editor interface\n"
+"Project-Id-Version: scardot Engine editor interface\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2024-04-20 08:08+0000\n"
@@ -1164,11 +1164,11 @@ msgstr "Αδύνατη η δημιουργία φακέλου."
 msgid "Create Folder"
 msgstr "Δημιουργία φακέλου"
 
-msgid "Thanks from the Godot community!"
-msgstr "Ευχαριστίες από την κοινότητα της Godot!"
+msgid "Thanks from the scardot community!"
+msgstr "Ευχαριστίες από την κοινότητα της scardot!"
 
-msgid "Godot Engine contributors"
-msgstr "Συνεισφέροντες στην Godot Engine"
+msgid "scardot Engine contributors"
+msgstr "Συνεισφέροντες στην scardot Engine"
 
 msgid "Project Founders"
 msgstr "Ιδρυτές του έργου"
@@ -1201,12 +1201,12 @@ msgid "Third-party Licenses"
 msgstr "Άδειες τρίτων κατασκευαστών"
 
 msgid ""
-"Godot Engine relies on a number of third-party free and open source "
+"scardot Engine relies on a number of third-party free and open source "
 "libraries, all compatible with the terms of its MIT license. The following is "
 "an exhaustive list of all such third-party components with their respective "
 "copyright statements and license terms."
 msgstr ""
-"Η μηχανή Godot βασίζεται σε μια σειρά από δωρεάν και ανοιχτού κώδικα "
+"Η μηχανή scardot βασίζεται σε μια σειρά από δωρεάν και ανοιχτού κώδικα "
 "βιβλιοθήκες τρίτων κατασκευαστών, όλες συμβατές με τους όρους της άδειας MIT. "
 "Ακολουθεί μία εκτενής λίστα με όλα τα σχετικά συστατικά της μηχανής μαζί με "
 "όλες τις αντοίστοιχες δηλώσεις προστασίας πνευματικών δικαιωμάτων και τους "
@@ -1502,8 +1502,8 @@ msgstr "Επιπλέον Επιλογές:"
 msgid "New profile name:"
 msgstr "Νέο όνομα προφίλ:"
 
-msgid "Godot Feature Profile"
-msgstr "Προφίλ Χαρακτηριστικών του Godot"
+msgid "scardot Feature Profile"
+msgstr "Προφίλ Χαρακτηριστικών του scardot"
 
 msgid "Import Profile(s)"
 msgstr "Εισαγωγή Προφίλ"
@@ -2067,8 +2067,8 @@ msgstr "Αναφορά Σφάλματος"
 msgid "Send Docs Feedback"
 msgstr "Αποστολή Σχολίων Τεκμηρίωσης"
 
-msgid "Support Godot Development"
-msgstr "Υποστηρίξτε την ανάπτυξη του Godot"
+msgid "Support scardot Development"
+msgstr "Υποστηρίξτε την ανάπτυξη του scardot"
 
 msgid "Update Continuously"
 msgstr "Συνεχόμενη Ανανέωση"
@@ -2358,8 +2358,8 @@ msgstr "Τα επίσημα πρότυπα εξαγωγής δεν είναι δ
 msgid "Select Template File"
 msgstr "Επιλογή Αρχείου Προτύπων"
 
-msgid "Godot Export Templates"
-msgstr "Προτύπων Εξαγωγής Godot"
+msgid "scardot Export Templates"
+msgstr "Προτύπων Εξαγωγής scardot"
 
 msgid "Runnable"
 msgstr "Εκτελέσιμο"
@@ -4602,8 +4602,8 @@ msgstr "Αποθήκευση θέματος ως..."
 msgid "Online Docs"
 msgstr "Ηλεκτρονική τεκμηρίωση"
 
-msgid "Open Godot online documentation."
-msgstr "Άνοιγμα ηλεκτρονικής τεκμηρίωσης της Godot."
+msgid "Open scardot online documentation."
+msgstr "Άνοιγμα ηλεκτρονικής τεκμηρίωσης της scardot."
 
 msgid "%s Class Reference"
 msgstr "Αναφορά Κλάσης %s"
@@ -5705,11 +5705,11 @@ msgstr ""
 "«x» και «y»."
 
 msgid ""
-"Custom Godot Shader Language expression, with custom amount of input and "
+"Custom scardot Shader Language expression, with custom amount of input and "
 "output ports. This is a direct injection of code into the vertex/fragment/"
 "light function, do not use it to write the function declarations inside."
 msgstr ""
-"Προσαρμοσμένη έκφραση γλώσσας σκίασης της Godot, με προσαρμοσμένο αριθμό "
+"Προσαρμοσμένη έκφραση γλώσσας σκίασης της scardot, με προσαρμοσμένο αριθμό "
 "εισόδων και εξόδων. Αυτό είναι μία άμεση παρεμβολή κώδικα στην συνάρτηση "
 "κορυφής/τμήματος/φωτός, μην γράψετε μέσα ορισμούς συναρτήσεων."
 

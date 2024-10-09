@@ -1,6 +1,6 @@
-using Godot;
+using scardot;
 
-public partial class AllReadOnly : GodotObject
+public partial class AllReadOnly : scardotObject
 {
     public readonly string ReadOnlyField = "foo";
     public string ReadOnlyAutoProperty { get; } = "foo";

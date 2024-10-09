@@ -2,10 +2,10 @@
 /*  gd_mono.h                                                             */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -164,19 +164,19 @@ public:
 
 namespace mono_bind {
 
-class GodotSharp : public Object {
-	GDCLASS(GodotSharp, Object);
+class scardotSharp : public Object {
+	GDCLASS(scardotSharp, Object);
 
 protected:
-	static GodotSharp *singleton;
+	static scardotSharp *singleton;
 
 public:
-	static GodotSharp *get_singleton() { return singleton; }
+	static scardotSharp *get_singleton() { return singleton; }
 
 	void reload_assemblies(bool p_soft_reload);
 
-	GodotSharp();
-	~GodotSharp();
+	scardotSharp();
+	~scardotSharp();
 };
 
 } // namespace mono_bind

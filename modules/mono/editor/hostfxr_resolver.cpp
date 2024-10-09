@@ -2,10 +2,10 @@
 /*  hostfxr_resolver.cpp                                                  */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -29,7 +29,7 @@
 /**************************************************************************/
 
 /*
-Adapted to Godot from the nethost library: https://github.com/dotnet/runtime/tree/main/src/native/corehost
+Adapted to scardot from the nethost library: https://github.com/dotnet/runtime/tree/main/src/native/corehost
 */
 
 /*

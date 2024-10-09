@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 #nullable enable
 
-namespace Godot
+namespace scardot
 {
     /// <summary>
     /// A 4x4 matrix used for 3D projective transformations. It can represent transformations such as

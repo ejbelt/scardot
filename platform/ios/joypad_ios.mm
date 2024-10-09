@@ -2,10 +2,10 @@
 /*  joypad_ios.mm                                                         */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -158,7 +158,7 @@ void JoypadIOS::start_processing() {
 		controller.playerIndex = [self getFreePlayerIndex];
 	}
 
-	// tell Godot about our new controller
+	// tell scardot about our new controller
 	Input::get_singleton()->joy_connection_changed(joy_id, true, String::utf8([controller.vendorName UTF8String]));
 
 	// add it to our dictionary, this will retain our controllers
@@ -196,7 +196,7 @@ void JoypadIOS::start_processing() {
 
 	NSArray *keys = [self.connectedJoypads allKeysForObject:controller];
 	for (NSNumber *key in keys) {
-		// tell Godot this joystick is no longer there
+		// tell scardot this joystick is no longer there
 		int joy_id = [key intValue];
 		Input::get_singleton()->joy_connection_changed(joy_id, false, "");
 

@@ -2,10 +2,10 @@
 /*  wayland_thread.h                                                      */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -83,7 +83,7 @@
 
 class WaylandThread {
 public:
-	// Messages used for exchanging information between Godot's and Wayland's thread.
+	// Messages used for exchanging information between scardot's and Wayland's thread.
 	class Message : public RefCounted {
 	public:
 		Message() {}
@@ -259,7 +259,7 @@ public:
 		WaylandThread *wayland_thread;
 	};
 
-	// "High level" Godot-side screen data.
+	// "High level" scardot-side screen data.
 	struct ScreenData {
 		// Geometry data.
 		Point2i position;

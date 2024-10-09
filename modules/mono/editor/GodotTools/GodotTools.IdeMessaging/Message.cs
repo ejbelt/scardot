@@ -1,4 +1,4 @@
-namespace GodotTools.IdeMessaging
+namespace scardotTools.IdeMessaging
 {
     public class Message
     {

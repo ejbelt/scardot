@@ -2,7 +2,7 @@ using System;
 
 #nullable enable
 
-namespace Godot
+namespace scardot
 {
     /// <summary>
     /// Define a new subgroup for the following exported properties. This helps to organize properties in the Inspector dock.

@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-namespace Godot.NativeInterop;
+namespace scardot.NativeInterop;
 
 // Ref structs are not allowed as generic type parameters, so we can't use Unsafe.AsPointer<T>/AsRef<T>.
 // As a workaround we create our own overloads for our structs with some tricks under the hood.

@@ -1,6 +1,6 @@
-namespace Godot.SourceGenerators.Sample
+namespace scardot.SourceGenerators.Sample
 {
-    public partial class Foo : GodotObject
+    public partial class Foo : scardotObject
     {
     }
 

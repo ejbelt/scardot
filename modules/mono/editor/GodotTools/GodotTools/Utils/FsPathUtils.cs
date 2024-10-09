@@ -1,10 +1,10 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using Godot;
-using GodotTools.Core;
+using scardot;
+using scardotTools.Core;
 
-namespace GodotTools.Utils
+namespace scardotTools.Utils
 {
     public static class FsPathUtils
     {

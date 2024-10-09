@@ -2,10 +2,10 @@
 /*  rendering_device_driver_d3d12.cpp                                     */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -101,8 +101,8 @@ extern "C" {
 
 static const D3D12_RANGE VOID_RANGE = {};
 
-static const uint32_t ROOT_CONSTANT_REGISTER = GODOT_NIR_DESCRIPTOR_SET_MULTIPLIER * (RDD::MAX_UNIFORM_SETS + 1);
-static const uint32_t RUNTIME_DATA_REGISTER = GODOT_NIR_DESCRIPTOR_SET_MULTIPLIER * (RDD::MAX_UNIFORM_SETS + 2);
+static const uint32_t ROOT_CONSTANT_REGISTER = SCARDOT_NIR_DESCRIPTOR_SET_MULTIPLIER * (RDD::MAX_UNIFORM_SETS + 1);
+static const uint32_t RUNTIME_DATA_REGISTER = SCARDOT_NIR_DESCRIPTOR_SET_MULTIPLIER * (RDD::MAX_UNIFORM_SETS + 2);
 
 /*****************/
 /**** GENERIC ****/
@@ -2976,7 +2976,7 @@ uint32_t RenderingDeviceDriverD3D12::_shader_patch_dxil_specialization_constant(
 #ifdef DEV_ENABLED
 		uint64_t orig_patch_val = tamper_bits(bytecode.ptrw(), offset, patch_val);
 		// Checking against the value the NIR patch should have set.
-		DEV_ASSERT(!p_is_first_patch || ((orig_patch_val >> 1) & GODOT_NIR_SC_SENTINEL_MAGIC_MASK) == GODOT_NIR_SC_SENTINEL_MAGIC);
+		DEV_ASSERT(!p_is_first_patch || ((orig_patch_val >> 1) & SCARDOT_NIR_SC_SENTINEL_MAGIC_MASK) == SCARDOT_NIR_SC_SENTINEL_MAGIC);
 		uint64_t readback_patch_val = tamper_bits(bytecode.ptrw(), offset, patch_val);
 		DEV_ASSERT(readback_patch_val == patch_val);
 #else
@@ -3194,7 +3194,7 @@ Vector<uint8_t> RenderingDeviceDriverD3D12::shader_compile_binary_from_spirv(Vec
 				Vector<ShaderBinary::SpecializationConstant> &specialization_constants;
 			} shader_data{ stage, binary_data, sets_bindings, specialization_constants };
 
-			GodotNirCallbacks godot_nir_callbacks = {};
+			scardotNirCallbacks godot_nir_callbacks = {};
 			godot_nir_callbacks.data = &shader_data;
 
 			godot_nir_callbacks.report_resource = [](uint32_t p_register, uint32_t p_space, uint32_t p_dxil_type, void *p_data) {
@@ -3226,8 +3226,8 @@ Vector<uint8_t> RenderingDeviceDriverD3D12::shader_compile_binary_from_spirv(Vec
 				} else {
 					DEV_ASSERT(p_space == 0);
 
-					uint32_t set = p_register / GODOT_NIR_DESCRIPTOR_SET_MULTIPLIER;
-					uint32_t binding = (p_register % GODOT_NIR_DESCRIPTOR_SET_MULTIPLIER) / GODOT_NIR_BINDING_MULTIPLIER;
+					uint32_t set = p_register / SCARDOT_NIR_DESCRIPTOR_SET_MULTIPLIER;
+					uint32_t binding = (p_register % SCARDOT_NIR_DESCRIPTOR_SET_MULTIPLIER) / SCARDOT_NIR_BINDING_MULTIPLIER;
 
 					DEV_ASSERT(set < (uint32_t)shader_data_in.sets_bindings.size());
 					[[maybe_unused]] bool found = false;
@@ -3472,7 +3472,7 @@ Vector<uint8_t> RenderingDeviceDriverD3D12::shader_compile_binary_from_spirv(Vec
 					} break;
 				}
 
-				uint32_t dxil_register = set * GODOT_NIR_DESCRIPTOR_SET_MULTIPLIER + binding.binding * GODOT_NIR_BINDING_MULTIPLIER;
+				uint32_t dxil_register = set * SCARDOT_NIR_DESCRIPTOR_SET_MULTIPLIER + binding.binding * SCARDOT_NIR_BINDING_MULTIPLIER;
 
 				if (binding.res_class != RES_CLASS_INVALID) {
 					insert_range(
@@ -3592,7 +3592,7 @@ Vector<uint8_t> RenderingDeviceDriverD3D12::shader_compile_binary_from_spirv(Vec
 		binptr[0] = 'G';
 		binptr[1] = 'S';
 		binptr[2] = 'B';
-		binptr[3] = 'D'; // Godot shader binary data.
+		binptr[3] = 'D'; // scardot shader binary data.
 		offset += 4;
 		encode_uint32(ShaderBinary::VERSION, binptr + offset);
 		offset += sizeof(uint32_t);

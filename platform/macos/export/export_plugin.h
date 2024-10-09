@@ -2,10 +2,10 @@
 /*  export_plugin.h                                                       */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -45,14 +45,14 @@
 
 // Optional environment variables for defining confidential information. If any
 // of these is set, they will override the values set in the credentials file.
-const String ENV_MAC_CODESIGN_CERT_FILE = "GODOT_MACOS_CODESIGN_CERTIFICATE_FILE";
-const String ENV_MAC_CODESIGN_CERT_PASS = "GODOT_MACOS_CODESIGN_CERTIFICATE_PASSWORD";
-const String ENV_MAC_CODESIGN_PROFILE = "GODOT_MACOS_CODESIGN_PROVISIONING_PROFILE";
-const String ENV_MAC_NOTARIZATION_UUID = "GODOT_MACOS_NOTARIZATION_API_UUID";
-const String ENV_MAC_NOTARIZATION_KEY = "GODOT_MACOS_NOTARIZATION_API_KEY";
-const String ENV_MAC_NOTARIZATION_KEY_ID = "GODOT_MACOS_NOTARIZATION_API_KEY_ID";
-const String ENV_MAC_NOTARIZATION_APPLE_ID = "GODOT_MACOS_NOTARIZATION_APPLE_ID_NAME";
-const String ENV_MAC_NOTARIZATION_APPLE_PASS = "GODOT_MACOS_NOTARIZATION_APPLE_ID_PASSWORD";
+const String ENV_MAC_CODESIGN_CERT_FILE = "SCARDOT_MACOS_CODESIGN_CERTIFICATE_FILE";
+const String ENV_MAC_CODESIGN_CERT_PASS = "SCARDOT_MACOS_CODESIGN_CERTIFICATE_PASSWORD";
+const String ENV_MAC_CODESIGN_PROFILE = "SCARDOT_MACOS_CODESIGN_PROVISIONING_PROFILE";
+const String ENV_MAC_NOTARIZATION_UUID = "SCARDOT_MACOS_NOTARIZATION_API_UUID";
+const String ENV_MAC_NOTARIZATION_KEY = "SCARDOT_MACOS_NOTARIZATION_API_KEY";
+const String ENV_MAC_NOTARIZATION_KEY_ID = "SCARDOT_MACOS_NOTARIZATION_API_KEY_ID";
+const String ENV_MAC_NOTARIZATION_APPLE_ID = "SCARDOT_MACOS_NOTARIZATION_APPLE_ID_NAME";
+const String ENV_MAC_NOTARIZATION_APPLE_PASS = "SCARDOT_MACOS_NOTARIZATION_APPLE_ID_PASSWORD";
 
 class EditorExportPlatformMacOS : public EditorExportPlatform {
 	GDCLASS(EditorExportPlatformMacOS, EditorExportPlatform);

@@ -1,27 +1,27 @@
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using Godot.Bridge;
-using Godot.NativeInterop;
+using scardot.Bridge;
+using scardot.NativeInterop;
 
 #nullable enable
 
-namespace Godot
+namespace scardot
 {
-    public partial class GodotObject : IDisposable
+    public partial class scardotObject : IDisposable
     {
         private bool _disposed;
-        private static readonly Type _cachedType = typeof(GodotObject);
+        private static readonly Type _cachedType = typeof(scardotObject);
 
         internal IntPtr NativePtr;
         private bool _memoryOwn;
 
-        private WeakReference<GodotObject>? _weakReferenceToSelf;
+        private WeakReference<scardotObject>? _weakReferenceToSelf;
 
         /// <summary>
-        /// Constructs a new <see cref="GodotObject"/>.
+        /// Constructs a new <see cref="scardotObject"/>.
         /// </summary>
-        public GodotObject() : this(false)
+        public scardotObject() : this(false)
         {
             unsafe
             {
@@ -52,20 +52,20 @@ namespace Godot
                     GetType(), cachedType);
             }
 
-            _weakReferenceToSelf = DisposablesTracker.RegisterGodotObject(this);
+            _weakReferenceToSelf = DisposablesTracker.RegisterscardotObject(this);
         }
 
-        internal GodotObject(bool memoryOwn)
+        internal scardotObject(bool memoryOwn)
         {
             _memoryOwn = memoryOwn;
         }
 
         /// <summary>
-        /// The pointer to the native instance of this <see cref="GodotObject"/>.
+        /// The pointer to the native instance of this <see cref="scardotObject"/>.
         /// </summary>
         public IntPtr NativeInstance => NativePtr;
 
-        internal static IntPtr GetPtr(GodotObject? instance)
+        internal static IntPtr GetPtr(scardotObject? instance)
         {
             if (instance == null)
                 return IntPtr.Zero;
@@ -81,13 +81,13 @@ namespace Godot
             return instance.NativePtr;
         }
 
-        ~GodotObject()
+        ~scardotObject()
         {
             Dispose(false);
         }
 
         /// <summary>
-        /// Disposes of this <see cref="GodotObject"/>.
+        /// Disposes of this <see cref="scardotObject"/>.
         /// </summary>
         public void Dispose()
         {
@@ -96,7 +96,7 @@ namespace Godot
         }
 
         /// <summary>
-        /// Disposes implementation of this <see cref="GodotObject"/>.
+        /// Disposes implementation of this <see cref="scardotObject"/>.
         /// </summary>
         protected virtual void Dispose(bool disposing)
         {
@@ -121,7 +121,7 @@ namespace Godot
                 if (_memoryOwn)
                 {
                     NativeFuncs.godotsharp_internal_refcounted_disposed(NativePtr, gcHandleToFree,
-                        (!disposing).ToGodotBool());
+                        (!disposing).ToscardotBool());
                 }
                 else
                 {
@@ -133,12 +133,12 @@ namespace Godot
 
             if (_weakReferenceToSelf != null)
             {
-                DisposablesTracker.UnregisterGodotObject(this, _weakReferenceToSelf);
+                DisposablesTracker.UnregisterscardotObject(this, _weakReferenceToSelf);
             }
         }
 
         /// <summary>
-        /// Converts this <see cref="GodotObject"/> to a string.
+        /// Converts this <see cref="scardotObject"/> to a string.
         /// </summary>
         /// <returns>A string representation of this object.</returns>
         public override string ToString()
@@ -175,7 +175,7 @@ namespace Godot
         /// A <see cref="SignalAwaiter"/> that completes when
         /// <paramref name="source"/> emits the <paramref name="signal"/>.
         /// </returns>
-        public SignalAwaiter ToSignal(GodotObject source, StringName signal)
+        public SignalAwaiter ToSignal(scardotObject source, StringName signal)
         {
             return new SignalAwaiter(source, signal, this);
         }
@@ -184,10 +184,10 @@ namespace Godot
         {
             var name = t.Assembly.GetName().Name;
 
-            if (name == "GodotSharp" || name == "GodotSharpEditor")
+            if (name == "scardotSharp" || name == "scardotSharpEditor")
                 return t;
 
-            Debug.Assert(t.BaseType is not null, "Script types must derive from a native Godot type.");
+            Debug.Assert(t.BaseType is not null, "Script types must derive from a native scardot type.");
 
             return InternalGetClassNativeBase(t.BaseType);
         }
@@ -195,14 +195,14 @@ namespace Godot
         // ReSharper disable once VirtualMemberNeverOverridden.Global
         /// <summary>
         /// Set the value of a property contained in this class.
-        /// This method is used by Godot to assign property values.
+        /// This method is used by scardot to assign property values.
         /// Do not call or override this method.
         /// </summary>
         /// <param name="name">Name of the property to set.</param>
         /// <param name="value">Value to set the property to if it was found.</param>
         /// <returns><see langword="true"/> if a property with the given name was found.</returns>
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        protected internal virtual bool SetGodotClassPropertyValue(in godot_string_name name, in godot_variant value)
+        protected internal virtual bool SetscardotClassPropertyValue(in godot_string_name name, in godot_variant value)
         {
             return false;
         }
@@ -210,14 +210,14 @@ namespace Godot
         // ReSharper disable once VirtualMemberNeverOverridden.Global
         /// <summary>
         /// Get the value of a property contained in this class.
-        /// This method is used by Godot to retrieve property values.
+        /// This method is used by scardot to retrieve property values.
         /// Do not call or override this method.
         /// </summary>
         /// <param name="name">Name of the property to get.</param>
         /// <param name="value">Value of the property if it was found.</param>
         /// <returns><see langword="true"/> if a property with the given name was found.</returns>
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        protected internal virtual bool GetGodotClassPropertyValue(in godot_string_name name, out godot_variant value)
+        protected internal virtual bool GetscardotClassPropertyValue(in godot_string_name name, out godot_variant value)
         {
             value = default;
             return false;
@@ -226,13 +226,13 @@ namespace Godot
         // ReSharper disable once VirtualMemberNeverOverridden.Global
         /// <summary>
         /// Raises the signal with the given name, using the given arguments.
-        /// This method is used by Godot to raise signals from the engine side.\n"
+        /// This method is used by scardot to raise signals from the engine side.\n"
         /// Do not call or override this method.
         /// </summary>
         /// <param name="signal">Name of the signal to raise.</param>
         /// <param name="args">Arguments to use with the raised signal.</param>
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        protected internal virtual void RaiseGodotClassSignalCallbacks(in godot_string_name signal,
+        protected internal virtual void RaisescardotClassSignalCallbacks(in godot_string_name signal,
             NativeVariantPtrArgs args)
         {
         }
@@ -280,7 +280,7 @@ namespace Godot
         /// </summary>
         /// <param name="info">Object used to save the data.</param>
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        protected internal virtual void SaveGodotObjectData(GodotSerializationInfo info)
+        protected internal virtual void SavescardotObjectData(scardotSerializationInfo info)
         {
         }
 
@@ -292,7 +292,7 @@ namespace Godot
         /// </summary>
         /// <param name="info">Object that contains the previously saved data.</param>
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        protected internal virtual void RestoreGodotObjectData(GodotSerializationInfo info)
+        protected internal virtual void RestorescardotObjectData(scardotSerializationInfo info)
         {
         }
     }

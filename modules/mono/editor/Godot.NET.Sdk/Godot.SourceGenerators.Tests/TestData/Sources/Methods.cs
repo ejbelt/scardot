@@ -1,6 +1,6 @@
-using Godot;
+using scardot;
 
-public partial class Methods : GodotObject
+public partial class Methods : scardotObject
 {
     private void MethodWithOverload()
     {

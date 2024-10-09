@@ -2,10 +2,10 @@
 /*  godot_joints_2d.h                                                     */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -28,13 +28,13 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#ifndef GODOT_JOINTS_2D_H
-#define GODOT_JOINTS_2D_H
+#ifndef SCARDOT_JOINTS_2D_H
+#define SCARDOT_JOINTS_2D_H
 
 #include "godot_body_2d.h"
 #include "godot_constraint_2d.h"
 
-class GodotJoint2D : public GodotConstraint2D {
+class scardotJoint2D : public scardotConstraint2D {
 	real_t bias = 0;
 	real_t max_bias = 3.40282e+38;
 	real_t max_force = 3.40282e+38;
@@ -57,15 +57,15 @@ public:
 	virtual bool pre_solve(real_t p_step) override { return false; }
 	virtual void solve(real_t p_step) override {}
 
-	void copy_settings_from(GodotJoint2D *p_joint);
+	void copy_settings_from(scardotJoint2D *p_joint);
 
 	virtual PhysicsServer2D::JointType get_type() const { return PhysicsServer2D::JOINT_TYPE_MAX; }
-	GodotJoint2D(GodotBody2D **p_body_ptr = nullptr, int p_body_count = 0) :
-			GodotConstraint2D(p_body_ptr, p_body_count) {}
+	scardotJoint2D(scardotBody2D **p_body_ptr = nullptr, int p_body_count = 0) :
+			scardotConstraint2D(p_body_ptr, p_body_count) {}
 
-	virtual ~GodotJoint2D() {
+	virtual ~scardotJoint2D() {
 		for (int i = 0; i < get_body_count(); i++) {
-			GodotBody2D *body = get_body_ptr()[i];
+			scardotBody2D *body = get_body_ptr()[i];
 			if (body) {
 				body->remove_constraint(this, i);
 			}
@@ -73,14 +73,14 @@ public:
 	};
 };
 
-class GodotPinJoint2D : public GodotJoint2D {
+class scardotPinJoint2D : public scardotJoint2D {
 	union {
 		struct {
-			GodotBody2D *A;
-			GodotBody2D *B;
+			scardotBody2D *A;
+			scardotBody2D *B;
 		};
 
-		GodotBody2D *_arr[2] = { nullptr, nullptr };
+		scardotBody2D *_arr[2] = { nullptr, nullptr };
 	};
 
 	Transform2D M;
@@ -115,17 +115,17 @@ public:
 	void set_flag(PhysicsServer2D::PinJointFlag p_flag, bool p_enabled);
 	bool get_flag(PhysicsServer2D::PinJointFlag p_flag) const;
 
-	GodotPinJoint2D(const Vector2 &p_pos, GodotBody2D *p_body_a, GodotBody2D *p_body_b = nullptr);
+	scardotPinJoint2D(const Vector2 &p_pos, scardotBody2D *p_body_a, scardotBody2D *p_body_b = nullptr);
 };
 
-class GodotGrooveJoint2D : public GodotJoint2D {
+class scardotGrooveJoint2D : public scardotJoint2D {
 	union {
 		struct {
-			GodotBody2D *A;
-			GodotBody2D *B;
+			scardotBody2D *A;
+			scardotBody2D *B;
 		};
 
-		GodotBody2D *_arr[2] = { nullptr, nullptr };
+		scardotBody2D *_arr[2] = { nullptr, nullptr };
 	};
 
 	Vector2 A_groove_1;
@@ -149,17 +149,17 @@ public:
 	virtual bool pre_solve(real_t p_step) override;
 	virtual void solve(real_t p_step) override;
 
-	GodotGrooveJoint2D(const Vector2 &p_a_groove1, const Vector2 &p_a_groove2, const Vector2 &p_b_anchor, GodotBody2D *p_body_a, GodotBody2D *p_body_b);
+	scardotGrooveJoint2D(const Vector2 &p_a_groove1, const Vector2 &p_a_groove2, const Vector2 &p_b_anchor, scardotBody2D *p_body_a, scardotBody2D *p_body_b);
 };
 
-class GodotDampedSpringJoint2D : public GodotJoint2D {
+class scardotDampedSpringJoint2D : public scardotJoint2D {
 	union {
 		struct {
-			GodotBody2D *A;
-			GodotBody2D *B;
+			scardotBody2D *A;
+			scardotBody2D *B;
 		};
 
-		GodotBody2D *_arr[2] = { nullptr, nullptr };
+		scardotBody2D *_arr[2] = { nullptr, nullptr };
 	};
 
 	Vector2 anchor_A;
@@ -186,7 +186,7 @@ public:
 	void set_param(PhysicsServer2D::DampedSpringParam p_param, real_t p_value);
 	real_t get_param(PhysicsServer2D::DampedSpringParam p_param) const;
 
-	GodotDampedSpringJoint2D(const Vector2 &p_anchor_a, const Vector2 &p_anchor_b, GodotBody2D *p_body_a, GodotBody2D *p_body_b);
+	scardotDampedSpringJoint2D(const Vector2 &p_anchor_a, const Vector2 &p_anchor_b, scardotBody2D *p_body_a, scardotBody2D *p_body_b);
 };
 
-#endif // GODOT_JOINTS_2D_H
+#endif // SCARDOT_JOINTS_2D_H

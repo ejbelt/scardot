@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
-namespace GodotTools.Utils
+namespace scardotTools.Utils
 {
     public static class CollectionExtensions
     {

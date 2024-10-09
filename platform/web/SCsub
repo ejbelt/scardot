@@ -10,11 +10,11 @@ if "serve" in COMMAND_LINE_TARGETS or "run" in COMMAND_LINE_TARGETS:
 
     from serve import serve
 
-    port = os.environ.get("GODOT_WEB_TEST_PORT", 8060)
+    port = os.environ.get("SCARDOT_WEB_TEST_PORT", 8060)
     try:
         port = int(port)
     except Exception:
-        print_error("GODOT_WEB_TEST_PORT must be a valid integer")
+        print_error("SCARDOT_WEB_TEST_PORT must be a valid integer")
         sys.exit(255)
     serve(env.Dir(env.GetTemplateZipPath()).abspath, port, "run" in COMMAND_LINE_TARGETS)
     sys.exit(0)
@@ -77,7 +77,7 @@ if env["dlink_enabled"]:
     # The main emscripten runtime, with exported standard libraries.
     sys = sys_env.Program(build_targets, ["web_runtime.cpp"])
 
-    # The side library, containing all Godot code.
+    # The side library, containing all scardot code.
     wasm = env.add_program("#bin/godot.side${PROGSUFFIX}.wasm", web_files)
     build = sys + [wasm[0]]
 else:

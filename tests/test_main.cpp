@@ -2,10 +2,10 @@
 /*  test_main.cpp                                                         */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -179,7 +179,7 @@
 int test_main(int argc, char *argv[]) {
 	bool run_tests = true;
 
-	// Convert arguments to Godot's command-line.
+	// Convert arguments to scardot's command-line.
 	List<String> args;
 
 	for (int i = 0; i < argc; i++) {
@@ -218,10 +218,10 @@ int test_main(int argc, char *argv[]) {
 	}
 
 	if (test_args.size() > 0) {
-		// Convert Godot command line arguments back to standard arguments.
+		// Convert scardot command line arguments back to standard arguments.
 		char **doctest_args = new char *[test_args.size()];
 		for (uint32_t x = 0; x < test_args.size(); x++) {
-			// Operation to convert Godot string to non wchar string.
+			// Operation to convert scardot string to non wchar string.
 			CharString cs = test_args[x].utf8();
 			const char *str = cs.get_data();
 			// Allocate the string copy.
@@ -243,8 +243,8 @@ int test_main(int argc, char *argv[]) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-struct GodotTestCaseListener : public doctest::IReporter {
-	GodotTestCaseListener(const doctest::ContextOptions &p_in) {}
+struct scardotTestCaseListener : public doctest::IReporter {
+	scardotTestCaseListener(const doctest::ContextOptions &p_in) {}
 
 	SignalWatcher *signal_watcher = nullptr;
 
@@ -452,4 +452,4 @@ private:
 	}
 };
 
-REGISTER_LISTENER("GodotTestCaseListener", 1, GodotTestCaseListener);
+REGISTER_LISTENER("scardotTestCaseListener", 1, scardotTestCaseListener);

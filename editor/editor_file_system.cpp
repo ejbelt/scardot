@@ -2,10 +2,10 @@
 /*  editor_file_system.cpp                                                */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -48,7 +48,7 @@
 #include "scene/resources/packed_scene.h"
 
 EditorFileSystem *EditorFileSystem::singleton = nullptr;
-//the name is the version, to keep compatibility with different versions of Godot
+//the name is the version, to keep compatibility with different versions of scardot
 #define CACHE_FILE_NAME "filesystem_cache8"
 
 int EditorFileSystemDirectory::find_file_index(const String &p_file) const {

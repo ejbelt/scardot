@@ -5,10 +5,10 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Loader;
-using Godot.Bridge;
-using Godot.NativeInterop;
+using scardot.Bridge;
+using scardot.NativeInterop;
 
-namespace GodotPlugins
+namespace scardotPlugins
 {
     public static class Main
     {
@@ -73,7 +73,7 @@ namespace GodotPlugins
         }
 
         private static readonly List<AssemblyName> SharedAssemblies = new();
-        private static readonly Assembly CoreApiAssembly = typeof(global::Godot.GodotObject).Assembly;
+        private static readonly Assembly CoreApiAssembly = typeof(global::scardot.scardotObject).Assembly;
         private static Assembly? _editorApiAssembly;
         private static PluginLoadContextWrapper? _projectLoadContext;
         private static bool _editorHint = false;
@@ -95,7 +95,7 @@ namespace GodotPlugins
             {
                 _editorHint = editorHint.ToBool();
 
-                _dllImportResolver = new GodotDllImportResolver(godotDllHandle).OnResolveDllImport;
+                _dllImportResolver = new scardotDllImportResolver(godotDllHandle).OnResolveDllImport;
 
                 SharedAssemblies.Add(CoreApiAssembly.GetName());
                 NativeLibrary.SetDllImportResolver(CoreApiAssembly, _dllImportResolver);
@@ -105,7 +105,7 @@ namespace GodotPlugins
 
                 if (_editorHint)
                 {
-                    _editorApiAssembly = Assembly.Load("GodotSharpEditor");
+                    _editorApiAssembly = Assembly.Load("scardotSharpEditor");
                     SharedAssemblies.Add(_editorApiAssembly.GetName());
                     NativeLibrary.SetDllImportResolver(_editorApiAssembly, _dllImportResolver);
                 }
@@ -171,19 +171,19 @@ namespace GodotPlugins
                 string assemblyPath = new(nAssemblyPath);
 
                 if (_editorApiAssembly == null)
-                    throw new InvalidOperationException("The Godot editor API assembly is not loaded.");
+                    throw new InvalidOperationException("The scardot editor API assembly is not loaded.");
 
                 var (assembly, _) = LoadPlugin(assemblyPath, isCollectible: false);
 
                 NativeLibrary.SetDllImportResolver(assembly, _dllImportResolver!);
 
-                var method = assembly.GetType("GodotTools.GodotSharpEditor")?
+                var method = assembly.GetType("scardotTools.scardotSharpEditor")?
                     .GetMethod("InternalCreateInstance",
                         BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
 
                 if (method == null)
                 {
-                    throw new MissingMethodException("GodotTools.GodotSharpEditor",
+                    throw new MissingMethodException("scardotTools.scardotSharpEditor",
                         "InternalCreateInstance");
                 }
 
@@ -220,7 +220,7 @@ namespace GodotPlugins
         {
             try
             {
-                return UnloadPlugin(ref _projectLoadContext).ToGodotBool();
+                return UnloadPlugin(ref _projectLoadContext).ToscardotBool();
             }
             catch (Exception e)
             {
@@ -263,12 +263,12 @@ namespace GodotPlugins
                     {
                         takingTooLong = true;
 
-                        // TODO: How to log from GodotPlugins? (delegate pointer?)
+                        // TODO: How to log from scardotPlugins? (delegate pointer?)
                         Console.Error.WriteLine("Assembly unloading is taking longer than expected...");
                     }
                     else if (elapsedTimeMs >= 1000)
                     {
-                        // TODO: How to log from GodotPlugins? (delegate pointer?)
+                        // TODO: How to log from scardotPlugins? (delegate pointer?)
                         Console.Error.WriteLine(
                             "Failed to unload assemblies. Possible causes: Strong GC handles, running threads, etc.");
 
@@ -283,7 +283,7 @@ namespace GodotPlugins
             }
             catch (Exception e)
             {
-                // TODO: How to log exceptions from GodotPlugins? (delegate pointer?)
+                // TODO: How to log exceptions from scardotPlugins? (delegate pointer?)
                 Console.Error.WriteLine(e);
                 return false;
             }

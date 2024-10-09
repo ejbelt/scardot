@@ -1,4 +1,4 @@
-namespace Godot.SourceGenerators
+namespace scardot.SourceGenerators
 {
     internal readonly struct PropertyInfo
     {

@@ -1,5 +1,5 @@
 using System;
-using Godot;
+using scardot;
 
 public partial class ExportDiagnostics_GD0105 : Node
 {

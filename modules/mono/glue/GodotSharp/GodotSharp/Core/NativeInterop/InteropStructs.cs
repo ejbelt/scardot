@@ -7,15 +7,15 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace Godot.NativeInterop
+namespace scardot.NativeInterop
 {
     // NOTES:
     // ref structs cannot implement interfaces, but they still work in `using` directives if they declare Dispose()
 
-    public static class GodotBoolExtensions
+    public static class scardotBoolExtensions
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe godot_bool ToGodotBool(this bool @bool)
+        public static unsafe godot_bool ToscardotBool(this bool @bool)
         {
             return *(godot_bool*)&@bool;
         }
@@ -66,13 +66,13 @@ namespace Godot.NativeInterop
 
     public enum godot_variant_call_error_error
     {
-        GODOT_CALL_ERROR_CALL_OK = 0,
-        GODOT_CALL_ERROR_CALL_ERROR_INVALID_METHOD,
-        GODOT_CALL_ERROR_CALL_ERROR_INVALID_ARGUMENT,
-        GODOT_CALL_ERROR_CALL_ERROR_TOO_MANY_ARGUMENTS,
-        GODOT_CALL_ERROR_CALL_ERROR_TOO_FEW_ARGUMENTS,
-        GODOT_CALL_ERROR_CALL_ERROR_INSTANCE_IS_NULL,
-        GODOT_CALL_ERROR_CALL_ERROR_METHOD_NOT_CONST,
+        SCARDOT_CALL_ERROR_CALL_OK = 0,
+        SCARDOT_CALL_ERROR_CALL_ERROR_INVALID_METHOD,
+        SCARDOT_CALL_ERROR_CALL_ERROR_INVALID_ARGUMENT,
+        SCARDOT_CALL_ERROR_CALL_ERROR_TOO_MANY_ARGUMENTS,
+        SCARDOT_CALL_ERROR_CALL_ERROR_TOO_FEW_ARGUMENTS,
+        SCARDOT_CALL_ERROR_CALL_ERROR_INSTANCE_IS_NULL,
+        SCARDOT_CALL_ERROR_CALL_ERROR_METHOD_NOT_CONST,
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -98,9 +98,9 @@ namespace Godot.NativeInterop
             set => argument = value;
         }
 
-        public Godot.Variant.Type Expected
+        public scardot.Variant.Type Expected
         {
-            readonly get => (Godot.Variant.Type)expected;
+            readonly get => (scardot.Variant.Type)expected;
             set => expected = (int)value;
         }
     }

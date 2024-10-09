@@ -2,10 +2,10 @@
 /*  gd_mono_cache.cpp                                                     */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -57,11 +57,11 @@ void update_godot_api_cache(const ManagedCallbacks &p_managed_callbacks) {
 	CHECK_CALLBACK_NOT_NULL(DelegateUtils, TrySerializeDelegateWithGCHandle);
 	CHECK_CALLBACK_NOT_NULL(DelegateUtils, TryDeserializeDelegateWithGCHandle);
 	CHECK_CALLBACK_NOT_NULL(ScriptManagerBridge, FrameCallback);
-	CHECK_CALLBACK_NOT_NULL(ScriptManagerBridge, CreateManagedForGodotObjectBinding);
-	CHECK_CALLBACK_NOT_NULL(ScriptManagerBridge, CreateManagedForGodotObjectScriptInstance);
+	CHECK_CALLBACK_NOT_NULL(ScriptManagerBridge, CreateManagedForscardotObjectBinding);
+	CHECK_CALLBACK_NOT_NULL(ScriptManagerBridge, CreateManagedForscardotObjectScriptInstance);
 	CHECK_CALLBACK_NOT_NULL(ScriptManagerBridge, GetScriptNativeName);
 	CHECK_CALLBACK_NOT_NULL(ScriptManagerBridge, GetGlobalClassName);
-	CHECK_CALLBACK_NOT_NULL(ScriptManagerBridge, SetGodotObjectPtr);
+	CHECK_CALLBACK_NOT_NULL(ScriptManagerBridge, SetscardotObjectPtr);
 	CHECK_CALLBACK_NOT_NULL(ScriptManagerBridge, RaiseEventSignal);
 	CHECK_CALLBACK_NOT_NULL(ScriptManagerBridge, ScriptIsOrInherits);
 	CHECK_CALLBACK_NOT_NULL(ScriptManagerBridge, AddScriptBridge);
@@ -84,7 +84,7 @@ void update_godot_api_cache(const ManagedCallbacks &p_managed_callbacks) {
 	CHECK_CALLBACK_NOT_NULL(GCHandleBridge, FreeGCHandle);
 	CHECK_CALLBACK_NOT_NULL(GCHandleBridge, GCHandleIsTargetCollectible);
 	CHECK_CALLBACK_NOT_NULL(DebuggingUtils, GetCurrentStackInfo);
-	CHECK_CALLBACK_NOT_NULL(DisposablesTracker, OnGodotShuttingDown);
+	CHECK_CALLBACK_NOT_NULL(DisposablesTracker, OnscardotShuttingDown);
 	CHECK_CALLBACK_NOT_NULL(GD, OnCoreApiAssemblyLoaded);
 
 	managed_callbacks = p_managed_callbacks;

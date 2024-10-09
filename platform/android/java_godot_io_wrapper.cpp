@@ -2,10 +2,10 @@
 /*  java_godot_io_wrapper.cpp                                             */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -36,10 +36,10 @@
 
 // JNIEnv is only valid within the thread it belongs to, in a multi threading environment
 // we can't cache it.
-// For GodotIO we call all access methods from our thread and we thus get a valid JNIEnv
+// For scardotIO we call all access methods from our thread and we thus get a valid JNIEnv
 // from get_jni_env().
 
-GodotIOJavaWrapper::GodotIOJavaWrapper(JNIEnv *p_env, jobject p_godot_io_instance) {
+scardotIOJavaWrapper::scardotIOJavaWrapper(JNIEnv *p_env, jobject p_godot_io_instance) {
 	godot_io_instance = p_env->NewGlobalRef(p_godot_io_instance);
 	if (godot_io_instance) {
 		cls = p_env->GetObjectClass(godot_io_instance);
@@ -69,7 +69,7 @@ GodotIOJavaWrapper::GodotIOJavaWrapper(JNIEnv *p_env, jobject p_godot_io_instanc
 	}
 }
 
-GodotIOJavaWrapper::~GodotIOJavaWrapper() {
+scardotIOJavaWrapper::~scardotIOJavaWrapper() {
 	JNIEnv *env = get_jni_env();
 	ERR_FAIL_NULL(env);
 
@@ -77,11 +77,11 @@ GodotIOJavaWrapper::~GodotIOJavaWrapper() {
 	env->DeleteGlobalRef(godot_io_instance);
 }
 
-jobject GodotIOJavaWrapper::get_instance() {
+jobject scardotIOJavaWrapper::get_instance() {
 	return godot_io_instance;
 }
 
-Error GodotIOJavaWrapper::open_uri(const String &p_uri) {
+Error scardotIOJavaWrapper::open_uri(const String &p_uri) {
 	if (_open_URI) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, ERR_UNAVAILABLE);
@@ -94,7 +94,7 @@ Error GodotIOJavaWrapper::open_uri(const String &p_uri) {
 	}
 }
 
-String GodotIOJavaWrapper::get_cache_dir() {
+String scardotIOJavaWrapper::get_cache_dir() {
 	if (_get_cache_dir) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, String());
@@ -105,7 +105,7 @@ String GodotIOJavaWrapper::get_cache_dir() {
 	}
 }
 
-String GodotIOJavaWrapper::get_user_data_dir() {
+String scardotIOJavaWrapper::get_user_data_dir() {
 	if (_get_data_dir) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, String());
@@ -116,7 +116,7 @@ String GodotIOJavaWrapper::get_user_data_dir() {
 	}
 }
 
-String GodotIOJavaWrapper::get_locale() {
+String scardotIOJavaWrapper::get_locale() {
 	if (_get_locale) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, String());
@@ -127,7 +127,7 @@ String GodotIOJavaWrapper::get_locale() {
 	}
 }
 
-String GodotIOJavaWrapper::get_model() {
+String scardotIOJavaWrapper::get_model() {
 	if (_get_model) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, String());
@@ -138,7 +138,7 @@ String GodotIOJavaWrapper::get_model() {
 	}
 }
 
-int GodotIOJavaWrapper::get_screen_dpi() {
+int scardotIOJavaWrapper::get_screen_dpi() {
 	if (_get_screen_DPI) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, 160);
@@ -148,7 +148,7 @@ int GodotIOJavaWrapper::get_screen_dpi() {
 	}
 }
 
-float GodotIOJavaWrapper::get_scaled_density() {
+float scardotIOJavaWrapper::get_scaled_density() {
 	if (_get_scaled_density) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, 1.0f);
@@ -158,7 +158,7 @@ float GodotIOJavaWrapper::get_scaled_density() {
 	}
 }
 
-float GodotIOJavaWrapper::get_screen_refresh_rate(float fallback) {
+float scardotIOJavaWrapper::get_screen_refresh_rate(float fallback) {
 	if (_get_screen_refresh_rate) {
 		JNIEnv *env = get_jni_env();
 		if (env == nullptr) {
@@ -171,7 +171,7 @@ float GodotIOJavaWrapper::get_screen_refresh_rate(float fallback) {
 	return fallback;
 }
 
-TypedArray<Rect2> GodotIOJavaWrapper::get_display_cutouts() {
+TypedArray<Rect2> scardotIOJavaWrapper::get_display_cutouts() {
 	TypedArray<Rect2> result;
 	ERR_FAIL_NULL_V(_get_display_cutouts, result);
 	JNIEnv *env = get_jni_env();
@@ -192,7 +192,7 @@ TypedArray<Rect2> GodotIOJavaWrapper::get_display_cutouts() {
 	return result;
 }
 
-Rect2i GodotIOJavaWrapper::get_display_safe_area() {
+Rect2i scardotIOJavaWrapper::get_display_safe_area() {
 	Rect2i result;
 	ERR_FAIL_NULL_V(_get_display_safe_area, result);
 	JNIEnv *env = get_jni_env();
@@ -205,7 +205,7 @@ Rect2i GodotIOJavaWrapper::get_display_safe_area() {
 	return result;
 }
 
-String GodotIOJavaWrapper::get_unique_id() {
+String scardotIOJavaWrapper::get_unique_id() {
 	if (_get_unique_id) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, String());
@@ -216,11 +216,11 @@ String GodotIOJavaWrapper::get_unique_id() {
 	}
 }
 
-bool GodotIOJavaWrapper::has_vk() {
+bool scardotIOJavaWrapper::has_vk() {
 	return (_show_keyboard != nullptr) && (_hide_keyboard != nullptr);
 }
 
-void GodotIOJavaWrapper::show_vk(const String &p_existing, int p_type, int p_max_input_length, int p_cursor_start, int p_cursor_end) {
+void scardotIOJavaWrapper::show_vk(const String &p_existing, int p_type, int p_max_input_length, int p_cursor_start, int p_cursor_end) {
 	if (_show_keyboard) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
@@ -230,7 +230,7 @@ void GodotIOJavaWrapper::show_vk(const String &p_existing, int p_type, int p_max
 	}
 }
 
-void GodotIOJavaWrapper::hide_vk() {
+void scardotIOJavaWrapper::hide_vk() {
 	if (_hide_keyboard) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
@@ -238,7 +238,7 @@ void GodotIOJavaWrapper::hide_vk() {
 	}
 }
 
-void GodotIOJavaWrapper::set_screen_orientation(int p_orient) {
+void scardotIOJavaWrapper::set_screen_orientation(int p_orient) {
 	if (_set_screen_orientation) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
@@ -246,7 +246,7 @@ void GodotIOJavaWrapper::set_screen_orientation(int p_orient) {
 	}
 }
 
-int GodotIOJavaWrapper::get_screen_orientation() {
+int scardotIOJavaWrapper::get_screen_orientation() {
 	if (_get_screen_orientation) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, 0);
@@ -256,7 +256,7 @@ int GodotIOJavaWrapper::get_screen_orientation() {
 	}
 }
 
-String GodotIOJavaWrapper::get_system_dir(int p_dir, bool p_shared_storage) {
+String scardotIOJavaWrapper::get_system_dir(int p_dir, bool p_shared_storage) {
 	if (_get_system_dir) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, String("."));
@@ -271,10 +271,10 @@ String GodotIOJavaWrapper::get_system_dir(int p_dir, bool p_shared_storage) {
 // ensure the change is immediately visible to other threads.
 static SafeNumeric<int> virtual_keyboard_height;
 
-int GodotIOJavaWrapper::get_vk_height() {
+int scardotIOJavaWrapper::get_vk_height() {
 	return virtual_keyboard_height.get();
 }
 
-void GodotIOJavaWrapper::set_vk_height(int p_height) {
+void scardotIOJavaWrapper::set_vk_height(int p_height) {
 	virtual_keyboard_height.set(p_height);
 }

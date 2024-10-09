@@ -2,10 +2,10 @@
 /*  gdscript_extend_parser.h                                              */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -67,23 +67,23 @@ typedef HashMap<String, const lsp::DocumentSymbol *> ClassMembers;
  * →→var my_value = 42
  * ```
  * `_` is at:
- * * Godot: `column=12`
+ * * scardot: `column=12`
  * 	* using `indent/size=4`
  * 	* Note: counting starts at `1`
  * * LSP: `character=8`
  * 	* Note: counting starts at `0`
  */
-struct GodotPosition {
+struct scardotPosition {
 	int line;
 	int column;
 
-	GodotPosition(int p_line, int p_column) :
+	scardotPosition(int p_line, int p_column) :
 			line(p_line), column(p_column) {}
 
 	lsp::Position to_lsp(const Vector<String> &p_lines) const;
-	static GodotPosition from_lsp(const lsp::Position p_pos, const Vector<String> &p_lines);
+	static scardotPosition from_lsp(const lsp::Position p_pos, const Vector<String> &p_lines);
 
-	bool operator==(const GodotPosition &p_other) const {
+	bool operator==(const scardotPosition &p_other) const {
 		return line == p_other.line && column == p_other.column;
 	}
 
@@ -92,17 +92,17 @@ struct GodotPosition {
 	}
 };
 
-struct GodotRange {
-	GodotPosition start;
-	GodotPosition end;
+struct scardotRange {
+	scardotPosition start;
+	scardotPosition end;
 
-	GodotRange(GodotPosition p_start, GodotPosition p_end) :
+	scardotRange(scardotPosition p_start, scardotPosition p_end) :
 			start(p_start), end(p_end) {}
 
 	lsp::Range to_lsp(const Vector<String> &p_lines) const;
-	static GodotRange from_lsp(const lsp::Range &p_range, const Vector<String> &p_lines);
+	static scardotRange from_lsp(const lsp::Range &p_range, const Vector<String> &p_lines);
 
-	bool operator==(const GodotRange &p_other) const {
+	bool operator==(const scardotRange &p_other) const {
 		return start == p_other.start && end == p_other.end;
 	}
 

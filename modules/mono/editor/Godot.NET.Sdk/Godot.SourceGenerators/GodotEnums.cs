@@ -1,8 +1,8 @@
 using System;
 
-namespace Godot.SourceGenerators
+namespace scardot.SourceGenerators
 {
-    // TODO: May need to think about compatibility here. Could Godot change these values between minor versions?
+    // TODO: May need to think about compatibility here. Could scardot change these values between minor versions?
 
     internal enum VariantType
     {

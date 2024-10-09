@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace GodotTools.Utils
+namespace scardotTools.Utils
 {
     public static class User32Dll
     {

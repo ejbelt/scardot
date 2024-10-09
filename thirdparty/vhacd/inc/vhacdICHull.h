@@ -18,9 +18,9 @@
 #include "vhacdManifoldMesh.h"
 #include "vhacdVector.h"
 
-// -- GODOT start --
+// -- SCARDOT start --
 #include <cstdint>
-// -- GODOT end --
+// -- SCARDOT end --
 
 namespace VHACD {
 //!    Incremental Convex Hull algorithm (cf. http://cs.smith.edu/~orourke/books/ftp.html ).

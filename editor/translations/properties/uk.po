@@ -1,7 +1,7 @@
-# Ukrainian translation of the Godot Engine properties.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Ukrainian translation of the scardot Engine properties.
+# Copyright (c) 2014-present scardot Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the scardot source code.
 # Aleksandr <XpycT.TOP@gmail.com>, 2017.
 # Yuri Chornoivan <yurchor@ukr.net>, 2018, 2019, 2020, 2021, 2022.
 # Андрій Бандура <andriykopanytsia@gmail.com>, 2018.
@@ -36,7 +36,7 @@
 # Veni Vid <venivid28@gmail.com>, 2024.
 msgid ""
 msgstr ""
-"Project-Id-Version: Ukrainian (Godot Engine)\n"
+"Project-Id-Version: Ukrainian (scardot Engine)\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2024-06-18 08:12+0000\n"
@@ -2601,7 +2601,7 @@ msgstr "Суглоби"
 msgid "Roots"
 msgstr "Корені"
 
-msgid "Godot Bone Node"
+msgid "scardot Bone Node"
 msgstr "Отримати вузол сцени"
 
 msgid "Skin Root"

@@ -2,10 +2,10 @@
 /*  runtime_interop.cpp                                                   */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -276,7 +276,7 @@ GCHandleIntPtr godotsharp_internal_unmanaged_instance_binding_create_managed(Obj
 			"Type inherits from native type '" + script_binding.type_name + "', so it can't be instantiated in object of type: '" + p_unmanaged->get_class() + "'.");
 
 	GCHandleIntPtr strong_gchandle =
-			GDMonoCache::managed_callbacks.ScriptManagerBridge_CreateManagedForGodotObjectBinding(
+			GDMonoCache::managed_callbacks.ScriptManagerBridge_CreateManagedForscardotObjectBinding(
 					&script_binding.type_name, p_unmanaged);
 
 	ERR_FAIL_NULL_V(strong_gchandle.value, { nullptr });
@@ -324,7 +324,7 @@ void godotsharp_internal_editor_file_system_update_files(const PackedStringArray
 		efs->update_files(p_script_paths);
 	}
 #else
-	// EditorFileSystem is only available when running in the Godot editor.
+	// EditorFileSystem is only available when running in the scardot editor.
 	DEV_ASSERT(false);
 #endif
 }
@@ -1441,7 +1441,7 @@ void godotsharp_object_to_string(Object *p_ptr, godot_string *r_str) {
 #endif
 
 // The order in this array must match the declaration order of
-// the methods in 'GodotSharp/Core/NativeInterop/NativeFuncs.cs'.
+// the methods in 'scardotSharp/Core/NativeInterop/NativeFuncs.cs'.
 static const void *unmanaged_callbacks[]{
 	(void *)godotsharp_dotnet_module_is_initialized,
 	(void *)godotsharp_method_bind_get_method,

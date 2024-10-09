@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
-namespace Godot.NativeInterop;
+namespace scardot.NativeInterop;
 
 #nullable enable
 
@@ -179,11 +179,11 @@ public partial class VariantUtils
         if (typeof(T) == typeof(Rid))
             return CreateFromRid(UnsafeAs<Rid>(from));
 
-        if (typeof(T) == typeof(Godot.Collections.Dictionary))
-            return CreateFromDictionary(UnsafeAs<Godot.Collections.Dictionary>(from));
+        if (typeof(T) == typeof(scardot.Collections.Dictionary))
+            return CreateFromDictionary(UnsafeAs<scardot.Collections.Dictionary>(from));
 
-        if (typeof(T) == typeof(Godot.Collections.Array))
-            return CreateFromArray(UnsafeAs<Godot.Collections.Array>(from));
+        if (typeof(T) == typeof(scardot.Collections.Array))
+            return CreateFromArray(UnsafeAs<scardot.Collections.Array>(from));
 
         if (typeof(T) == typeof(Variant))
             return NativeFuncs.godotsharp_variant_new_copy((godot_variant)UnsafeAs<Variant>(from).NativeVar);
@@ -192,8 +192,8 @@ public partial class VariantUtils
 
         // `typeof(X).IsAssignableFrom(typeof(T))` is optimized away
 
-        if (typeof(GodotObject).IsAssignableFrom(typeof(T)))
-            return CreateFromGodotObject(UnsafeAs<GodotObject>(from));
+        if (typeof(scardotObject).IsAssignableFrom(typeof(T)))
+            return CreateFromscardotObject(UnsafeAs<scardotObject>(from));
 
         // `typeof(T).IsValueType` is optimized away
         // `typeof(T).IsEnum` is NOT optimized away: https://github.com/dotnet/runtime/issues/67113
@@ -370,10 +370,10 @@ public partial class VariantUtils
         if (typeof(T) == typeof(Rid))
             return UnsafeAsT(ConvertToRid(variant));
 
-        if (typeof(T) == typeof(Godot.Collections.Dictionary))
+        if (typeof(T) == typeof(scardot.Collections.Dictionary))
             return UnsafeAsT(ConvertToDictionary(variant));
 
-        if (typeof(T) == typeof(Godot.Collections.Array))
+        if (typeof(T) == typeof(scardot.Collections.Array))
             return UnsafeAsT(ConvertToArray(variant));
 
         if (typeof(T) == typeof(Variant))
@@ -383,8 +383,8 @@ public partial class VariantUtils
 
         // `typeof(X).IsAssignableFrom(typeof(T))` is optimized away
 
-        if (typeof(GodotObject).IsAssignableFrom(typeof(T)))
-            return (T)(object)ConvertToGodotObject(variant);
+        if (typeof(scardotObject).IsAssignableFrom(typeof(T)))
+            return (T)(object)ConvertToscardotObject(variant);
 
         // `typeof(T).IsValueType` is optimized away
         // `typeof(T).IsEnum` is NOT optimized away: https://github.com/dotnet/runtime/issues/67113

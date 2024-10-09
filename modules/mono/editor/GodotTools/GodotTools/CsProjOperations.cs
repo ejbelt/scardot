@@ -1,8 +1,8 @@
-using Godot;
+using scardot;
 using System;
-using GodotTools.ProjectEditor;
+using scardotTools.ProjectEditor;
 
-namespace GodotTools
+namespace scardotTools
 {
     public static class CsProjOperations
     {

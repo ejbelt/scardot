@@ -1,4 +1,4 @@
-using Godot;
+using scardot;
 
 public class MustBeVariantGD0302
 {

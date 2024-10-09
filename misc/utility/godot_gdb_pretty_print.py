@@ -1,5 +1,5 @@
 """
-Load this file to your GDB session to enable pretty-printing of some Godot C++ types.
+Load this file to your GDB session to enable pretty-printing of some scardot C++ types.
 
 GDB command: `source misc/utility/godot_gdb_pretty_print.py`.
 
@@ -9,7 +9,7 @@ the `setupCommands` of your configuration in `launch.json`:
 "setupCommands": [
 ...
     {
-        "description": "Load custom pretty-printers for Godot types.",
+        "description": "Load custom pretty-printers for scardot types.",
         "text": "source ${workspaceFolder}/misc/utility/godot_gdb_pretty_print.py"
     }
 ]
@@ -27,8 +27,8 @@ import re
 import gdb  # type: ignore
 
 
-# Printer for Godot StringName variables.
-class GodotStringNamePrinter:
+# Printer for scardot StringName variables.
+class scardotStringNamePrinter:
     def __init__(self, value):
         self.value = value
 
@@ -40,8 +40,8 @@ class GodotStringNamePrinter:
         return "string"
 
 
-# Printer for Godot String variables.
-class GodotStringPrinter:
+# Printer for scardot String variables.
+class scardotStringPrinter:
     def __init__(self, value):
         self.value = value
 
@@ -53,8 +53,8 @@ class GodotStringPrinter:
         return "string"
 
 
-# Printer for Godot Vector variables.
-class GodotVectorPrinter:
+# Printer for scardot Vector variables.
+class scardotVectorPrinter:
     def __init__(self, value):
         self.value = value
 
@@ -104,11 +104,11 @@ VECTOR_REGEX = re.compile("^Vector<.*$")
 # Tries to find a pretty printer for a debugger value.
 def lookup_pretty_printer(value):
     if value.type.name == "StringName":
-        return GodotStringNamePrinter(value)
+        return scardotStringNamePrinter(value)
     if value.type.name == "String":
-        return GodotStringPrinter(value)
+        return scardotStringPrinter(value)
     if value.type.name and VECTOR_REGEX.match(value.type.name):
-        return GodotVectorPrinter(value)
+        return scardotVectorPrinter(value)
     return None
 
 

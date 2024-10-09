@@ -2,10 +2,10 @@
 /*  gd_mono.cpp                                                           */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -121,13 +121,13 @@ String find_hostfxr() {
 #else
 
 #if defined(WINDOWS_ENABLED)
-	String probe_path = GodotSharpDirs::get_api_assemblies_dir()
+	String probe_path = scardotSharpDirs::get_api_assemblies_dir()
 								.path_join("hostfxr.dll");
 #elif defined(MACOS_ENABLED)
-	String probe_path = GodotSharpDirs::get_api_assemblies_dir()
+	String probe_path = scardotSharpDirs::get_api_assemblies_dir()
 								.path_join("libhostfxr.dylib");
 #elif defined(UNIX_ENABLED)
-	String probe_path = GodotSharpDirs::get_api_assemblies_dir()
+	String probe_path = scardotSharpDirs::get_api_assemblies_dir()
 								.path_join("libhostfxr.so");
 #else
 #error "Platform not supported (yet?)"
@@ -254,17 +254,17 @@ godot_plugins_initialize_fn initialize_hostfxr_and_godot_plugins(bool &r_runtime
 	godot_plugins_initialize_fn godot_plugins_initialize = nullptr;
 
 	HostFxrCharString godot_plugins_path = str_to_hostfxr(
-			GodotSharpDirs::get_api_assemblies_dir().path_join("GodotPlugins.dll"));
+			scardotSharpDirs::get_api_assemblies_dir().path_join("scardotPlugins.dll"));
 
 	HostFxrCharString config_path = str_to_hostfxr(
-			GodotSharpDirs::get_api_assemblies_dir().path_join("GodotPlugins.runtimeconfig.json"));
+			scardotSharpDirs::get_api_assemblies_dir().path_join("scardotPlugins.runtimeconfig.json"));
 
 	load_assembly_and_get_function_pointer_fn load_assembly_and_get_function_pointer =
 			initialize_hostfxr_for_config(get_data(config_path));
 
 	if (load_assembly_and_get_function_pointer == nullptr) {
 		// Show a message box to the user to make the problem explicit (and explain a potential crash).
-		OS::get_singleton()->alert(TTR("Unable to load .NET runtime, no compatible version was found.\nAttempting to create/edit a project will lead to a crash.\n\nPlease install the .NET SDK 6.0 or later from https://dotnet.microsoft.com/en-us/download and restart Godot."), TTR("Failed to load .NET runtime"));
+		OS::get_singleton()->alert(TTR("Unable to load .NET runtime, no compatible version was found.\nAttempting to create/edit a project will lead to a crash.\n\nPlease install the .NET SDK 6.0 or later from https://dotnet.microsoft.com/en-us/download and restart scardot."), TTR("Failed to load .NET runtime"));
 		ERR_FAIL_V_MSG(nullptr, ".NET: Failed to load compatible .NET runtime");
 	}
 
@@ -273,12 +273,12 @@ godot_plugins_initialize_fn initialize_hostfxr_and_godot_plugins(bool &r_runtime
 	print_verbose(".NET: hostfxr initialized");
 
 	int rc = load_assembly_and_get_function_pointer(get_data(godot_plugins_path),
-			HOSTFXR_STR("GodotPlugins.Main, GodotPlugins"),
+			HOSTFXR_STR("scardotPlugins.Main, scardotPlugins"),
 			HOSTFXR_STR("InitializeFromEngine"),
 			UNMANAGEDCALLERSONLY_METHOD,
 			nullptr,
 			(void **)&godot_plugins_initialize);
-	ERR_FAIL_COND_V_MSG(rc != 0, nullptr, ".NET: Failed to get GodotPlugins initialization function pointer");
+	ERR_FAIL_COND_V_MSG(rc != 0, nullptr, ".NET: Failed to get scardotPlugins initialization function pointer");
 
 	return godot_plugins_initialize;
 }
@@ -288,7 +288,7 @@ godot_plugins_initialize_fn initialize_hostfxr_and_godot_plugins(bool &r_runtime
 
 	String assembly_name = path::get_csharp_project_name();
 
-	HostFxrCharString assembly_path = str_to_hostfxr(GodotSharpDirs::get_api_assemblies_dir()
+	HostFxrCharString assembly_path = str_to_hostfxr(scardotSharpDirs::get_api_assemblies_dir()
 															 .path_join(assembly_name + ".dll"));
 
 	load_assembly_and_get_function_pointer_fn load_assembly_and_get_function_pointer =
@@ -300,12 +300,12 @@ godot_plugins_initialize_fn initialize_hostfxr_and_godot_plugins(bool &r_runtime
 	print_verbose(".NET: hostfxr initialized");
 
 	int rc = load_assembly_and_get_function_pointer(get_data(assembly_path),
-			get_data(str_to_hostfxr("GodotPlugins.Game.Main, " + assembly_name)),
+			get_data(str_to_hostfxr("scardotPlugins.Game.Main, " + assembly_name)),
 			HOSTFXR_STR("InitializeFromGameProject"),
 			UNMANAGEDCALLERSONLY_METHOD,
 			nullptr,
 			(void **)&godot_plugins_initialize);
-	ERR_FAIL_COND_V_MSG(rc != 0, nullptr, ".NET: Failed to get GodotPlugins initialization function pointer");
+	ERR_FAIL_COND_V_MSG(rc != 0, nullptr, ".NET: Failed to get scardotPlugins initialization function pointer");
 
 	return godot_plugins_initialize;
 }
@@ -314,11 +314,11 @@ godot_plugins_initialize_fn try_load_native_aot_library(void *&r_aot_dll_handle)
 	String assembly_name = path::get_csharp_project_name();
 
 #if defined(WINDOWS_ENABLED)
-	String native_aot_so_path = GodotSharpDirs::get_api_assemblies_dir().path_join(assembly_name + ".dll");
+	String native_aot_so_path = scardotSharpDirs::get_api_assemblies_dir().path_join(assembly_name + ".dll");
 #elif defined(MACOS_ENABLED) || defined(IOS_ENABLED)
-	String native_aot_so_path = GodotSharpDirs::get_api_assemblies_dir().path_join(assembly_name + ".dylib");
+	String native_aot_so_path = scardotSharpDirs::get_api_assemblies_dir().path_join(assembly_name + ".dylib");
 #elif defined(UNIX_ENABLED)
-	String native_aot_so_path = GodotSharpDirs::get_api_assemblies_dir().path_join(assembly_name + ".so");
+	String native_aot_so_path = scardotSharpDirs::get_api_assemblies_dir().path_join(assembly_name + ".so");
 #else
 #error "Platform not supported (yet?)"
 #endif
@@ -376,8 +376,8 @@ void GDMono::initialize() {
 
 #if !defined(IOS_ENABLED)
 	// Check that the .NET assemblies directory exists before trying to use it.
-	if (!DirAccess::exists(GodotSharpDirs::get_api_assemblies_dir())) {
-		OS::get_singleton()->alert(vformat(RTR("Unable to find the .NET assemblies directory.\nMake sure the '%s' directory exists and contains the .NET assemblies."), GodotSharpDirs::get_api_assemblies_dir()), RTR(".NET assemblies not found"));
+	if (!DirAccess::exists(scardotSharpDirs::get_api_assemblies_dir())) {
+		OS::get_singleton()->alert(vformat(RTR("Unable to find the .NET assemblies directory.\nMake sure the '%s' directory exists and contains the .NET assemblies."), scardotSharpDirs::get_api_assemblies_dir()), RTR(".NET assemblies not found"));
 		ERR_FAIL_MSG(".NET: Assemblies not found");
 	}
 #endif
@@ -395,7 +395,7 @@ void GDMono::initialize() {
 #else
 
 		// Show a message box to the user to make the problem explicit (and explain a potential crash).
-		OS::get_singleton()->alert(TTR("Unable to load .NET runtime, specifically hostfxr.\nAttempting to create/edit a project will lead to a crash.\n\nPlease install the .NET SDK 6.0 or later from https://dotnet.microsoft.com/en-us/download and restart Godot."), TTR("Failed to load .NET runtime"));
+		OS::get_singleton()->alert(TTR("Unable to load .NET runtime, specifically hostfxr.\nAttempting to create/edit a project will lead to a crash.\n\nPlease install the .NET SDK 6.0 or later from https://dotnet.microsoft.com/en-us/download and restart scardot."), TTR("Failed to load .NET runtime"));
 		ERR_FAIL_MSG(".NET: Failed to load hostfxr");
 #endif
 	}
@@ -423,18 +423,18 @@ void GDMono::initialize() {
 			Engine::get_singleton()->is_editor_hint(),
 			&plugin_callbacks_res, &managed_callbacks,
 			interop_funcs, interop_funcs_size);
-	ERR_FAIL_COND_MSG(!init_ok, ".NET: GodotPlugins initialization failed");
+	ERR_FAIL_COND_MSG(!init_ok, ".NET: scardotPlugins initialization failed");
 
 	plugin_callbacks = plugin_callbacks_res;
 #else
 	bool init_ok = godot_plugins_initialize(godot_dll_handle, &managed_callbacks,
 			interop_funcs, interop_funcs_size);
-	ERR_FAIL_COND_MSG(!init_ok, ".NET: GodotPlugins initialization failed");
+	ERR_FAIL_COND_MSG(!init_ok, ".NET: scardotPlugins initialization failed");
 #endif
 
 	GDMonoCache::update_godot_api_cache(managed_callbacks);
 
-	print_verbose(".NET: GodotPlugins initialized");
+	print_verbose(".NET: scardotPlugins initialized");
 
 	_on_core_api_assembly_loaded();
 
@@ -476,7 +476,7 @@ void GDMono::_init_godot_api_hashes() {
 bool GDMono::_load_project_assembly() {
 	String assembly_name = path::get_csharp_project_name();
 
-	String assembly_path = GodotSharpDirs::get_res_temp_assemblies_dir()
+	String assembly_path = scardotSharpDirs::get_res_temp_assemblies_dir()
 								   .path_join(assembly_name + ".dll");
 	assembly_path = ProjectSettings::get_singleton()->globalize_path(assembly_path);
 
@@ -506,7 +506,7 @@ void GDMono::reload_failure() {
 		ERR_PRINT_ED(".NET: Giving up on assembly reloading. Please restart the editor if unloading was failing.");
 
 		String assembly_name = path::get_csharp_project_name();
-		String assembly_path = GodotSharpDirs::get_res_temp_assemblies_dir().path_join(assembly_name + ".dll");
+		String assembly_path = scardotSharpDirs::get_res_temp_assemblies_dir().path_join(assembly_name + ".dll");
 		assembly_path = ProjectSettings::get_singleton()->globalize_path(assembly_path);
 		project_assembly_path = assembly_path.simplify_path();
 		project_assembly_modified_time = FileAccess::get_modified_time(assembly_path);
@@ -562,9 +562,9 @@ GDMono::~GDMono() {
 
 namespace mono_bind {
 
-GodotSharp *GodotSharp::singleton = nullptr;
+scardotSharp *scardotSharp::singleton = nullptr;
 
-void GodotSharp::reload_assemblies(bool p_soft_reload) {
+void scardotSharp::reload_assemblies(bool p_soft_reload) {
 #ifdef GD_MONO_HOT_RELOAD
 	CRASH_COND(CSharpLanguage::get_singleton() == nullptr);
 	// This method may be called more than once with `call_deferred`, so we need to check
@@ -575,11 +575,11 @@ void GodotSharp::reload_assemblies(bool p_soft_reload) {
 #endif
 }
 
-GodotSharp::GodotSharp() {
+scardotSharp::scardotSharp() {
 	singleton = this;
 }
 
-GodotSharp::~GodotSharp() {
+scardotSharp::~scardotSharp() {
 	singleton = nullptr;
 }
 

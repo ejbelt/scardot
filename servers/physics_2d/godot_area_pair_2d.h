@@ -2,10 +2,10 @@
 /*  godot_area_pair_2d.h                                                  */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -28,16 +28,16 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#ifndef GODOT_AREA_PAIR_2D_H
-#define GODOT_AREA_PAIR_2D_H
+#ifndef SCARDOT_AREA_PAIR_2D_H
+#define SCARDOT_AREA_PAIR_2D_H
 
 #include "godot_area_2d.h"
 #include "godot_body_2d.h"
 #include "godot_constraint_2d.h"
 
-class GodotAreaPair2D : public GodotConstraint2D {
-	GodotBody2D *body = nullptr;
-	GodotArea2D *area = nullptr;
+class scardotAreaPair2D : public scardotConstraint2D {
+	scardotBody2D *body = nullptr;
+	scardotArea2D *area = nullptr;
 	int body_shape = 0;
 	int area_shape = 0;
 	bool colliding = false;
@@ -50,13 +50,13 @@ public:
 	virtual bool pre_solve(real_t p_step) override;
 	virtual void solve(real_t p_step) override;
 
-	GodotAreaPair2D(GodotBody2D *p_body, int p_body_shape, GodotArea2D *p_area, int p_area_shape);
-	~GodotAreaPair2D();
+	scardotAreaPair2D(scardotBody2D *p_body, int p_body_shape, scardotArea2D *p_area, int p_area_shape);
+	~scardotAreaPair2D();
 };
 
-class GodotArea2Pair2D : public GodotConstraint2D {
-	GodotArea2D *area_a = nullptr;
-	GodotArea2D *area_b = nullptr;
+class scardotArea2Pair2D : public scardotConstraint2D {
+	scardotArea2D *area_a = nullptr;
+	scardotArea2D *area_b = nullptr;
 	int shape_a = 0;
 	int shape_b = 0;
 	bool colliding_a = false;
@@ -71,8 +71,8 @@ public:
 	virtual bool pre_solve(real_t p_step) override;
 	virtual void solve(real_t p_step) override;
 
-	GodotArea2Pair2D(GodotArea2D *p_area_a, int p_shape_a, GodotArea2D *p_area_b, int p_shape_b);
-	~GodotArea2Pair2D();
+	scardotArea2Pair2D(scardotArea2D *p_area_a, int p_shape_a, scardotArea2D *p_area_b, int p_shape_b);
+	~scardotArea2Pair2D();
 };
 
-#endif // GODOT_AREA_PAIR_2D_H
+#endif // SCARDOT_AREA_PAIR_2D_H

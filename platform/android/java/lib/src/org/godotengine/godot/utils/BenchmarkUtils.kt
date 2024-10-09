@@ -2,10 +2,10 @@
 /*  BenchmarkUtils.kt                                                     */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -47,7 +47,7 @@ import java.util.Collections
 /**
  * Contains benchmark related utilities methods
  */
-private const val TAG = "GodotBenchmark"
+private const val TAG = "scardotBenchmark"
 
 var useBenchmark = false
 var benchmarkFile = ""

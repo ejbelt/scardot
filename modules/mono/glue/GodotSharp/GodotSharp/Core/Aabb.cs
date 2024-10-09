@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 #nullable enable
 
-namespace Godot
+namespace scardot
 {
     /// <summary>
     /// Axis-Aligned Bounding Box. AABB consists of a position, a size, and

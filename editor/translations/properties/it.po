@@ -1,7 +1,7 @@
-# Italian translation of the Godot Engine properties.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Italian translation of the scardot Engine properties.
+# Copyright (c) 2014-present scardot Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the scardot source code.
 # Alessio Corridori <alessiocorridori@hotmail.com>, 2018.
 # Dario Bonfanti <bonfi.96@hotmail.it>, 2016-2017.
 # Dario D'Ambra <legione0@gmail.com>, 2017.
@@ -88,7 +88,7 @@
 # Matteo Peretto <skymatti12@gmail.com>, 2024.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine properties\n"
+"Project-Id-Version: scardot Engine properties\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2024-08-13 23:09+0000\n"
@@ -3485,8 +3485,8 @@ msgstr "Articolazioni"
 msgid "Roots"
 msgstr "Radici"
 
-msgid "Godot Bone Node"
-msgstr "Nodo d'osso di Godot"
+msgid "scardot Bone Node"
+msgstr "Nodo d'osso di scardot"
 
 msgid "Skin Root"
 msgstr "Radice della Skin"
@@ -3494,8 +3494,8 @@ msgstr "Radice della Skin"
 msgid "Non Joints"
 msgstr "Non articolazioni"
 
-msgid "Godot Skin"
-msgstr "Skin Godot"
+msgid "scardot Skin"
+msgstr "Skin scardot"
 
 msgid "Src Image"
 msgstr "Immagine sorgente"

@@ -1,9 +1,9 @@
 # Contributors guidelines
 
 This document summarizes the most important points for people interested in
-contributing to Godot, especially via bug reports or pull requests.
+contributing to scardot, especially via bug reports or pull requests.
 
-The Godot documentation has a dedicated [Contributing section](https://docs.godotengine.org/en/latest/contributing/how_to_contribute.html)
+The scardot documentation has a dedicated [Contributing section](https://docs.godotengine.org/en/latest/contributing/how_to_contribute.html)
 which details these points and more, and is a recommended read.
 
 ## Table of contents
@@ -11,7 +11,7 @@ which details these points and more, and is a recommended read.
 - [Reporting bugs](#reporting-bugs)
 - [Proposing features or improvements](#proposing-features-or-improvements)
 - [Contributing pull requests](#contributing-pull-requests)
-- [Contributing to Godot translations](#contributing-to-godot-translations)
+- [Contributing to scardot translations](#contributing-to-godot-translations)
 - [Communicating with developers](#communicating-with-developers)
 
 ## Reporting bugs
@@ -20,16 +20,16 @@ Report bugs [here](https://github.com/godotengine/godot/issues/new?assignees=&la
 Please follow the instructions in the template when you do.
 
 Notably, please include a Minimal Reproduction Project (MRP), which is a small
-Godot project which reproduces the issue, with no unnecessary files included.
+scardot project which reproduces the issue, with no unnecessary files included.
 Be sure to not include the `.godot` folder in the archive to save space.
 
-Make sure that the bug you are experiencing is reproducible in the latest Godot
-releases. You can find an overview of all Godot releases [on the website](https://godotengine.org/download/archive/)
+Make sure that the bug you are experiencing is reproducible in the latest scardot
+releases. You can find an overview of all scardot releases [on the website](https://godotengine.org/download/archive/)
 to confirm whether your current version is the latest one. It's worth testing
 against both the latest stable release and the latest dev snapshot for the next
-Godot release.
+scardot release.
 
-If you run into a bug which wasn't present in an earlier Godot version (what we
+If you run into a bug which wasn't present in an earlier scardot version (what we
 call a _regression_), please mention it and clarify which versions you tested
 (both the one(s) working and the one(s) exhibiting the bug).
 
@@ -37,7 +37,7 @@ call a _regression_), please mention it and clarify which versions you tested
 
 **The main issue tracker is for bug reports and does not accept feature proposals.**
 
-Instead, head to the [Godot Proposals repository](https://github.com/godotengine/godot-proposals)
+Instead, head to the [scardot Proposals repository](https://github.com/godotengine/godot-proposals)
 and follow the instructions in the README file and issue template.
 
 ## Contributing pull requests
@@ -61,7 +61,7 @@ ensure that your pull request fulfills the requirements.
 
 In addition to the following tips, also take a look at the
 [Engine development guide](https://docs.godotengine.org/en/latest/contributing/development/index.html)
-for an introduction to developing on Godot.
+for an introduction to developing on scardot.
 
 The [Contributing docs](https://docs.godotengine.org/en/latest/contributing/how_to_contribute.html)
 also have important information on the [PR workflow](https://docs.godotengine.org/en/latest/contributing/workflow/pr_workflow.html)
@@ -125,12 +125,12 @@ description is also manually wrapped at 80 chars for readability):
 ```text
 Prevent French fries carbonization by fixing heat regulation
 
-When using the French fries frying module, Godot would not regulate the heat
+When using the French fries frying module, scardot would not regulate the heat
 and thus bring the oil bath to supercritical liquid conditions, thus causing
 unwanted side effects in the physics engine.
 
 By fixing the regulation system via an added binding to the internal feature,
-this commit now ensures that Godot will not go past the ebullition temperature
+this commit now ensures that scardot will not go past the ebullition temperature
 of cooking oil under normal atmospheric conditions.
 ```
 
@@ -175,11 +175,11 @@ Feel free to contribute standalone pull requests to add new tests or improve
 existing tests as well.
 
 See [Unit testing](https://docs.godotengine.org/en/latest/contributing/development/core_and_modules/unit_testing.html)
-for information on writing tests in Godot's C++ codebase.
+for information on writing tests in scardot's C++ codebase.
 
-## Contributing to Godot translations
+## Contributing to scardot translations
 
-You can contribute to Godot translations on [Hosted Weblate](https://hosted.weblate.org/projects/godot-engine/),
+You can contribute to scardot translations on [Hosted Weblate](https://hosted.weblate.org/projects/godot-engine/),
 an open source and web-based translation platform.
 
 Please refer to our [editor and documentation localization guidelines](https://docs.godotengine.org/en/latest/contributing/documentation/editor_and_docs_localization.html)
@@ -187,16 +187,16 @@ for an overview of the translation resources and what they correspond to.
 
 ## Communicating with developers
 
-The Godot Engine community has [many communication
+The scardot Engine community has [many communication
 channels](https://godotengine.org/community), some used more for user-level
 discussions and support, others more for development discussions.
 
 To communicate with developers (e.g. to discuss a feature you want to implement
 or a bug you want to fix), the following channels can be used:
 
-- [Godot Contributors Chat](https://chat.godotengine.org): You will
+- [scardot Contributors Chat](https://chat.godotengine.org): You will
   find most core developers there, so it's the go-to platform for direct chat
-  about Godot Engine development. Browse the [Directory](https://chat.godotengine.org/directory/channels)
+  about scardot Engine development. Browse the [Directory](https://chat.godotengine.org/directory/channels)
   for an overview of public channels focusing on various engine areas which you
   might be interested in.
 - [Bug tracker](https://github.com/godotengine/godot/issues): If there is an
@@ -205,9 +205,9 @@ or a bug you want to fix), the following channels can be used:
   for bug reporting.
 - [Feature proposals](https://github.com/godotengine/godot-proposals/issues):
   To propose a new feature, we have a dedicated issue tracker for that. Don't
-  hesitate to start by talking about your idea on the Godot Contributors Chat
-  to make sure that it makes sense in Godot's context.
+  hesitate to start by talking about your idea on the scardot Contributors Chat
+  to make sure that it makes sense in scardot's context.
 
 Thanks for your interest in contributing!
 
-—The Godot development team
+—The scardot development team

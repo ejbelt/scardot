@@ -1,7 +1,7 @@
-namespace Godot.SourceGenerators.Sample;
+namespace scardot.SourceGenerators.Sample;
 
 [GlobalClass]
-public partial class CustomGlobalClass : GodotObject
+public partial class CustomGlobalClass : scardotObject
 {
 }
 

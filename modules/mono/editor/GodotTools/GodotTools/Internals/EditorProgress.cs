@@ -1,9 +1,9 @@
 using System;
 using System.Runtime.CompilerServices;
-using Godot;
-using Godot.NativeInterop;
+using scardot;
+using scardot.NativeInterop;
 
-namespace GodotTools.Internals
+namespace scardotTools.Internals
 {
     public class EditorProgress : IDisposable
     {

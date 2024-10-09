@@ -2,10 +2,10 @@
 /*  editor_node.cpp                                                       */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -552,8 +552,8 @@ void EditorNode::_update_theme(bool p_skip_creation) {
 
 		help_menu->set_item_icon(help_menu->get_item_index(HELP_SEARCH), theme->get_icon(SNAME("HelpSearch"), EditorStringName(EditorIcons)));
 		help_menu->set_item_icon(help_menu->get_item_index(HELP_COPY_SYSTEM_INFO), theme->get_icon(SNAME("ActionCopy"), EditorStringName(EditorIcons)));
-		help_menu->set_item_icon(help_menu->get_item_index(HELP_ABOUT), theme->get_icon(SNAME("Godot"), EditorStringName(EditorIcons)));
-		help_menu->set_item_icon(help_menu->get_item_index(HELP_SUPPORT_GODOT_DEVELOPMENT), theme->get_icon(SNAME("Heart"), EditorStringName(EditorIcons)));
+		help_menu->set_item_icon(help_menu->get_item_index(HELP_ABOUT), theme->get_icon(SNAME("scardot"), EditorStringName(EditorIcons)));
+		help_menu->set_item_icon(help_menu->get_item_index(HELP_SUPPORT_SCARDOT_DEVELOPMENT), theme->get_icon(SNAME("Heart"), EditorStringName(EditorIcons)));
 
 		if (EditorDebuggerNode::get_singleton()->is_visible()) {
 			bottom_panel->add_theme_style_override(SceneStringName(panel), theme->get_stylebox(SNAME("BottomPanelDebuggerOverride"), EditorStringName(EditorStyles)));
@@ -1536,7 +1536,7 @@ void EditorNode::_dialog_display_load_error(String p_file, Error p_error) {
 				show_accept(vformat(TTR("Missing file '%s' or one of its dependencies."), p_file.get_file()), TTR("OK"));
 			} break;
 			case ERR_FILE_UNRECOGNIZED: {
-				show_accept(vformat(TTR("File '%s' is saved in a format that is newer than the formats supported by this version of Godot, so it can't be opened."), p_file.get_file()), TTR("OK"));
+				show_accept(vformat(TTR("File '%s' is saved in a format that is newer than the formats supported by this version of scardot, so it can't be opened."), p_file.get_file()), TTR("OK"));
 			} break;
 			default: {
 				show_accept(vformat(TTR("Error while loading file '%s'."), p_file.get_file()), TTR("OK"));
@@ -3208,7 +3208,7 @@ void EditorNode::_menu_option_confirm(int p_option, bool p_confirmed) {
 		case HELP_ABOUT: {
 			about->popup_centered(Size2(780, 500) * EDSCALE);
 		} break;
-		case HELP_SUPPORT_GODOT_DEVELOPMENT: {
+		case HELP_SUPPORT_SCARDOT_DEVELOPMENT: {
 			OS::get_singleton()->shell_open("https://godotengine.org/donate");
 		} break;
 		case SET_RENDERER_NAME_SAVE_AND_RESTART: {
@@ -5006,7 +5006,7 @@ String EditorNode::_get_system_info() const {
 	}
 	const String distribution_version = OS::get_singleton()->get_version();
 
-	String godot_version = "Godot v" + String(VERSION_FULL_CONFIG);
+	String godot_version = "scardot v" + String(VERSION_FULL_CONFIG);
 	if (String(VERSION_BUILD) != "official") {
 		String hash = String(VERSION_HASH);
 		hash = hash.is_empty() ? String("unknown") : vformat("(%s)", hash.left(9));
@@ -6442,7 +6442,7 @@ bool EditorNode::call_build() {
 
 	for (int i = 0; i < build_callback_count && builds_successful; i++) {
 		if (!build_callbacks[i]()) {
-			ERR_PRINT("A Godot Engine build callback failed.");
+			ERR_PRINT("A scardot Engine build callback failed.");
 			builds_successful = false;
 		}
 	}
@@ -7415,9 +7415,9 @@ EditorNode::EditorNode() {
 	help_menu->add_separator();
 	if (!global_menu || !OS::get_singleton()->has_feature("macos")) {
 		// On macOS  "Quit" and "About" options are in the "app" menu.
-		help_menu->add_icon_shortcut(theme->get_icon(SNAME("Godot"), EditorStringName(EditorIcons)), ED_SHORTCUT_AND_COMMAND("editor/about", TTR("About Godot...")), HELP_ABOUT);
+		help_menu->add_icon_shortcut(theme->get_icon(SNAME("scardot"), EditorStringName(EditorIcons)), ED_SHORTCUT_AND_COMMAND("editor/about", TTR("About scardot...")), HELP_ABOUT);
 	}
-	help_menu->add_icon_shortcut(theme->get_icon(SNAME("Heart"), EditorStringName(EditorIcons)), ED_SHORTCUT_AND_COMMAND("editor/support_development", TTR("Support Godot Development")), HELP_SUPPORT_GODOT_DEVELOPMENT);
+	help_menu->add_icon_shortcut(theme->get_icon(SNAME("Heart"), EditorStringName(EditorIcons)), ED_SHORTCUT_AND_COMMAND("editor/support_development", TTR("Support scardot Development")), HELP_SUPPORT_SCARDOT_DEVELOPMENT);
 
 	// Spacer to center 2D / 3D / Script buttons.
 	Control *right_spacer = memnew(Control);

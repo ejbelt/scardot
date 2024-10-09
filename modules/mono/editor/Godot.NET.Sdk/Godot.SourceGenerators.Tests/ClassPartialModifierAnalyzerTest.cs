@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Godot.SourceGenerators.Tests;
+namespace scardot.SourceGenerators.Tests;
 
 public class ClassPartialModifierTest
 {

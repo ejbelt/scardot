@@ -2,10 +2,10 @@
 /*  register_server_types.cpp                                             */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -106,27 +106,27 @@
 ShaderTypes *shader_types = nullptr;
 
 #ifndef _3D_DISABLED
-static PhysicsServer3D *_createGodotPhysics3DCallback() {
+static PhysicsServer3D *_createscardotPhysics3DCallback() {
 #ifdef THREADS_ENABLED
 	bool using_threads = GLOBAL_GET("physics/3d/run_on_separate_thread");
 #else
 	bool using_threads = false;
 #endif
 
-	PhysicsServer3D *physics_server_3d = memnew(GodotPhysicsServer3D(using_threads));
+	PhysicsServer3D *physics_server_3d = memnew(scardotPhysicsServer3D(using_threads));
 
 	return memnew(PhysicsServer3DWrapMT(physics_server_3d, using_threads));
 }
 #endif // _3D_DISABLED
 
-static PhysicsServer2D *_createGodotPhysics2DCallback() {
+static PhysicsServer2D *_createscardotPhysics2DCallback() {
 #ifdef THREADS_ENABLED
 	bool using_threads = GLOBAL_GET("physics/2d/run_on_separate_thread");
 #else
 	bool using_threads = false;
 #endif
 
-	PhysicsServer2D *physics_server_2d = memnew(GodotPhysicsServer2D(using_threads));
+	PhysicsServer2D *physics_server_2d = memnew(scardotPhysicsServer2D(using_threads));
 
 	return memnew(PhysicsServer2DWrapMT(physics_server_2d, using_threads));
 }
@@ -289,8 +289,8 @@ void register_server_types() {
 
 	GLOBAL_DEF(PropertyInfo(Variant::STRING, PhysicsServer2DManager::setting_property_name, PROPERTY_HINT_ENUM, "DEFAULT"), "DEFAULT");
 
-	PhysicsServer2DManager::get_singleton()->register_server("GodotPhysics2D", callable_mp_static(_createGodotPhysics2DCallback));
-	PhysicsServer2DManager::get_singleton()->set_default_server("GodotPhysics2D");
+	PhysicsServer2DManager::get_singleton()->register_server("scardotPhysics2D", callable_mp_static(_createscardotPhysics2DCallback));
+	PhysicsServer2DManager::get_singleton()->set_default_server("scardotPhysics2D");
 
 	GDREGISTER_ABSTRACT_CLASS(NavigationServer2D);
 	GDREGISTER_CLASS(NavigationPathQueryParameters2D);
@@ -323,8 +323,8 @@ void register_server_types() {
 
 	GLOBAL_DEF(PropertyInfo(Variant::STRING, PhysicsServer3DManager::setting_property_name, PROPERTY_HINT_ENUM, "DEFAULT"), "DEFAULT");
 
-	PhysicsServer3DManager::get_singleton()->register_server("GodotPhysics3D", callable_mp_static(_createGodotPhysics3DCallback));
-	PhysicsServer3DManager::get_singleton()->set_default_server("GodotPhysics3D");
+	PhysicsServer3DManager::get_singleton()->register_server("scardotPhysics3D", callable_mp_static(_createscardotPhysics3DCallback));
+	PhysicsServer3DManager::get_singleton()->set_default_server("scardotPhysics3D");
 
 	GDREGISTER_ABSTRACT_CLASS(XRInterface);
 	GDREGISTER_CLASS(XRVRS);

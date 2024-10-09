@@ -1,4 +1,4 @@
-namespace Godot
+namespace scardot
 {
     /// <summary>
     /// An interface that requires a GetAwaiter() method to get a reference to the Awaiter.

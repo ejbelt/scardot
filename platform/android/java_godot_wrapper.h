@@ -2,10 +2,10 @@
 /*  java_godot_wrapper.h                                                  */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -28,8 +28,8 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#ifndef JAVA_GODOT_WRAPPER_H
-#define JAVA_GODOT_WRAPPER_H
+#ifndef JAVA_SCARDOT_WRAPPER_H
+#define JAVA_SCARDOT_WRAPPER_H
 
 #include "java_godot_view_wrapper.h"
 #include "string_android.h"
@@ -39,15 +39,15 @@
 #include <android/log.h>
 #include <jni.h>
 
-// Class that makes functions in java/src/org/godotengine/godot/Godot.kt callable from C++
-class GodotJavaWrapper {
+// Class that makes functions in java/src/org/godotengine/godot/scardot.kt callable from C++
+class scardotJavaWrapper {
 private:
 	jobject godot_instance;
 	jobject activity;
 	jclass godot_class;
 	jclass activity_class;
 
-	GodotJavaViewWrapper *godot_view = nullptr;
+	scardotJavaViewWrapper *godot_view = nullptr;
 
 	jmethodID _restart = nullptr;
 	jmethodID _finish = nullptr;
@@ -81,12 +81,12 @@ private:
 	jmethodID _is_in_immersive_mode = nullptr;
 
 public:
-	GodotJavaWrapper(JNIEnv *p_env, jobject p_activity, jobject p_godot_instance);
-	~GodotJavaWrapper();
+	scardotJavaWrapper(JNIEnv *p_env, jobject p_activity, jobject p_godot_instance);
+	~scardotJavaWrapper();
 
 	jobject get_activity();
 
-	GodotJavaViewWrapper *get_godot_view();
+	scardotJavaViewWrapper *get_godot_view();
 
 	void on_godot_setup_completed(JNIEnv *p_env = nullptr);
 	void on_godot_main_loop_started(JNIEnv *p_env = nullptr);
@@ -129,4 +129,4 @@ public:
 	bool is_in_immersive_mode();
 };
 
-#endif // JAVA_GODOT_WRAPPER_H
+#endif // JAVA_SCARDOT_WRAPPER_H

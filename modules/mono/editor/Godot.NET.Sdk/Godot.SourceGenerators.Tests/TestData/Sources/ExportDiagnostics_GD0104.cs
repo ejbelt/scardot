@@ -1,4 +1,4 @@
-using Godot;
+using scardot;
 
 public partial class ExportDiagnostics_GD0104 : Node
 {

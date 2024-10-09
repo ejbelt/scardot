@@ -1,9 +1,9 @@
-using Godot;
-using GodotTools.Build;
-using GodotTools.Internals;
+using scardot;
+using scardotTools.Build;
+using scardotTools.Internals;
 using JetBrains.Annotations;
 
-namespace GodotTools
+namespace scardotTools
 {
     public partial class HotReloadAssemblyWatcher : Node
     {

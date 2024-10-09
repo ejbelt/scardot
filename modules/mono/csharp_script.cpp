@@ -2,10 +2,10 @@
 /*  csharp_script.cpp                                                     */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -143,7 +143,7 @@ void CSharpLanguage::finalize() {
 	}
 
 	if (gdmono && gdmono->is_runtime_initialized() && GDMonoCache::godot_api_cache_updated) {
-		GDMonoCache::managed_callbacks.DisposablesTracker_OnGodotShuttingDown();
+		GDMonoCache::managed_callbacks.DisposablesTracker_OnscardotShuttingDown();
 	}
 
 	finalizing = true;
@@ -351,7 +351,7 @@ void CSharpLanguage::get_string_delimiters(List<String> *p_delimiters) const {
 static String get_base_class_name(const String &p_base_class_name, const String p_class_name) {
 	String base_class = pascal_to_pascal_case(p_base_class_name);
 	if (p_class_name == base_class) {
-		base_class = "Godot." + base_class;
+		base_class = "scardot." + base_class;
 	}
 	return base_class;
 }
@@ -617,7 +617,7 @@ bool CSharpLanguage::is_assembly_reloading_needed() {
 	} else {
 		String assembly_name = path::get_csharp_project_name();
 
-		assembly_path = GodotSharpDirs::get_res_temp_assemblies_dir()
+		assembly_path = scardotSharpDirs::get_res_temp_assemblies_dir()
 								.path_join(assembly_name + ".dll");
 		assembly_path = ProjectSettings::get_singleton()->globalize_path(assembly_path);
 
@@ -1053,13 +1053,13 @@ bool CSharpLanguage::debug_break(const String &p_error, bool p_allow_continue) {
 
 #ifdef TOOLS_ENABLED
 void CSharpLanguage::_editor_init_callback() {
-	// Load GodotTools and initialize GodotSharpEditor
+	// Load scardotTools and initialize scardotSharpEditor
 
 	int32_t interop_funcs_size = 0;
 	const void **interop_funcs = godotsharp::get_editor_interop_funcs(interop_funcs_size);
 
 	Object *editor_plugin_obj = GDMono::get_singleton()->get_plugin_callbacks().LoadToolsAssemblyCallback(
-			GodotSharpDirs::get_data_editor_tools_dir().path_join("GodotTools.dll").utf16(),
+			scardotSharpDirs::get_data_editor_tools_dir().path_join("scardotTools.dll").utf16(),
 			interop_funcs, interop_funcs_size);
 	CRASH_COND(editor_plugin_obj == nullptr);
 
@@ -1149,7 +1149,7 @@ bool CSharpLanguage::setup_csharp_script_binding(CSharpScriptBinding &r_script_b
 #endif
 
 	GCHandleIntPtr strong_gchandle =
-			GDMonoCache::managed_callbacks.ScriptManagerBridge_CreateManagedForGodotObjectBinding(
+			GDMonoCache::managed_callbacks.ScriptManagerBridge_CreateManagedForscardotObjectBinding(
 					&type_name, p_object);
 
 	ERR_FAIL_NULL_V(strong_gchandle.value, false);
@@ -1219,7 +1219,7 @@ void CSharpLanguage::_instance_binding_free_callback(void *, void *, void *p_bin
 		if (script_binding.inited) {
 			// Set the native instance field to IntPtr.Zero, if not yet garbage collected.
 			// This is done to avoid trying to dispose the native instance from Dispose(bool).
-			GDMonoCache::managed_callbacks.ScriptManagerBridge_SetGodotObjectPtr(
+			GDMonoCache::managed_callbacks.ScriptManagerBridge_SetscardotObjectPtr(
 					script_binding.gchandle.get_intptr(), nullptr);
 
 			script_binding.gchandle.release();
@@ -1359,7 +1359,7 @@ void CSharpLanguage::tie_native_managed_to_unmanaged(GCHandleIntPtr p_gchandle_i
 	MonoGCHandleData gchandle = MonoGCHandleData(p_gchandle_intptr,
 			p_ref_counted ? gdmono::GCHandleType::WEAK_HANDLE : gdmono::GCHandleType::STRONG_HANDLE);
 
-	// If it's just a wrapper Godot class and not a custom inheriting class, then attach a
+	// If it's just a wrapper scardot class and not a custom inheriting class, then attach a
 	// script binding instead. One of the advantages of this is that if a script is attached
 	// later and it's not a C# script, then the managed object won't have to be disposed.
 	// Another reason for doing this is that this instance could outlive CSharpLanguage, which would
@@ -1709,7 +1709,7 @@ bool CSharpInstance::_internal_new_managed() {
 	ERR_FAIL_COND_V(script.is_null(), false);
 	ERR_FAIL_COND_V(!script->can_instantiate(), false);
 
-	bool ok = GDMonoCache::managed_callbacks.ScriptManagerBridge_CreateManagedForGodotObjectScriptInstance(
+	bool ok = GDMonoCache::managed_callbacks.ScriptManagerBridge_CreateManagedForscardotObjectScriptInstance(
 			script.ptr(), owner, nullptr, 0);
 
 	if (!ok) {
@@ -2354,7 +2354,7 @@ CSharpInstance *CSharpScript::_create_instance(const Variant **p_args, int p_arg
 
 	/* STEP 2, INITIALIZE AND CONSTRUCT */
 
-	bool ok = GDMonoCache::managed_callbacks.ScriptManagerBridge_CreateManagedForGodotObjectScriptInstance(
+	bool ok = GDMonoCache::managed_callbacks.ScriptManagerBridge_CreateManagedForscardotObjectScriptInstance(
 			this, p_owner, p_args, p_argcount);
 
 	if (!ok) {

@@ -534,7 +534,7 @@ if env["builtin_icu4c"]:
         env.Append(LIBS=[lib])
 
 
-# Godot source files
+# scardot source files
 
 module_obj = []
 

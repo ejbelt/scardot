@@ -7,13 +7,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Godot;
-using GodotTools.BuildLogger;
-using GodotTools.Internals;
-using GodotTools.Utils;
-using Directory = GodotTools.Utils.Directory;
+using scardot;
+using scardotTools.BuildLogger;
+using scardotTools.Internals;
+using scardotTools.Utils;
+using Directory = scardotTools.Utils.Directory;
 
-namespace GodotTools.Build
+namespace scardotTools.Build
 {
     public static class BuildSystem
     {
@@ -33,7 +33,7 @@ namespace GodotTools.Build
 
             string launchMessage = startInfo.GetCommandLineDisplay(new StringBuilder("Running: ")).ToString();
             stdOutHandler?.Invoke(launchMessage);
-            if (Godot.OS.IsStdOutVerbose())
+            if (scardot.OS.IsStdOutVerbose())
                 Console.WriteLine(launchMessage);
 
             startInfo.RedirectStandardOutput = true;
@@ -104,7 +104,7 @@ namespace GodotTools.Build
 
             string launchMessage = startInfo.GetCommandLineDisplay(new StringBuilder("Running: ")).ToString();
             stdOutHandler?.Invoke(launchMessage);
-            if (Godot.OS.IsStdOutVerbose())
+            if (scardot.OS.IsStdOutVerbose())
                 Console.WriteLine(launchMessage);
 
             startInfo.RedirectStandardOutput = true;
@@ -246,7 +246,7 @@ namespace GodotTools.Build
             EditorSettings editorSettings)
         {
             var verbosityLevel =
-                editorSettings.GetSetting(GodotSharpEditor.Settings.VerbosityLevel).As<VerbosityLevelId>();
+                editorSettings.GetSetting(scardotSharpEditor.Settings.VerbosityLevel).As<VerbosityLevelId>();
             arguments.Add("-v");
             arguments.Add(verbosityLevel switch
             {
@@ -257,23 +257,23 @@ namespace GodotTools.Build
                 _ => "normal",
             });
 
-            if ((bool)editorSettings.GetSetting(GodotSharpEditor.Settings.NoConsoleLogging))
+            if ((bool)editorSettings.GetSetting(scardotSharpEditor.Settings.NoConsoleLogging))
                 arguments.Add("-noconlog");
         }
 
         private static void AddLoggerArgument(BuildInfo buildInfo, Collection<string> arguments)
         {
-            string buildLoggerPath = Path.Combine(Internals.GodotSharpDirs.DataEditorToolsDir,
-                "GodotTools.BuildLogger.dll");
+            string buildLoggerPath = Path.Combine(Internals.scardotSharpDirs.DataEditorToolsDir,
+                "scardotTools.BuildLogger.dll");
 
             arguments.Add(
-                $"-l:{typeof(GodotBuildLogger).FullName},{buildLoggerPath};{buildInfo.LogsDirPath}");
+                $"-l:{typeof(scardotBuildLogger).FullName},{buildLoggerPath};{buildInfo.LogsDirPath}");
         }
 
         private static void AddBinaryLogArgument(BuildInfo buildInfo, Collection<string> arguments,
             EditorSettings editorSettings)
         {
-            if (!(bool)editorSettings.GetSetting(GodotSharpEditor.Settings.CreateBinaryLog))
+            if (!(bool)editorSettings.GetSetting(scardotSharpEditor.Settings.CreateBinaryLog))
                 return;
 
             arguments.Add($"-bl:{Path.Combine(buildInfo.LogsDirPath, "msbuild.binlog")}");
@@ -310,7 +310,7 @@ namespace GodotTools.Build
 
             string launchMessage = startInfo.GetCommandLineDisplay(new StringBuilder("Packaging: ")).ToString();
             stdOutHandler?.Invoke(launchMessage);
-            if (Godot.OS.IsStdOutVerbose())
+            if (scardot.OS.IsStdOutVerbose())
                 Console.WriteLine(launchMessage);
 
             startInfo.RedirectStandardOutput = true;
@@ -354,8 +354,8 @@ namespace GodotTools.Build
         private static void BuildXCFrameworkArguments(List<string> outputPaths,
             string xcFrameworkPath, Collection<string> arguments)
         {
-            var baseDylib = $"{GodotSharpDirs.ProjectAssemblyName}.dylib";
-            var baseSym = $"{GodotSharpDirs.ProjectAssemblyName}.framework.dSYM";
+            var baseDylib = $"{scardotSharpDirs.ProjectAssemblyName}.dylib";
+            var baseSym = $"{scardotSharpDirs.ProjectAssemblyName}.framework.dSYM";
 
             arguments.Add("xcodebuild");
             arguments.Add("-create-xcframework");

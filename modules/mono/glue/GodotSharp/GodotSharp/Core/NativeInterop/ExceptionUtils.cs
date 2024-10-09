@@ -6,7 +6,7 @@ using System.Text;
 
 #nullable enable
 
-namespace Godot.NativeInterop
+namespace scardot.NativeInterop
 {
     internal static class ExceptionUtils
     {
@@ -140,9 +140,9 @@ namespace Godot.NativeInterop
         [Conditional("DEBUG")]
         public unsafe static void DebugCheckCallError(godot_string_name method, IntPtr instance, godot_variant** args, int argCount, godot_variant_call_error error)
         {
-            if (error.Error != godot_variant_call_error_error.GODOT_CALL_ERROR_CALL_OK)
+            if (error.Error != godot_variant_call_error_error.SCARDOT_CALL_ERROR_CALL_OK)
             {
-                using godot_variant instanceVariant = VariantUtils.CreateFromGodotObjectPtr(instance);
+                using godot_variant instanceVariant = VariantUtils.CreateFromscardotObjectPtr(instance);
                 string where = GetCallErrorWhere(ref error, method, &instanceVariant, args, argCount);
                 string errorText = GetCallErrorMessage(error, where, args);
                 GD.PushError(errorText);
@@ -152,7 +152,7 @@ namespace Godot.NativeInterop
         [Conditional("DEBUG")]
         public unsafe static void DebugCheckCallError(in godot_callable callable, godot_variant** args, int argCount, godot_variant_call_error error)
         {
-            if (error.Error != godot_variant_call_error_error.GODOT_CALL_ERROR_CALL_OK)
+            if (error.Error != godot_variant_call_error_error.SCARDOT_CALL_ERROR_CALL_OK)
             {
                 using godot_variant callableVariant = VariantUtils.CreateFromCallableTakingOwnershipOfDisposableValue(callable);
                 string where = $"callable '{VariantUtils.ConvertToString(callableVariant)}'";
@@ -166,12 +166,12 @@ namespace Godot.NativeInterop
             string? methodstr = null;
             string basestr = GetVariantTypeName(instance);
 
-            if (method == GodotObject.MethodName.Call || (basestr == "Godot.TreeItem" && method == TreeItem.MethodName.CallRecursive))
+            if (method == scardotObject.MethodName.Call || (basestr == "scardot.TreeItem" && method == TreeItem.MethodName.CallRecursive))
             {
                 if (argCount >= 1)
                 {
                     methodstr = VariantUtils.ConvertToString(*args[0]);
-                    if (error.Error == godot_variant_call_error_error.GODOT_CALL_ERROR_CALL_ERROR_INVALID_ARGUMENT)
+                    if (error.Error == godot_variant_call_error_error.SCARDOT_CALL_ERROR_CALL_ERROR_INVALID_ARGUMENT)
                     {
                         error.Argument += 1;
                     }
@@ -190,7 +190,7 @@ namespace Godot.NativeInterop
         {
             switch (error.Error)
             {
-                case godot_variant_call_error_error.GODOT_CALL_ERROR_CALL_ERROR_INVALID_ARGUMENT:
+                case godot_variant_call_error_error.SCARDOT_CALL_ERROR_CALL_ERROR_INVALID_ARGUMENT:
                 {
                     int errorarg = error.Argument;
                     // Handle the Object to Object case separately as we don't have further class details.
@@ -209,14 +209,14 @@ namespace Godot.NativeInterop
                         return $"Invalid type in {where}. Cannot convert argument {errorarg + 1} from {args[errorarg]->Type} to {error.Expected}.";
                     }
                 }
-                case godot_variant_call_error_error.GODOT_CALL_ERROR_CALL_ERROR_TOO_MANY_ARGUMENTS:
-                case godot_variant_call_error_error.GODOT_CALL_ERROR_CALL_ERROR_TOO_FEW_ARGUMENTS:
+                case godot_variant_call_error_error.SCARDOT_CALL_ERROR_CALL_ERROR_TOO_MANY_ARGUMENTS:
+                case godot_variant_call_error_error.SCARDOT_CALL_ERROR_CALL_ERROR_TOO_FEW_ARGUMENTS:
                     return $"Invalid call to {where}. Expected {error.Expected} arguments.";
-                case godot_variant_call_error_error.GODOT_CALL_ERROR_CALL_ERROR_INVALID_METHOD:
+                case godot_variant_call_error_error.SCARDOT_CALL_ERROR_CALL_ERROR_INVALID_METHOD:
                     return $"Invalid call. Nonexistent {where}.";
-                case godot_variant_call_error_error.GODOT_CALL_ERROR_CALL_ERROR_INSTANCE_IS_NULL:
+                case godot_variant_call_error_error.SCARDOT_CALL_ERROR_CALL_ERROR_INSTANCE_IS_NULL:
                     return $"Attempt to call {where} on a null instance.";
-                case godot_variant_call_error_error.GODOT_CALL_ERROR_CALL_ERROR_METHOD_NOT_CONST:
+                case godot_variant_call_error_error.SCARDOT_CALL_ERROR_CALL_ERROR_METHOD_NOT_CONST:
                     return $"Attempt to call {where} on a const instance.";
                 default:
                     return $"Bug, call error: #{error.Error}";
@@ -227,12 +227,12 @@ namespace Godot.NativeInterop
         {
             if (variant->Type == Variant.Type.Object)
             {
-                GodotObject obj = VariantUtils.ConvertToGodotObject(*variant);
+                scardotObject obj = VariantUtils.ConvertToscardotObject(*variant);
                 if (obj == null)
                 {
                     return "null instance";
                 }
-                else if (!GodotObject.IsInstanceValid(obj))
+                else if (!scardotObject.IsInstanceValid(obj))
                 {
                     return "previously freed";
                 }

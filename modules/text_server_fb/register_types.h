@@ -2,10 +2,10 @@
 /*  register_types.h                                                      */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -34,7 +34,7 @@
 #ifdef GDEXTENSION
 #include <godot_cpp/core/class_db.hpp>
 using namespace godot;
-#elif defined(GODOT_MODULE)
+#elif defined(SCARDOT_MODULE)
 #include "modules/register_module_types.h"
 #endif
 

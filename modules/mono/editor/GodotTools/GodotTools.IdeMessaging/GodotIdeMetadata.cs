@@ -1,36 +1,36 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace GodotTools.IdeMessaging
+namespace scardotTools.IdeMessaging
 {
-    public readonly struct GodotIdeMetadata
+    public readonly struct scardotIdeMetadata
     {
         public int Port { get; }
         public string EditorExecutablePath { get; }
 
         public const string DefaultFileName = "ide_messaging_meta.txt";
 
-        public GodotIdeMetadata(int port, string editorExecutablePath)
+        public scardotIdeMetadata(int port, string editorExecutablePath)
         {
             Port = port;
             EditorExecutablePath = editorExecutablePath;
         }
 
-        public static bool operator ==(GodotIdeMetadata a, GodotIdeMetadata b)
+        public static bool operator ==(scardotIdeMetadata a, scardotIdeMetadata b)
         {
             return a.Port == b.Port && a.EditorExecutablePath == b.EditorExecutablePath;
         }
 
-        public static bool operator !=(GodotIdeMetadata a, GodotIdeMetadata b)
+        public static bool operator !=(scardotIdeMetadata a, scardotIdeMetadata b)
         {
             return !(a == b);
         }
 
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
-            return obj is GodotIdeMetadata metadata && metadata == this;
+            return obj is scardotIdeMetadata metadata && metadata == this;
         }
 
-        public bool Equals(GodotIdeMetadata other)
+        public bool Equals(scardotIdeMetadata other)
         {
             return Port == other.Port && EditorExecutablePath == other.EditorExecutablePath;
         }

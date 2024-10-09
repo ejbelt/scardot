@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace GodotTools.Core
+namespace scardotTools.Core
 {
     public static class FileUtils
     {

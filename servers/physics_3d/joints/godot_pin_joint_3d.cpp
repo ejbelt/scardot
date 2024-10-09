@@ -2,10 +2,10 @@
 /*  godot_pin_joint_3d.cpp                                                */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -29,7 +29,7 @@
 /**************************************************************************/
 
 /*
-Adapted to Godot from the Bullet library.
+Adapted to scardot from the Bullet library.
 */
 
 /*
@@ -49,7 +49,7 @@ subject to the following restrictions:
 
 #include "godot_pin_joint_3d.h"
 
-bool GodotPinJoint3D::setup(real_t p_step) {
+bool scardotPinJoint3D::setup(real_t p_step) {
 	dynamic_A = (A->get_mode() > PhysicsServer3D::BODY_MODE_KINEMATIC);
 	dynamic_B = (B->get_mode() > PhysicsServer3D::BODY_MODE_KINEMATIC);
 
@@ -65,7 +65,7 @@ bool GodotPinJoint3D::setup(real_t p_step) {
 		normal[i] = 1;
 		memnew_placement(
 				&m_jac[i],
-				GodotJacobianEntry3D(
+				scardotJacobianEntry3D(
 						A->get_principal_inertia_axes().transposed(),
 						B->get_principal_inertia_axes().transposed(),
 						A->get_transform().xform(m_pivotInA) - A->get_transform().origin - A->get_center_of_mass(),
@@ -81,7 +81,7 @@ bool GodotPinJoint3D::setup(real_t p_step) {
 	return true;
 }
 
-void GodotPinJoint3D::solve(real_t p_step) {
+void scardotPinJoint3D::solve(real_t p_step) {
 	Vector3 pivotAInW = A->get_transform().xform(m_pivotInA);
 	Vector3 pivotBInW = B->get_transform().xform(m_pivotInB);
 
@@ -139,7 +139,7 @@ void GodotPinJoint3D::solve(real_t p_step) {
 	}
 }
 
-void GodotPinJoint3D::set_param(PhysicsServer3D::PinJointParam p_param, real_t p_value) {
+void scardotPinJoint3D::set_param(PhysicsServer3D::PinJointParam p_param, real_t p_value) {
 	switch (p_param) {
 		case PhysicsServer3D::PIN_JOINT_BIAS:
 			m_tau = p_value;
@@ -153,7 +153,7 @@ void GodotPinJoint3D::set_param(PhysicsServer3D::PinJointParam p_param, real_t p
 	}
 }
 
-real_t GodotPinJoint3D::get_param(PhysicsServer3D::PinJointParam p_param) const {
+real_t scardotPinJoint3D::get_param(PhysicsServer3D::PinJointParam p_param) const {
 	switch (p_param) {
 		case PhysicsServer3D::PIN_JOINT_BIAS:
 			return m_tau;
@@ -166,8 +166,8 @@ real_t GodotPinJoint3D::get_param(PhysicsServer3D::PinJointParam p_param) const 
 	return 0;
 }
 
-GodotPinJoint3D::GodotPinJoint3D(GodotBody3D *p_body_a, const Vector3 &p_pos_a, GodotBody3D *p_body_b, const Vector3 &p_pos_b) :
-		GodotJoint3D(_arr, 2) {
+scardotPinJoint3D::scardotPinJoint3D(scardotBody3D *p_body_a, const Vector3 &p_pos_a, scardotBody3D *p_body_b, const Vector3 &p_pos_b) :
+		scardotJoint3D(_arr, 2) {
 	A = p_body_a;
 	B = p_body_b;
 	m_pivotInA = p_pos_a;
@@ -177,5 +177,5 @@ GodotPinJoint3D::GodotPinJoint3D(GodotBody3D *p_body_a, const Vector3 &p_pos_a, 
 	B->add_constraint(this, 1);
 }
 
-GodotPinJoint3D::~GodotPinJoint3D() {
+scardotPinJoint3D::~scardotPinJoint3D() {
 }

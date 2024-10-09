@@ -1,7 +1,7 @@
-# Bulgarian translation of the Godot Engine editor interface.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Bulgarian translation of the scardot Engine editor interface.
+# Copyright (c) 2014-present scardot Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the scardot source code.
 # Bojidar Marinov <bojidar.marinov.bg@gmail.com>, 2016.
 # Иван Пенев (Адмирал АнимЕ) <aeternus.arcis@gmail.com>, 2016-2017.
 # Любомир Василев <lyubomirv@abv.bg>, 2018, 2020.
@@ -22,7 +22,7 @@
 # Филип Узунов <filkata@gmail.com>, 2024.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine editor interface\n"
+"Project-Id-Version: scardot Engine editor interface\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2024-06-30 18:47+0000\n"
@@ -1054,8 +1054,8 @@ msgstr "Папката не може да бъде създадена."
 msgid "Create Folder"
 msgstr "Създаване на папка"
 
-msgid "Thanks from the Godot community!"
-msgstr "Благодарности от общността на Godot!"
+msgid "Thanks from the scardot community!"
+msgstr "Благодарности от общността на scardot!"
 
 msgid "Project Founders"
 msgstr "Основатели на проекта"
@@ -1919,8 +1919,8 @@ msgstr "Деинсталиране на шаблона"
 msgid "Select Template File"
 msgstr "Избор на шаблонен файл"
 
-msgid "Godot Export Templates"
-msgstr "Шаблони за изнасяне на Godot"
+msgid "scardot Export Templates"
+msgstr "Шаблони за изнасяне на scardot"
 
 msgid "Resources to export:"
 msgstr "Ресурси за изнасяне:"
@@ -2015,8 +2015,8 @@ msgstr "Изнасяне на всичко…"
 msgid "ZIP File"
 msgstr "Файл ZIP"
 
-msgid "Godot Project Pack"
-msgstr "Проектен пакет на Godot"
+msgid "scardot Project Pack"
+msgstr "Проектен пакет на scardot"
 
 msgid "Export templates for this platform are missing:"
 msgstr "Шаблоните за изнасяне за тази система липсват:"
@@ -3787,8 +3787,8 @@ msgstr "Грешка при запазването"
 msgid "Save Theme As..."
 msgstr "Запазване на темата като..."
 
-msgid "Open Godot online documentation."
-msgstr "Отваряне на документацията на Godot в Интернет."
+msgid "Open scardot online documentation."
+msgstr "Отваряне на документацията на scardot в Интернет."
 
 msgid "Find Next"
 msgstr "Търсене напред"

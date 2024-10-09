@@ -17,7 +17,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = "Godot"
+rootProject.name = "scardot"
 
 include ':app'
 include ':lib'

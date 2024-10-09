@@ -2,10 +2,10 @@
 /*  godot_webgl2.h                                                        */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -28,8 +28,8 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#ifndef GODOT_WEBGL2_H
-#define GODOT_WEBGL2_H
+#ifndef SCARDOT_WEBGL2_H
+#define SCARDOT_WEBGL2_H
 
 #include <GLES3/gl3.h>
 #include <webgl/webgl2.h>
@@ -54,4 +54,4 @@ void godot_webgl2_glGetBufferSubData(GLenum target, GLintptr offset, GLsizeiptr 
 }
 #endif
 
-#endif // GODOT_WEBGL2_H
+#endif // SCARDOT_WEBGL2_H

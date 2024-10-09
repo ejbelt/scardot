@@ -1,7 +1,7 @@
-using Godot;
+using scardot;
 using System.Globalization;
 
-namespace GodotTools.Build
+namespace scardotTools.Build
 {
     public class BuildProblemsFilter
     {

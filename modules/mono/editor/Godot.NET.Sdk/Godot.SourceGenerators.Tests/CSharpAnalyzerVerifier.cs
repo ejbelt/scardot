@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Testing;
 using Microsoft.CodeAnalysis.Testing.Verifiers;
 using Microsoft.CodeAnalysis.Text;
 
-namespace Godot.SourceGenerators.Tests;
+namespace scardot.SourceGenerators.Tests;
 
 public static class CSharpAnalyzerVerifier<TAnalyzer>
     where TAnalyzer : DiagnosticAnalyzer, new()
@@ -26,7 +26,7 @@ public static class CSharpAnalyzerVerifier<TAnalyzer>
             SolutionTransforms.Add((Solution solution, ProjectId projectId) =>
             {
                 Project project =
-                    solution.GetProject(projectId)!.AddMetadataReference(Constants.GodotSharpAssembly
+                    solution.GetProject(projectId)!.AddMetadataReference(Constants.scardotSharpAssembly
                         .CreateMetadataReference()).WithParseOptions(new CSharpParseOptions(LangVersion));
 
                 return project.Solution;
@@ -45,7 +45,7 @@ public static class CSharpAnalyzerVerifier<TAnalyzer>
 
         verifier.TestState.AnalyzerConfigFiles.Add(("/.globalconfig", $"""
         is_global = true
-        build_property.GodotProjectDir = {Constants.ExecutingAssemblyPath}
+        build_property.scardotProjectDir = {Constants.ExecutingAssemblyPath}
         """));
 
         verifier.TestState.Sources.AddRange(sources.Select(source =>

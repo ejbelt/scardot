@@ -210,7 +210,7 @@ opts.Add(BoolVariable("debug_symbols", "Build with debugging symbols", False))
 opts.Add(BoolVariable("separate_debug_symbols", "Extract debugging symbols to a separate file", False))
 opts.Add(BoolVariable("debug_paths_relative", "Make file paths in debug symbols relative (if supported)", False))
 opts.Add(EnumVariable("lto", "Link-time optimization (production builds)", "none", ("none", "auto", "thin", "full")))
-opts.Add(BoolVariable("production", "Set defaults to build Godot for use in production", False))
+opts.Add(BoolVariable("production", "Set defaults to build scardot for use in production", False))
 opts.Add(BoolVariable("threads", "Enable threading support", True))
 
 # Components
@@ -348,24 +348,24 @@ if env["platform"] == "":
 
 if env["platform"] == "osx":
     # Deprecated alias kept for compatibility.
-    print_warning('Platform "osx" has been renamed to "macos" in Godot 4. Building for platform "macos".')
+    print_warning('Platform "osx" has been renamed to "macos" in scardot 4. Building for platform "macos".')
     env["platform"] = "macos"
 
 if env["platform"] == "iphone":
     # Deprecated alias kept for compatibility.
-    print_warning('Platform "iphone" has been renamed to "ios" in Godot 4. Building for platform "ios".')
+    print_warning('Platform "iphone" has been renamed to "ios" in scardot 4. Building for platform "ios".')
     env["platform"] = "ios"
 
 if env["platform"] in ["linux", "bsd", "x11"]:
     if env["platform"] == "x11":
         # Deprecated alias kept for compatibility.
-        print_warning('Platform "x11" has been renamed to "linuxbsd" in Godot 4. Building for platform "linuxbsd".')
+        print_warning('Platform "x11" has been renamed to "linuxbsd" in scardot 4. Building for platform "linuxbsd".')
     # Alias for convenience.
     env["platform"] = "linuxbsd"
 
 if env["platform"] == "javascript":
     # Deprecated alias kept for compatibility.
-    print_warning('Platform "javascript" has been renamed to "web" in Godot 4. Building for platform "web".')
+    print_warning('Platform "javascript" has been renamed to "web" in scardot 4. Building for platform "web".')
     env["platform"] = "web"
 
 if env["platform"] not in platform_list:
@@ -651,7 +651,7 @@ if methods.using_gcc(env):
     elif cc_version_major < 9:
         print_error(
             "Detected GCC version older than 9, which does not fully support "
-            "C++17, or has bugs when compiling Godot. Supported versions are 9 "
+            "C++17, or has bugs when compiling scardot. Supported versions are 9 "
             "and later. Use a newer GCC version, or Clang 6 or later by passing "
             '"use_llvm=yes" to the SCons command line.'
         )
@@ -792,7 +792,7 @@ else:
     # don't compile under complete conformance.
     env.Prepend(CCFLAGS=["/permissive-"])
 
-# Disable exception handling. Godot doesn't use exceptions anywhere, and this
+# Disable exception handling. scardot doesn't use exceptions anywhere, and this
 # saves around 20% of binary size and very significant build time (GH-80513).
 if env["disable_exceptions"]:
     if env.msvc:

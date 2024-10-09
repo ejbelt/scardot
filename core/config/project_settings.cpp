@@ -2,10 +2,10 @@
 /*  project_settings.cpp                                                  */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -74,7 +74,7 @@ String ProjectSettings::get_imported_files_path() const {
 }
 
 #ifdef TOOLS_ENABLED
-// Returns the features that a project must have when opened with this build of Godot.
+// Returns the features that a project must have when opened with this build of scardot.
 // This is used by the project manager to provide the initial_settings for config/features.
 const PackedStringArray ProjectSettings::get_required_features() {
 	PackedStringArray features;
@@ -85,7 +85,7 @@ const PackedStringArray ProjectSettings::get_required_features() {
 	return features;
 }
 
-// Returns the features supported by this build of Godot. Includes all required features.
+// Returns the features supported by this build of scardot. Includes all required features.
 const PackedStringArray ProjectSettings::_get_supported_features() {
 	PackedStringArray features = get_required_features();
 #ifdef MODULE_MONO_ENABLED
@@ -108,7 +108,7 @@ const PackedStringArray ProjectSettings::_get_supported_features() {
 	return features;
 }
 
-// Returns the features that this project needs but this build of Godot lacks.
+// Returns the features that this project needs but this build of scardot lacks.
 const PackedStringArray ProjectSettings::get_unsupported_features(const PackedStringArray &p_project_features) {
 	PackedStringArray unsupported_features;
 	PackedStringArray supported_features = singleton->_get_supported_features();
@@ -125,7 +125,7 @@ const PackedStringArray ProjectSettings::get_unsupported_features(const PackedSt
 	return unsupported_features;
 }
 
-// Returns the features that both this project has and this build of Godot has, ensuring required features exist.
+// Returns the features that both this project has and this build of scardot has, ensuring required features exist.
 const PackedStringArray ProjectSettings::_trim_to_supported_features(const PackedStringArray &p_project_features) {
 	// Remove unsupported features if present.
 	PackedStringArray features = PackedStringArray(p_project_features);
@@ -570,7 +570,7 @@ Error ProjectSettings::_setup(const String &p_path, const String &p_main_pack, b
 		bool found = _load_resource_pack(exec_path);
 
 		// Attempt with exec_name.pck.
-		// (This is the usual case when distributing a Godot game.)
+		// (This is the usual case when distributing a scardot game.)
 		String exec_dir = exec_path.get_base_dir();
 		String exec_filename = exec_path.get_file();
 		String exec_basename = exec_filename.get_basename();
@@ -1418,7 +1418,7 @@ ProjectSettings::ProjectSettings() {
 #ifdef TOOLS_ENABLED
 	// Available only at runtime in editor builds. Needs to be processed before anything else to work properly.
 	if (!Engine::get_singleton()->is_editor_hint()) {
-		String editor_features = OS::get_singleton()->get_environment("GODOT_EDITOR_CUSTOM_FEATURES");
+		String editor_features = OS::get_singleton()->get_environment("SCARDOT_EDITOR_CUSTOM_FEATURES");
 		if (!editor_features.is_empty()) {
 			PackedStringArray feature_list = editor_features.split(",");
 			for (const String &s : feature_list) {

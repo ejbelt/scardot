@@ -2,10 +2,10 @@
 /*  test_list.h                                                           */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -441,15 +441,15 @@ TEST_CASE("[List] Swap middle (values check)") {
 	List<String>::Element *n_str1 = list.push_back("Still");
 	List<String>::Element *n_str2 = list.push_back("waiting");
 	List<String>::Element *n_str3 = list.push_back("for");
-	List<String>::Element *n_str4 = list.push_back("Godot.");
+	List<String>::Element *n_str4 = list.push_back("scardot.");
 
 	CHECK(n_str1->get() == "Still");
-	CHECK(n_str4->get() == "Godot.");
+	CHECK(n_str4->get() == "scardot.");
 
 	CHECK(list.front()->get() == "Still");
 	CHECK(list.front()->next()->get() == "waiting");
 	CHECK(list.back()->prev()->get() == "for");
-	CHECK(list.back()->get() == "Godot.");
+	CHECK(list.back()->get() == "scardot.");
 
 	list.swap(n_str2, n_str3);
 
@@ -459,18 +459,18 @@ TEST_CASE("[List] Swap middle (values check)") {
 
 TEST_CASE("[List] Swap front and back (values check)") {
 	List<Variant> list;
-	Variant str = "Godot";
+	Variant str = "scardot";
 	List<Variant>::Element *n_str = list.push_back(str);
 	Variant color = Color(0, 0, 1);
 	List<Variant>::Element *n_color = list.push_back(color);
 
-	CHECK(list.front()->get() == "Godot");
+	CHECK(list.front()->get() == "scardot");
 	CHECK(list.back()->get() == Color(0, 0, 1));
 
 	list.swap(n_str, n_color);
 
 	CHECK(list.front()->get() == Color(0, 0, 1));
-	CHECK(list.back()->get() == "Godot");
+	CHECK(list.back()->get() == "scardot");
 }
 
 TEST_CASE("[List] Swap adjacent back and front (reverse order of elements)") {

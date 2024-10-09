@@ -4,18 +4,18 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Godot
+namespace scardot
 {
     /// <summary>
-    /// GodotTaskScheduler contains a linked list of tasks to perform as a queue. Methods
+    /// scardotTaskScheduler contains a linked list of tasks to perform as a queue. Methods
     /// within the class are used to control the queue and perform the contained tasks.
     /// </summary>
-    public sealed class GodotTaskScheduler : TaskScheduler, IDisposable
+    public sealed class scardotTaskScheduler : TaskScheduler, IDisposable
     {
         /// <summary>
         /// The current synchronization context.
         /// </summary>
-        internal GodotSynchronizationContext Context { get; }
+        internal scardotSynchronizationContext Context { get; }
 
         /// <summary>
         /// The queue of tasks for the task scheduler.
@@ -23,11 +23,11 @@ namespace Godot
         private readonly LinkedList<Task> _tasks = new LinkedList<Task>();
 
         /// <summary>
-        /// Constructs a new GodotTaskScheduler instance.
+        /// Constructs a new scardotTaskScheduler instance.
         /// </summary>
-        public GodotTaskScheduler()
+        public scardotTaskScheduler()
         {
-            Context = new GodotSynchronizationContext();
+            Context = new scardotSynchronizationContext();
             SynchronizationContext.SetSynchronizationContext(Context);
         }
 

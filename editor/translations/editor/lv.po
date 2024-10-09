@@ -1,7 +1,7 @@
-# Latvian translation of the Godot Engine editor interface.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Latvian translation of the scardot Engine editor interface.
+# Copyright (c) 2014-present scardot Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the scardot source code.
 # Gustavs Porietis (pg829-) <porietisgustavs@gmail.com>, 2018.
 # Martch Zagorski <martchzagorski@gmail.com>, 2018, 2020.
 # Jānis Ondzuls <janisond@inbox.lv>, 2020.
@@ -15,7 +15,7 @@
 # Peter Lauris <peterlauris@gmail.com>, 2023.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine editor interface\n"
+"Project-Id-Version: scardot Engine editor interface\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2023-11-16 07:52+0000\n"
@@ -1121,11 +1121,11 @@ msgstr "Neizdevās izveidot mapi."
 msgid "Create Folder"
 msgstr "Izveidot mapi"
 
-msgid "Thanks from the Godot community!"
-msgstr "Paldies no Godot sabiedrības!"
+msgid "Thanks from the scardot community!"
+msgstr "Paldies no scardot sabiedrības!"
 
-msgid "Godot Engine contributors"
-msgstr "Godot Dzinēja ieguldītāji"
+msgid "scardot Engine contributors"
+msgstr "scardot Dzinēja ieguldītāji"
 
 msgid "Project Founders"
 msgstr "Projekta Dibinātāji"
@@ -1158,12 +1158,12 @@ msgid "Third-party Licenses"
 msgstr "Trešās partijas Licences"
 
 msgid ""
-"Godot Engine relies on a number of third-party free and open source "
+"scardot Engine relies on a number of third-party free and open source "
 "libraries, all compatible with the terms of its MIT license. The following is "
 "an exhaustive list of all such third-party components with their respective "
 "copyright statements and license terms."
 msgstr ""
-"Godot Konstruktors paļaujas uz citiem trešās partijas brīvajām un atvērtā "
+"scardot Konstruktors paļaujas uz citiem trešās partijas brīvajām un atvērtā "
 "avota bibliotēkām, kuras ir saderīgas ar to MIT licences nosacījumiem. "
 "Sekojošais ir saraksts ar šīm trešās partijas komponentēm ar to autortiesību "
 "apgalvojumiem un licences nosacījumiem."
@@ -1520,8 +1520,8 @@ msgstr ""
 msgid "New profile name:"
 msgstr "Jaunais profila nosaukums:"
 
-msgid "Godot Feature Profile"
-msgstr "Godot iespēju profils"
+msgid "scardot Feature Profile"
+msgstr "scardot iespēju profils"
 
 msgid "Import Profile(s)"
 msgstr "Importēt profilu(s)"
@@ -2059,8 +2059,8 @@ msgstr "Ieteikt Iespēju"
 msgid "Send Docs Feedback"
 msgstr "Sūtīt dokumentu atsauksmi"
 
-msgid "Support Godot Development"
-msgstr "Atbalstīt Godot izstrādi"
+msgid "Support scardot Development"
+msgstr "Atbalstīt scardot izstrādi"
 
 msgid "Update Continuously"
 msgstr "Nepārtraukti Atjaunot"
@@ -2918,8 +2918,8 @@ msgstr "Saglabāt motīvu kā..."
 msgid "Online Docs"
 msgstr "Tiešsaistes Dokumenti"
 
-msgid "Open Godot online documentation."
-msgstr "Atvērt Godot tiešsaistes dokumentāciju."
+msgid "Open scardot online documentation."
+msgstr "Atvērt scardot tiešsaistes dokumentāciju."
 
 msgid "Find Next"
 msgstr "Atrast Nākamo"

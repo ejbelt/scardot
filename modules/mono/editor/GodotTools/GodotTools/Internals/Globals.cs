@@ -1,9 +1,9 @@
-using Godot;
-using Godot.NativeInterop;
+using scardot;
+using scardot.NativeInterop;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
-namespace GodotTools.Internals
+namespace scardotTools.Internals
 {
     public static class Globals
     {
@@ -33,7 +33,7 @@ namespace GodotTools.Internals
         {
             using godot_string settingIn = Marshaling.ConvertStringToNative(setting);
             using godot_string nameIn = Marshaling.ConvertStringToNative(name);
-            Internal.godot_icall_Globals_EditorDefShortcut(settingIn, nameIn, keycode, physical.ToGodotBool(), out godot_variant result);
+            Internal.godot_icall_Globals_EditorDefShortcut(settingIn, nameIn, keycode, physical.ToscardotBool(), out godot_variant result);
             return (Shortcut)Variant.CreateTakingOwnershipOfDisposableValue(result);
         }
 
@@ -48,7 +48,7 @@ namespace GodotTools.Internals
         {
             using godot_string settingIn = Marshaling.ConvertStringToNative(setting);
             using godot_string featureIn = Marshaling.ConvertStringToNative(feature);
-            Internal.godot_icall_Globals_EditorShortcutOverride(settingIn, featureIn, keycode, physical.ToGodotBool());
+            Internal.godot_icall_Globals_EditorShortcutOverride(settingIn, featureIn, keycode, physical.ToscardotBool());
         }
 
         [SuppressMessage("ReSharper", "InconsistentNaming")]

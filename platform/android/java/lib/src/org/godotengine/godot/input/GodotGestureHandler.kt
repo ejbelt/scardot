@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotGestureHandler.kt                                                */
+/*  scardotGestureHandler.kt                                                */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -36,18 +36,18 @@ import android.view.InputDevice
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.ScaleGestureDetector.OnScaleGestureListener
-import org.godotengine.godot.GodotLib
+import org.godotengine.godot.scardotLib
 
 /**
- * Handles regular and scale gesture input related events for the [GodotView] view.
+ * Handles regular and scale gesture input related events for the [scardotView] view.
  *
  * @See https://developer.android.com/reference/android/view/GestureDetector.SimpleOnGestureListener
  * @See https://developer.android.com/reference/android/view/ScaleGestureDetector.OnScaleGestureListener
  */
-internal class GodotGestureHandler(private val inputHandler: GodotInputHandler) : SimpleOnGestureListener(), OnScaleGestureListener {
+internal class scardotGestureHandler(private val inputHandler: scardotInputHandler) : SimpleOnGestureListener(), OnScaleGestureListener {
 
 	companion object {
-		private val TAG = GodotGestureHandler::class.java.simpleName
+		private val TAG = scardotGestureHandler::class.java.simpleName
 	}
 
 	/**
@@ -76,7 +76,7 @@ internal class GodotGestureHandler(private val inputHandler: GodotInputHandler) 
 	}
 
 	override fun onLongPress(event: MotionEvent) {
-		val toolType = GodotInputHandler.getEventToolType(event)
+		val toolType = scardotInputHandler.getEventToolType(event)
 		if (toolType != MotionEvent.TOOL_TYPE_MOUSE) {
 			contextClickRouter(event)
 		}
@@ -131,7 +131,7 @@ internal class GodotGestureHandler(private val inputHandler: GodotInputHandler) 
 		}
 
 		if (pointerCaptureInProgress || dragInProgress || contextClickInProgress) {
-			if (contextClickInProgress || GodotInputHandler.isMouseEvent(event)) {
+			if (contextClickInProgress || scardotInputHandler.isMouseEvent(event)) {
 				// This may be an ACTION_BUTTON_RELEASE event which we don't handle,
 				// so we convert it to an ACTION_UP event.
 				inputHandler.handleMouseEvent(event, MotionEvent.ACTION_UP)

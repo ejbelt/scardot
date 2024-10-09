@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotGLRenderView.java                                                */
+/*  scardotGLRenderView.java                                                */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -31,8 +31,8 @@
 package org.godotengine.godot;
 
 import org.godotengine.godot.gl.GLSurfaceView;
-import org.godotengine.godot.gl.GodotRenderer;
-import org.godotengine.godot.input.GodotInputHandler;
+import org.godotengine.godot.gl.scardotRenderer;
+import org.godotengine.godot.input.scardotInputHandler;
 import org.godotengine.godot.xr.XRMode;
 import org.godotengine.godot.xr.ovr.OvrConfigChooser;
 import org.godotengine.godot.xr.ovr.OvrContextFactory;
@@ -76,20 +76,20 @@ import java.io.InputStream;
  *   that matches it exactly (with regards to red/green/blue/alpha channels
  *   bit depths). Failure to do so would result in an EGL_BAD_MATCH error.
  */
-class GodotGLRenderView extends GLSurfaceView implements GodotRenderView {
-	private final GodotHost host;
-	private final Godot godot;
-	private final GodotInputHandler inputHandler;
-	private final GodotRenderer godotRenderer;
+class scardotGLRenderView extends GLSurfaceView implements scardotRenderView {
+	private final scardotHost host;
+	private final scardot godot;
+	private final scardotInputHandler inputHandler;
+	private final scardotRenderer godotRenderer;
 	private final SparseArray<PointerIcon> customPointerIcons = new SparseArray<>();
 
-	public GodotGLRenderView(GodotHost host, Godot godot, GodotInputHandler inputHandler, XRMode xrMode, boolean useDebugOpengl) {
+	public scardotGLRenderView(scardotHost host, scardot godot, scardotInputHandler inputHandler, XRMode xrMode, boolean useDebugOpengl) {
 		super(host.getActivity());
 
 		this.host = host;
 		this.godot = godot;
 		this.inputHandler = inputHandler;
-		this.godotRenderer = new GodotRenderer();
+		this.godotRenderer = new scardotRenderer();
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 			setPointerIcon(PointerIcon.getSystemIcon(getContext(), PointerIcon.TYPE_DEFAULT));
 		}
@@ -109,7 +109,7 @@ class GodotGLRenderView extends GLSurfaceView implements GodotRenderView {
 	@Override
 	public void onActivityPaused() {
 		queueEvent(() -> {
-			GodotLib.focusout();
+			scardotLib.focusout();
 			// Pause the renderer
 			godotRenderer.onActivityPaused();
 		});
@@ -125,7 +125,7 @@ class GodotGLRenderView extends GLSurfaceView implements GodotRenderView {
 		queueEvent(() -> {
 			// Resume the renderer
 			godotRenderer.onActivityResumed();
-			GodotLib.focusin();
+			scardotLib.focusin();
 		});
 	}
 
@@ -140,7 +140,7 @@ class GodotGLRenderView extends GLSurfaceView implements GodotRenderView {
 	}
 
 	@Override
-	public GodotInputHandler getInputHandler() {
+	public scardotInputHandler getInputHandler() {
 		return inputHandler;
 	}
 

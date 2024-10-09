@@ -4,11 +4,11 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
-using Godot.NativeInterop;
+using scardot.NativeInterop;
 
 #nullable enable
 
-namespace Godot
+namespace scardot
 {
     internal static class DebuggingUtils
     {
@@ -59,7 +59,7 @@ namespace Godot
         internal static void InstallTraceListener()
         {
             Trace.Listeners.Clear();
-            Trace.Listeners.Add(new GodotTraceListener());
+            Trace.Listeners.Add(new scardotTraceListener());
         }
 
 #pragma warning disable IDE1006 // Naming rule violation

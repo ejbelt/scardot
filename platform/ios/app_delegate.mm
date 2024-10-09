@@ -2,10 +2,10 @@
 /*  app_delegate.mm                                                       */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -69,7 +69,7 @@ static ViewController *mainViewController = nil;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	// TODO: might be required to make an early return, so app wouldn't crash because of timeout.
 	// TODO: logo screen is not displayed while shaders are compiling
-	// DummyViewController(Splash/LoadingViewController) -> setup -> GodotViewController
+	// DummyViewController(Splash/LoadingViewController) -> setup -> scardotViewController
 
 	CGRect windowBounds = [[UIScreen mainScreen] bounds];
 

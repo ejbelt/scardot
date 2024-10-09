@@ -2,10 +2,10 @@
 /*  godot_module_mbedtls_config.h                                         */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -28,15 +28,15 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#ifndef GODOT_MODULE_MBEDTLS_CONFIG_H
-#define GODOT_MODULE_MBEDTLS_CONFIG_H
+#ifndef SCARDOT_MODULE_MBEDTLS_CONFIG_H
+#define SCARDOT_MODULE_MBEDTLS_CONFIG_H
 
 #include "platform_config.h"
 
-#ifdef GODOT_MBEDTLS_INCLUDE_H
+#ifdef SCARDOT_MBEDTLS_INCLUDE_H
 
 // Allow platforms to customize the mbedTLS configuration.
-#include GODOT_MBEDTLS_INCLUDE_H
+#include SCARDOT_MBEDTLS_INCLUDE_H
 
 #else
 
@@ -71,6 +71,6 @@
 #undef MBEDTLS_PSA_ITS_FILE_C
 #undef MBEDTLS_LMS_C
 
-#endif // GODOT_MBEDTLS_INCLUDE_H
+#endif // SCARDOT_MBEDTLS_INCLUDE_H
 
-#endif // GODOT_MODULE_MBEDTLS_CONFIG_H
+#endif // SCARDOT_MODULE_MBEDTLS_CONFIG_H

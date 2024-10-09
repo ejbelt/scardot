@@ -4,7 +4,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
-namespace GodotTools.IdeMessaging.Utils
+namespace scardotTools.IdeMessaging.Utils
 {
     public class NotifyAwaiter<T> : INotifyCompletion
     {

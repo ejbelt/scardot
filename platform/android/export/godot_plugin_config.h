@@ -2,10 +2,10 @@
 /*  godot_plugin_config.h                                                 */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -28,8 +28,8 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#ifndef ANDROID_GODOT_PLUGIN_CONFIG_H
-#define ANDROID_GODOT_PLUGIN_CONFIG_H
+#ifndef ANDROID_SCARDOT_PLUGIN_CONFIG_H
+#define ANDROID_SCARDOT_PLUGIN_CONFIG_H
 
 #ifndef DISABLE_DEPRECATED
 
@@ -105,4 +105,4 @@ struct PluginConfigAndroid {
 
 #endif // DISABLE_DEPRECATED
 
-#endif // ANDROID_GODOT_PLUGIN_CONFIG_H
+#endif // ANDROID_SCARDOT_PLUGIN_CONFIG_H

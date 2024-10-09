@@ -4,10 +4,10 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using GodotTools.IdeMessaging.Requests;
+using scardotTools.IdeMessaging.Requests;
 using Newtonsoft.Json;
 
-namespace GodotTools.IdeMessaging.CLI
+namespace scardotTools.IdeMessaging.CLI
 {
     internal static class Program
     {
@@ -45,7 +45,7 @@ namespace GodotTools.IdeMessaging.CLI
 
                 if (!Directory.Exists(godotProjectDir))
                 {
-                    Logger.LogError($"The specified Godot project directory does not exist: {godotProjectDir}");
+                    Logger.LogError($"The specified scardot project directory does not exist: {godotProjectDir}");
                     return 1;
                 }
 

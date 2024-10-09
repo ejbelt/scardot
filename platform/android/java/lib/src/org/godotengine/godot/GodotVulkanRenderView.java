@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotVulkanRenderView.java                                            */
+/*  scardotVulkanRenderView.java                                            */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -30,7 +30,7 @@
 
 package org.godotengine.godot;
 
-import org.godotengine.godot.input.GodotInputHandler;
+import org.godotengine.godot.input.scardotInputHandler;
 import org.godotengine.godot.vulkan.VkRenderer;
 import org.godotengine.godot.vulkan.VkSurfaceView;
 
@@ -50,14 +50,14 @@ import androidx.annotation.Keep;
 
 import java.io.InputStream;
 
-class GodotVulkanRenderView extends VkSurfaceView implements GodotRenderView {
-	private final GodotHost host;
-	private final Godot godot;
-	private final GodotInputHandler mInputHandler;
+class scardotVulkanRenderView extends VkSurfaceView implements scardotRenderView {
+	private final scardotHost host;
+	private final scardot godot;
+	private final scardotInputHandler mInputHandler;
 	private final VkRenderer mRenderer;
 	private final SparseArray<PointerIcon> customPointerIcons = new SparseArray<>();
 
-	public GodotVulkanRenderView(GodotHost host, Godot godot, GodotInputHandler inputHandler) {
+	public scardotVulkanRenderView(scardotHost host, scardot godot, scardotInputHandler inputHandler) {
 		super(host.getActivity());
 
 		this.host = host;
@@ -88,7 +88,7 @@ class GodotVulkanRenderView extends VkSurfaceView implements GodotRenderView {
 	@Override
 	public void onActivityPaused() {
 		queueOnVkThread(() -> {
-			GodotLib.focusout();
+			scardotLib.focusout();
 			// Pause the renderer
 			mRenderer.onVkPause();
 		});
@@ -109,7 +109,7 @@ class GodotVulkanRenderView extends VkSurfaceView implements GodotRenderView {
 		queueOnVkThread(() -> {
 			// Resume the renderer
 			mRenderer.onVkResume();
-			GodotLib.focusin();
+			scardotLib.focusin();
 		});
 	}
 
@@ -119,7 +119,7 @@ class GodotVulkanRenderView extends VkSurfaceView implements GodotRenderView {
 	}
 
 	@Override
-	public GodotInputHandler getInputHandler() {
+	public scardotInputHandler getInputHandler() {
 		return mInputHandler;
 	}
 

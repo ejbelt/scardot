@@ -2,10 +2,10 @@
 /*  display_server_android.cpp                                            */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -120,14 +120,14 @@ void DisplayServerAndroid::tts_stop() {
 }
 
 bool DisplayServerAndroid::is_dark_mode_supported() const {
-	GodotJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
+	scardotJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
 	ERR_FAIL_NULL_V(godot_java, false);
 
 	return godot_java->is_dark_mode_supported();
 }
 
 bool DisplayServerAndroid::is_dark_mode() const {
-	GodotJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
+	scardotJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
 	ERR_FAIL_NULL_V(godot_java, false);
 
 	return godot_java->is_dark_mode();
@@ -144,7 +144,7 @@ void DisplayServerAndroid::emit_system_theme_changed() {
 }
 
 void DisplayServerAndroid::clipboard_set(const String &p_text) {
-	GodotJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
+	scardotJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
 	ERR_FAIL_NULL(godot_java);
 
 	if (godot_java->has_set_clipboard()) {
@@ -155,7 +155,7 @@ void DisplayServerAndroid::clipboard_set(const String &p_text) {
 }
 
 String DisplayServerAndroid::clipboard_get() const {
-	GodotJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
+	scardotJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
 	ERR_FAIL_NULL_V(godot_java, String());
 
 	if (godot_java->has_get_clipboard()) {
@@ -166,7 +166,7 @@ String DisplayServerAndroid::clipboard_get() const {
 }
 
 bool DisplayServerAndroid::clipboard_has() const {
-	GodotJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
+	scardotJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
 	ERR_FAIL_NULL_V(godot_java, false);
 
 	if (godot_java->has_has_clipboard()) {
@@ -177,19 +177,19 @@ bool DisplayServerAndroid::clipboard_has() const {
 }
 
 TypedArray<Rect2> DisplayServerAndroid::get_display_cutouts() const {
-	GodotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
+	scardotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
 	ERR_FAIL_NULL_V(godot_io_java, Array());
 	return godot_io_java->get_display_cutouts();
 }
 
 Rect2i DisplayServerAndroid::get_display_safe_area() const {
-	GodotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
+	scardotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
 	ERR_FAIL_NULL_V(godot_io_java, Rect2i());
 	return godot_io_java->get_display_safe_area();
 }
 
 void DisplayServerAndroid::screen_set_keep_on(bool p_enable) {
-	GodotJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
+	scardotJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
 	ERR_FAIL_NULL(godot_java);
 
 	godot_java->set_keep_screen_on(p_enable);
@@ -201,14 +201,14 @@ bool DisplayServerAndroid::screen_is_kept_on() const {
 }
 
 void DisplayServerAndroid::screen_set_orientation(DisplayServer::ScreenOrientation p_orientation, int p_screen) {
-	GodotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
+	scardotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
 	ERR_FAIL_NULL(godot_io_java);
 
 	godot_io_java->set_screen_orientation(p_orientation);
 }
 
 DisplayServer::ScreenOrientation DisplayServerAndroid::screen_get_orientation(int p_screen) const {
-	GodotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
+	scardotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
 	ERR_FAIL_NULL_V(godot_io_java, SCREEN_LANDSCAPE);
 
 	const int orientation = godot_io_java->get_screen_orientation();
@@ -238,14 +238,14 @@ Rect2i DisplayServerAndroid::screen_get_usable_rect(int p_screen) const {
 }
 
 int DisplayServerAndroid::screen_get_dpi(int p_screen) const {
-	GodotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
+	scardotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
 	ERR_FAIL_NULL_V(godot_io_java, 0);
 
 	return godot_io_java->get_screen_dpi();
 }
 
 float DisplayServerAndroid::screen_get_scale(int p_screen) const {
-	GodotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
+	scardotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
 	ERR_FAIL_NULL_V(godot_io_java, 1.0f);
 
 	float screen_scale = godot_io_java->get_scaled_density();
@@ -263,7 +263,7 @@ float DisplayServerAndroid::screen_get_scale(int p_screen) const {
 }
 
 float DisplayServerAndroid::screen_get_refresh_rate(int p_screen) const {
-	GodotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
+	scardotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
 	if (!godot_io_java) {
 		ERR_PRINT("An error occurred while trying to get the screen refresh rate.");
 		return SCREEN_REFRESH_RATE_FALLBACK;
@@ -277,7 +277,7 @@ bool DisplayServerAndroid::is_touchscreen_available() const {
 }
 
 void DisplayServerAndroid::virtual_keyboard_show(const String &p_existing_text, const Rect2 &p_screen_rect, VirtualKeyboardType p_type, int p_max_length, int p_cursor_start, int p_cursor_end) {
-	GodotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
+	scardotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
 	ERR_FAIL_NULL(godot_io_java);
 
 	if (godot_io_java->has_vk()) {
@@ -288,7 +288,7 @@ void DisplayServerAndroid::virtual_keyboard_show(const String &p_existing_text, 
 }
 
 void DisplayServerAndroid::virtual_keyboard_hide() {
-	GodotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
+	scardotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
 	ERR_FAIL_NULL(godot_io_java);
 
 	if (godot_io_java->has_vk()) {
@@ -299,7 +299,7 @@ void DisplayServerAndroid::virtual_keyboard_hide() {
 }
 
 int DisplayServerAndroid::virtual_keyboard_get_height() const {
-	GodotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
+	scardotIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
 	ERR_FAIL_NULL_V(godot_io_java, 0);
 
 	return godot_io_java->get_vk_height();

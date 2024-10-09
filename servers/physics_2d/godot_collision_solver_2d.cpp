@@ -2,10 +2,10 @@
 /*  godot_collision_solver_2d.cpp                                         */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -34,8 +34,8 @@
 #define collision_solver sat_2d_calculate_penetration
 //#define collision_solver gjk_epa_calculate_penetration
 
-bool GodotCollisionSolver2D::solve_static_world_boundary(const GodotShape2D *p_shape_A, const Transform2D &p_transform_A, const GodotShape2D *p_shape_B, const Transform2D &p_transform_B, const Vector2 &p_motion_B, CallbackResult p_result_callback, void *p_userdata, bool p_swap_result, real_t p_margin) {
-	const GodotWorldBoundaryShape2D *world_boundary = static_cast<const GodotWorldBoundaryShape2D *>(p_shape_A);
+bool scardotCollisionSolver2D::solve_static_world_boundary(const scardotShape2D *p_shape_A, const Transform2D &p_transform_A, const scardotShape2D *p_shape_B, const Transform2D &p_transform_B, const Vector2 &p_motion_B, CallbackResult p_result_callback, void *p_userdata, bool p_swap_result, real_t p_margin) {
+	const scardotWorldBoundaryShape2D *world_boundary = static_cast<const scardotWorldBoundaryShape2D *>(p_shape_A);
 	if (p_shape_B->get_type() == PhysicsServer2D::SHAPE_WORLD_BOUNDARY) {
 		return false;
 	}
@@ -75,8 +75,8 @@ bool GodotCollisionSolver2D::solve_static_world_boundary(const GodotShape2D *p_s
 	return found;
 }
 
-bool GodotCollisionSolver2D::solve_separation_ray(const GodotShape2D *p_shape_A, const Vector2 &p_motion_A, const Transform2D &p_transform_A, const GodotShape2D *p_shape_B, const Transform2D &p_transform_B, CallbackResult p_result_callback, void *p_userdata, bool p_swap_result, Vector2 *r_sep_axis, real_t p_margin) {
-	const GodotSeparationRayShape2D *ray = static_cast<const GodotSeparationRayShape2D *>(p_shape_A);
+bool scardotCollisionSolver2D::solve_separation_ray(const scardotShape2D *p_shape_A, const Vector2 &p_motion_A, const Transform2D &p_transform_A, const scardotShape2D *p_shape_B, const Transform2D &p_transform_B, CallbackResult p_result_callback, void *p_userdata, bool p_swap_result, Vector2 *r_sep_axis, real_t p_margin) {
+	const scardotSeparationRayShape2D *ray = static_cast<const scardotSeparationRayShape2D *>(p_shape_A);
 	if (p_shape_B->get_type() == PhysicsServer2D::SHAPE_SEPARATION_RAY) {
 		return false;
 	}
@@ -136,13 +136,13 @@ bool GodotCollisionSolver2D::solve_separation_ray(const GodotShape2D *p_shape_A,
 
 struct _ConcaveCollisionInfo2D {
 	const Transform2D *transform_A = nullptr;
-	const GodotShape2D *shape_A = nullptr;
+	const scardotShape2D *shape_A = nullptr;
 	const Transform2D *transform_B = nullptr;
 	Vector2 motion_A;
 	Vector2 motion_B;
 	real_t margin_A = 0.0;
 	real_t margin_B = 0.0;
-	GodotCollisionSolver2D::CallbackResult result_callback = nullptr;
+	scardotCollisionSolver2D::CallbackResult result_callback = nullptr;
 	void *userdata = nullptr;
 	bool swap_result = false;
 	bool collided = false;
@@ -151,7 +151,7 @@ struct _ConcaveCollisionInfo2D {
 	Vector2 *sep_axis = nullptr;
 };
 
-bool GodotCollisionSolver2D::concave_callback(void *p_userdata, GodotShape2D *p_convex) {
+bool scardotCollisionSolver2D::concave_callback(void *p_userdata, scardotShape2D *p_convex) {
 	_ConcaveCollisionInfo2D &cinfo = *(static_cast<_ConcaveCollisionInfo2D *>(p_userdata));
 	cinfo.aabb_tests++;
 
@@ -167,8 +167,8 @@ bool GodotCollisionSolver2D::concave_callback(void *p_userdata, GodotShape2D *p_
 	return !cinfo.result_callback;
 }
 
-bool GodotCollisionSolver2D::solve_concave(const GodotShape2D *p_shape_A, const Transform2D &p_transform_A, const Vector2 &p_motion_A, const GodotShape2D *p_shape_B, const Transform2D &p_transform_B, const Vector2 &p_motion_B, CallbackResult p_result_callback, void *p_userdata, bool p_swap_result, Vector2 *r_sep_axis, real_t p_margin_A, real_t p_margin_B) {
-	const GodotConcaveShape2D *concave_B = static_cast<const GodotConcaveShape2D *>(p_shape_B);
+bool scardotCollisionSolver2D::solve_concave(const scardotShape2D *p_shape_A, const Transform2D &p_transform_A, const Vector2 &p_motion_A, const scardotShape2D *p_shape_B, const Transform2D &p_transform_B, const Vector2 &p_motion_B, CallbackResult p_result_callback, void *p_userdata, bool p_swap_result, Vector2 *r_sep_axis, real_t p_margin_A, real_t p_margin_B) {
+	const scardotConcaveShape2D *concave_B = static_cast<const scardotConcaveShape2D *>(p_shape_B);
 
 	_ConcaveCollisionInfo2D cinfo;
 	cinfo.transform_A = &p_transform_A;
@@ -216,7 +216,7 @@ bool GodotCollisionSolver2D::solve_concave(const GodotShape2D *p_shape_A, const 
 	return cinfo.collided;
 }
 
-bool GodotCollisionSolver2D::solve(const GodotShape2D *p_shape_A, const Transform2D &p_transform_A, const Vector2 &p_motion_A, const GodotShape2D *p_shape_B, const Transform2D &p_transform_B, const Vector2 &p_motion_B, CallbackResult p_result_callback, void *p_userdata, Vector2 *r_sep_axis, real_t p_margin_A, real_t p_margin_B) {
+bool scardotCollisionSolver2D::solve(const scardotShape2D *p_shape_A, const Transform2D &p_transform_A, const Vector2 &p_motion_A, const scardotShape2D *p_shape_B, const Transform2D &p_transform_B, const Vector2 &p_motion_B, CallbackResult p_result_callback, void *p_userdata, Vector2 *r_sep_axis, real_t p_margin_A, real_t p_margin_B) {
 	PhysicsServer2D::ShapeType type_A = p_shape_A->get_type();
 	PhysicsServer2D::ShapeType type_B = p_shape_B->get_type();
 	bool concave_A = p_shape_A->is_concave();

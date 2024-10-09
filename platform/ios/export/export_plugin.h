@@ -2,10 +2,10 @@
 /*  export_plugin.h                                                       */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -52,8 +52,8 @@
 
 // Optional environment variables for defining confidential information. If any
 // of these is set, they will override the values set in the credentials file.
-const String ENV_IOS_PROFILE_UUID_DEBUG = "GODOT_IOS_PROVISIONING_PROFILE_UUID_DEBUG";
-const String ENV_IOS_PROFILE_UUID_RELEASE = "GODOT_IOS_PROVISIONING_PROFILE_UUID_RELEASE";
+const String ENV_IOS_PROFILE_UUID_DEBUG = "SCARDOT_IOS_PROVISIONING_PROFILE_UUID_DEBUG";
+const String ENV_IOS_PROFILE_UUID_RELEASE = "SCARDOT_IOS_PROVISIONING_PROFILE_UUID_RELEASE";
 
 class EditorExportPlatformIOS : public EditorExportPlatform {
 	GDCLASS(EditorExportPlatformIOS, EditorExportPlatform);

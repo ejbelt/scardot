@@ -2,10 +2,10 @@
 /*  display_layer.mm                                                      */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -46,7 +46,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
 
-@implementation GodotMetalLayer
+@implementation scardotMetalLayer
 
 - (void)initializeDisplayLayer {
 #if defined(TARGET_OS_SIMULATOR) && TARGET_OS_SIMULATOR
@@ -69,7 +69,7 @@
 
 @end
 
-@implementation GodotOpenGLLayer {
+@implementation scardotOpenGLLayer {
 	// The pixel dimensions of the backbuffer
 	GLint backingWidth;
 	GLint backingHeight;

@@ -2,10 +2,10 @@
 /*  rendering_device_driver_metal.mm                                      */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -564,7 +564,7 @@ uint8_t *RenderingDeviceDriverMetal::texture_map(TextureID p_texture, const Text
 		offset += bytes_per_layer * mipExtent.depth * (p_subresource.layer - 1);
 	}
 
-	// TODO: Confirm with rendering team that there is no other way Godot may attempt to map a texture with multiple mipmaps or array layers.
+	// TODO: Confirm with rendering team that there is no other way scardot may attempt to map a texture with multiple mipmaps or array layers.
 
 	// NOTE: It is not possible to create a buffer-backed texture with mipmaps or array layers,
 	//  as noted in the is_valid_linear function, so the offset calculation SHOULD always be zero.
@@ -798,7 +798,7 @@ void RenderingDeviceDriverMetal::fence_free(FenceID p_fence) {
 #pragma mark - Semaphores
 
 RDD::SemaphoreID RenderingDeviceDriverMetal::semaphore_create() {
-	// Metal doesn't use semaphores, as their purpose within Godot is to ensure ordering of command buffer execution.
+	// Metal doesn't use semaphores, as their purpose within scardot is to ensure ordering of command buffer execution.
 	return SemaphoreID(1);
 }
 
@@ -3885,7 +3885,7 @@ RenderingDeviceDriverMetal::RenderingDeviceDriverMetal(RenderingContextDriverMet
 		context_driver(p_context_driver) {
 	DEV_ASSERT(p_context_driver != nullptr);
 
-	if (String res = OS::get_singleton()->get_environment("GODOT_MTL_SHADER_LOAD_STRATEGY"); res == U"lazy") {
+	if (String res = OS::get_singleton()->get_environment("SCARDOT_MTL_SHADER_LOAD_STRATEGY"); res == U"lazy") {
 		_shader_load_strategy = ShaderLoadStrategy::LAZY;
 	}
 }
@@ -3909,7 +3909,7 @@ Error RenderingDeviceDriverMetal::_create_device() {
 	ERR_FAIL_NULL_V(device_queue, ERR_CANT_CREATE);
 
 	device_scope = [MTLCaptureManager.sharedCaptureManager newCaptureScopeWithCommandQueue:device_queue];
-	device_scope.label = @"Godot Frame";
+	device_scope.label = @"scardot Frame";
 	[device_scope beginScope]; // Allow Xcode to capture the first frame, if desired.
 
 	resource_cache = std::make_unique<MDResourceCache>(this);
@@ -3946,7 +3946,7 @@ Error RenderingDeviceDriverMetal::initialize(uint32_t p_device_index, uint32_t p
 	// Check required features and abort if any of them is missing.
 	if (!metal_device_properties->features.imageCubeArray) {
 		// NOTE: Apple A11 (Apple4) GPUs support image cube arrays, which are devices from 2017 and newer.
-		String error_string = vformat("Your Apple GPU does not support the following features which are required to use Metal-based renderers in Godot:\n\n");
+		String error_string = vformat("Your Apple GPU does not support the following features which are required to use Metal-based renderers in scardot:\n\n");
 		if (!metal_device_properties->features.imageCubeArray) {
 			error_string += "- No support for image cube arrays.\n";
 		}

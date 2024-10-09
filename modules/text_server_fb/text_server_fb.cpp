@@ -2,10 +2,10 @@
 /*  text_server_fb.cpp                                                    */
 /**************************************************************************/
 /*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
+/*                             SCARDOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present scardot Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -46,7 +46,7 @@ using namespace godot;
 
 #define GLOBAL_GET(m_var) ProjectSettings::get_singleton()->get_setting_with_override(m_var)
 
-#elif defined(GODOT_MODULE)
+#elif defined(SCARDOT_MODULE)
 // Headers for building as built-in module.
 
 #include "core/config/project_settings.h"
@@ -103,7 +103,7 @@ bool TextServerFallback::_has_feature(Feature p_feature) const {
 String TextServerFallback::_get_name() const {
 #ifdef GDEXTENSION
 	return "Fallback (GDExtension)";
-#elif defined(GODOT_MODULE)
+#elif defined(SCARDOT_MODULE)
 	return "Fallback (Built-in)";
 #endif
 }
@@ -3869,7 +3869,7 @@ RID TextServerFallback::_find_sys_font_for_text(const RID &p_fdef, const String 
 #ifdef GDEXTENSION
 		for (int fb = 0; fb < fallback_font_name.size(); fb++) {
 			const String &E = fallback_font_name[fb];
-#elif defined(GODOT_MODULE)
+#elif defined(SCARDOT_MODULE)
 		for (const String &E : fallback_font_name) {
 #endif
 			SystemFontKey key = SystemFontKey(E, font_style & TextServer::FONT_ITALIC, font_weight, font_stretch, p_fdef, this);

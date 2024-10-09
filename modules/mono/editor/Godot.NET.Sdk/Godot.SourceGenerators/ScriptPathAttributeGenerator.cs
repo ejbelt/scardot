@@ -7,26 +7,26 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 
-namespace Godot.SourceGenerators
+namespace scardot.SourceGenerators
 {
     [Generator]
     public class ScriptPathAttributeGenerator : ISourceGenerator
     {
         public void Execute(GeneratorExecutionContext context)
         {
-            if (context.IsGodotSourceGeneratorDisabled("ScriptPathAttribute"))
+            if (context.IsscardotSourceGeneratorDisabled("ScriptPathAttribute"))
                 return;
 
-            if (context.IsGodotToolsProject())
+            if (context.IsscardotToolsProject())
                 return;
 
             // NOTE: NotNullWhen diagnostics don't work on projects targeting .NET Standard 2.0
             // ReSharper disable once ReplaceWithStringIsNullOrEmpty
-            if (!context.TryGetGlobalAnalyzerProperty("GodotProjectDirBase64", out string? godotProjectDir) || godotProjectDir!.Length == 0)
+            if (!context.TryGetGlobalAnalyzerProperty("scardotProjectDirBase64", out string? godotProjectDir) || godotProjectDir!.Length == 0)
             {
-                if (!context.TryGetGlobalAnalyzerProperty("GodotProjectDir", out godotProjectDir) || godotProjectDir!.Length == 0)
+                if (!context.TryGetGlobalAnalyzerProperty("scardotProjectDir", out godotProjectDir) || godotProjectDir!.Length == 0)
                 {
-                    throw new InvalidOperationException("Property 'GodotProjectDir' is null or empty.");
+                    throw new InvalidOperationException("Property 'scardotProjectDir' is null or empty.");
                 }
             }
             else
@@ -42,7 +42,7 @@ namespace Godot.SourceGenerators
                         .OfType<ClassDeclarationSyntax>()
                         // Ignore inner classes
                         .Where(cds => !cds.IsNested())
-                        .SelectGodotScriptClasses(context.Compilation)
+                        .SelectscardotScriptClasses(context.Compilation)
                         // Report and skip non-partial classes
                         .Where(x =>
                         {
@@ -60,7 +60,7 @@ namespace Godot.SourceGenerators
             var usedPaths = new HashSet<string>();
             foreach (var godotClass in godotClasses)
             {
-                VisitGodotScriptClass(context, godotProjectDir, usedPaths,
+                VisitscardotScriptClass(context, godotProjectDir, usedPaths,
                     symbol: godotClass.Key,
                     classDeclarations: godotClass.Value);
             }
@@ -71,7 +71,7 @@ namespace Godot.SourceGenerators
             AddScriptTypesAssemblyAttr(context, godotClasses);
         }
 
-        private static void VisitGodotScriptClass(
+        private static void VisitscardotScriptClass(
             GeneratorExecutionContext context,
             string godotProjectDir,
             HashSet<string> usedPaths,
@@ -98,7 +98,7 @@ namespace Godot.SourceGenerators
                 if (!usedPaths.Add(scriptPath))
                 {
                     context.ReportDiagnostic(Diagnostic.Create(
-                        Common.MultipleClassesInGodotScriptRule,
+                        Common.MultipleClassesInscardotScriptRule,
                         cds.Identifier.GetLocation(),
                         symbol.Name
                     ));
@@ -121,13 +121,13 @@ namespace Godot.SourceGenerators
 
             var source = new StringBuilder();
 
-            // using Godot;
+            // using scardot;
             // namespace {classNs} {
             //     {attributesBuilder}
             //     partial class {className} { }
             // }
 
-            source.Append("using Godot;\n");
+            source.Append("using scardot;\n");
 
             if (hasNamespace)
             {
@@ -155,7 +155,7 @@ namespace Godot.SourceGenerators
             var sourceBuilder = new StringBuilder();
 
             sourceBuilder.Append("[assembly:");
-            sourceBuilder.Append(GodotClasses.AssemblyHasScriptsAttr);
+            sourceBuilder.Append(scardotClasses.AssemblyHasScriptsAttr);
             sourceBuilder.Append("(new System.Type[] {");
 
             bool first = true;

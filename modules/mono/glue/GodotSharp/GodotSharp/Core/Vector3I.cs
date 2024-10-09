@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 #nullable enable
 
-namespace Godot
+namespace scardot
 {
     /// <summary>
     /// 3-element structure that can be used to represent 3D grid coordinates or sets of integers.
